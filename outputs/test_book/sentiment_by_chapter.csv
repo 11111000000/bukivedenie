@@ -1,0 +1,4 @@
+chapter_idx,title,total_score,avg_score,sentiment_words,positive_count,negative_count,neutral_count,sentiment_label
+0,Глава 1,1.0,1.0,1,1,0,0,positive
+1,Глава 2,0.0,0,0,0,0,0,neutral
+2,Глава 3,0.0,0,0,0,0,0,neutral

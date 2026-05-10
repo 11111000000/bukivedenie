@@ -1,0 +1,2 @@
+source,source_lower,target,target_lower,weight,context_level,chapters,num_chapters
+Иван,иван,Петр,петр,1,sentence,0,1

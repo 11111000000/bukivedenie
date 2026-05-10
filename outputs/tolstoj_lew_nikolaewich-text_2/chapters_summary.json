@@ -1,0 +1,64 @@
+{
+  "chapters": [
+    {
+      "chapter_idx": 0,
+      "title": "ЧАСТЬ ПЕРВАЯ",
+      "start_offset": 89,
+      "end_offset": 86319,
+      "total_chars": 86230,
+      "total_paragraphs": 231,
+      "total_sentences": 965,
+      "total_words": 13414,
+      "dialog_sentences": 279,
+      "dialog_ratio": 0.2891
+    },
+    {
+      "chapter_idx": 1,
+      "title": "часть времени",
+      "start_offset": 86319,
+      "end_offset": 298062,
+      "total_chars": 211743,
+      "total_paragraphs": 375,
+      "total_sentences": 2090,
+      "total_words": 32696,
+      "dialog_sentences": 621,
+      "dialog_ratio": 0.2971
+    },
+    {
+      "chapter_idx": 2,
+      "title": "ЧАСТЬ ТРЕТЬЯ",
+      "start_offset": 298062,
+      "end_offset": 477617,
+      "total_chars": 179555,
+      "total_paragraphs": 210,
+      "total_sentences": 1668,
+      "total_words": 27544,
+      "dialog_sentences": 386,
+      "dialog_ratio": 0.2314
+    },
+    {
+      "chapter_idx": 3,
+      "title": "ЧАСТЬ ЧЕТВЕРТАЯ",
+      "start_offset": 477617,
+      "end_offset": 592581,
+      "total_chars": 114964,
+      "total_paragraphs": 508,
+      "total_sentences": 1251,
+      "total_words": 17890,
+      "dialog_sentences": 415,
+      "dialog_ratio": 0.3317
+    },
+    {
+      "chapter_idx": 4,
+      "title": "ЧАСТЬ ПЯТАЯ",
+      "start_offset": 592581,
+      "end_offset": 768356,
+      "total_chars": 175775,
+      "total_paragraphs": 328,
+      "total_sentences": 1998,
+      "total_words": 27477,
+      "dialog_sentences": 517,
+      "dialog_ratio": 0.2588
+    }
+  ]
+}

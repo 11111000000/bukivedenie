@@ -1,0 +1,40 @@
+{
+  "chapters": [
+    {
+      "chapter_idx": 0,
+      "title": "ЧАСТЬ ПЕРВАЯ",
+      "start_offset": 87,
+      "end_offset": 251178,
+      "total_chars": 251091,
+      "total_paragraphs": 711,
+      "total_sentences": 2776,
+      "total_words": 38425,
+      "dialog_sentences": 947,
+      "dialog_ratio": 0.3411
+    },
+    {
+      "chapter_idx": 1,
+      "title": "ЧАСТЬ ВТОРАЯ",
+      "start_offset": 251178,
+      "end_offset": 464047,
+      "total_chars": 212869,
+      "total_paragraphs": 964,
+      "total_sentences": 2373,
+      "total_words": 31369,
+      "dialog_sentences": 801,
+      "dialog_ratio": 0.3375
+    },
+    {
+      "chapter_idx": 2,
+      "title": "ЧАСТЬ ТРЕТЬЯ",
+      "start_offset": 464047,
+      "end_offset": 730516,
+      "total_chars": 266469,
+      "total_paragraphs": 379,
+      "total_sentences": 2626,
+      "total_words": 40649,
+      "dialog_sentences": 565,
+      "dialog_ratio": 0.2152
+    }
+  ]
+}

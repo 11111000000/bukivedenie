@@ -1,0 +1,59 @@
+# Конфигурация пайплайна обработки текста
+# Используется скриптами ingest_normalize.py, compute_counts.py
+
+# Пути к папкам (относительно корня bukivedenie/)
+paths:
+  raw: "data/raw"
+  processed_texts: "data/processed/texts"
+  processed_meta: "data/processed/meta"
+  tables: "outputs/tables"
+  figures: "outputs/figures"
+  wordclouds: "outputs/figures/wordclouds"
+  profiles: "outputs/figures/profiles"
+
+# Параметры нормализации
+normalization:
+  # Заменять ё на е
+  yo_to_e: false
+  # Unicode нормализация (NFC)
+  unicode_norm: "NFC"
+  # Удалять HTML/FB2 теги
+  strip_tags: true
+  # Минимальная длина строки для сохранения (0 — сохранять все)
+  min_line_len: 0
+  # Унифицировать кавычки на «»
+  unify_quotes: true
+  # Унифицировать тире на —
+  unify_dashes: true
+
+# Параметры токенизации и подсчёта частот
+counts:
+  # Единица учёта по умолчанию: lemmas или forms
+  unit_default: "lemmas"
+  # Минимальная длина токена
+  min_token_len: 2
+  # Сохранять ли цифры как токены
+  keep_digits: false
+  # Сохранять ли пунктуацию как токены
+  keep_punct: false
+  # Приводить к нижнему регистру
+  lower: true
+  # Использовать лемматизацию (если unit=lemmas)
+  use_lemmas: true
+  # Путь к стоп-словам (относительно корня)
+  stopwords_path: "configs/stopwords_ru.txt"
+
+# Параметры скользящих окон (для будущей динамики)
+windows:
+  enabled: false
+  # Размер окна в токенах
+  size: 1000
+  # Шаг окна (доля от size, 0.5 = 50%)
+  step_ratio: 0.5
+
+# Логирование
+logging:
+  # Уровень: DEBUG, INFO, WARNING, ERROR
+  level: "INFO"
+  # Путь к файлу логов (null — только stdout)
+  file: null

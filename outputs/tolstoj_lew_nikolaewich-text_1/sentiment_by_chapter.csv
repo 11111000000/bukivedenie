@@ -1,0 +1,4 @@
+chapter_idx,title,total_score,avg_score,sentiment_words,positive_count,negative_count,neutral_count,sentiment_label
+0,ЧАСТЬ ПЕРВАЯ,97.0,0.5774,168,126,42,0,positive
+1,ЧАСТЬ ВТОРАЯ,15.0,0.1613,93,57,36,0,positive
+2,ЧАСТЬ ТРЕТЬЯ,103.0,0.5393,191,138,53,0,positive

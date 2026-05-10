@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Bukivedenie: Results Viewer</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 16px; }
+    #left { float:left; width:30%; }
+    #right { margin-left:32%; }
+    textarea { width:100%; height:400px; }
+    select, button { width:100%; padding:8px; margin:8px 0; }
+    pre { white-space: pre-wrap; background:#f7f7f7; padding:8px; border:1px solid #ddd; }
+    table { width:100%; border-collapse:collapse; }
+    th, td { padding:6px; border:1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <h1>Bukivedenie: Results Viewer</h1>
+  <div id="left">
+    <label for="rawSelect" style="font-weight:600;display:block;margin-bottom:6px;">Выберите текст для анализа</label>
+    <select id="rawSelect" style="width:100%;padding:8px;margin-bottom:8px;"><!-- RAW_OPTIONS --></select>
+
+    <div style="margin-top:8px">
+      <textarea id="rawEditor" placeholder="Raw text will appear here..." style="height:300px"></textarea>
+    </div>
+
+    <div style="margin-top:8px">
+      <button id="runAnalysis">Сохранить и запустить анализ</button>
+    </div>
+
+    <div style="margin-top:12px">
+      <strong>Текущий файл:</strong>
+      <div id="currentFile" style="word-break:break-all;">(none)</div>
+    </div>
+  </div>
+
+  <div id="right">
+    <h3>Результаты анализа</h3>
+    <div id="preview" style="margin-bottom:12px;">
+      <div id="meta" style="color:#444; margin-bottom:6px;"></div>
+      <div id="content" style="border:1px solid #eee; padding:8px; background:#fafafa; min-height:60px;"></div>
+    </div>
+
+    <!-- Error panel: appears when an error occurs, can show details -->
+    <div id="errorPanel" style="display:none; border:1px solid #f2a; background:#fff0f2; padding:8px; margin-bottom:12px;">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <strong id="errorTitle">Ошибка</strong>
+        <div>
+          <button id="errorToggleDetails" style="margin-right:8px;">Показать детали</button>
+          <button id="errorClose">Закрыть</button>
+        </div>
+      </div>
+      <div id="errorMessage" style="margin-top:8px; color:#800;"></div>
+      <pre id="errorDetails" style="display:none; white-space:pre-wrap; max-height:300px; overflow:auto; background:#fff; border:1px solid #fdd; padding:8px; margin-top:8px;"></pre>
+    </div>
+
+    <div id="filesContainer"></div>
+    <div style="margin-top:16px; border-top:1px solid #eee; padding-top:12px;">
+      <h4>Анализ по главам</h4>
+      <div id="tokenByChapterWidget"></div>
+    </div>
+  </div>
+
+  <script type="module" src="/static/app.js"></script>
+  <script type="module" src="/static/file_renderer.js"></script>
+  <!-- Non-module fallback to populate raw select in case module script fails -->
+  <script>
+    (function(){
+      const sel = document.getElementById('rawSelect');
+      if (!sel) return;
+      // If already populated by module, skip
+      if (sel.options && sel.options.length>0) return;
+      fetch('/api/raw_files').then(r=>r.json()).then(j=>{
+        const raws = j.files || [];
+        sel.innerHTML = '';
+        raws.forEach(name => {
+          const opt = document.createElement('option'); opt.value = name; opt.innerText = name; sel.appendChild(opt);
+        });
+        sel.addEventListener('change', async ()=>{
+          const v = sel.value; if (v) {
+            try {
+              const resp = await fetch('/api/raw?name=' + encodeURIComponent(v));
+              const j = await resp.json();
+              document.getElementById('rawEditor').value = j.content || '';
+              document.getElementById('currentFile').innerText = v;
+              // load book files
+              fetch('/api/files?book=' + encodeURIComponent(v.replace(/\.txt$/i,''))).then(r=>r.json()).then(j2=>{
+                const files = j2.files || [];
+                // trigger rendering by calling existing function if present
+                if (window.loadBookFiles) window.loadBookFiles(v.replace(/\.txt$/i,''));
+              });
+            } catch(e){ console.error(e); }
+          }
+        });
+        if (raws.length>0){ sel.value = raws[0]; sel.dispatchEvent(new Event('change')); }
+      }).catch(e=>console.warn('raw_files fetch failed', e));
+    })();
+  </script>
+</body>
+</html>
