@@ -221,6 +221,64 @@ class Handler(BaseHTTPRequestHandler):
                 raws = list_raw_files()
                 return self._json({'files': raws})
 
+            if path == '/api/token_by_chapter':
+                book = qs.get('book', [''])[0]
+                token = qs.get('token', [''])[0]
+                if not book or not token:
+                    return self._json({'error': 'book and token params required'}, status=400)
+                # try to load chapters_summary.json
+                chapters_path = OUTPUTS_DIR / book / 'chapters_summary.json'
+                if not chapters_path.exists():
+                    return self._json({'error': 'chapters_summary.json not found for book'}, status=404)
+                try:
+                    chapters = json.loads(chapters_path.read_text(encoding='utf-8'))
+                except Exception as e:
+                    return self._json({'error': f'cannot read chapters file: {e}'}, status=500)
+                # try sentences file in processed or book folder
+                sent_path = OUTPUTS_DIR / 'processed' / f'{book}_sentences.jsonl'
+                if not sent_path.exists():
+                    alt = OUTPUTS_DIR / book / 'sentences.jsonl'
+                    if alt.exists():
+                        sent_path = alt
+                if not sent_path.exists():
+                    return self._json({'error': 'sentences jsonl not found for book (processed/<book>_sentences.jsonl or <book>/sentences.jsonl required)'}, status=404)
+                # prepare chapter bins
+                bins = []
+                for i, ch in enumerate(chapters):
+                    start = ch.get('start_offset', 0)
+                    end = ch.get('end_offset', 0)
+                    title = ch.get('title', f'chapter_{i}')
+                    bins.append({'idx': i, 'start': start, 'end': end, 'title': title, 'count': 0})
+                # iterate sentences and count token occurrences
+                tlower = token.lower()
+                try:
+                    with open(sent_path, 'r', encoding='utf-8') as fh:
+                        for line in fh:
+                            line = line.strip()
+                            if not line: continue
+                            obj = json.loads(line)
+                            sent_start = obj.get('start_offset')
+                            tokens = obj.get('tokens', [])
+                            # decide chapter by sent_start (first bin matching start<=sent_start<end)
+                            chap_idx = None
+                            for b in bins:
+                                if b['start'] <= sent_start < b['end']:
+                                    chap_idx = b['idx']
+                                    break
+                            if chap_idx is None:
+                                # if sentence before first chapter or after last, skip
+                                continue
+                            # count occurrences in this sentence
+                            for tok in tokens:
+                                txt = tok.get('text') or ''
+                                if txt.lower() == tlower:
+                                    bins[chap_idx]['count'] += 1
+                except Exception as e:
+                    return self._json({'error': f'cannot read sentences file: {e}'}, status=500)
+                # prepare response
+                out = [{'chapter_idx': b['idx'], 'title': b['title'], 'count': b['count']} for b in bins]
+                return self._json({'book': book, 'token': token, 'counts': out})
+
             if path == '/api/raw':
                 name = qs.get('name', [''])[0]
                 if not name:
