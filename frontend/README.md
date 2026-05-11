@@ -3,17 +3,17 @@ Frontend (vanilla ES modules) — README
 
 Кратко
 ------
-Проект фронтенда минималистичен: ванильные ES-модули, визуализации через vega/vis-network/wordcloud. Для разработки на машине с Node/Vite есть возможность dev-server (HMR). В средах с ограничениями (Termux/Android) доступен статический режим: фронт подключается через CDN и отдаётся backend'ом (src/webapp.py).
+Проект фронтенда минималистичен: ванильные ES-модули, визуализации через vega/vis-network/wordcloud. Для разработки на машине с Node есть возможность dev-server на основе Rollup (watch + serve) или browser-sync. В средах с ограничениями (Termux/Android) доступен статический режим: фронт подключается через CDN и отдаётся backend'ом (src/webapp.py).
 
 Расположение
 -----------
-- frontend/ — Vite scaffold (опционально для dev/build на машине с Node)
+- frontend/ — исходники фронтенда (опционально для dev/build на машине с Node) — использует Rollup/watch или статический CDN-режим.
 - src/web_view/ — статический фронтенд, который отдаёт backend (используется в production / mobile)
 
 Требования
 ----------
 - Python 3.8+ — для backend (src.webapp.py)
-- Node.js + npm (только если вы хотите запускать Vite dev/build на вашей машине)
+- Node.js + npm (только если вы хотите запускать rollup dev/watch или собирать бандл)
 
 Установка (Node / dev)
 ----------------------

@@ -46,7 +46,7 @@ for i in {1..60}; do
   sleep 0.5
 done
 
-# Start frontend (Vite) if possible; fallback to local python dev server
+# Start frontend watcher (rollup/browser-sync) if possible; fallback to local python dev server
 if [ -d "$FRONTEND_DIR" ]; then
   if command -v node >/dev/null 2>&1 && command -v npm >/dev/null 2>&1; then
     echo "Node detected. Attempting to ensure dependencies and start frontend watcher (rollup) in $FRONTEND_DIR"

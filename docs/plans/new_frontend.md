@@ -9,7 +9,7 @@
 - Не изобретать заново: не пишем собственные dev‑панели, роутеры‑монстры и компоненты‑фреймворки.
 - Меньше зависимостей — быстрее «холодный старт» и меньше поддержки.
 - Backend уже парсит данные (/api/file_parsed) — на фронте только визуализируем и управляем запросами.
-- Mobile‑first: интерфейс удобен на телефоне; для разработки — стандартные браузерные DevTools и Vite HMR.
+- Mobile‑first: интерфейс удобен на телефоне; для разработки — стандартные браузерные DevTools и live‑reload от rollup/browser-sync.
 
 Ключевые решения
 ----------------
@@ -37,7 +37,7 @@
 Состав библиотек (точный)
 -------------------------
 Устанавливаем через npm в проекте frontend/:
-- vite — dev‑сервер и сборка
+- rollup — dev‑watch/serve и сборка
 - vega, vega‑lite, vega‑embed — визуализации диаграмм
 - vis‑network — визуализация графа персонажей
 - wordcloud — wordcloud2.js для облака слов
@@ -141,12 +141,15 @@ frontend-deploy: frontend-build
    mkdir -p archives
    tar -czf archives/web_view-backup-$(date +%Y%m%d-%H%M%S).tar.gz src/web_view
 
-2) Scaffold минимального фронта (Vite vanilla)
-   npm create vite@latest frontend -- --template vanilla
-   cd frontend && npm install
-   npm install vega vega-lite vega-embed vis-network wordcloud
+2) Scaffold минимального фронта (Rollup / vanilla)
+   Создайте минимальную структуру frontend/ или используйте готовый шаблон rollup+vanilla.
+   Вручную:
+     mkdir frontend && cd frontend
+     npm init -y
+     npm install --save vega vega-lite vega-embed vis-network wordcloud
+     npm install --save-dev rollup @rollup/plugin-node-resolve @rollup/plugin-commonjs rollup-plugin-serve rollup-plugin-livereload
 
-3) Настройка proxy (vite.config.js) и базовых скриптов (package.json)
+3) Настройка proxy (через rollup-plugin-serve или browser-sync) и базовых скриптов (package.json)
    - dev, build, preview
 
 4) Реализация базовой навигации и страниц
