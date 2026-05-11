@@ -177,6 +177,7 @@ class Handler(BaseHTTPRequestHandler):
 
             if path == '/api/books':
                 books = list_books()
+                slog(f'books endpoint: count={len(books)} sample={books[:10]}')
                 return self._json({'books': books})
 
             if path == '/api/files':

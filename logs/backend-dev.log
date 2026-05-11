@@ -6,3 +6,6 @@
 127.0.0.1 - - [12/May/2026 00:02:04] "GET /static/js/main.js HTTP/1.1" 404 -
 127.0.0.1 - - [12/May/2026 00:04:32] "GET /?dev HTTP/1.1" 200 -
 127.0.0.1 - - [12/May/2026 00:04:32] "GET /static/js/main.js HTTP/1.1" 404 -
+127.0.0.1 - - [12/May/2026 00:10:09] "GET /api/books HTTP/1.1" 200 -
+127.0.0.1 - - [12/May/2026 00:10:14] "GET /api/books HTTP/1.1" 200 -
+127.0.0.1 - - [12/May/2026 00:10:26] "GET /api/books HTTP/1.1" 200 -

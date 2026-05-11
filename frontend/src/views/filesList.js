@@ -2,6 +2,10 @@ import { api } from '../api.js'
 
 export async function viewFiles(book){
   const el = document.getElementById('view')
+  if(!el){
+    console.error('view mount not found in viewFiles')
+    return
+  }
   el.innerHTML = `<h2>${book}: файлы</h2><p>Загружаю…</p>`
   const { files } = await api.files(book)
   if(!files?.length){

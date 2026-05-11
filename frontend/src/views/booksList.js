@@ -2,6 +2,10 @@ import { api } from '../api.js'
 
 export async function viewBooks(){
   const mount = document.getElementById('view')
+  if(!mount){
+    console.error('view mount not found in viewBooks')
+    return
+  }
   mount.innerHTML = '<p>Загружаю список книг…</p>'
   const { books } = await api.books()
   if(!books?.length){

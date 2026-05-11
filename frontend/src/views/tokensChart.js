@@ -3,6 +3,10 @@ import { renderSpec } from '../viz/vegaHelper.js'
 
 export async function viewTokens(book){
   const el = document.getElementById('view')
+  if(!el){
+    console.error('view mount not found in viewTokens')
+    return
+  }
   el.innerHTML = `<h2>${book}: Tokens</h2><p>Загружаю…</p>`
   const files = await api.files(book).then(r=>r.files||[])
   const name = files.includes('tokens.csv') ? 'tokens.csv' : (files.find(f=>f.endsWith('_tokens.csv')) || 'tokens.csv')

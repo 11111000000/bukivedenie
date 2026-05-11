@@ -2,6 +2,10 @@ import { api } from '../api.js'
 
 export async function viewBookOverview(book){
   const el = document.getElementById('view')
+  if(!el){
+    console.error('view mount not found in viewBookOverview')
+    return
+  }
   el.innerHTML = `<h2>${book}</h2><p>Загружаю обзор…</p>`
   // Пытаемся взять базовые файлы
   const files = await api.files(book).then(r=>r.files||[]).catch(()=>[])

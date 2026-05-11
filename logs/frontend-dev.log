@@ -34,3 +34,28 @@ node_modules/d3-interpolate/src/value.js -> node_modules/d3-interpolate/src/arra
 node_modules/d3-interpolate/src/value.js -> node_modules/d3-interpolate/src/object.js -> node_modules/d3-interpolate/src/value.js
 [32mcreated [1mdist[22m in [1m14.3s[22m[39m
 [36mbundles [1msrc/main.js[22m → [1mdist[22m...[39m
+[1m[33m(!) Circular dependencies[39m[22m
+node_modules/d3-interpolate/src/value.js -> node_modules/d3-interpolate/src/array.js -> node_modules/d3-interpolate/src/value.js
+node_modules/d3-interpolate/src/value.js -> node_modules/d3-interpolate/src/object.js -> node_modules/d3-interpolate/src/value.js
+[32mcreated [1mdist[22m in [1m13.2s[22m[39m
+[36mbundles [1msrc/main.js[22m → [1mdist[22m...[39m
+[1m[33m(!) Circular dependencies[39m[22m
+node_modules/d3-interpolate/src/value.js -> node_modules/d3-interpolate/src/array.js -> node_modules/d3-interpolate/src/value.js
+node_modules/d3-interpolate/src/value.js -> node_modules/d3-interpolate/src/object.js -> node_modules/d3-interpolate/src/value.js
+[32mcreated [1mdist[22m in [1m12.5s[22m[39m
+[36mbundles [1msrc/main.js[22m → [1mdist[22m...[39m
+[1m[33m(!) Circular dependencies[39m[22m
+node_modules/d3-interpolate/src/value.js -> node_modules/d3-interpolate/src/array.js -> node_modules/d3-interpolate/src/value.js
+node_modules/d3-interpolate/src/value.js -> node_modules/d3-interpolate/src/object.js -> node_modules/d3-interpolate/src/value.js
+[32mcreated [1mdist[22m in [1m11.9s[22m[39m
+[36mbundles [1msrc/main.js[22m → [1mdist[22m...[39m
+[1m[33m(!) Circular dependencies[39m[22m
+node_modules/d3-interpolate/src/value.js -> node_modules/d3-interpolate/src/array.js -> node_modules/d3-interpolate/src/value.js
+node_modules/d3-interpolate/src/value.js -> node_modules/d3-interpolate/src/object.js -> node_modules/d3-interpolate/src/value.js
+[32mcreated [1mdist[22m in [1m12.2s[22m[39m
+[36mbundles [1msrc/main.js[22m → [1mdist[22m...[39m
+[1m[33m(!) Circular dependencies[39m[22m
+node_modules/d3-interpolate/src/value.js -> node_modules/d3-interpolate/src/array.js -> node_modules/d3-interpolate/src/value.js
+node_modules/d3-interpolate/src/value.js -> node_modules/d3-interpolate/src/object.js -> node_modules/d3-interpolate/src/value.js
+[32mcreated [1mdist[22m in [1m12s[22m[39m
+[36mbundles [1msrc/main.js[22m → [1mdist[22m...[39m

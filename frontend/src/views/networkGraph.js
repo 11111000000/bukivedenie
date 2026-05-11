@@ -2,6 +2,10 @@ import { api } from '../api.js'
 
 export async function viewNetwork(book){
   const el = document.getElementById('view')
+  if(!el){
+    console.error('view mount not found in viewNetwork')
+    return
+  }
   el.innerHTML = `<h2>${book}: Character Network</h2><p>Загружаю…</p>`
   const files = await api.files(book).then(r=>r.files||[])
   const name = 'cooccurrence_edges.csv'

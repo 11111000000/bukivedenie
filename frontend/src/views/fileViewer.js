@@ -2,6 +2,10 @@ import { api } from '../api.js'
 
 export async function viewFile(book, name){
   const el = document.getElementById('view')
+  if(!el){
+    console.error('view mount not found in viewFile')
+    return
+  }
   el.innerHTML = `<h2>${book}: ${name}</h2><p>Загружаю…</p>`
   const resp = await api.fileParsed(book, name)
   if(resp.type === 'csv'){

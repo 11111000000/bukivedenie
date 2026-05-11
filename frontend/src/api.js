@@ -1,4 +1,18 @@
 // Lightweight fetch wrapper with timeout and visible logging
+const API_BASE = (() => {
+  try{
+    const isDevPort = location.port === '5173'
+    const isLocal = ['127.0.0.1', 'localhost'].includes(location.hostname)
+    return (isDevPort || isLocal) ? 'http://127.0.0.1:8000' : ''
+  }catch(e){
+    return ''
+  }
+})()
+
+function apiPath(path){
+  return `${API_BASE}${path}`
+}
+
 function appendLog(msg){
   try{
     const el = document.getElementById('logs')
@@ -18,10 +32,11 @@ export async function fetchJson(path, opts={}){
   const timeout = opts.timeout ?? 30000 // 30s default
   const timer = setTimeout(()=> controller.abort(), timeout)
   const method = (opts.method||'GET').toUpperCase()
-  console.info(`${method} ${path} (timeout ${timeout}ms)`)
-  appendLog(`${new Date().toISOString()} - ${method} ${path}`)
+  console.info(`${method} ${apiPath(path)} (timeout ${timeout}ms)`)
+  appendLog(`${new Date().toISOString()} - ${method} ${apiPath(path)}`)
   try{
-    const res = await fetch(path, { headers: { 'Accept': 'application/json' }, signal: controller.signal, ...opts })
+    const url = apiPath(path)
+    const res = await fetch(url, { headers: { 'Accept': 'application/json' }, signal: controller.signal, ...opts })
     clearTimeout(timer)
     if(!res.ok){
       const text = await res.text().catch(()=> '')
@@ -34,7 +49,7 @@ export async function fetchJson(path, opts={}){
     const raw = await res.text().catch(()=> '')
     try{
       const data = raw ? JSON.parse(raw) : null
-      console.info(`OK ${method} ${path}`)
+      console.info(`OK ${method} ${apiPath(path)}`)
       return data
     }catch(e){
       const preview = raw ? raw.slice(0, 1000) : ''
@@ -49,8 +64,8 @@ export async function fetchJson(path, opts={}){
   }catch(e){
     clearTimeout(timer)
     const errMsg = e.name === 'AbortError' ? 'Request timed out' : (e.message || String(e))
-    console.error(`${method} ${path} -> ${errMsg}`)
-    appendLog(`ERROR: ${method} ${path} -> ${errMsg}`)
+    console.error(`${method} ${apiPath(path)} -> ${errMsg}`)
+    appendLog(`ERROR: ${method} ${apiPath(path)} -> ${errMsg}`)
     throw e
   }
 }

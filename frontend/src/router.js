@@ -20,6 +20,10 @@ export function initRouter(){
 
 function setView(html){
   const v = document.getElementById('view')
+  if(!v){
+    console.error('view container not found')
+    return
+  }
   v.innerHTML = html
 }
 
