@@ -1,6 +1,2 @@
 chapter_idx,title,total_score,avg_score,sentiment_words,positive_count,negative_count,neutral_count,sentiment_label
-0,ЧАСТЬ ПЕРВАЯ,22.0,0.2529,87,52,35,0,positive
-1,часть времени,73.0,0.4834,151,108,43,0,positive
-2,ЧАСТЬ ТРЕТЬЯ,96.0,0.6857,140,107,33,0,positive
-3,ЧАСТЬ ЧЕТВЕРТАЯ,81.0,1.08,75,68,7,0,positive
-4,ЧАСТЬ ПЯТАЯ,71.0,0.5504,129,84,45,0,positive
+0,Весь текст,343.0,0.5893,582,419,163,0,positive

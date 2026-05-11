@@ -25,7 +25,7 @@ from typing import List, Set
 # Проверка зависимостей
 try:
     import pandas as pd
-    from razdel import tokenize, sentenize
+    from razdel import tokenize
 except ImportError as e:
     print(f"✗ Ошибка импорта: {e}")
     print("Установите зависимости: pip install razdel pandas pyyaml")
@@ -233,14 +233,6 @@ def main():
         action='store_true',
         help='Использовать лемматизацию (требуется pymorphy2)'
     )
-    parser.add_argument(
-        '--dump-surfaces', action='store_true',
-        help='Сохранять таблицу surface tokens (case-preserving)'
-    )
-    parser.add_argument(
-        '--dump-sentences', action='store_true',
-        help='Сохранять разбиение на предложения (JSONL)'
-    )
     
     args = parser.parse_args()
     
@@ -289,78 +281,13 @@ def main():
     # === ШАГ 6: Токенизация и фильтрация ===
     print("Токенизация и фильтрация слов...")
     
-    # Добавочные структуры для surface tokens и sentences
-    surface_map = {}  # surface -> {lower, count_total, count_capitalized, count_lower, first_offset, first_sentence}
-    sentences_out = []
-
-    # Разбиение на предложения (по опции)
-    if args.dump_sentences:
-        sent_iter = list(sentenize(normalized_text))
-    else:
-        sent_iter = list(sentenize(normalized_text))
-
-    # Проход по предложениям и токенам
-    total_tokens = 0
-    words = []
-    for si, sent in enumerate(sent_iter):
-        sent_text = normalized_text[sent.start:sent.stop]
-        toks = [t for t in tokenize(sent_text)]
-        # build sentence structure for dump
-        sent_tokens = []
-        for ti, t in enumerate(toks):
-            surface = t.text
-            start = sent.start + t.start
-            end = sent.start + t.stop
-            is_first = (ti == 0)
-            total_tokens += 1
-
-            # update surface_map
-            lower = surface.lower()
-            entry = surface_map.get(surface)
-            if entry is None:
-                entry = {
-                    'lower': lower,
-                    'count_total': 0,
-                    'count_capitalized': 0,
-                    'count_lower': 0,
-                    'first_offset': start,
-                    'first_sentence_index': si,
-                }
-                surface_map[surface] = entry
-            entry['count_total'] += 1
-            # determine capitalization: find first letter character
-            first_letter = None
-            for ch in surface:
-                if ch.isalpha():
-                    first_letter = ch
-                    break
-            if first_letter is not None and first_letter.isupper():
-                entry['count_capitalized'] += 1
-            else:
-                entry['count_lower'] += 1
-
-            # filtering for word counts (lowercase as before)
-            token_lower = lower
-            if len(token_lower) < args.min_len:
-                pass
-            elif token_lower in stopwords:
-                pass
-            elif token_lower in '.,;:!?—…"«»()[]{}':
-                pass
-            elif token_lower.isdigit():
-                pass
-            else:
-                clean_token = token_lower.replace('-', '').replace("'", '')
-                if clean_token.isalpha():
-                    words.append(token_lower)
-
-            # collect sentence token info
-            sent_tokens.append({'text': surface, 'start': start, 'end': end, 'is_first': is_first})
-
-        if args.dump_sentences:
-            sentences_out.append({'sentence_index': si, 'start_offset': sent.start, 'end_offset': sent.stop, 'tokens': sent_tokens})
-
-    print(f"✓ Получено {len(words)} слов после фильтрации (совместимо с предыдущим режимом)")
+    words = tokenize_and_filter(
+        normalized_text,
+        stopwords,
+        min_len=args.min_len,
+    )
+    
+    print(f"✓ Получено {len(words)} слов после фильтрации")
     
     # === ШАГ 7: Подсчёт частот ===
     counts = compute_frequencies(words)
@@ -374,37 +301,7 @@ def main():
     csv_path = tables_dir / csv_filename
     
     save_to_csv(counts, args.text_id, str(csv_path), len(words))
-
-    # save surface tokens if requested
-    if args.dump_surfaces:
-        import csv
-        surface_csv = tables_dir / f"{args.text_id}_surface_tokens.csv"
-        with open(surface_csv, 'w', encoding='utf-8', newline='') as f:
-            writer = csv.writer(f, quoting=csv.QUOTE_MINIMAL)
-            writer.writerow(['surface','lower','count_total','count_capitalized','count_lower','first_offset','first_sentence_index'])
-            for surface, entry in sorted(surface_map.items(), key=lambda x: x[0]):
-                writer.writerow([
-                    surface,
-                    entry['lower'],
-                    entry['count_total'],
-                    entry['count_capitalized'],
-                    entry['count_lower'],
-                    entry['first_offset'],
-                    entry['first_sentence_index']
-                ])
-        print(f"✓ Сохранены surface tokens: {surface_csv}")
-
-    # save sentences jsonl if requested
-    if args.dump_sentences:
-        import json as _json
-        processed_dir = output_dir / 'processed'
-        processed_dir.mkdir(parents=True, exist_ok=True)
-        sent_path = processed_dir / f"{args.text_id}_sentences.jsonl"
-        with open(sent_path, 'w', encoding='utf-8') as f:
-            for sent in sentences_out:
-                f.write(_json.dumps(sent, ensure_ascii=False) + '\n')
-        print(f"✓ Сохранено разбиение на предложения: {sent_path}")
-
+    
     # === Вывод топ-20 ===
     print("\n" + "="*60)
     print("TOP-20 самых частых слов:")
@@ -420,10 +317,6 @@ def main():
     print("="*60)
     print(f"  Нормализованный текст: {normalized_path}")
     print(f"  Таблица частот: {csv_path}")
-    if args.dump_surfaces:
-        print(f"  Surface tokens: {surface_csv}")
-    if args.dump_sentences:
-        print(f"  Sentences JSONL: {sent_path}")
     print("\nПримечание: подсчёт выполнен по формам слов (без лемматизации).")
     print("Для лемматизации установите pymorphy2 и запустите с флагом --use-lemmas")
 

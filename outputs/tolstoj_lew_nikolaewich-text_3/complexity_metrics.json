@@ -1,0 +1,11 @@
+{
+  "total_words": 125372,
+  "unique_words": 23354,
+  "hapax_count": 14108,
+  "dis_legomena": 3550,
+  "yules_k": 48.7965,
+  "honores_r": 1322.7522,
+  "lexical_density": 0.1863,
+  "avg_sentence_length": 14.54,
+  "total_sentences": 8620
+}

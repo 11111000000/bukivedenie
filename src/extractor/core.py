@@ -124,32 +124,22 @@ class TextPipeline:
         # CRLF -> LF
         text = text.replace('\r\n', '\n').replace('\r', '\n')
         
-        # Унификация кавычек: приводим разные формы к стандартной "
+        # Унификация кавычек
         quote_map = {
+            '"': '"', '"': '"',
             '«': '"', '»': '"',
-            '„': '"', '“': '"', '”': '"', '‚': "'", '‘': "'", '’': "'",
-            "'": '"'
+            '„': '"', '"': '"',
+            ''': "'", ''': "'", ''': "'", ''': "'",
         }
         for old, new in quote_map.items():
             text = text.replace(old, new)
-
-        # Склейка переводов строки внутри парных кавычек: "Анна\nШерер" -> "Анна Шерер"
-        try:
-            def _fix_quotes(m):
-                inner = m.group(1)
-                # заменяем любые пробелы/переводы строк на один пробел внутри кавычек
-                inner_fixed = re.sub(r'\s+', ' ', inner).strip()
-                return '"' + inner_fixed + '"'
-            text = re.sub(r'"([^"]*?)"', _fix_quotes, text, flags=re.S)
-        except Exception:
-            pass
-
+        
         # Унификация тире и дефисов
         text = text.replace('—', '—').replace('–', '—').replace('-', '-')
-
+        
         # Унификация многоточий
         text = re.sub(r'\.{3,}', '…', text)
-
+        
         # Нормализация пробелов (но сохраняем структуру абзацев)
         lines = text.split('\n')
         normalized_lines = []
@@ -158,13 +148,13 @@ class TextPipeline:
             line = re.sub(r'[ \t]+', ' ', line).strip()
             normalized_lines.append(line)
         text = '\n'.join(normalized_lines)
-
+        
         # Удаление управляющих символов (кроме \n, \t)
         text = ''.join(
             ch for ch in text 
             if unicodedata.category(ch)[0] != 'C' or ch in '\n\t'
         )
-
+        
         return text
     
     def detect_chapters(
@@ -174,36 +164,53 @@ class TextPipeline:
     ) -> List[Tuple[int, int, str]]:
         """
         Детекция глав. Возвращает список (start_offset, end_offset, title).
+
+        Теперь заголовок ограничен только маркером:
+        - римская цифра (I., II., III и т.п.),
+        - или слово 'Глава' (включая возможный номер),
+        - аналогично для английского 'Chapter'.
+
+        Это предотвращает захват нескольких строк после метки.
         """
         if pattern:
             chapter_regex = re.compile(pattern, re.MULTILINE)
         else:
-            # Robust default chapter heading patterns for ru/en: try several common variants
             if self.config.lang == "ru":
-                chapter_regex = re.compile(
-                    r'^(?:\s*(?:Глава|ГЛАВА|Часть|ЧАСТЬ|Книга|КНИГА)\b\s*(?:\d+|[IVXLC]+|[А-ЯЁ]+)?)',
-                    re.MULTILINE | re.IGNORECASE
-                )
+                # базовые маркеры: Глава, Часть, Книга с опциональным номером
+                base = r'(?:Глава\s*(?:\d+|[IVXLCM]+)?|Часть\s*\d+|Книга\s*\d+)'
+                # отдельная линия с римской цифрой
+                roman_line = r'(?:^\s*[IVXLCM]{1,6}\.?(?:\s|$))'
+                chapter_regex = re.compile(r'^(?:' + base + r'|' + roman_line + r')', re.MULTILINE | re.IGNORECASE)
+                # токен для извлечения краткого заголовка
+                token_re = re.compile(r'^(?:Глава\s*(?:\d+|[IVXLCM]+)?|Часть\s*\d+|Книга\s*\d+|[IVXLCM]{1,6}\.?)', re.IGNORECASE)
             else:
-                chapter_regex = re.compile(
-                    r'^(?:\s*(?:Chapter|CHAPTER|Part|PART|Book|BOOK)\b\s*(?:\d+|[IVXLC]+)?)',
-                    re.MULTILINE | re.IGNORECASE
-                )
+                base = r'(?:Chapter\s*(?:\d+|[IVXLCM]+)?|Part\s*\d+|Book\s*\d+)'
+                roman_line = r'(?:^\s*[IVXLCM]{1,6}\.?(?:\s|$))'
+                chapter_regex = re.compile(r'^(?:' + base + r'|' + roman_line + r')', re.MULTILINE | re.IGNORECASE)
+                token_re = re.compile(r'^(?:Chapter\s*(?:\d+|[IVXLCM]+)?|Part\s*\d+|Book\s*\d+|[IVXLCM]{1,6}\.?)', re.IGNORECASE)
         
         chapters = []
         matches = list(chapter_regex.finditer(text))
         
         if not matches:
-            # Если глав не найдено — считаем весь текст одной главой
             return [(0, len(text), "Весь текст")]
         
         for i, match in enumerate(matches):
             start = match.start()
-            title = match.group(0).strip()
-            
-            # Конец главы — начало следующей или конец текста
+            # извлекаем только первую строку, где расположен матч
+            line_end = text.find('\n', start)
+            if line_end == -1:
+                line_end = len(text)
+            line = text[start:line_end]
+
+            # пробуем извлечь компактный маркер (римская цифра или слово 'Глава')
+            m = token_re.search(line)
+            if m:
+                title = m.group(0).strip()
+            else:
+                title = match.group(0).strip()
+
             end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
-            
             chapters.append((start, end, title))
         
         return chapters

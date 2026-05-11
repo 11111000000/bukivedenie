@@ -1,0 +1,2 @@
+chapter_idx,title,total_score,avg_score,sentiment_words,positive_count,negative_count,neutral_count,sentiment_label
+0,Весь текст,-15.0,-0.0382,393,209,184,0,neutral

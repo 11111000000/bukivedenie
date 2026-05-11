@@ -215,7 +215,6 @@ def export_results(
     book_id: str,
     config: ExtractorConfig,
     token_freqs: List[Dict[str, Any]],
-    token_freqs_by_chapter: Optional[List[Dict[str, Any]]],
     chapters_summary: List[Dict[str, Any]],
     characters: List[Dict[str, Any]],
     char_freq_by_chapter: List[Dict[str, Any]],
@@ -241,12 +240,7 @@ def export_results(
     try:
         # Export tokens.csv (primary). frequency_dictionary.csv was a duplicate — omit duplicate export.
         tokens_path = book_dir / 'tokens.csv'
-        # Determine headers dynamically from first record if provided
-        if token_freqs:
-            fieldnames = list(token_freqs[0].keys())
-        else:
-            fieldnames = ['token','count','rank','per_1k']
-        write_csv(tokens_path, token_freqs, fieldnames)
+        write_csv(tokens_path, token_freqs, ['token', 'count', 'rank', 'per_1k'])
         paths['tokens'] = tokens_path
     except Exception as e:
         logger.error("Ошибка при экспорте tokens.csv для %s: %s", book_id, e)
@@ -259,14 +253,14 @@ def export_results(
         logger.error("Ошибка при экспорте chapters_summary.json для %s: %s", book_id, e)
 
     try:
-        # Always write characters CSV (possibly empty) to ensure previous runs are overwritten
-        chars_path = book_dir / 'characters.csv'
-        export_characters(chars_path, characters or [])
-        paths['characters'] = chars_path
+        if characters:
+            chars_path = book_dir / 'characters.csv'
+            export_characters(chars_path, characters)
+            paths['characters'] = chars_path
 
-        char_freq_path = book_dir / 'character_freq_by_chapter.csv'
-        export_character_freq_by_chapter(char_freq_path, char_freq_by_chapter or [])
-        paths['character_freq_by_chapter'] = char_freq_path
+            char_freq_path = book_dir / 'character_freq_by_chapter.csv'
+            export_character_freq_by_chapter(char_freq_path, char_freq_by_chapter)
+            paths['character_freq_by_chapter'] = char_freq_path
     except Exception as e:
         logger.error("Ошибка при экспорте characters для %s: %s", book_id, e)
 
@@ -293,15 +287,6 @@ def export_results(
         paths['hapax'] = hapax_path
     except Exception as e:
         logger.error("Ошибка при экспорте hapax для %s: %s", book_id, e)
-
-    # export token freq by chapter if provided by analyze_text
-    try:
-        if token_freqs_by_chapter:
-            tfbc_path = book_dir / 'token_freq_by_chapter.csv'
-            write_csv(tfbc_path, token_freqs_by_chapter, ['token','token_lower','chapter_idx','count'])
-            paths['token_freq_by_chapter'] = tfbc_path
-    except Exception as e:
-        logger.debug("token_freq_by_chapter export skipped: %s", e)
 
     try:
         complexity_path = book_dir / 'complexity_metrics.json'

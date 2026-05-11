@@ -13,13 +13,18 @@
     pre { white-space: pre-wrap; background:#f7f7f7; padding:8px; border:1px solid #ddd; }
     table { width:100%; border-collapse:collapse; }
     th, td { padding:6px; border:1px solid #ccc; }
+
+    /* Side menu styles */
+    #fileMenu { overflow:auto; max-height:640px; }
+    .file-menu-button { display:block; width:100%; text-align:left; padding:10px; font-size:14px; margin:6px 0; border-radius:6px; border:1px solid #ddd; background:#fff; cursor:pointer; }
+    .file-menu-button.missing { opacity:0.55; background:#fafafa; }
   </style>
 </head>
 <body>
   <h1>Bukivedenie: Results Viewer</h1>
   <div id="left">
     <label for="rawSelect" style="font-weight:600;display:block;margin-bottom:6px;">Выберите текст для анализа</label>
-    <select id="rawSelect" style="width:100%;padding:8px;margin-bottom:8px;"><!-- RAW_OPTIONS --></select>
+    <select id="rawSelect" style="width:100%;padding:8px;margin-bottom:8px;"></select>
 
     <div style="margin-top:8px">
       <textarea id="rawEditor" placeholder="Raw text will appear here..." style="height:300px"></textarea>
@@ -32,6 +37,12 @@
     <div style="margin-top:12px">
       <strong>Текущий файл:</strong>
       <div id="currentFile" style="word-break:break-all;">(none)</div>
+    </div>
+
+    <!-- Файлные кнопки будут размещаться здесь, под редактором -->
+    <div id="fileButtonsContainer" style="margin-top:16px; border:1px solid #eee; padding:8px; background:#fff; max-height:320px; overflow:auto;">
+      <strong style="display:block;margin-bottom:8px;">Файлы (быстрый доступ)</strong>
+      <div id="fileButtonsList"></div>
     </div>
   </div>
 
@@ -55,47 +66,21 @@
       <pre id="errorDetails" style="display:none; white-space:pre-wrap; max-height:300px; overflow:auto; background:#fff; border:1px solid #fdd; padding:8px; margin-top:8px;"></pre>
     </div>
 
-    <div id="filesContainer"></div>
-    <div style="margin-top:16px; border-top:1px solid #eee; padding-top:12px;">
-      <h4>Анализ по главам</h4>
-      <div id="tokenByChapterWidget"></div>
+    <div id="filesContainer">
+      <div id="fileApp" style="display:flex; gap:12px; align-items:flex-start;">
+        <div id="fileMenu" style="width:240px; border:1px solid #ddd; padding:8px; background:#fafafa; overflow:auto; max-height:640px;">
+          <strong style="display:block;margin-bottom:8px;">Файлы</strong>
+          <div id="fileMenuList"></div>
+        </div>
+        <div id="tabArea" style="flex:1; border:1px solid #ddd; padding:8px;">
+          <div id="tabHeaders" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px;"></div>
+          <div id="tabContent" style="min-height:200px;"></div>
+        </div>
+      </div>
     </div>
   </div>
 
   <script type="module" src="/static/app.js"></script>
-  <script type="module" src="/static/file_renderer.js"></script>
-  <!-- Non-module fallback to populate raw select in case module script fails -->
-  <script>
-    (function(){
-      const sel = document.getElementById('rawSelect');
-      if (!sel) return;
-      // If already populated by module, skip
-      if (sel.options && sel.options.length>0) return;
-      fetch('/api/raw_files').then(r=>r.json()).then(j=>{
-        const raws = j.files || [];
-        sel.innerHTML = '';
-        raws.forEach(name => {
-          const opt = document.createElement('option'); opt.value = name; opt.innerText = name; sel.appendChild(opt);
-        });
-        sel.addEventListener('change', async ()=>{
-          const v = sel.value; if (v) {
-            try {
-              const resp = await fetch('/api/raw?name=' + encodeURIComponent(v));
-              const j = await resp.json();
-              document.getElementById('rawEditor').value = j.content || '';
-              document.getElementById('currentFile').innerText = v;
-              // load book files
-              fetch('/api/files?book=' + encodeURIComponent(v.replace(/\.txt$/i,''))).then(r=>r.json()).then(j2=>{
-                const files = j2.files || [];
-                // trigger rendering by calling existing function if present
-                if (window.loadBookFiles) window.loadBookFiles(v.replace(/\.txt$/i,''));
-              });
-            } catch(e){ console.error(e); }
-          }
-        });
-        if (raws.length>0){ sel.value = raws[0]; sel.dispatchEvent(new Event('change')); }
-      }).catch(e=>console.warn('raw_files fetch failed', e));
-    })();
-  </script>
+  <script src="/static/fallback.js"></script>
 </body>
 </html>

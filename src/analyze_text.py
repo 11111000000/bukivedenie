@@ -249,20 +249,10 @@ def process_single_file(
 
     # Извлечение данных — каждая часть в try/except с подробным сообщением
     try:
-        # build tokens.csv enriched with per-chapter counts
-        try:
-            from extractor.metrics import compute_tokens_with_chapter_counts
-            token_freqs = compute_tokens_with_chapter_counts(chapters, use_lemmas=config.use_lemmas)
-            # Also build compact per-chapter table for other uses
-            from extractor.metrics import compute_token_freq_by_chapter
-            token_freqs_by_chapter = compute_token_freq_by_chapter(chapters)
-        except Exception as e:
-            # fallback to simple frequencies
-            token_freqs = compute_token_frequencies(
-                chapters, 
-                use_lemmas=config.use_lemmas
-            )
-            token_freqs_by_chapter = None
+        token_freqs = compute_token_frequencies(
+            chapters, 
+            use_lemmas=config.use_lemmas
+        )
     except Exception as e:
         msg = f"Ошибка при вычислении частот токенов для '{file_path}': {e}"
         logger.error(msg)
@@ -339,7 +329,6 @@ def process_single_file(
                 book_id=book_id,
                 config=config,
                 token_freqs=token_freqs,
-                token_freqs_by_chapter=token_freqs_by_chapter,
                 chapters_summary=chapters_summary,
                 characters=characters,
                 char_freq_by_chapter=char_freq_by_chapter,

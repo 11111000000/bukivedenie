@@ -85,8 +85,6 @@ class Handler(BaseHTTPRequestHandler):
         self.wfile.write(data)
 
     def do_GET(self):
-            # static prefix: serve files from src/web_view under /static/
-            
         parsed = urlparse(self.path)
         path = parsed.path
         qs = parse_qs(parsed.query)
@@ -99,16 +97,6 @@ class Handler(BaseHTTPRequestHandler):
                     return self._text('Index not found', status=404)
                 with open(idx, 'r', encoding='utf-8') as f:
                     content = f.read()
-                # Inject raw files options into HTML to support static viewing without JS API
-                try:
-                    raws = list_raw_files()
-                    options_html = ''
-                    for name in raws:
-                        safe = html.escape(name)
-                        options_html += f'<option value="{safe}">{safe}</option>'
-                    content = content.replace('<!-- RAW_OPTIONS -->', options_html)
-                except Exception:
-                    pass
                 return self._text(content, content_type='text/html; charset=utf-8')
 
             if path == '/api/books':
@@ -139,30 +127,6 @@ class Handler(BaseHTTPRequestHandler):
                 # Return as JSON with metadata and content
                 return self._json({'book': book, 'name': name, 'content': text})
 
-            if path == '/api/file_json':
-                # Return CSV parsed into JSON array of objects (or raw text for non-CSV)
-                book = qs.get('book', [''])[0]
-                name = qs.get('name', [''])[0]
-                if not book or not name:
-                    return self._json({'error': 'book and name params required'}, status=400)
-                file_path = safe_join(OUTPUTS_DIR / book, unquote_plus(name))
-                if not file_path.exists():
-                    return self._json({'error': 'file not found'}, status=404)
-                try:
-                    import csv
-                    text = file_path.read_text(encoding='utf-8')
-                    if name.lower().endswith('.csv'):
-                        # parse CSV robustly
-                        rows = []
-                        reader = csv.DictReader(text.splitlines())
-                        for row in reader:
-                            rows.append(row)
-                        return self._json({'book': book, 'name': name, 'rows': rows})
-                    else:
-                        return self._json({'book': book, 'name': name, 'content': text})
-                except Exception as e:
-                    return self._json({'error': f'cannot parse file: {e}'}, status=500)
-
             if path == '/api/file_download':
                 book = qs.get('book', [''])[0]
                 name = qs.get('name', [''])[0]
@@ -175,14 +139,11 @@ class Handler(BaseHTTPRequestHandler):
                     data = file_path.read_bytes()
                 except Exception as e:
                     return self._json({'error': f'cannot read file: {e}'}, status=500)
-                # serve as attachment (sanitize filename)
+                # serve as attachment
                 try:
-                    safe_name = os.path.basename(unquote_plus(name))
-                    # basic sanitization: remove double quotes and control chars
-                    safe_name = ''.join(ch for ch in safe_name if ord(ch) >= 32 and ch != '"')
                     self.send_response(200)
                     self.send_header('Content-Type', 'application/octet-stream')
-                    self.send_header('Content-Disposition', f'attachment; filename="{safe_name}"')
+                    self.send_header('Content-Disposition', f'attachment; filename="{name}"')
                     self.send_header('Content-Length', str(len(data)))
                     self.end_headers()
                     self.wfile.write(data)
@@ -208,8 +169,7 @@ class Handler(BaseHTTPRequestHandler):
                     script = PROJECT_ROOT / 'src' / 'analyze_text.py'
                     cmd = [sys.executable, str(script), 'analyze', '--input', str(raw_path), '--output-dir', str(OUTPUTS_DIR), '--lang', 'ru']
                     # Run subprocess synchronously and capture output
-                    # NOTE: consider making this asynchronous in future (job queue)
-                    proc = subprocess.run(cmd, capture_output=True, timeout=300)
+                    proc = subprocess.run(cmd, capture_output=True)
                     # sanitize stdout/stderr to valid utf-8 strings
                     stdout = proc.stdout.decode('utf-8', errors='replace') if proc.stdout is not None else ''
                     stderr = proc.stderr.decode('utf-8', errors='replace') if proc.stderr is not None else ''
@@ -227,8 +187,6 @@ class Handler(BaseHTTPRequestHandler):
                     book_id = raw_path.stem
                     files = list_files(book_id)
                     return self._json({'book': book_id, 'files': files, 'stdout': stdout, 'stderr': stderr})
-                except subprocess.TimeoutExpired as e:
-                    return self._json({'error': 'analysis timed out', 'stdout': '', 'stderr': 'TimeoutExpired'}, status=500)
                 except Exception as e:
                     return self._json({'error': str(e)}, status=500)
 
@@ -296,11 +254,7 @@ class Handler(BaseHTTPRequestHandler):
                     RAW_DIR.mkdir(parents=True, exist_ok=True)
                 except Exception:
                     pass
-                # Prevent path traversal on save
-                try:
-                    file_path = safe_join(RAW_DIR, unquote_plus(name))
-                except ValueError:
-                    return self._json({'error': 'invalid filename'}, status=400)
+                file_path = RAW_DIR / unquote_plus(name)
                 try:
                     file_path.write_text(text, encoding='utf-8')
                 except Exception as e:
