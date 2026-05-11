@@ -63,6 +63,13 @@ function renderFilesList(book, files) {
     menu.appendChild(btn);
   });
 
+  // add cloud quick link
+  const cloudBtn = document.createElement('div');
+  cloudBtn.className = 'file-menu-button';
+  cloudBtn.textContent = 'Cloud Preview — показывать последнее облако';
+  cloudBtn.onclick = () => loadCloudPreview(book);
+  menu.appendChild(cloudBtn);
+
   // open first generated file if any, otherwise open logical first to show placeholder
   const firstActual = files.find(f => available.some(a => f.toLowerCase().endsWith(a.toLowerCase())) ) || null;
   if (firstActual) openTab(book, firstActual, true);
@@ -92,6 +99,25 @@ function openTab(book, name, present) {
   panel.textContent = 'Loading...';
   content.appendChild(panel);
 
+  // If this is an image from figures/wordclouds, render via figure_download endpoint
+  const isImage = typeof name === 'string' && (name.toLowerCase().endsWith('.png') || name.toLowerCase().endsWith('.svg'));
+  if (isImage) {
+    panel.innerHTML = '';
+    const toolbar = document.createElement('div'); toolbar.style.display='flex'; toolbar.style.justifyContent='space-between'; toolbar.style.marginBottom='8px';
+    const title = document.createElement('div'); title.textContent = name; title.style.fontWeight='600';
+    const actions = document.createElement('div');
+    const dl = document.createElement('button'); dl.textContent='Скачать'; dl.onclick = () => { window.location = '/api/figure_download?book=' + encodeURIComponent(book) + '&name=' + encodeURIComponent(name); };
+    actions.appendChild(dl);
+    toolbar.appendChild(title); toolbar.appendChild(actions);
+    panel.appendChild(toolbar);
+
+    const img = document.createElement('img');
+    img.src = '/api/figure_download?book=' + encodeURIComponent(book) + '&name=' + encodeURIComponent(name);
+    img.style.maxWidth = '100%'; img.style.height = 'auto'; img.alt = name;
+    panel.appendChild(img);
+    return;
+  }
+
   if (present && window.renderFileInto) {
     // use the static renderer which exposes renderFileInto globally
     try {
@@ -109,7 +135,73 @@ async function loadBookFiles(book) {
   const resp = await api('/api/files?book=' + encodeURIComponent(book));
   const files = resp.files || [];
   renderFilesList(book, files);
+  // also try to load cloud preview
+  try { await loadCloudPreview(book); } catch(e) { /* ignore */ }
 }
+
+// Load latest cloud PNG for a book
+async function loadCloudPreview(book) {
+  if (!book) return;
+  const resp = await api('/api/figures?book=' + encodeURIComponent(book));
+  if (resp.error) return;
+  const list = resp.files || [];
+  if (!list.length) {
+    // create a cloud preview panel with message and generate button
+    const name = 'cloud_preview';
+    const id = makeId(book, name);
+    const headers = document.getElementById('tabHeaders');
+    const content = document.getElementById('tabContent');
+    if (!document.getElementById('tab_' + id)) {
+      const hbtn = document.createElement('button'); hbtn.id = 'tab_' + id; hbtn.textContent = 'Cloud Preview'; hbtn.style.marginRight='8px'; hbtn.onclick = ()=>{
+        Array.from(headers.children).forEach(h=>h.classList.remove('active'));
+        hbtn.classList.add('active');
+        Array.from(content.children).forEach(c=>c.style.display='none');
+        document.getElementById('panel_' + id).style.display = 'block';
+      };
+      headers.appendChild(hbtn);
+
+      const panel = document.createElement('div'); panel.id = 'panel_' + id; panel.style.display='block'; panel.style.padding='8px';
+      panel.innerHTML = '';
+      const toolbar = document.createElement('div'); toolbar.style.display='flex'; toolbar.style.justifyContent='space-between'; toolbar.style.marginBottom='8px';
+      const title = document.createElement('div'); title.textContent = 'Cloud Preview'; title.style.fontWeight='600';
+      const actions = document.createElement('div');
+      const gen = document.createElement('button'); gen.textContent='Сгенерировать облако'; gen.onclick = async ()=>{
+        gen.disabled = true; gen.textContent = 'Генерация...';
+        try {
+          const res = await api('/api/cloud_generate', { method: 'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({book: book}) });
+          if (res && res.error) {
+            alert('Ошибка генерации: ' + (res.error || JSON.stringify(res)));
+          } else {
+            // refresh file list and open latest
+            await loadBookFiles(book);
+            await new Promise(r => setTimeout(r, 500));
+            await loadCloudPreview(book);
+          }
+        } catch (e) { alert('Ошибка: ' + e); }
+        finally { gen.disabled = false; gen.textContent = 'Сгенерировать облако'; }
+      };
+      actions.appendChild(gen);
+      toolbar.appendChild(title); toolbar.appendChild(actions);
+      panel.appendChild(toolbar);
+
+      const msg = document.createElement('div'); msg.textContent = 'Облако ещё не сгенерировано для этой книги.'; panel.appendChild(msg);
+      content.appendChild(panel);
+    }
+    // activate the panel
+    Array.from(document.getElementById('tabHeaders').children).forEach(h=>h.classList.remove('active'));
+    const tabBtn = document.getElementById('tab_' + id); if (tabBtn) tabBtn.classList.add('active');
+    Array.from(document.getElementById('tabContent').children).forEach(c=>c.style.display='none');
+    const panelEl = document.getElementById('panel_' + id); if (panelEl) panelEl.style.display = 'block';
+    return;
+  }
+  // find latest png in figures/wordclouds/<book>/
+  const pngs = list.filter(n => n.toLowerCase().endsWith('.png'));
+  if (!pngs.length) return;
+  const latest = pngs[pngs.length-1];
+  // open in a new tab panel
+  openTab(book, latest, true);
+}
+
 
 async function loadRawIntoEditor(name) {
   const resp = await api('/api/raw?name=' + encodeURIComponent(name));
@@ -159,6 +251,27 @@ document.addEventListener('DOMContentLoaded', async ()=>{
     if (window.mountTokenByChapter && typeof window.mountTokenByChapter === 'function') {
       window.mountTokenByChapter('tokenByChapterWidget', book);
     }
+  } catch(e) { /* ignore */ }
+
+  // cloud buttons
+  try {
+    const showCloudBtn = document.getElementById('showCloudBtn');
+    const genCloudBtn = document.getElementById('genCloudBtn');
+    showCloudBtn && showCloudBtn.addEventListener('click', async ()=>{
+      const book = document.getElementById('currentFile').innerText.replace(/\.txt$/i, '') || '';
+      if (!book) { alert('Выберите файл/книгу сначала'); return; }
+      await loadCloudPreview(book);
+    });
+    genCloudBtn && genCloudBtn.addEventListener('click', async ()=>{
+      const book = document.getElementById('currentFile').innerText.replace(/\.txt$/i, '') || '';
+      if (!book) { alert('Выберите файл/книгу сначала'); return; }
+      try {
+        const resp = await api('/api/cloud_generate', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({book: book}) });
+        if (resp && resp.error) { alert('Ошибка генерации: ' + resp.error); return; }
+        alert('Генерация запущена (или завершена). Обновите список файлов.');
+        await loadBookFiles(book);
+      } catch (e) { alert('Ошибка: ' + e); }
+    });
   } catch(e) { /* ignore */ }
 });
 

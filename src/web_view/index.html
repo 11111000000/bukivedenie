@@ -44,6 +44,10 @@
     <div id="fileButtonsContainer" style="margin-top:16px; border:1px solid #eee; padding:8px; background:#fff; max-height:520px; overflow:auto;">
       <strong style="display:block;margin-bottom:8px;">Файлы (быстрый доступ)</strong>
       <div id="fileMenuList" style="width:100%; max-height:520px; overflow:auto;"></div>
+      <div style="margin-top:12px;">
+        <button id="showCloudBtn" style="width:100%; padding:10px; margin-top:8px;">Показать облако слов</button>
+        <button id="genCloudBtn" style="width:100%; padding:10px; margin-top:8px;">Сгенерировать облако</button>
+      </div>
     </div>
   </div>
 
@@ -73,6 +77,7 @@
     <div id="filesContainer">
       <div id="fileApp" style="display:flex; gap:12px; align-items:flex-start;">
         <div id="tabArea" style="flex:1; border:1px solid #ddd; padding:8px;">
+          <div id="tabHeaders" style="margin-bottom:8px;"></div>
           <div id="tabContent" style="min-height:200px;"></div>
         </div>
       </div>

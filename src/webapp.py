@@ -274,6 +274,47 @@ class Handler(BaseHTTPRequestHandler):
                 # Return as JSON with metadata and content
                 return self._json({'book': book, 'name': name, 'content': text})
 
+            # Figures endpoints: list and download generated wordclouds
+            if path == '/api/figures':
+                book = qs.get('book', [''])[0]
+                if not book:
+                    return self._json({'error': 'book param required'}, status=400)
+                figures_dir = OUTPUTS_DIR / 'figures' / 'wordclouds' / book
+                if not figures_dir.exists():
+                    return self._json({'book': book, 'files': []})
+                files = [p.name for p in sorted(figures_dir.iterdir()) if p.is_file()]
+                return self._json({'book': book, 'files': files})
+
+            if path == '/api/figure_download':
+                book = qs.get('book', [''])[0]
+                name = qs.get('name', [''])[0]
+                if not book or not name:
+                    return self._json({'error': 'book and name params required'}, status=400)
+                file_path = safe_join(OUTPUTS_DIR / 'figures' / 'wordclouds' / book, unquote_plus(name))
+                if not file_path.exists():
+                    return self._json({'error': 'file not found'}, status=404)
+                try:
+                    data = file_path.read_bytes()
+                except Exception as e:
+                    return self._json({'error': f'cannot read file: {e}'}, status=500)
+                # determine content-type
+                ct = 'application/octet-stream'
+                if name.lower().endswith('.png'):
+                    ct = 'image/png'
+                elif name.lower().endswith('.svg'):
+                    ct = 'image/svg+xml'
+                elif name.lower().endswith('.json'):
+                    ct = 'application/json; charset=utf-8'
+                try:
+                    self.send_response(200)
+                    self.send_header('Content-Type', ct)
+                    self.send_header('Content-Length', str(len(data)))
+                    self.end_headers()
+                    self.wfile.write(data)
+                    return
+                except Exception as e:
+                    return self._json({'error': f'cannot send file: {e}'}, status=500)
+
             if path == '/api/file_download':
                 book = qs.get('book', [''])[0]
                 name = qs.get('name', [''])[0]
@@ -297,6 +338,35 @@ class Handler(BaseHTTPRequestHandler):
                     return
                 except Exception as e:
                     return self._json({'error': f'cannot send file: {e}'}, status=500)
+
+            if path == '/api/cloud_generate':
+                # Simple wrapper to run plotting script for a given book
+                # Accepts POST JSON {"book": "<book_id>"} or query param book=
+                book = qs.get('book', [''])[0] if qs.get('book') else ''
+                if not book and self.command == 'POST':
+                    # try to read JSON body
+                    try:
+                        length = int(self.headers.get('Content-Length', 0))
+                        raw = self.rfile.read(length) if length else b''
+                        if raw:
+                            j = json.loads(raw.decode('utf-8'))
+                            book = j.get('book', '')
+                    except Exception:
+                        book = ''
+                if not book:
+                    return self._json({'error': 'book param required'}, status=400)
+                # run script synchronously (blocking)
+                try:
+                    script = PROJECT_ROOT / 'scripts' / 'plot_wordcloud_from_counts.py'
+                    cmd = [sys.executable, str(script), '--text-id', book]
+                    proc = subprocess.run(cmd, capture_output=True)
+                    stdout = proc.stdout.decode('utf-8', errors='replace') if proc.stdout else ''
+                    stderr = proc.stderr.decode('utf-8', errors='replace') if proc.stderr else ''
+                    if proc.returncode != 0:
+                        return self._json({'error': 'plot failed', 'stdout': stdout, 'stderr': stderr}, status=500)
+                    return self._json({'book': book, 'stdout': stdout, 'stderr': stderr})
+                except Exception as e:
+                    return self._json({'error': str(e)}, status=500)
 
             if path == '/api/run_analysis':
                 # Trigger analysis for a selected raw file and return list of created files

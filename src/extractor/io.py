@@ -3,6 +3,8 @@ import json
 import logging
 import os
 import tempfile
+import subprocess
+import sys
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 from datetime import datetime
@@ -242,6 +244,26 @@ def export_results(
         tokens_path = book_dir / 'tokens.csv'
         write_csv(tokens_path, token_freqs, ['token', 'count', 'rank', 'per_1k'])
         paths['tokens'] = tokens_path
+        # Автоматически запускаем генерацию облака слов в фоне (не блокируем экспорт).
+        try:
+            project_root = Path(__file__).resolve().parent.parent.parent
+            script = project_root / 'scripts' / 'plot_wordcloud_from_counts.py'
+            if script.exists():
+                log_file = book_dir / 'cloud_generation.log'
+                # Запускаем отдельный процесс, перенаправляя stdout/stderr в лог
+                with open(log_file, 'a', encoding='utf-8') as lf:
+                    lf.write(f"=== Cloud generation started: {datetime.now().isoformat()}\n")
+                    try:
+                        # Используем sys.executable для корректного интерпретатора
+                        p = subprocess.Popen([sys.executable, str(script), '--text-id', book_id], stdout=lf, stderr=lf)
+                        logger.info("Запущен процесс генерации облака слов (pid=%s) для %s", p.pid, book_id)
+                    except Exception as e:
+                        lf.write(f"Error launching cloud generation: {e}\n")
+                        logger.error("Не удалось запустить генерацию облака для %s: %s", book_id, e)
+            else:
+                logger.debug("Plot script not found, skipping cloud generation: %s", script)
+        except Exception as e:
+            logger.error("Ошибка при попытке запустить генерацию облака для %s: %s", book_id, e)
     except Exception as e:
         logger.error("Ошибка при экспорте tokens.csv для %s: %s", book_id, e)
 

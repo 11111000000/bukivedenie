@@ -175,17 +175,21 @@ class TextPipeline:
         """
         if pattern:
             chapter_regex = re.compile(pattern, re.MULTILINE)
+            token_re = re.compile(pattern, re.MULTILINE)
         else:
             if self.config.lang == "ru":
                 # базовые маркеры: Глава, Часть, Книга с опциональным номером
                 base = r'(?:Глава\s*(?:\d+|[IVXLCM]+)?|Часть\s*\d+|Книга\s*\d+)'
-                # отдельная линия с римской цифрой (без ^ внутри)
-                roman_line = r'[IVXLCM]{1,6}\.?' 
+                # римская цифра (только если она отдельный токен: I, II, IV. и т.п.)
+                roman_line = r'[IVXLCDM]{1,6}\.?(?=\s|$)'
                 chapter_regex = re.compile(r'^\s*(?:' + base + r'|' + roman_line + r')', re.MULTILINE | re.IGNORECASE)
+                # token_re — выдирает только маркер (без остального содержимого строки)
+                token_re = re.compile(r'^\s*(?:Глава\s*(?:\d+|[IVXLCDM]+)?|Часть\s*\d+|Книга\s*\d+|' + roman_line + r')', re.IGNORECASE)
             else:
                 base = r'(?:Chapter\s*(?:\d+|[IVXLCM]+)?|Part\s*\d+|Book\s*\d+)'
-                roman_line = r'[IVXLCM]{1,6}\.?' 
+                roman_line = r'[IVXLCDM]{1,6}\.?(?=\s|$)'
                 chapter_regex = re.compile(r'^\s*(?:' + base + r'|' + roman_line + r')', re.MULTILINE | re.IGNORECASE)
+                token_re = re.compile(r'^\s*(?:Chapter\s*(?:\d+|[IVXLCDM]+)?|Part\s*\d+|Book\s*\d+|' + roman_line + r')', re.IGNORECASE)
         
         chapters = []
         matches = list(chapter_regex.finditer(text))
@@ -202,14 +206,23 @@ class TextPipeline:
                 line_end = len(text)
             line = text[start:line_end].strip()
 
-            # По умолчанию используем всю строку заголовка — это даёт более понятные названия
-            title = re.sub(r'\s+', ' ', line)
+            # Попробуем извлечь компактный маркер (римская цифра или слово 'Глава')
+            title = None
+            try:
+                if 'token_re' in locals() and token_re:
+                    m = token_re.match(line)
+                    if m:
+                        title = m.group(0).strip()
+            except Exception:
+                title = None
+
+            # Если маркер не найден, используем всю строку (но урежем до 80 символов)
             if not title:
-                # fallback — используем сам матч
-                title = match.group(0).strip()
+                short = re.sub(r'\s+', ' ', line)
+                title = short if len(short) <= 80 else (short[:77] + '...')
 
             # Если пользователь передал кастомный pattern и в нём есть именованная группа 'title',
-            # попробуем достать её содержимое
+            # попробуем достать её содержимое (приоритет)
             if pattern:
                 try:
                     m_full = match
