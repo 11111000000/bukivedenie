@@ -137,6 +137,56 @@ class Handler(BaseHTTPRequestHandler):
                 files = list_files(book)
                 return self._json({'book': book, 'files': files})
 
+            if path == '/api/file_parsed':
+                # return parsed CSV/JSONL/JSON for safer client rendering
+                book = qs.get('book', [''])[0]
+                name = qs.get('name', [''])[0]
+                if not book or not name:
+                    return self._json({'error': 'book and name params required'}, status=400)
+                file_path = safe_join(OUTPUTS_DIR / book, unquote_plus(name))
+                if not file_path.exists():
+                    return self._json({'error': 'file not found'}, status=404)
+                try:
+                    if file_path.suffix.lower() == '.csv':
+                        import csv
+                        headers = None
+                        rows = []
+                        with open(file_path, 'r', encoding='utf-8', newline='') as fh:
+                            reader = csv.reader(fh)
+                            for i, row in enumerate(reader):
+                                if i == 0:
+                                    headers = row
+                                else:
+                                    rows.append(row)
+                                if len(rows) >= 1000:
+                                    break
+                        return self._json({'type': 'csv', 'headers': headers or [], 'rows': rows})
+                    elif file_path.suffix.lower() in ('.json',):
+                        txt = file_path.read_text(encoding='utf-8')
+                        try:
+                            data = json.loads(txt)
+                        except Exception:
+                            data = txt
+                        return self._json({'type': 'json', 'data': data})
+                    elif file_path.suffix.lower() in ('.jsonl', '.ndjson'):
+                        data = []
+                        with open(file_path, 'r', encoding='utf-8') as fh:
+                            for i, line in enumerate(fh):
+                                if i >= 500: break
+                                line = line.strip()
+                                if not line: continue
+                                try:
+                                    data.append(json.loads(line))
+                                except Exception:
+                                    data.append({'_raw': line})
+                        return self._json({'type': 'jsonl', 'data': data})
+                    else:
+                        # fallback: return raw content
+                        text = file_path.read_text(encoding='utf-8')
+                        return self._json({'type': 'text', 'content': text})
+                except Exception as e:
+                    return self._json({'error': f'cannot parse file: {e}'}, status=500)
+
             if path == '/api/file':
                 book = qs.get('book', [''])[0]
                 name = qs.get('name', [''])[0]
