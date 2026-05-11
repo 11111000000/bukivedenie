@@ -72,6 +72,27 @@ def list_files(book: str):
     return uniq
 
 
+def ensure_log_dir():
+    logdir = PROJECT_ROOT / 'logs'
+    try:
+        logdir.mkdir(parents=True, exist_ok=True)
+    except Exception:
+        pass
+    return logdir
+
+LOG_DIR = ensure_log_dir()
+LOG_PATH = LOG_DIR / 'webapp.log'
+
+def slog(msg):
+    try:
+        from datetime import datetime
+        s = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ') + ' ' + str(msg) + '\n'
+        with open(LOG_PATH, 'a', encoding='utf-8') as fh:
+            fh.write(s)
+    except Exception:
+        pass
+
+
 def list_raw_files():
     """Return raw files; include ALT_CHEKHOV_PATH if present (adds it as 'чехов-письмо.txt' logical name).
     If RAW_DIR contains a file with the same name, prefer that one.
@@ -139,6 +160,7 @@ class Handler(BaseHTTPRequestHandler):
                 if not book:
                     return self._json({'error': 'book param required'}, status=400)
                 files = list_files(book)
+                slog(f"list_files: book={book} files_count={len(files)} sample={files[:10]}")
                 return self._json({'book': book, 'files': files})
 
             if path == '/api/file_parsed':
@@ -147,10 +169,35 @@ class Handler(BaseHTTPRequestHandler):
                 name = qs.get('name', [''])[0]
                 if not book or not name:
                     return self._json({'error': 'book and name params required'}, status=400)
-                file_path = safe_join(OUTPUTS_DIR / book, unquote_plus(name))
-                if not file_path.exists():
-                    return self._json({'error': 'file not found'}, status=404)
+                # support paths like 'tables/filename.csv' or 'processed/filename.jsonl'
+                parts = name.split('/') if '/' in name else [name]
+                if len(parts) > 1:
+                    sub = parts[0]
+                    real_name = '/'.join(parts[1:])
+                    candidate = OUTPUTS_DIR / sub / real_name
+                else:
+                    candidate = OUTPUTS_DIR / book / name
+                # fallback: if candidate not exists, try alternative locations
+                if not candidate.exists():
+                    # try outputs/tables/<book>_name
+                    alt1 = OUTPUTS_DIR / 'tables' / f"{book}_{name}"
+                    alt2 = OUTPUTS_DIR / 'processed' / f"{book}_{name}"
+                    alt3 = OUTPUTS_DIR / name
+                    chosen = None
+                    for c in (alt1, alt2, alt3):
+                        if c.exists():
+                            chosen = c; break
+                    if chosen:
+                        candidate = chosen
+                if not candidate.exists():
+                    # final fallback: attempt safe_join with provided book/name (may raise)
+                    try:
+                        candidate = safe_join(OUTPUTS_DIR / book, unquote_plus(name))
+                    except Exception:
+                        return self._json({'error': 'file not found'}, status=404)
+                file_path = candidate
                 try:
+                    slog(f"file_parsed: serving {file_path}")
                     if file_path.suffix.lower() == '.csv':
                         import csv
                         headers = None
@@ -176,7 +223,7 @@ class Handler(BaseHTTPRequestHandler):
                         data = []
                         with open(file_path, 'r', encoding='utf-8') as fh:
                             for i, line in enumerate(fh):
-                                if i >= 500: break
+                                if i >= 1000: break
                                 line = line.strip()
                                 if not line: continue
                                 try:
@@ -189,6 +236,7 @@ class Handler(BaseHTTPRequestHandler):
                         text = file_path.read_text(encoding='utf-8')
                         return self._json({'type': 'text', 'content': text})
                 except Exception as e:
+                    slog(f"file_parsed: error {e} while reading {file_path}")
                     return self._json({'error': f'cannot parse file: {e}'}, status=500)
 
             if path == '/api/find_file':
@@ -206,6 +254,7 @@ class Handler(BaseHTTPRequestHandler):
                             rel = os.path.relpath(os.path.join(root, fn), str(OUTPUTS_DIR))
                             matches.append(rel.replace('\\', '/'))
                 matches = sorted(list(dict.fromkeys(matches)))
+                slog(f"find_file: logical={logical} book={book} matches={matches[:10]}")
                 return self._json({'logical': logical, 'book': book, 'matches': matches})
 
             if path == '/api/file':
@@ -297,6 +346,7 @@ class Handler(BaseHTTPRequestHandler):
                 token = qs.get('token', [''])[0]
                 if not book or not token:
                     return self._json({'error': 'book and token params required'}, status=400)
+                slog(f"token_by_chapter: book={book} token={token}")
                 # try to load chapters_summary.json
                 chapters_path = OUTPUTS_DIR / book / 'chapters_summary.json'
                 if not chapters_path.exists():
@@ -312,7 +362,19 @@ class Handler(BaseHTTPRequestHandler):
                     if alt.exists():
                         sent_path = alt
                 if not sent_path.exists():
+                    # try to search generically
+                    # look for any file that endswith '_sentences.jsonl' or contains book + '_sentences'
+                    found = None
+                    for root, dirs, files in os.walk(OUTPUTS_DIR):
+                        for fn in files:
+                            if fn.lower().endswith('_sentences.jsonl') and fn.lower().startswith(book.lower()):
+                                found = Path(root) / fn; break
+                        if found: break
+                    if found:
+                        sent_path = found
+                if not sent_path.exists():
                     return self._json({'error': 'sentences jsonl not found for book (processed/<book>_sentences.jsonl or <book>/sentences.jsonl required)'}, status=404)
+                slog(f"token_by_chapter: using sentences file {sent_path}")
                 # prepare chapter bins
                 bins = []
                 for i, ch in enumerate(chapters):
@@ -345,6 +407,7 @@ class Handler(BaseHTTPRequestHandler):
                                 if txt.lower() == tlower:
                                     bins[chap_idx]['count'] += 1
                 except Exception as e:
+                    slog(f"token_by_chapter: error reading sentences file: {e}")
                     return self._json({'error': f'cannot read sentences file: {e}'}, status=500)
                 # prepare response
                 out = [{'chapter_idx': b['idx'], 'title': b['title'], 'count': b['count']} for b in bins]
