@@ -110,41 +110,38 @@ function renderFilesList(book, files) {
 }
 
 function openTab(book, name, present, menuBtn) {
-  const headers = document.getElementById('tabHeaders');
   const content = document.getElementById('tabContent');
-  // create header button
-  const id = makeId(book, name);
-  // avoid duplicate tab
-  if (document.getElementById('tab_' + id)) {
-    // activate
-    Array.from(headers.children).forEach(h=>h.classList.remove('active'));
-    document.getElementById('tab_' + id).classList.add('active');
+
+  // If 'name' contains a path (like 'tables/filename.csv'), treat the part before slash as book
+  let resolvedBook = book;
+  let resolvedName = name;
+  if (typeof name === 'string' && name.includes('/')) {
+    const parts = name.split('/');
+    resolvedBook = parts[0];
+    resolvedName = parts.slice(1).join('/');
+  }
+
+  const id = makeId(resolvedBook, resolvedName);
+  // If panel exists, show it
+  const existing = document.getElementById('panel_' + id);
+  Array.from(document.getElementById('fileMenuList').children).forEach(n=>n.classList && n.classList.remove('active-menu'));
+  if (menuBtn) menuBtn.classList.add('active-menu');
+  if (existing) {
     Array.from(content.children).forEach(c=>c.style.display='none');
-    document.getElementById('panel_' + id).style.display = 'block';
-    // sync menu active state
-    Array.from(document.getElementById('fileMenuList').children).forEach(n=>n.classList && n.classList.remove('active-menu'));
-    if (menuBtn) menuBtn.classList.add('active-menu');
+    existing.style.display = 'block';
     return;
   }
-  const hbtn = document.createElement('button'); hbtn.id = 'tab_' + id; hbtn.textContent = name; hbtn.style.marginRight='8px'; hbtn.onclick = ()=>{
-    Array.from(headers.children).forEach(h=>h.classList.remove('active'));
-    hbtn.classList.add('active');
-    Array.from(content.children).forEach(c=>c.style.display='none');
-    document.getElementById('panel_' + id).style.display = 'block';
-  };
-  headers.appendChild(hbtn);
 
-  const panel = document.createElement('div'); panel.id = 'panel_' + id; panel.style.display='block'; panel.style.padding='8px';
+  // create panel and render content directly; no top header buttons
+  const panel = document.createElement('div');
+  panel.id = 'panel_' + id;
+  panel.style.display = 'block';
+  panel.style.padding = '8px';
   panel.textContent = 'Loading...';
   content.appendChild(panel);
 
-  // sync menu active state
-  Array.from(document.getElementById('fileMenuList').children).forEach(n=>n.classList && n.classList.remove('active-menu'));
-  if (menuBtn) menuBtn.classList.add('active-menu');
-
-  // render file into panel using safe renderer
   if (present) {
-    renderFileInto(book, name, panel);
+    renderFileInto(resolvedBook, resolvedName, panel);
   } else {
     panel.textContent = 'File not generated for this book';
   }
