@@ -45,26 +45,66 @@ export async function mountTokenByChapter(containerId, book) {
 
   let csvCache = null;
   btn.addEventListener('click', async ()=>{
-    const q = input.value.trim().toLowerCase();
+    const q = input.value.trim();
     if (!q) { out.innerHTML = '<i>Введите токен</i>'; return; }
+    const qlow = q.toLowerCase();
     try {
+      // First try CSV cache/source
       if (!csvCache) {
-        const txt = await fetchTokenFreqCSV(book);
-        csvCache = parseCSVToRows(txt);
+        try {
+          const txt = await fetchTokenFreqCSV(book);
+          csvCache = parseCSVToRows(txt);
+        } catch (csvErr) {
+          // CSV not available; fall back to server API
+          if (window.api) {
+            const resp = await window.api('/api/token_by_chapter?book=' + encodeURIComponent(book) + '&token=' + encodeURIComponent(qlow));
+            if (resp && resp.counts) {
+              const rows = resp.counts.map(c=>({chapter_idx: c.chapter_idx, title: c.title, count: Number(c.count)}));
+              // render
+              let html = '<table><thead><tr><th>chapter_idx</th><th>title</th><th>count</th></tr></thead><tbody>';
+              for(const rr of rows) html += `<tr><td>${rr.chapter_idx}</td><td>${rr.title}</td><td>${rr.count}</td></tr>`;
+              html += '</tbody></table>';
+              out.innerHTML = html;
+              return;
+            } else {
+              out.innerHTML = '<i>Токен не найден или сервер не поддерживает /api/token_by_chapter</i>';
+              return;
+            }
+          } else {
+            // direct fetch fallback
+            const resp = await fetch('/api/token_by_chapter?book=' + encodeURIComponent(book) + '&token=' + encodeURIComponent(qlow));
+            if (resp.ok) {
+              const j = await resp.json();
+              if (j && j.counts) {
+                const rows = j.counts.map(c=>({chapter_idx: c.chapter_idx, title: c.title, count: Number(c.count)}));
+                let html = '<table><thead><tr><th>chapter_idx</th><th>title</th><th>count</th></tr></thead><tbody>';
+                for(const rr of rows) html += `<tr><td>${rr.chapter_idx}</td><td>${rr.title}</td><td>${rr.count}</td></tr>`;
+                html += '</tbody></table>';
+                out.innerHTML = html;
+                return;
+              }
+            }
+            throw csvErr;
+          }
+        }
       }
-      // filter csvCache for token == q
-      const filtered = csvCache.filter(r => r.token_lower === q || r.token === q);
-      if (filtered.length === 0) {
-        out.innerHTML = '<i>Токен не найден в токенах по главам</i>';
+
+      // If we have CSV data, use it
+      if (csvCache) {
+        const filtered = csvCache.filter(r => (r.token_lower||'').toLowerCase() === qlow || (r.token||'').toLowerCase() === qlow);
+        if (filtered.length === 0) {
+          out.innerHTML = '<i>Токен не найден в токенах по главам</i>';
+          return;
+        }
+        const rows = filtered.map(r=>({chapter_idx: r.chapter_idx, count: Number(r.count)})).sort((a,b)=>Number(a.chapter_idx)-Number(b.chapter_idx));
+        let html = '<table><thead><tr><th>chapter_idx</th><th>count</th></tr></thead><tbody>';
+        for(const rr of rows) html += `<tr><td>${rr.chapter_idx}</td><td>${rr.count}</td></tr>`;
+        html += '</tbody></table>';
+        out.innerHTML = html;
         return;
       }
-      // Build table rows: headers chapter_idx, count
-      const rows = filtered.map(r=>({chapter_idx: r.chapter_idx, count: Number(r.count)})).sort((a,b)=>Number(a.chapter_idx)-Number(b.chapter_idx));
-      // Render simple table
-      let html = '<table><thead><tr><th>chapter_idx</th><th>count</th></tr></thead><tbody>';
-      for(const rr of rows) html += `<tr><td>${rr.chapter_idx}</td><td>${rr.count}</td></tr>`;
-      html += '</tbody></table>';
-      out.innerHTML = html;
+
+      out.innerHTML = '<i>Не удалось получить данные по токенам</i>';
     } catch(e){
       out.innerHTML = '<i>Error: '+String(e)+'</i>';
     }
