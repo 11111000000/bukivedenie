@@ -15,7 +15,7 @@ function appendLog(msg){
 
 export async function fetchJson(path, opts={}){
   const controller = new AbortController()
-  const timeout = opts.timeout ?? 15000 // 15s default
+  const timeout = opts.timeout ?? 30000 // 30s default
   const timer = setTimeout(()=> controller.abort(), timeout)
   const method = (opts.method||'GET').toUpperCase()
   console.info(`${method} ${path} (timeout ${timeout}ms)`)
@@ -30,9 +30,22 @@ export async function fetchJson(path, opts={}){
       appendLog(`ERROR: ${msg}`)
       throw new Error(msg)
     }
-    const data = await res.json().catch(e=>{ throw new Error('Invalid JSON response') })
-    console.info(`OK ${method} ${path}`)
-    return data
+    // try to parse JSON, but on failure include raw text in logs for easier debugging
+    const raw = await res.text().catch(()=> '')
+    try{
+      const data = raw ? JSON.parse(raw) : null
+      console.info(`OK ${method} ${path}`)
+      return data
+    }catch(e){
+      const preview = raw ? raw.slice(0, 1000) : ''
+      const msg = `Invalid JSON response${preview?`: ${preview}`:''}`
+      console.error(msg)
+      appendLog(`ERROR: ${msg}`)
+      // also expose raw text on error object for debug inspectors
+      const err = new Error('Invalid JSON response')
+      err.raw = raw
+      throw err
+    }
   }catch(e){
     clearTimeout(timer)
     const errMsg = e.name === 'AbortError' ? 'Request timed out' : (e.message || String(e))
