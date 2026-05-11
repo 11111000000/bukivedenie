@@ -11,16 +11,20 @@ export function renderTopbar(el){
   `
 
   const btn = el.querySelector('#dev-toggle')
-  btn.addEventListener('click', ()=>{
-    const cur = localStorage.getItem('devtools') === '1'
-    if(cur){
-      localStorage.removeItem('devtools')
-      btn.textContent = 'Dev'
-      alert('Dev tools отключены; перезагрузите страницу')
-    }else{
-      localStorage.setItem('devtools','1')
-      btn.textContent = 'Dev (on)'
-      alert('Dev tools включены; перезагрузите страницу или откройте ?dev')
-    }
-  })
+  if(btn){
+    btn.addEventListener('click', ()=>{
+      const cur = localStorage.getItem('devtools') === '1'
+      if(cur){
+        localStorage.removeItem('devtools')
+        btn.textContent = 'Dev'
+        alert('Dev tools отключены; перезагрузите страницу')
+      }else{
+        localStorage.setItem('devtools','1')
+        btn.textContent = 'Dev (on)'
+        alert('Dev tools включены; перезагрузите страницу или откройте ?dev')
+      }
+    })
+  } else {
+    console.warn('Dev toggle button not found in topbar')
+  }
 }

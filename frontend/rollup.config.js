@@ -22,12 +22,15 @@ export default {
     commonjs(),
     dev && serve({
       open: false,
-      contentBase: ['dist', 'public'],
+      // include project root so index.html (at frontend/index.html) is served during dev
+      contentBase: ['dist', 'public', '.'],
       host: '0.0.0.0',
       port: 5173,
       headers: {
         'Access-Control-Allow-Origin': '*'
-      }
+      },
+      // useful for single-page apps
+      historyApiFallback: true
     }),
     dev && livereload({ watch: 'dist' }),
     !dev && terser()

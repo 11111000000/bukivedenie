@@ -5,7 +5,7 @@ all:
 # We disable npm progress spinner and force CI mode to avoid interactive spinners on Termux/CI.
 # Output is tee'd to logs/frontend-install.log so you can inspect the full log.
 frontend-install:
-	@./scripts/frontend_install.sh
+	@sh scripts/frontend_install.sh
 
 # Start frontend dev server only (rollup/browser-sync watcher)
 frontend-dev:
