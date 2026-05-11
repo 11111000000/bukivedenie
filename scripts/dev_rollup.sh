@@ -49,12 +49,12 @@ if [ -d "$FRONTEND_DIR" ]; then
     ROLLUP_BIN="$FRONTEND_DIR/node_modules/rollup/dist/bin/rollup"
     if [ -x "$ROLLUP_BIN" ] || [ -f "$ROLLUP_BIN" ]; then
       echo "Starting rollup watcher (cd $FRONTEND_DIR && node $ROLLUP_BIN -c -w)"
-      ( cd "$FRONTEND_DIR" && node "$ROLLUP_BIN" -c -w ) > "$ROLLUP_LOG" 2>&1 &
+      ( cd "$FRONTEND_DIR" && npm run dev:rollup 2>&1 ) > "$ROLLUP_LOG" 2>&1 &
       pid_rollup=$!
       pids+=("$pid_rollup")
       echo "Rollup PID=$pid_rollup, log=$ROLLUP_LOG"
     else
-      echo "Rollup binary not found at $ROLLUP_BIN. Try running npm install in frontend." >&2
+      echo "Rollup binary not found at $ROLLUP_BIN. Try running make frontend-install or npm install in frontend. Check logs/frontend-install.log" >&2
     fi
   else
     echo "Node not found; cannot start rollup watcher" >&2
