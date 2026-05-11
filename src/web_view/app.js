@@ -71,42 +71,35 @@ const FILE_DESCRIPTIONS = {
   'characters.csv':'Список обнаруженных персонажей (name, occurrences, context)'
 };
 
+// renderFilesList is no longer used to replace the sidebar. Keep as legacy but avoid wiping the static menu.
 function renderFilesList(book, files) {
+  // Deprecated in current UI: sidebar is static. Use updateSidebarState instead.
+  return;
+}
+
+// Update existing sidebar buttons with presence/actual filename info
+function updateSidebarState(book, files) {
   const menu = document.getElementById('fileMenuList');
-  const headers = document.getElementById('tabHeaders');
-  const content = document.getElementById('tabContent');
-  menu.innerHTML = ''; headers.innerHTML = ''; content.innerHTML = '';
-
-  const available = FILE_KEYS.concat(Object.keys(FILE_DESCRIPTIONS)).filter((v,i,a)=>a.indexOf(v)===i);
-
-  // For each logical name, try to find the actual generated filename in `files` (may be prefixed by book id)
-  available.forEach(name => {
-    const lowerName = name.toLowerCase();
+  if (!menu) return;
+  const availableBtns = Array.from(menu.children);
+  availableBtns.forEach(btn => {
+    const logical = btn.dataset.logical;
+    if (!logical) return;
+    const lowerName = logical.toLowerCase();
     const actual = files.find(f => {
       const lf = f.toLowerCase();
       return lf === lowerName || lf.endsWith('_' + lowerName) || lf.endsWith('/' + lowerName) || lf.endsWith(lowerName) || lf.includes(lowerName);
-    }) || null;
-    const present = !!actual;
-
-    const btn = document.createElement('div');
-    btn.className = 'file-menu-button' + (present ? '' : ' missing');
-    btn.textContent = name + (present ? (' — ' + actual) : ' (not)');
-    btn.onclick = () => openTab(book, actual || name, present, btn);
-    menu.appendChild(btn);
+    }) || '';
+    if (actual) {
+      btn.dataset.actual = actual;
+      btn.classList.remove('missing');
+      btn.textContent = logical + ' — ' + actual;
+    } else {
+      btn.dataset.actual = '';
+      btn.classList.add('missing');
+      btn.textContent = logical + ' (not)';
+    }
   });
-
-  // open first generated file if any, otherwise open logical first to show placeholder
-  const firstActual = files.find(f => available.some(a => f.toLowerCase().endsWith(a.toLowerCase())) ) || null;
-  if (firstActual) {
-    // find the corresponding menu button and activate
-    const firstBtn = Array.from(menu.children).find(n => n.textContent && n.textContent.indexOf(firstActual) !== -1);
-    openTab(book, firstActual, true, firstBtn || null);
-  }
-  else if (available.length) {
-    const firstLogical = available[0];
-    const firstBtn = menu.children[0] || null;
-    openTab(book, firstLogical, false, firstBtn);
-  }
 }
 
 function openTab(book, name, present, menuBtn) {
@@ -151,7 +144,8 @@ function openTab(book, name, present, menuBtn) {
 async function loadBookFiles(book) {
   const resp = await api('/api/files?book=' + encodeURIComponent(book));
   const files = resp.files || [];
-  renderFilesList(book, files);
+  // Update static sidebar buttons to show which files are present
+  try { updateSidebarState(book, files); } catch (e) { /* ignore */ }
   // mount token-by-chapter widget (if present)
   try { mountTokenByChapter('tokenByChapterWidget', book); } catch (e) { /* ignore */ }
 }
@@ -194,10 +188,42 @@ async function populateRawSelect() {
   if (raws.length>0) { sel.value = raws[0]; await loadRawIntoEditor(raws[0]); }
 }
 
+// initialize static sidebar (always visible) - shows logical file buttons
+function initSidebarStatic(){
+  const menu = document.getElementById('fileMenuList');
+  if(!menu) return;
+  menu.innerHTML = '';
+  const available = FILE_KEYS.concat(Object.keys(FILE_DESCRIPTIONS)).filter((v,i,a)=>a.indexOf(v)===i);
+  available.forEach(name => {
+    const btn = document.createElement('div');
+    btn.className = 'file-menu-button missing';
+    btn.textContent = name;
+    btn.dataset.logical = name;
+    btn.onclick = async (e) => {
+      // determine current book from selected raw
+      const cur = document.getElementById('currentFile').innerText || '';
+      const book = cur && cur !== '(none)' ? cur.replace(/\.txt$/i,'') : '';
+      if(!book){ alert('Выберите файл слева в селекте сначала'); return; }
+      // fetch files for book and try to resolve actual filename
+      const resp = await api('/api/files?book=' + encodeURIComponent(book));
+      const files = (resp && resp.files) || [];
+      const lowerName = name.toLowerCase();
+      const actual = files.find(f => {
+        const lf = f.toLowerCase();
+        return lf === lowerName || lf.endsWith('_' + lowerName) || lf.endsWith('/' + lowerName) || lf.endsWith(lowerName) || lf.includes(lowerName);
+      }) || null;
+      const present = !!actual;
+      openTab(actual ? book : book, actual || name, present, e.currentTarget);
+    };
+    menu.appendChild(btn);
+  });
+}
+
 // init
 document.addEventListener('DOMContentLoaded', async ()=>{
   document.getElementById('runAnalysis').addEventListener('click', runAnalysisAction);
   await populateRawSelect();
+  initSidebarStatic();
 });
 
 // expose for non-module fallback
