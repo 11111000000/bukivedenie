@@ -123,19 +123,20 @@ class TextPipeline:
         
         # CRLF -> LF
         text = text.replace('\r\n', '\n').replace('\r', '\n')
+
+        # Replace non-breaking / unusual spaces
+        for sp in ('\u00a0','\u2007','\u202f'):
+            text = text.replace(sp, ' ')
         
         # Унификация кавычек
         quote_map = {
-            '"': '"', '"': '"',
-            '«': '"', '»': '"',
-            '„': '"', '"': '"',
-            ''': "'", ''': "'", ''': "'", ''': "'",
+            '«': '"', '»': '"', '„': '"', '“': '"', '”': '"', "'": "'"
         }
         for old, new in quote_map.items():
             text = text.replace(old, new)
         
         # Унификация тире и дефисов
-        text = text.replace('—', '—').replace('–', '—').replace('-', '-')
+        text = text.replace('–', '—').replace('-', '‑')
         
         # Унификация многоточий
         text = re.sub(r'\.{3,}', '…', text)
@@ -178,16 +179,13 @@ class TextPipeline:
             if self.config.lang == "ru":
                 # базовые маркеры: Глава, Часть, Книга с опциональным номером
                 base = r'(?:Глава\s*(?:\d+|[IVXLCM]+)?|Часть\s*\d+|Книга\s*\d+)'
-                # отдельная линия с римской цифрой
-                roman_line = r'(?:^\s*[IVXLCM]{1,6}\.?(?:\s|$))'
-                chapter_regex = re.compile(r'^(?:' + base + r'|' + roman_line + r')', re.MULTILINE | re.IGNORECASE)
-                # токен для извлечения краткого заголовка
-                token_re = re.compile(r'^(?:Глава\s*(?:\d+|[IVXLCM]+)?|Часть\s*\d+|Книга\s*\d+|[IVXLCM]{1,6}\.?)', re.IGNORECASE)
+                # отдельная линия с римской цифрой (без ^ внутри)
+                roman_line = r'[IVXLCM]{1,6}\.?' 
+                chapter_regex = re.compile(r'^\s*(?:' + base + r'|' + roman_line + r')', re.MULTILINE | re.IGNORECASE)
             else:
                 base = r'(?:Chapter\s*(?:\d+|[IVXLCM]+)?|Part\s*\d+|Book\s*\d+)'
-                roman_line = r'(?:^\s*[IVXLCM]{1,6}\.?(?:\s|$))'
-                chapter_regex = re.compile(r'^(?:' + base + r'|' + roman_line + r')', re.MULTILINE | re.IGNORECASE)
-                token_re = re.compile(r'^(?:Chapter\s*(?:\d+|[IVXLCM]+)?|Part\s*\d+|Book\s*\d+|[IVXLCM]{1,6}\.?)', re.IGNORECASE)
+                roman_line = r'[IVXLCM]{1,6}\.?' 
+                chapter_regex = re.compile(r'^\s*(?:' + base + r'|' + roman_line + r')', re.MULTILINE | re.IGNORECASE)
         
         chapters = []
         matches = list(chapter_regex.finditer(text))
@@ -197,22 +195,71 @@ class TextPipeline:
         
         for i, match in enumerate(matches):
             start = match.start()
-            # извлекаем только первую строку, где расположен матч
+            # извлекаем первую непустую строку, где расположен матч
+            # (иногда заголовок и номер могут быть на нескольких строках)
             line_end = text.find('\n', start)
             if line_end == -1:
                 line_end = len(text)
-            line = text[start:line_end]
+            line = text[start:line_end].strip()
 
-            # пробуем извлечь компактный маркер (римская цифра или слово 'Глава')
-            m = token_re.search(line)
-            if m:
-                title = m.group(0).strip()
-            else:
+            # По умолчанию используем всю строку заголовка — это даёт более понятные названия
+            title = re.sub(r'\s+', ' ', line)
+            if not title:
+                # fallback — используем сам матч
                 title = match.group(0).strip()
 
+            # Если пользователь передал кастомный pattern и в нём есть именованная группа 'title',
+            # попробуем достать её содержимое
+            if pattern:
+                try:
+                    m_full = match
+                    if 'title' in m_full.groupdict():
+                        g = m_full.group('title')
+                        if g:
+                            title = g.strip()
+                except Exception:
+                    pass
+
             end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
+            # Гарантируем, что title не пуст
+            if not title:
+                title = f"Глава {i+1}"
             chapters.append((start, end, title))
-        
+
+        # Постобработка: объединяем заведомо крошечные главы (false positives), т.к.
+        # паттерн может ловить римские цифры и прочие маркеры, встречающиеся внутри текста
+        MIN_CHARS = 200
+        if len(chapters) > 1:
+            merged = []
+            i = 0
+            while i < len(chapters):
+                s, e, t = chapters[i]
+                size = e - s
+                if size < MIN_CHARS:
+                    # очень маленькая глава — присоединим к соседу
+                    if i == 0:
+                        # merge into next (extend next.start to s)
+                        if i + 1 < len(chapters):
+                            ns, ne, nt = chapters[i + 1]
+                            chapters[i + 1] = (s, ne, nt)
+                        else:
+                            # only one small chapter, keep it
+                            merged.append((s, e, t))
+                        i += 1
+                        continue
+                    else:
+                        # merge into previous
+                        ps, pe, pt = merged[-1]
+                        merged[-1] = (ps, e, pt)
+                        i += 1
+                        continue
+                else:
+                    merged.append((s, e, t))
+                    i += 1
+            if self.config.verbose:
+                print(f"[DEBUG] detect_chapters: {len(chapters)} matches -> {len(merged)} after merging small ones (MIN_CHARS={MIN_CHARS})")
+            return merged
+
         return chapters
     
     def split_paragraphs(self, text: str) -> List[Tuple[int, int, str]]:
