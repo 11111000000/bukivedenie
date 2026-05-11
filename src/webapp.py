@@ -191,6 +191,23 @@ class Handler(BaseHTTPRequestHandler):
                 except Exception as e:
                     return self._json({'error': f'cannot parse file: {e}'}, status=500)
 
+            if path == '/api/find_file':
+                # search outputs recursively for candidate files matching logical name
+                logical = qs.get('logical', [''])[0]
+                book = qs.get('book', [''])[0]
+                if not logical:
+                    return self._json({'error': 'logical param required'}, status=400)
+                matches = []
+                low = logical.lower()
+                # walk outputs dir
+                for root, dirs, files in os.walk(OUTPUTS_DIR):
+                    for fn in files:
+                        if low in fn.lower() or fn.lower().endswith('_' + low) or fn.lower().endswith(low):
+                            rel = os.path.relpath(os.path.join(root, fn), str(OUTPUTS_DIR))
+                            matches.append(rel.replace('\\', '/'))
+                matches = sorted(list(dict.fromkeys(matches)))
+                return self._json({'logical': logical, 'book': book, 'matches': matches})
+
             if path == '/api/file':
                 book = qs.get('book', [''])[0]
                 name = qs.get('name', [''])[0]
