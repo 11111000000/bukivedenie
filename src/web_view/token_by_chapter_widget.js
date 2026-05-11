@@ -1,8 +1,13 @@
 // Simple widget: input token + button -> fetch token_freq_by_chapter.csv and render aggregated table per chapter
-import { renderCSV, renderRows } from './file_renderer.js';
-
+// No imports for fallback; use api helper if available
 async function fetchTokenFreqCSV(book) {
-  const resp = await fetch('/api/file?book=' + encodeURIComponent(book) + '&name=' + encodeURIComponent('token_freq_by_chapter.csv'));
+  const path = '/api/file?book=' + encodeURIComponent(book) + '&name=' + encodeURIComponent('token_freq_by_chapter.csv');
+  if (window.api) {
+    const r = await window.api(path);
+    if (r && r.content) return r.content;
+    throw new Error(r && r.error ? r.error : 'cannot fetch token_freq_by_chapter.csv');
+  }
+  const resp = await fetch(path);
   if (!resp.ok) throw new Error('cannot fetch token_freq_by_chapter.csv');
   const j = await resp.json();
   return j.content || '';

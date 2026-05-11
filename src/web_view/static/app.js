@@ -153,6 +153,13 @@ async function populateRawSelect() {
 document.addEventListener('DOMContentLoaded', async ()=>{
   document.getElementById('runAnalysis').addEventListener('click', runAnalysisAction);
   await populateRawSelect();
+  // mount token-by-chapter widget if available (static fallback)
+  try {
+    const book = (document.getElementById('currentFile').innerText || '').replace(/\.txt$/i,'');
+    if (window.mountTokenByChapter && typeof window.mountTokenByChapter === 'function') {
+      window.mountTokenByChapter('tokenByChapterWidget', book);
+    }
+  } catch(e) { /* ignore */ }
 });
 
 // expose for non-module fallback
