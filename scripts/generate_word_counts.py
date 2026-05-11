@@ -299,6 +299,58 @@ def main():
     
     print(f"✓ Получено {len(words)} слов после фильтрации")
     
+    # === ШАГ 6b: Optional surfaces and sentences dump ===
+    if args.dump_sentences or args.dump_surfaces:
+        try:
+            print('→ Генерация токенизированных предложений (для --dump-sentences/--dump-surfaces)')
+            from razdel import sentenize, tokenize as razdel_tokenize
+            sentences = []
+            surfaces = {}
+            sent_index = 0
+            for s in sentenize(normalized_text):
+                st = s.text
+                start = s.start
+                end = s.stop
+                toks = []
+                for t in razdel_tokenize(st):
+                    tok_text = t.text
+                    toks.append({'text': tok_text, 'start': start + t.start, 'end': start + t.stop, 'is_first': (t.start==0)})
+                    lower = tok_text.lower()
+                    rec = surfaces.setdefault(lower, {'surface': tok_text, 'lower': lower, 'count_total':0, 'count_capitalized':0, 'count_lower':0, 'first_offset': None, 'first_sentence_index': None})
+                    rec['count_total'] += 1
+                    if tok_text and tok_text[0].isupper():
+                        rec['count_capitalized'] += 1
+                    else:
+                        rec['count_lower'] += 1
+                    if rec['first_offset'] is None:
+                        rec['first_offset'] = start + t.start
+                        rec['first_sentence_index'] = sent_index
+                sentences.append({'sentence_index': sent_index, 'start_offset': start, 'end_offset': end, 'tokens': toks, 'text': st})
+                sent_index += 1
+            # save sentences.jsonl
+            if args.dump_sentences:
+                processed_dir.mkdir(parents=True, exist_ok=True)
+                sent_path = processed_dir / f"{args.text_id}_sentences.jsonl"
+                with open(sent_path, 'w', encoding='utf-8') as fh:
+                    for s in sentences:
+                        fh.write(json.dumps(s, ensure_ascii=False) + "\n")
+                print(f"✓ Saved sentences JSONL: {sent_path}")
+            # save surface tokens
+            if args.dump_surfaces:
+                tables_dir.mkdir(parents=True, exist_ok=True)
+                sf_path = tables_dir / f"{args.text_id}_surface_tokens.csv"
+                import csv
+                with open(sf_path, 'w', encoding='utf-8', newline='') as fh:
+                    writer = csv.writer(fh)
+                    writer.writerow(['surface','lower','count_total','count_capitalized','count_lower','first_offset','first_sentence_index'])
+                    for key, rec in sorted(surfaces.items(), key=lambda x: -x[1]['count_total']):
+                        writer.writerow([rec['surface'], rec['lower'], rec['count_total'], rec['count_capitalized'], rec['count_lower'], rec['first_offset'] if rec['first_offset'] is not None else '', rec['first_sentence_index'] if rec['first_sentence_index'] is not None else ''])
+                print(f"✓ Saved surface tokens CSV: {sf_path}")
+        except Exception as e:
+            print('✗ Error while dumping sentences/surfaces:', e)
+            import traceback
+            traceback.print_exc()
+
     # === ШАГ 7: Подсчёт частот ===
     counts = compute_frequencies(words)
     print(f"✓ Уникальных слов: {len(counts)}")
