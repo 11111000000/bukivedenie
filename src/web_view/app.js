@@ -91,17 +91,25 @@ function renderFilesList(book, files) {
     const btn = document.createElement('div');
     btn.className = 'file-menu-button' + (present ? '' : ' missing');
     btn.textContent = name + (present ? (' — ' + actual) : ' (not)');
-    btn.onclick = () => openTab(book, actual || name, present);
+    btn.onclick = () => openTab(book, actual || name, present, btn);
     menu.appendChild(btn);
   });
 
   // open first generated file if any, otherwise open logical first to show placeholder
   const firstActual = files.find(f => available.some(a => f.toLowerCase().endsWith(a.toLowerCase())) ) || null;
-  if (firstActual) openTab(book, firstActual, true);
-  else if (available.length) openTab(book, available[0], false);
+  if (firstActual) {
+    // find the corresponding menu button and activate
+    const firstBtn = Array.from(menu.children).find(n => n.textContent && n.textContent.indexOf(firstActual) !== -1);
+    openTab(book, firstActual, true, firstBtn || null);
+  }
+  else if (available.length) {
+    const firstLogical = available[0];
+    const firstBtn = menu.children[0] || null;
+    openTab(book, firstLogical, false, firstBtn);
+  }
 }
 
-function openTab(book, name, present) {
+function openTab(book, name, present, menuBtn) {
   const headers = document.getElementById('tabHeaders');
   const content = document.getElementById('tabContent');
   // create header button
@@ -113,6 +121,9 @@ function openTab(book, name, present) {
     document.getElementById('tab_' + id).classList.add('active');
     Array.from(content.children).forEach(c=>c.style.display='none');
     document.getElementById('panel_' + id).style.display = 'block';
+    // sync menu active state
+    Array.from(document.getElementById('fileMenuList').children).forEach(n=>n.classList && n.classList.remove('active-menu'));
+    if (menuBtn) menuBtn.classList.add('active-menu');
     return;
   }
   const hbtn = document.createElement('button'); hbtn.id = 'tab_' + id; hbtn.textContent = name; hbtn.style.marginRight='8px'; hbtn.onclick = ()=>{
@@ -126,6 +137,10 @@ function openTab(book, name, present) {
   const panel = document.createElement('div'); panel.id = 'panel_' + id; panel.style.display='block'; panel.style.padding='8px';
   panel.textContent = 'Loading...';
   content.appendChild(panel);
+
+  // sync menu active state
+  Array.from(document.getElementById('fileMenuList').children).forEach(n=>n.classList && n.classList.remove('active-menu'));
+  if (menuBtn) menuBtn.classList.add('active-menu');
 
   // render file into panel using safe renderer
   if (present) {
