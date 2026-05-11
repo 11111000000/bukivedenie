@@ -18,14 +18,59 @@ def run_generate(text_id='test_book'):
     print('Running:', ' '.join(cmd))
     proc = subprocess.run(cmd, capture_output=True)
     print('returncode', proc.returncode)
-    if proc.stdout:
-        print(proc.stdout.decode('utf-8', errors='replace'))
-    if proc.stderr:
-        print(proc.stderr.decode('utf-8', errors='replace'))
-    return proc.returncode == 0
+    stdout = proc.stdout.decode('utf-8', errors='replace') if proc.stdout else ''
+    stderr = proc.stderr.decode('utf-8', errors='replace') if proc.stderr else ''
+    if stdout:
+        print('STDOUT:\n', stdout)
+    if stderr:
+        print('STDERR:\n', stderr)
+    return proc
 
 
-def check_files(text_id='test_book'):
+def diagnose_missing_outputs(text_id='test_book', proc=None):
+    print('\n=== DIAGNOSTICS ===')
+    print('Outputs root:', OUTPUTS)
+    for p in (OUTPUTS, OUTPUTS / 'tables', OUTPUTS / 'processed'):
+        try:
+            if p.exists():
+                print(f'-- {p}:')
+                for i, f in enumerate(sorted(p.iterdir()), 1):
+                    if i > 40: break
+                    print('   ', f.name)
+            else:
+                print(f'-- {p} (missing)')
+        except Exception as e:
+            print('   error listing', p, e)
+    # show sample of files that may be relevant
+    tables_dir = OUTPUTS / 'tables'
+    processed_dir = OUTPUTS / 'processed'
+    wf = tables_dir / f'{text_id}_word_counts.csv'
+    sf = tables_dir / f'{text_id}_surface_tokens.csv'
+    sent = processed_dir / f'{text_id}_sentences.jsonl'
+    for p in (wf, sf, sent):
+        print('\nChecking', p)
+        if p.exists():
+            try:
+                print(' SIZE', p.stat().st_size)
+                # show head
+                with open(p, 'r', encoding='utf-8') as fh:
+                    for k, line in enumerate(fh):
+                        if k >= 10: break
+                        print('  ', line.rstrip('\n'))
+            except Exception as e:
+                print('  cannot read file:', e)
+        else:
+            print(' MISSING')
+    # print script stdout/stderr if provided
+    if proc is not None:
+        stdout = proc.stdout.decode('utf-8', errors='replace') if proc.stdout else ''
+        stderr = proc.stderr.decode('utf-8', errors='replace') if proc.stderr else ''
+        print('\n--- generate_word_counts stdout ---\n', stdout)
+        print('\n--- generate_word_counts stderr ---\n', stderr)
+    print('=== END DIAGNOSTICS ===\n')
+
+
+def check_files(text_id='test_book', proc=None):
     ok = True
     tables_dir = OUTPUTS / 'tables'
     processed_dir = OUTPUTS / 'processed'
@@ -39,6 +84,8 @@ def check_files(text_id='test_book'):
             ok = False
         else:
             print('SIZE', p.stat().st_size)
+    if not ok:
+        diagnose_missing_outputs(text_id, proc=proc)
     return ok
 
 

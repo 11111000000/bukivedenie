@@ -233,6 +233,16 @@ def main():
         action='store_true',
         help='Использовать лемматизацию (требуется pymorphy2)'
     )
+    parser.add_argument(
+        '--dump-surfaces',
+        action='store_true',
+        help='Сохранить таблицу surface_tokens.csv (вспомогательная для NER)'
+    )
+    parser.add_argument(
+        '--dump-sentences',
+        action='store_true',
+        help='Сохранить sentences.jsonl (токенизированные предложения)'
+    )
     
     args = parser.parse_args()
     
