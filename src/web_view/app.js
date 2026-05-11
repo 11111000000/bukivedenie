@@ -242,7 +242,22 @@ function initSidebarStatic(){
       // fetch files for book and try to resolve actual filename
       const resp = await api('/api/files?book=' + encodeURIComponent(book));
       const files = (resp && resp.files) || [];
-      const resolved = resolveActualFromList(book, name, files);
+      let resolved = resolveActualFromList(book, name, files);
+      // Fallback: check common folders 'tables' and 'processed' if not found
+      if (!resolved) {
+        try {
+          const tResp = await api('/api/files?book=' + encodeURIComponent('tables'));
+          const tFiles = (tResp && tResp.files) || [];
+          resolved = resolveActualFromList(book, name, tFiles);
+          if (!resolved) {
+            const pResp = await api('/api/files?book=' + encodeURIComponent('processed'));
+            const pFiles = (pResp && pResp.files) || [];
+            resolved = resolveActualFromList(book, name, pFiles);
+          }
+        } catch (e) {
+          // ignore
+        }
+      }
       if (resolved) {
         openTab(resolved.book || book, resolved.name, true, e.currentTarget);
       } else {
