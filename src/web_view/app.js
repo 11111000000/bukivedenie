@@ -243,20 +243,24 @@ function initSidebarStatic(){
       const resp = await api('/api/files?book=' + encodeURIComponent(book));
       const files = (resp && resp.files) || [];
       let resolved = resolveActualFromList(book, name, files);
-      // Fallback: check common folders 'tables' and 'processed' if not found
+      // Fallback: try /api/find_file to search all outputs
       if (!resolved) {
         try {
-          const tResp = await api('/api/files?book=' + encodeURIComponent('tables'));
-          const tFiles = (tResp && tResp.files) || [];
-          resolved = resolveActualFromList(book, name, tFiles);
-          if (!resolved) {
-            const pResp = await api('/api/files?book=' + encodeURIComponent('processed'));
-            const pFiles = (pResp && pResp.files) || [];
-            resolved = resolveActualFromList(book, name, pFiles);
+          const findResp = await api('/api/find_file?logical=' + encodeURIComponent(name) + '&book=' + encodeURIComponent(book));
+          const matches = (findResp && findResp.matches) || [];
+          if (matches.length === 1) {
+            const m = matches[0];
+            if (m.includes('/')) { const parts = m.split('/'); resolved = {book: parts[0], name: parts.slice(1).join('/')}; }
+            else resolved = {book: 'tables', name: m};
+          } else if (matches.length > 1) {
+            // pick the best candidate: prefer exact endswith _name
+            let chosen = null;
+            for (const m of matches) { if (m.toLowerCase().endsWith('_' + name.toLowerCase())) { chosen = m; break; } }
+            if (!chosen) chosen = matches[0];
+            if (chosen.includes('/')) { const parts = chosen.split('/'); resolved = {book: parts[0], name: parts.slice(1).join('/')}; }
+            else resolved = {book: 'tables', name: chosen};
           }
-        } catch (e) {
-          // ignore
-        }
+        } catch (e) { /* ignore */ }
       }
       if (resolved) {
         openTab(resolved.book || book, resolved.name, true, e.currentTarget);
