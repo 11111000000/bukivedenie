@@ -19,7 +19,7 @@ frontend-build:
 
 frontend-deploy: frontend-build
 
-# One-time dev setup (install deps only)
+# One-time dev setup (install deps only in ./frontend)
 dev-setup:
 	@sh scripts/frontend_install.sh
 

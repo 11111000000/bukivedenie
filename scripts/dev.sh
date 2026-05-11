@@ -8,6 +8,7 @@ cd "$ROOT_DIR"
 
 PYTHON_CMD=${PYTHON_CMD:-python}
 FRONTEND_DIR="$ROOT_DIR/frontend"
+FRONTEND_NODE_MODULES="$FRONTEND_DIR/node_modules"
 BACKEND_LOG="$ROOT_DIR/logs/backend-dev.log"
 FRONTEND_LOG="$ROOT_DIR/logs/frontend-dev.log"
 
@@ -55,10 +56,10 @@ if [ -d "$FRONTEND_DIR" ]; then
 
       # Dependencies are expected to be installed via make dev-setup.
       # Keep dev-all fast: do not auto-install here.
-      if [ ! -d node_modules ] || [ ! -x node_modules/.bin/rollup ]; then
-        echo "node_modules missing or rollup not found. Run: make dev-setup" >&2
+      if [ ! -d "$FRONTEND_NODE_MODULES" ] || [ ! -x "$FRONTEND_NODE_MODULES/.bin/rollup" ]; then
+        echo "frontend/node_modules missing or rollup not found. Run: make dev-setup" >&2
       else
-        echo "Dependencies present; skipping npm install"
+        echo "Dependencies present in frontend/node_modules; skipping npm install"
       fi
 
       # start rollup watcher if available, otherwise try browser-sync
