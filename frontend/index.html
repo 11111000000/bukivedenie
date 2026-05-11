@@ -19,7 +19,23 @@
       <div id="topbar"></div>
     </header>
     <main class="container" id="view"></main>
+    <aside id="logs-toggle" style="position:fixed; left:8px; bottom:8px; z-index:99999;">
+      <button id="logs-open" style="padding:6px 8px; font-size:13px;">Logs</button>
+    </aside>
     <!-- dev console loader (eruda) — loads when on localhost, port 5173, or when ?dev present -->
+    <script>
+      (function(){
+        try{
+          const btn = document.getElementById('logs-open')
+          const logs = document.getElementById('logs')
+          if(btn && logs){
+            btn.addEventListener('click', ()=>{
+              logs.style.display = logs.style.display === 'none' ? 'block' : 'none'
+            })
+          }
+        }catch(e){}
+      })()
+    </script>
     <script>
       (function(){
         try{
