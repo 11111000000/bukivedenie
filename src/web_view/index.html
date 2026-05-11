@@ -86,5 +86,53 @@
 
   <script type="module" src="/static/app.js"></script>
   <script src="/static/fallback.js"></script>
+
+  <!-- Eruda mobile console loader: enable with ?eruda=1 or press the Console button -->
+  <script>
+    (function(){
+      function loadEruda(){
+        if(window.eruda) return;
+        var s = document.createElement('script');
+        s.src = 'https://cdn.jsdelivr.net/npm/eruda';
+        s.crossOrigin = 'anonymous';
+        s.onload = function(){
+          try{ eruda.init({useShadowDom:true}); }catch(e){ console.warn('eruda init failed', e); }
+        };
+        document.body.appendChild(s);
+      }
+
+      var enabledByQuery = window.location.search.indexOf('eruda=1') !== -1;
+      var enabledByStorage = (function(){ try{ return localStorage.getItem('enableEruda') === '1'; }catch(e){return false;} })();
+      if (enabledByQuery || enabledByStorage) loadEruda();
+
+      // Small floating button to enable console (visible on mobile/dev only)
+      var btn = document.createElement('button');
+      btn.id = 'erudaEnableBtn';
+      btn.textContent = 'Console';
+      btn.title = 'Enable debugging console (eruda)';
+      btn.style.position = 'fixed';
+      btn.style.right = '8px';
+      btn.style.bottom = '8px';
+      btn.style.zIndex = 99999;
+      btn.style.padding = '8px 10px';
+      btn.style.background = '#222';
+      btn.style.color = '#fff';
+      btn.style.border = 'none';
+      btn.style.borderRadius = '6px';
+      btn.style.opacity = 0.85;
+      btn.style.fontSize = '13px';
+      btn.style.boxShadow = '0 2px 6px rgba(0,0,0,0.3)';
+      btn.onclick = function(e){
+        e.preventDefault();
+        try{ localStorage.setItem('enableEruda','1'); }catch(err){}
+        loadEruda();
+        btn.style.display = 'none';
+      };
+      // show button only on mobile or when localhost
+      var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      var isLocal = location.hostname === '127.0.0.1' || location.hostname === 'localhost';
+      if (isMobile || isLocal) document.body.appendChild(btn);
+    })();
+  </script>
 </body>
 </html>
