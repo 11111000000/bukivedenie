@@ -142,12 +142,16 @@ function openTab(book, name, present, menuBtn) {
   }
 
   const id = makeId(resolvedBook, resolvedName);
-  // If panel exists, show it
-  const existing = document.getElementById('panel_' + id);
+  // hide all panels first
+  Array.from(content.children).forEach(c=>c.style.display='none');
+
+  // sync menu active state
   Array.from(document.getElementById('fileMenuList').children).forEach(n=>n.classList && n.classList.remove('active-menu'));
   if (menuBtn) menuBtn.classList.add('active-menu');
+
+  // If panel exists, show it
+  const existing = document.getElementById('panel_' + id);
   if (existing) {
-    Array.from(content.children).forEach(c=>c.style.display='none');
     existing.style.display = 'block';
     return;
   }
@@ -161,7 +165,11 @@ function openTab(book, name, present, menuBtn) {
   content.appendChild(panel);
 
   if (present) {
-    renderFileInto(resolvedBook, resolvedName, panel);
+    try {
+      renderFileInto(resolvedBook, resolvedName, panel);
+    } catch (e) {
+      panel.textContent = 'Error rendering file: ' + e;
+    }
   } else {
     panel.textContent = 'File not generated for this book';
   }

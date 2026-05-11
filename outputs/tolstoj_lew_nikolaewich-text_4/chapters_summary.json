@@ -2,57 +2,1317 @@
   "chapters": [
     {
       "chapter_idx": 0,
-      "title": "ЧАСТЬ ПЕРВАЯ",
-      "start_offset": 92,
-      "end_offset": 20399,
-      "total_chars": 20307,
-      "total_paragraphs": 38,
-      "total_sentences": 164,
-      "total_words": 2950,
-      "dialog_sentences": 45,
-      "dialog_ratio": 0.2744
+      "title": "I.",
+      "start_offset": 181,
+      "end_offset": 8220,
+      "total_chars": 8039,
+      "total_paragraphs": 26,
+      "total_sentences": 68,
+      "total_words": 1141,
+      "dialog_sentences": 23,
+      "dialog_ratio": 0.3382
     },
     {
       "chapter_idx": 1,
-      "title": "часть людей",
-      "start_offset": 20399,
-      "end_offset": 222918,
-      "total_chars": 202519,
-      "total_paragraphs": 205,
-      "total_sentences": 1776,
-      "total_words": 30898,
-      "dialog_sentences": 313,
-      "dialog_ratio": 0.1762
+      "title": "II.",
+      "start_offset": 8220,
+      "end_offset": 13448,
+      "total_chars": 5228,
+      "total_paragraphs": 16,
+      "total_sentences": 51,
+      "total_words": 758,
+      "dialog_sentences": 8,
+      "dialog_ratio": 0.1569
     },
     {
       "chapter_idx": 2,
-      "title": "часть машины",
-      "start_offset": 222918,
-      "end_offset": 598345,
-      "total_chars": 375427,
-      "total_paragraphs": 392,
-      "total_sentences": 3609,
-      "total_words": 57313,
-      "dialog_sentences": 813,
-      "dialog_ratio": 0.2253
+      "title": "III.",
+      "start_offset": 13448,
+      "end_offset": 19468,
+      "total_chars": 6020,
+      "total_paragraphs": 26,
+      "total_sentences": 47,
+      "total_words": 913,
+      "dialog_sentences": 21,
+      "dialog_ratio": 0.4468
     },
     {
       "chapter_idx": 3,
-      "title": "ЧАСТЬ ВТОРАЯ",
-      "start_offset": 598345,
-      "end_offset": 789312,
-      "total_chars": 190967,
-      "total_paragraphs": 416,
-      "total_sentences": 1771,
-      "total_words": 28015,
-      "dialog_sentences": 195,
-      "dialog_ratio": 0.1101
+      "title": "IV.",
+      "start_offset": 19468,
+      "end_offset": 29725,
+      "total_chars": 10257,
+      "total_paragraphs": 24,
+      "total_sentences": 59,
+      "total_words": 1567,
+      "dialog_sentences": 2,
+      "dialog_ratio": 0.0339
     },
     {
       "chapter_idx": 4,
+      "title": "V.",
+      "start_offset": 29725,
+      "end_offset": 36120,
+      "total_chars": 6395,
+      "total_paragraphs": 43,
+      "total_sentences": 90,
+      "total_words": 997,
+      "dialog_sentences": 37,
+      "dialog_ratio": 0.4111
+    },
+    {
+      "chapter_idx": 5,
+      "title": "VI.",
+      "start_offset": 36120,
+      "end_offset": 45039,
+      "total_chars": 8919,
+      "total_paragraphs": 18,
+      "total_sentences": 49,
+      "total_words": 1412,
+      "dialog_sentences": 3,
+      "dialog_ratio": 0.0612
+    },
+    {
+      "chapter_idx": 6,
+      "title": "VII.",
+      "start_offset": 45039,
+      "end_offset": 54313,
+      "total_chars": 9274,
+      "total_paragraphs": 28,
+      "total_sentences": 82,
+      "total_words": 1497,
+      "dialog_sentences": 18,
+      "dialog_ratio": 0.2195
+    },
+    {
+      "chapter_idx": 7,
+      "title": "VIII.",
+      "start_offset": 54313,
+      "end_offset": 62745,
+      "total_chars": 8432,
+      "total_paragraphs": 32,
+      "total_sentences": 79,
+      "total_words": 1307,
+      "dialog_sentences": 21,
+      "dialog_ratio": 0.2658
+    },
+    {
+      "chapter_idx": 8,
+      "title": "IX.",
+      "start_offset": 62745,
+      "end_offset": 67343,
+      "total_chars": 4598,
+      "total_paragraphs": 12,
+      "total_sentences": 40,
+      "total_words": 720,
+      "dialog_sentences": 2,
+      "dialog_ratio": 0.05
+    },
+    {
+      "chapter_idx": 9,
+      "title": "X.",
+      "start_offset": 67343,
+      "end_offset": 74959,
+      "total_chars": 7616,
+      "total_paragraphs": 31,
+      "total_sentences": 79,
+      "total_words": 1182,
+      "dialog_sentences": 13,
+      "dialog_ratio": 0.1646
+    },
+    {
+      "chapter_idx": 10,
+      "title": "XI.",
+      "start_offset": 74959,
+      "end_offset": 82403,
+      "total_chars": 7444,
+      "total_paragraphs": 20,
+      "total_sentences": 84,
+      "total_words": 1173,
+      "dialog_sentences": 5,
+      "dialog_ratio": 0.0595
+    },
+    {
+      "chapter_idx": 11,
+      "title": "XII.",
+      "start_offset": 82403,
+      "end_offset": 92737,
+      "total_chars": 10334,
+      "total_paragraphs": 44,
+      "total_sentences": 144,
+      "total_words": 1640,
+      "dialog_sentences": 52,
+      "dialog_ratio": 0.3611
+    },
+    {
+      "chapter_idx": 12,
+      "title": "XIII.",
+      "start_offset": 92737,
+      "end_offset": 98800,
+      "total_chars": 6063,
+      "total_paragraphs": 14,
+      "total_sentences": 41,
+      "total_words": 932,
+      "dialog_sentences": 2,
+      "dialog_ratio": 0.0488
+    },
+    {
+      "chapter_idx": 13,
+      "title": "XIV.",
+      "start_offset": 98800,
+      "end_offset": 109452,
+      "total_chars": 10652,
+      "total_paragraphs": 47,
+      "total_sentences": 104,
+      "total_words": 1674,
+      "dialog_sentences": 25,
+      "dialog_ratio": 0.2404
+    },
+    {
+      "chapter_idx": 14,
+      "title": "XV.",
+      "start_offset": 109452,
+      "end_offset": 118155,
+      "total_chars": 8703,
+      "total_paragraphs": 54,
+      "total_sentences": 98,
+      "total_words": 1299,
+      "dialog_sentences": 42,
+      "dialog_ratio": 0.4286
+    },
+    {
+      "chapter_idx": 15,
+      "title": "XVI.",
+      "start_offset": 118155,
+      "end_offset": 129848,
+      "total_chars": 11693,
+      "total_paragraphs": 55,
+      "total_sentences": 142,
+      "total_words": 1863,
+      "dialog_sentences": 27,
+      "dialog_ratio": 0.1901
+    },
+    {
+      "chapter_idx": 16,
+      "title": "I.",
+      "start_offset": 129848,
+      "end_offset": 136593,
+      "total_chars": 6745,
+      "total_paragraphs": 7,
+      "total_sentences": 40,
+      "total_words": 955,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.025
+    },
+    {
+      "chapter_idx": 17,
+      "title": "II.",
+      "start_offset": 136593,
+      "end_offset": 141657,
+      "total_chars": 5064,
+      "total_paragraphs": 18,
+      "total_sentences": 29,
+      "total_words": 707,
+      "dialog_sentences": 6,
+      "dialog_ratio": 0.2069
+    },
+    {
+      "chapter_idx": 18,
+      "title": "III.",
+      "start_offset": 141657,
+      "end_offset": 147353,
+      "total_chars": 5696,
+      "total_paragraphs": 11,
+      "total_sentences": 42,
+      "total_words": 818,
+      "dialog_sentences": 4,
+      "dialog_ratio": 0.0952
+    },
+    {
+      "chapter_idx": 19,
+      "title": "IV.",
+      "start_offset": 147353,
+      "end_offset": 151080,
+      "total_chars": 3727,
+      "total_paragraphs": 21,
+      "total_sentences": 52,
+      "total_words": 563,
+      "dialog_sentences": 16,
+      "dialog_ratio": 0.3077
+    },
+    {
+      "chapter_idx": 20,
+      "title": "V.",
+      "start_offset": 151080,
+      "end_offset": 153900,
+      "total_chars": 2820,
+      "total_paragraphs": 6,
+      "total_sentences": 29,
+      "total_words": 421,
+      "dialog_sentences": 6,
+      "dialog_ratio": 0.2069
+    },
+    {
+      "chapter_idx": 21,
+      "title": "VI.",
+      "start_offset": 153900,
+      "end_offset": 160646,
+      "total_chars": 6746,
+      "total_paragraphs": 23,
+      "total_sentences": 66,
+      "total_words": 1007,
+      "dialog_sentences": 11,
+      "dialog_ratio": 0.1667
+    },
+    {
+      "chapter_idx": 22,
+      "title": "VII.",
+      "start_offset": 160646,
+      "end_offset": 165088,
+      "total_chars": 4442,
+      "total_paragraphs": 20,
+      "total_sentences": 31,
+      "total_words": 657,
+      "dialog_sentences": 7,
+      "dialog_ratio": 0.2258
+    },
+    {
+      "chapter_idx": 23,
+      "title": "VIII.",
+      "start_offset": 165088,
+      "end_offset": 169699,
+      "total_chars": 4611,
+      "total_paragraphs": 8,
+      "total_sentences": 27,
+      "total_words": 701,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.037
+    },
+    {
+      "chapter_idx": 24,
+      "title": "IX.",
+      "start_offset": 169699,
+      "end_offset": 177415,
+      "total_chars": 7716,
+      "total_paragraphs": 18,
+      "total_sentences": 61,
+      "total_words": 1044,
+      "dialog_sentences": 8,
+      "dialog_ratio": 0.1311
+    },
+    {
+      "chapter_idx": 25,
+      "title": "X.",
+      "start_offset": 177415,
+      "end_offset": 184681,
+      "total_chars": 7266,
+      "total_paragraphs": 25,
+      "total_sentences": 50,
+      "total_words": 1040,
+      "dialog_sentences": 7,
+      "dialog_ratio": 0.14
+    },
+    {
+      "chapter_idx": 26,
+      "title": "XI.",
+      "start_offset": 184681,
+      "end_offset": 193294,
+      "total_chars": 8613,
+      "total_paragraphs": 30,
+      "total_sentences": 85,
+      "total_words": 1311,
+      "dialog_sentences": 23,
+      "dialog_ratio": 0.2706
+    },
+    {
+      "chapter_idx": 27,
+      "title": "XII.",
+      "start_offset": 193294,
+      "end_offset": 199124,
+      "total_chars": 5830,
+      "total_paragraphs": 9,
+      "total_sentences": 31,
+      "total_words": 902,
+      "dialog_sentences": 2,
+      "dialog_ratio": 0.0645
+    },
+    {
+      "chapter_idx": 28,
+      "title": "XIII.",
+      "start_offset": 199124,
+      "end_offset": 205570,
+      "total_chars": 6446,
+      "total_paragraphs": 28,
+      "total_sentences": 69,
+      "total_words": 972,
+      "dialog_sentences": 18,
+      "dialog_ratio": 0.2609
+    },
+    {
+      "chapter_idx": 29,
+      "title": "XIV.",
+      "start_offset": 205570,
+      "end_offset": 214171,
+      "total_chars": 8601,
+      "total_paragraphs": 27,
+      "total_sentences": 101,
+      "total_words": 1309,
+      "dialog_sentences": 7,
+      "dialog_ratio": 0.0693
+    },
+    {
+      "chapter_idx": 30,
+      "title": "XV.",
+      "start_offset": 214171,
+      "end_offset": 219242,
+      "total_chars": 5071,
+      "total_paragraphs": 10,
+      "total_sentences": 34,
+      "total_words": 744,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0294
+    },
+    {
+      "chapter_idx": 31,
+      "title": "XVI.",
+      "start_offset": 219242,
+      "end_offset": 224206,
+      "total_chars": 4964,
+      "total_paragraphs": 25,
+      "total_sentences": 57,
+      "total_words": 722,
+      "dialog_sentences": 22,
+      "dialog_ratio": 0.386
+    },
+    {
+      "chapter_idx": 32,
+      "title": "XVII.",
+      "start_offset": 224206,
+      "end_offset": 230165,
+      "total_chars": 5959,
+      "total_paragraphs": 22,
+      "total_sentences": 69,
+      "total_words": 897,
+      "dialog_sentences": 14,
+      "dialog_ratio": 0.2029
+    },
+    {
+      "chapter_idx": 33,
+      "title": "XVIII.",
+      "start_offset": 230165,
+      "end_offset": 233789,
+      "total_chars": 3624,
+      "total_paragraphs": 13,
+      "total_sentences": 24,
+      "total_words": 546,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0417
+    },
+    {
+      "chapter_idx": 34,
+      "title": "XIX.",
+      "start_offset": 233789,
+      "end_offset": 238366,
+      "total_chars": 4577,
+      "total_paragraphs": 16,
+      "total_sentences": 38,
+      "total_words": 653,
+      "dialog_sentences": 2,
+      "dialog_ratio": 0.0526
+    },
+    {
+      "chapter_idx": 35,
+      "title": "I.",
+      "start_offset": 238366,
+      "end_offset": 244700,
+      "total_chars": 6334,
+      "total_paragraphs": 16,
+      "total_sentences": 29,
+      "total_words": 901,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0345
+    },
+    {
+      "chapter_idx": 36,
+      "title": "II.",
+      "start_offset": 244700,
+      "end_offset": 247064,
+      "total_chars": 2364,
+      "total_paragraphs": 11,
+      "total_sentences": 19,
+      "total_words": 330,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0526
+    },
+    {
+      "chapter_idx": 37,
+      "title": "X",
+      "start_offset": 247064,
+      "end_offset": 249806,
+      "total_chars": 2742,
+      "total_paragraphs": 6,
+      "total_sentences": 16,
+      "total_words": 387,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 38,
+      "title": "III.",
+      "start_offset": 249806,
+      "end_offset": 255636,
+      "total_chars": 5830,
+      "total_paragraphs": 13,
+      "total_sentences": 41,
+      "total_words": 853,
+      "dialog_sentences": 3,
+      "dialog_ratio": 0.0732
+    },
+    {
+      "chapter_idx": 39,
+      "title": "IV.",
+      "start_offset": 255636,
+      "end_offset": 262886,
+      "total_chars": 7250,
+      "total_paragraphs": 35,
+      "total_sentences": 71,
+      "total_words": 1087,
+      "dialog_sentences": 22,
+      "dialog_ratio": 0.3099
+    },
+    {
+      "chapter_idx": 40,
+      "title": "V.",
+      "start_offset": 262886,
+      "end_offset": 270007,
+      "total_chars": 7121,
+      "total_paragraphs": 35,
+      "total_sentences": 76,
+      "total_words": 1071,
+      "dialog_sentences": 26,
+      "dialog_ratio": 0.3421
+    },
+    {
+      "chapter_idx": 41,
+      "title": "VI.",
+      "start_offset": 270007,
+      "end_offset": 274361,
+      "total_chars": 4354,
+      "total_paragraphs": 30,
+      "total_sentences": 66,
+      "total_words": 666,
+      "dialog_sentences": 31,
+      "dialog_ratio": 0.4697
+    },
+    {
+      "chapter_idx": 42,
+      "title": "VII.",
+      "start_offset": 274361,
+      "end_offset": 281285,
+      "total_chars": 6924,
+      "total_paragraphs": 33,
+      "total_sentences": 104,
+      "total_words": 1076,
+      "dialog_sentences": 37,
+      "dialog_ratio": 0.3558
+    },
+    {
+      "chapter_idx": 43,
+      "title": "VIII.",
+      "start_offset": 281285,
+      "end_offset": 285957,
+      "total_chars": 4672,
+      "total_paragraphs": 27,
+      "total_sentences": 64,
+      "total_words": 739,
+      "dialog_sentences": 26,
+      "dialog_ratio": 0.4062
+    },
+    {
+      "chapter_idx": 44,
+      "title": "IX.",
+      "start_offset": 285957,
+      "end_offset": 291822,
+      "total_chars": 5865,
+      "total_paragraphs": 37,
+      "total_sentences": 66,
+      "total_words": 887,
+      "dialog_sentences": 24,
+      "dialog_ratio": 0.3636
+    },
+    {
+      "chapter_idx": 45,
+      "title": "X.",
+      "start_offset": 291822,
+      "end_offset": 299472,
+      "total_chars": 7650,
+      "total_paragraphs": 46,
+      "total_sentences": 122,
+      "total_words": 1210,
+      "dialog_sentences": 39,
+      "dialog_ratio": 0.3197
+    },
+    {
+      "chapter_idx": 46,
+      "title": "XI.",
+      "start_offset": 299472,
+      "end_offset": 305009,
+      "total_chars": 5537,
+      "total_paragraphs": 21,
+      "total_sentences": 72,
+      "total_words": 841,
+      "dialog_sentences": 14,
+      "dialog_ratio": 0.1944
+    },
+    {
+      "chapter_idx": 47,
+      "title": "XII.",
+      "start_offset": 305009,
+      "end_offset": 311376,
+      "total_chars": 6367,
+      "total_paragraphs": 16,
+      "total_sentences": 40,
+      "total_words": 983,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.025
+    },
+    {
+      "chapter_idx": 48,
+      "title": "XIII.",
+      "start_offset": 311376,
+      "end_offset": 317268,
+      "total_chars": 5892,
+      "total_paragraphs": 16,
+      "total_sentences": 75,
+      "total_words": 920,
+      "dialog_sentences": 9,
+      "dialog_ratio": 0.12
+    },
+    {
+      "chapter_idx": 49,
+      "title": "XIV.",
+      "start_offset": 317268,
+      "end_offset": 320232,
+      "total_chars": 2964,
+      "total_paragraphs": 13,
+      "total_sentences": 38,
+      "total_words": 451,
+      "dialog_sentences": 5,
+      "dialog_ratio": 0.1316
+    },
+    {
+      "chapter_idx": 50,
+      "title": "XV.",
+      "start_offset": 320232,
+      "end_offset": 325358,
+      "total_chars": 5126,
+      "total_paragraphs": 27,
+      "total_sentences": 62,
+      "total_words": 722,
+      "dialog_sentences": 22,
+      "dialog_ratio": 0.3548
+    },
+    {
+      "chapter_idx": 51,
+      "title": "XVI.",
+      "start_offset": 325358,
+      "end_offset": 328967,
+      "total_chars": 3609,
+      "total_paragraphs": 8,
+      "total_sentences": 23,
+      "total_words": 561,
+      "dialog_sentences": 2,
+      "dialog_ratio": 0.087
+    },
+    {
+      "chapter_idx": 52,
+      "title": "XVII.",
+      "start_offset": 328967,
+      "end_offset": 332299,
+      "total_chars": 3332,
+      "total_paragraphs": 9,
+      "total_sentences": 23,
+      "total_words": 487,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0435
+    },
+    {
+      "chapter_idx": 53,
+      "title": "XVIII.",
+      "start_offset": 332299,
+      "end_offset": 335537,
+      "total_chars": 3238,
+      "total_paragraphs": 12,
+      "total_sentences": 28,
+      "total_words": 475,
+      "dialog_sentences": 4,
+      "dialog_ratio": 0.1429
+    },
+    {
+      "chapter_idx": 54,
+      "title": "XIX.",
+      "start_offset": 335537,
+      "end_offset": 345533,
+      "total_chars": 9996,
+      "total_paragraphs": 38,
+      "total_sentences": 57,
+      "total_words": 1461,
+      "dialog_sentences": 6,
+      "dialog_ratio": 0.1053
+    },
+    {
+      "chapter_idx": 55,
+      "title": "I.",
+      "start_offset": 345533,
+      "end_offset": 353736,
+      "total_chars": 8203,
+      "total_paragraphs": 23,
+      "total_sentences": 80,
+      "total_words": 1289,
+      "dialog_sentences": 8,
+      "dialog_ratio": 0.1
+    },
+    {
+      "chapter_idx": 56,
+      "title": "II.",
+      "start_offset": 353736,
+      "end_offset": 358020,
+      "total_chars": 4284,
+      "total_paragraphs": 22,
+      "total_sentences": 61,
+      "total_words": 667,
+      "dialog_sentences": 18,
+      "dialog_ratio": 0.2951
+    },
+    {
+      "chapter_idx": 57,
+      "title": "III.",
+      "start_offset": 358020,
+      "end_offset": 363556,
+      "total_chars": 5536,
+      "total_paragraphs": 24,
+      "total_sentences": 70,
+      "total_words": 850,
+      "dialog_sentences": 10,
+      "dialog_ratio": 0.1429
+    },
+    {
+      "chapter_idx": 58,
+      "title": "IV.",
+      "start_offset": 363556,
+      "end_offset": 369987,
+      "total_chars": 6431,
+      "total_paragraphs": 18,
+      "total_sentences": 32,
+      "total_words": 932,
+      "dialog_sentences": 2,
+      "dialog_ratio": 0.0625
+    },
+    {
+      "chapter_idx": 59,
+      "title": "V.",
+      "start_offset": 369987,
+      "end_offset": 376864,
+      "total_chars": 6877,
+      "total_paragraphs": 18,
+      "total_sentences": 38,
+      "total_words": 1039,
+      "dialog_sentences": 2,
+      "dialog_ratio": 0.0526
+    },
+    {
+      "chapter_idx": 60,
+      "title": "VI.",
+      "start_offset": 376864,
+      "end_offset": 382582,
+      "total_chars": 5718,
+      "total_paragraphs": 21,
+      "total_sentences": 58,
+      "total_words": 832,
+      "dialog_sentences": 12,
+      "dialog_ratio": 0.2069
+    },
+    {
+      "chapter_idx": 61,
+      "title": "VII.",
+      "start_offset": 382582,
+      "end_offset": 386869,
+      "total_chars": 4287,
+      "total_paragraphs": 24,
+      "total_sentences": 54,
+      "total_words": 602,
+      "dialog_sentences": 12,
+      "dialog_ratio": 0.2222
+    },
+    {
+      "chapter_idx": 62,
+      "title": "VIII.",
+      "start_offset": 386869,
+      "end_offset": 393376,
+      "total_chars": 6507,
+      "total_paragraphs": 53,
+      "total_sentences": 108,
+      "total_words": 960,
+      "dialog_sentences": 54,
+      "dialog_ratio": 0.5
+    },
+    {
+      "chapter_idx": 63,
+      "title": "IX.",
+      "start_offset": 393376,
+      "end_offset": 397589,
+      "total_chars": 4213,
+      "total_paragraphs": 32,
+      "total_sentences": 70,
+      "total_words": 621,
+      "dialog_sentences": 20,
+      "dialog_ratio": 0.2857
+    },
+    {
+      "chapter_idx": 64,
+      "title": "X.",
+      "start_offset": 397589,
+      "end_offset": 408681,
+      "total_chars": 11092,
+      "total_paragraphs": 30,
+      "total_sentences": 77,
+      "total_words": 1639,
+      "dialog_sentences": 5,
+      "dialog_ratio": 0.0649
+    },
+    {
+      "chapter_idx": 65,
+      "title": "XI.",
+      "start_offset": 408681,
+      "end_offset": 412076,
+      "total_chars": 3395,
+      "total_paragraphs": 15,
+      "total_sentences": 26,
+      "total_words": 484,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0385
+    },
+    {
+      "chapter_idx": 66,
+      "title": "XII.",
+      "start_offset": 412076,
+      "end_offset": 417989,
+      "total_chars": 5913,
+      "total_paragraphs": 10,
+      "total_sentences": 49,
+      "total_words": 948,
+      "dialog_sentences": 4,
+      "dialog_ratio": 0.0816
+    },
+    {
+      "chapter_idx": 67,
+      "title": "XIII.",
+      "start_offset": 417989,
+      "end_offset": 428791,
+      "total_chars": 10802,
+      "total_paragraphs": 31,
+      "total_sentences": 83,
+      "total_words": 1672,
+      "dialog_sentences": 12,
+      "dialog_ratio": 0.1446
+    },
+    {
+      "chapter_idx": 68,
+      "title": "XIV.",
+      "start_offset": 428791,
+      "end_offset": 433543,
+      "total_chars": 4752,
+      "total_paragraphs": 11,
+      "total_sentences": 34,
+      "total_words": 665,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0294
+    },
+    {
+      "chapter_idx": 69,
+      "title": "XV.",
+      "start_offset": 433543,
+      "end_offset": 439895,
+      "total_chars": 6352,
+      "total_paragraphs": 25,
+      "total_sentences": 66,
+      "total_words": 1024,
+      "dialog_sentences": 15,
+      "dialog_ratio": 0.2273
+    },
+    {
+      "chapter_idx": 70,
+      "title": "XVI.",
+      "start_offset": 439895,
+      "end_offset": 445100,
+      "total_chars": 5205,
+      "total_paragraphs": 29,
+      "total_sentences": 68,
+      "total_words": 823,
+      "dialog_sentences": 24,
+      "dialog_ratio": 0.3529
+    },
+    {
+      "chapter_idx": 71,
+      "title": "XVII.",
+      "start_offset": 445100,
+      "end_offset": 465287,
+      "total_chars": 20187,
+      "total_paragraphs": 123,
+      "total_sentences": 288,
+      "total_words": 3142,
+      "dialog_sentences": 110,
+      "dialog_ratio": 0.3819
+    },
+    {
+      "chapter_idx": 72,
+      "title": "XIX.",
+      "start_offset": 465287,
+      "end_offset": 469245,
+      "total_chars": 3958,
+      "total_paragraphs": 11,
+      "total_sentences": 33,
+      "total_words": 626,
+      "dialog_sentences": 2,
+      "dialog_ratio": 0.0606
+    },
+    {
+      "chapter_idx": 73,
+      "title": "XX.",
+      "start_offset": 469245,
+      "end_offset": 472778,
+      "total_chars": 3533,
+      "total_paragraphs": 27,
+      "total_sentences": 47,
+      "total_words": 499,
+      "dialog_sentences": 19,
+      "dialog_ratio": 0.4043
+    },
+    {
+      "chapter_idx": 74,
+      "title": "I.",
+      "start_offset": 472778,
+      "end_offset": 479183,
+      "total_chars": 6405,
+      "total_paragraphs": 19,
+      "total_sentences": 37,
+      "total_words": 904,
+      "dialog_sentences": 2,
+      "dialog_ratio": 0.0541
+    },
+    {
+      "chapter_idx": 75,
+      "title": "II.",
+      "start_offset": 479183,
+      "end_offset": 483093,
+      "total_chars": 3910,
+      "total_paragraphs": 13,
+      "total_sentences": 23,
+      "total_words": 585,
+      "dialog_sentences": 2,
+      "dialog_ratio": 0.087
+    },
+    {
+      "chapter_idx": 76,
+      "title": "III.",
+      "start_offset": 483093,
+      "end_offset": 492742,
+      "total_chars": 9649,
+      "total_paragraphs": 19,
+      "total_sentences": 64,
+      "total_words": 1381,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0156
+    },
+    {
+      "chapter_idx": 77,
+      "title": "IV.",
+      "start_offset": 492742,
+      "end_offset": 498176,
+      "total_chars": 5434,
+      "total_paragraphs": 25,
+      "total_sentences": 49,
+      "total_words": 756,
+      "dialog_sentences": 7,
+      "dialog_ratio": 0.1429
+    },
+    {
+      "chapter_idx": 78,
+      "title": "V.",
+      "start_offset": 498176,
+      "end_offset": 504976,
+      "total_chars": 6800,
+      "total_paragraphs": 18,
+      "total_sentences": 52,
+      "total_words": 1057,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0192
+    },
+    {
+      "chapter_idx": 79,
+      "title": "VI.",
+      "start_offset": 504976,
+      "end_offset": 513419,
+      "total_chars": 8443,
+      "total_paragraphs": 45,
+      "total_sentences": 105,
+      "total_words": 1354,
+      "dialog_sentences": 42,
+      "dialog_ratio": 0.4
+    },
+    {
+      "chapter_idx": 80,
+      "title": "VII.",
+      "start_offset": 513419,
+      "end_offset": 520122,
+      "total_chars": 6703,
+      "total_paragraphs": 17,
+      "total_sentences": 44,
+      "total_words": 1068,
+      "dialog_sentences": 4,
+      "dialog_ratio": 0.0909
+    },
+    {
+      "chapter_idx": 81,
+      "title": "VIII.",
+      "start_offset": 520122,
+      "end_offset": 527281,
+      "total_chars": 7159,
+      "total_paragraphs": 27,
+      "total_sentences": 73,
+      "total_words": 1125,
+      "dialog_sentences": 17,
+      "dialog_ratio": 0.2329
+    },
+    {
+      "chapter_idx": 82,
+      "title": "IX.",
+      "start_offset": 527281,
+      "end_offset": 537896,
+      "total_chars": 10615,
+      "total_paragraphs": 52,
+      "total_sentences": 130,
+      "total_words": 1708,
+      "dialog_sentences": 44,
+      "dialog_ratio": 0.3385
+    },
+    {
+      "chapter_idx": 83,
+      "title": "X.",
+      "start_offset": 537896,
+      "end_offset": 547888,
+      "total_chars": 9992,
+      "total_paragraphs": 23,
+      "total_sentences": 66,
+      "total_words": 1598,
+      "dialog_sentences": 2,
+      "dialog_ratio": 0.0303
+    },
+    {
+      "chapter_idx": 84,
+      "title": "XI.",
+      "start_offset": 547888,
+      "end_offset": 554332,
+      "total_chars": 6444,
+      "total_paragraphs": 39,
+      "total_sentences": 79,
+      "total_words": 984,
+      "dialog_sentences": 27,
+      "dialog_ratio": 0.3418
+    },
+    {
+      "chapter_idx": 85,
+      "title": "XII.",
+      "start_offset": 554332,
+      "end_offset": 563787,
+      "total_chars": 9455,
+      "total_paragraphs": 34,
+      "total_sentences": 81,
+      "total_words": 1482,
+      "dialog_sentences": 15,
+      "dialog_ratio": 0.1852
+    },
+    {
+      "chapter_idx": 86,
+      "title": "XIII.",
+      "start_offset": 563787,
+      "end_offset": 570237,
+      "total_chars": 6450,
+      "total_paragraphs": 22,
+      "total_sentences": 65,
+      "total_words": 964,
+      "dialog_sentences": 22,
+      "dialog_ratio": 0.3385
+    },
+    {
+      "chapter_idx": 87,
+      "title": "XIV.",
+      "start_offset": 570237,
+      "end_offset": 580657,
+      "total_chars": 10420,
+      "total_paragraphs": 49,
+      "total_sentences": 115,
+      "total_words": 1603,
+      "dialog_sentences": 41,
+      "dialog_ratio": 0.3565
+    },
+    {
+      "chapter_idx": 88,
+      "title": "XV.",
+      "start_offset": 580657,
+      "end_offset": 589979,
+      "total_chars": 9322,
+      "total_paragraphs": 34,
+      "total_sentences": 104,
+      "total_words": 1512,
+      "dialog_sentences": 29,
+      "dialog_ratio": 0.2788
+    },
+    {
+      "chapter_idx": 89,
+      "title": "XVI.",
+      "start_offset": 589979,
+      "end_offset": 600339,
+      "total_chars": 10360,
+      "total_paragraphs": 53,
+      "total_sentences": 156,
+      "total_words": 1614,
+      "dialog_sentences": 59,
+      "dialog_ratio": 0.3782
+    },
+    {
+      "chapter_idx": 90,
+      "title": "I.",
+      "start_offset": 600339,
+      "end_offset": 610086,
+      "total_chars": 9747,
+      "total_paragraphs": 26,
+      "total_sentences": 72,
+      "total_words": 1411,
+      "dialog_sentences": 2,
+      "dialog_ratio": 0.0278
+    },
+    {
+      "chapter_idx": 91,
+      "title": "II.",
+      "start_offset": 610086,
+      "end_offset": 619115,
+      "total_chars": 9029,
+      "total_paragraphs": 15,
+      "total_sentences": 46,
+      "total_words": 1244,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0217
+    },
+    {
+      "chapter_idx": 92,
+      "title": "III.",
+      "start_offset": 619115,
+      "end_offset": 623863,
+      "total_chars": 4748,
+      "total_paragraphs": 11,
+      "total_sentences": 32,
+      "total_words": 696,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0312
+    },
+    {
+      "chapter_idx": 93,
+      "title": "IV.",
+      "start_offset": 623863,
+      "end_offset": 636983,
+      "total_chars": 13120,
+      "total_paragraphs": 36,
+      "total_sentences": 70,
+      "total_words": 1852,
+      "dialog_sentences": 2,
+      "dialog_ratio": 0.0286
+    },
+    {
+      "chapter_idx": 94,
+      "title": "V.",
+      "start_offset": 636983,
+      "end_offset": 643299,
+      "total_chars": 6316,
+      "total_paragraphs": 25,
+      "total_sentences": 45,
+      "total_words": 845,
+      "dialog_sentences": 11,
+      "dialog_ratio": 0.2444
+    },
+    {
+      "chapter_idx": 95,
+      "title": "VI.",
+      "start_offset": 643299,
+      "end_offset": 651216,
+      "total_chars": 7917,
+      "total_paragraphs": 22,
+      "total_sentences": 39,
+      "total_words": 1120,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0256
+    },
+    {
+      "chapter_idx": 96,
+      "title": "VII.",
+      "start_offset": 651216,
+      "end_offset": 658362,
+      "total_chars": 7146,
+      "total_paragraphs": 25,
+      "total_sentences": 51,
+      "total_words": 1009,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0196
+    },
+    {
+      "chapter_idx": 97,
+      "title": "VIII.",
+      "start_offset": 658362,
+      "end_offset": 667612,
+      "total_chars": 9250,
+      "total_paragraphs": 33,
+      "total_sentences": 56,
+      "total_words": 1338,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0179
+    },
+    {
+      "chapter_idx": 98,
+      "title": "IX.",
+      "start_offset": 667612,
+      "end_offset": 679927,
+      "total_chars": 12315,
+      "total_paragraphs": 30,
+      "total_sentences": 63,
+      "total_words": 1709,
+      "dialog_sentences": 2,
+      "dialog_ratio": 0.0317
+    },
+    {
+      "chapter_idx": 99,
+      "title": "X.",
+      "start_offset": 679927,
+      "end_offset": 691042,
+      "total_chars": 11115,
+      "total_paragraphs": 36,
+      "total_sentences": 71,
+      "total_words": 1668,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0141
+    },
+    {
+      "chapter_idx": 100,
+      "title": "XI.",
+      "start_offset": 691042,
+      "end_offset": 694285,
+      "total_chars": 3243,
+      "total_paragraphs": 12,
+      "total_sentences": 20,
+      "total_words": 463,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.05
+    },
+    {
+      "chapter_idx": 101,
+      "title": "XII.",
+      "start_offset": 694285,
+      "end_offset": 701735,
+      "total_chars": 7450,
+      "total_paragraphs": 50,
+      "total_sentences": 68,
+      "total_words": 968,
+      "dialog_sentences": 8,
+      "dialog_ratio": 0.1176
+    },
+    {
+      "chapter_idx": 102,
+      "title": "II",
+      "start_offset": 701735,
+      "end_offset": 721244,
+      "total_chars": 19509,
+      "total_paragraphs": 162,
+      "total_sentences": 223,
+      "total_words": 2949,
+      "dialog_sentences": 39,
+      "dialog_ratio": 0.1749
+    },
+    {
+      "chapter_idx": 103,
+      "title": "глава IV",
+      "start_offset": 721244,
+      "end_offset": 727168,
+      "total_chars": 5924,
+      "total_paragraphs": 56,
+      "total_sentences": 70,
+      "total_words": 894,
+      "dialog_sentences": 7,
+      "dialog_ratio": 0.1
+    },
+    {
+      "chapter_idx": 104,
+      "title": "IV.",
+      "start_offset": 727168,
+      "end_offset": 731455,
+      "total_chars": 4287,
+      "total_paragraphs": 55,
+      "total_sentences": 67,
+      "total_words": 654,
+      "dialog_sentences": 9,
+      "dialog_ratio": 0.1343
+    },
+    {
+      "chapter_idx": 105,
+      "title": "I",
+      "start_offset": 731455,
+      "end_offset": 732421,
+      "total_chars": 966,
+      "total_paragraphs": 12,
+      "total_sentences": 14,
+      "total_words": 146,
+      "dialog_sentences": 2,
+      "dialog_ratio": 0.1429
+    },
+    {
+      "chapter_idx": 106,
+      "title": "VII.",
+      "start_offset": 732421,
+      "end_offset": 750861,
+      "total_chars": 18440,
+      "total_paragraphs": 178,
+      "total_sentences": 245,
+      "total_words": 2755,
+      "dialog_sentences": 50,
+      "dialog_ratio": 0.2041
+    },
+    {
+      "chapter_idx": 107,
+      "title": "I",
+      "start_offset": 750861,
+      "end_offset": 751095,
+      "total_chars": 234,
+      "total_paragraphs": 5,
+      "total_sentences": 5,
+      "total_words": 33,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 108,
+      "title": "VII.",
+      "start_offset": 751095,
+      "end_offset": 792186,
+      "total_chars": 41091,
+      "total_paragraphs": 566,
+      "total_sentences": 716,
+      "total_words": 6261,
+      "dialog_sentences": 81,
+      "dialog_ratio": 0.1131
+    },
+    {
+      "chapter_idx": 109,
       "title": "Глава XXI",
-      "start_offset": 789312,
-      "end_offset": 801629,
+      "start_offset": 792186,
+      "end_offset": 804503,
       "total_chars": 12317,
       "total_paragraphs": 197,
       "total_sentences": 218,
@@ -61,34 +1321,490 @@
       "dialog_ratio": 0.0183
     },
     {
-      "chapter_idx": 5,
+      "chapter_idx": 110,
       "title": "Глава XXV",
-      "start_offset": 801629,
-      "end_offset": 1013209,
-      "total_chars": 211580,
-      "total_paragraphs": 1652,
-      "total_sentences": 3549,
-      "total_words": 29751,
-      "dialog_sentences": 280,
-      "dialog_ratio": 0.0789
+      "start_offset": 804503,
+      "end_offset": 816905,
+      "total_chars": 12402,
+      "total_paragraphs": 149,
+      "total_sentences": 181,
+      "total_words": 1902,
+      "dialog_sentences": 22,
+      "dialog_ratio": 0.1215
     },
     {
-      "chapter_idx": 6,
-      "title": "Часть первая",
-      "start_offset": 1013209,
-      "end_offset": 1153267,
-      "total_chars": 140058,
-      "total_paragraphs": 1404,
-      "total_sentences": 2853,
-      "total_words": 19099,
-      "dialog_sentences": 21,
+      "chapter_idx": 111,
+      "title": "XXVIII.",
+      "start_offset": 816905,
+      "end_offset": 823628,
+      "total_chars": 6723,
+      "total_paragraphs": 48,
+      "total_sentences": 83,
+      "total_words": 1010,
+      "dialog_sentences": 30,
+      "dialog_ratio": 0.3614
+    },
+    {
+      "chapter_idx": 112,
+      "title": "II",
+      "start_offset": 823628,
+      "end_offset": 829509,
+      "total_chars": 5881,
+      "total_paragraphs": 112,
+      "total_sentences": 117,
+      "total_words": 882,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 113,
+      "title": "II",
+      "start_offset": 829509,
+      "end_offset": 831831,
+      "total_chars": 2322,
+      "total_paragraphs": 39,
+      "total_sentences": 42,
+      "total_words": 342,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 114,
+      "title": "I",
+      "start_offset": 831831,
+      "end_offset": 850801,
+      "total_chars": 18970,
+      "total_paragraphs": 350,
+      "total_sentences": 375,
+      "total_words": 2800,
+      "dialog_sentences": 14,
+      "dialog_ratio": 0.0373
+    },
+    {
+      "chapter_idx": 115,
+      "title": "XXVIII.",
+      "start_offset": 850801,
+      "end_offset": 879813,
+      "total_chars": 29012,
+      "total_paragraphs": 316,
+      "total_sentences": 464,
+      "total_words": 4453,
+      "dialog_sentences": 82,
+      "dialog_ratio": 0.1767
+    },
+    {
+      "chapter_idx": 116,
+      "title": "XXXIV.",
+      "start_offset": 879813,
+      "end_offset": 880228,
+      "total_chars": 415,
+      "total_paragraphs": 8,
+      "total_sentences": 8,
+      "total_words": 62,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 117,
+      "title": "II",
+      "start_offset": 880228,
+      "end_offset": 886797,
+      "total_chars": 6569,
+      "total_paragraphs": 126,
+      "total_sentences": 136,
+      "total_words": 1008,
+      "dialog_sentences": 1,
       "dialog_ratio": 0.0074
     },
     {
-      "chapter_idx": 7,
+      "chapter_idx": 118,
+      "title": "XXXIV.",
+      "start_offset": 886797,
+      "end_offset": 889830,
+      "total_chars": 3033,
+      "total_paragraphs": 47,
+      "total_sentences": 55,
+      "total_words": 441,
+      "dialog_sentences": 8,
+      "dialog_ratio": 0.1455
+    },
+    {
+      "chapter_idx": 119,
+      "title": "XXXV.",
+      "start_offset": 889830,
+      "end_offset": 892588,
+      "total_chars": 2758,
+      "total_paragraphs": 38,
+      "total_sentences": 45,
+      "total_words": 396,
+      "dialog_sentences": 5,
+      "dialog_ratio": 0.1111
+    },
+    {
+      "chapter_idx": 120,
+      "title": "I",
+      "start_offset": 892588,
+      "end_offset": 895456,
+      "total_chars": 2868,
+      "total_paragraphs": 40,
+      "total_sentences": 54,
+      "total_words": 447,
+      "dialog_sentences": 11,
+      "dialog_ratio": 0.2037
+    },
+    {
+      "chapter_idx": 121,
+      "title": "XXXVI.",
+      "start_offset": 895456,
+      "end_offset": 910592,
+      "total_chars": 15136,
+      "total_paragraphs": 174,
+      "total_sentences": 229,
+      "total_words": 2245,
+      "dialog_sentences": 14,
+      "dialog_ratio": 0.0611
+    },
+    {
+      "chapter_idx": 122,
+      "title": "XXXIX.",
+      "start_offset": 910592,
+      "end_offset": 915796,
+      "total_chars": 5204,
+      "total_paragraphs": 74,
+      "total_sentences": 90,
+      "total_words": 766,
+      "dialog_sentences": 6,
+      "dialog_ratio": 0.0667
+    },
+    {
+      "chapter_idx": 123,
+      "title": "XLI.",
+      "start_offset": 915796,
+      "end_offset": 915841,
+      "total_chars": 45,
+      "total_paragraphs": 3,
+      "total_sentences": 3,
+      "total_words": 4,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 124,
+      "title": "XVI",
+      "start_offset": 915841,
+      "end_offset": 925251,
+      "total_chars": 9410,
+      "total_paragraphs": 149,
+      "total_sentences": 172,
+      "total_words": 1386,
+      "dialog_sentences": 11,
+      "dialog_ratio": 0.064
+    },
+    {
+      "chapter_idx": 125,
+      "title": "XLV.",
+      "start_offset": 925251,
+      "end_offset": 930997,
+      "total_chars": 5746,
+      "total_paragraphs": 94,
+      "total_sentences": 108,
+      "total_words": 848,
+      "dialog_sentences": 5,
+      "dialog_ratio": 0.0463
+    },
+    {
+      "chapter_idx": 126,
+      "title": "XLVI.",
+      "start_offset": 930997,
+      "end_offset": 968858,
+      "total_chars": 37861,
+      "total_paragraphs": 809,
+      "total_sentences": 867,
+      "total_words": 5185,
+      "dialog_sentences": 19,
+      "dialog_ratio": 0.0219
+    },
+    {
+      "chapter_idx": 127,
+      "title": "XXIX.",
+      "start_offset": 968858,
+      "end_offset": 969558,
+      "total_chars": 700,
+      "total_paragraphs": 18,
+      "total_sentences": 19,
+      "total_words": 94,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 128,
+      "title": "XXX.",
+      "start_offset": 969558,
+      "end_offset": 969654,
+      "total_chars": 96,
+      "total_paragraphs": 3,
+      "total_sentences": 3,
+      "total_words": 11,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 129,
+      "title": "XXXI.",
+      "start_offset": 969654,
+      "end_offset": 970153,
+      "total_chars": 499,
+      "total_paragraphs": 14,
+      "total_sentences": 14,
+      "total_words": 66,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 130,
+      "title": "XXXII.",
+      "start_offset": 970153,
+      "end_offset": 970652,
+      "total_chars": 499,
+      "total_paragraphs": 12,
+      "total_sentences": 15,
+      "total_words": 64,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 131,
+      "title": "XXXIII.",
+      "start_offset": 970652,
+      "end_offset": 971423,
+      "total_chars": 771,
+      "total_paragraphs": 17,
+      "total_sentences": 17,
+      "total_words": 103,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 132,
+      "title": "XXXV.",
+      "start_offset": 971423,
+      "end_offset": 971776,
+      "total_chars": 353,
+      "total_paragraphs": 10,
+      "total_sentences": 10,
+      "total_words": 46,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 133,
+      "title": "XXXVI.",
+      "start_offset": 971776,
+      "end_offset": 972128,
+      "total_chars": 352,
+      "total_paragraphs": 10,
+      "total_sentences": 10,
+      "total_words": 46,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 134,
+      "title": "XXXVII.",
+      "start_offset": 972128,
+      "end_offset": 972246,
+      "total_chars": 118,
+      "total_paragraphs": 4,
+      "total_sentences": 4,
+      "total_words": 17,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 135,
+      "title": "II",
+      "start_offset": 972246,
+      "end_offset": 988914,
+      "total_chars": 16668,
+      "total_paragraphs": 409,
+      "total_sentences": 418,
+      "total_words": 2238,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 136,
+      "title": "II",
+      "start_offset": 988914,
+      "end_offset": 991961,
+      "total_chars": 3047,
+      "total_paragraphs": 82,
+      "total_sentences": 82,
+      "total_words": 410,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 137,
+      "title": "I",
+      "start_offset": 991961,
+      "end_offset": 1000816,
+      "total_chars": 8855,
+      "total_paragraphs": 226,
+      "total_sentences": 230,
+      "total_words": 1171,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 138,
+      "title": "II",
+      "start_offset": 1000816,
+      "end_offset": 1004521,
+      "total_chars": 3705,
+      "total_paragraphs": 97,
+      "total_sentences": 97,
+      "total_words": 482,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 139,
+      "title": "II",
+      "start_offset": 1004521,
+      "end_offset": 1020244,
+      "total_chars": 15723,
+      "total_paragraphs": 241,
+      "total_sentences": 291,
+      "total_words": 1142,
+      "dialog_sentences": 106,
+      "dialog_ratio": 0.3643
+    },
+    {
+      "chapter_idx": 140,
+      "title": "I",
+      "start_offset": 1020244,
+      "end_offset": 1023216,
+      "total_chars": 2972,
+      "total_paragraphs": 55,
+      "total_sentences": 59,
+      "total_words": 416,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 141,
+      "title": "II",
+      "start_offset": 1023216,
+      "end_offset": 1024661,
+      "total_chars": 1445,
+      "total_paragraphs": 29,
+      "total_sentences": 29,
+      "total_words": 203,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 142,
+      "title": "I",
+      "start_offset": 1024661,
+      "end_offset": 1025328,
+      "total_chars": 667,
+      "total_paragraphs": 13,
+      "total_sentences": 13,
+      "total_words": 94,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 143,
+      "title": "II",
+      "start_offset": 1025328,
+      "end_offset": 1029224,
+      "total_chars": 3896,
+      "total_paragraphs": 88,
+      "total_sentences": 91,
+      "total_words": 537,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.011
+    },
+    {
+      "chapter_idx": 144,
+      "title": "II",
+      "start_offset": 1029224,
+      "end_offset": 1039277,
+      "total_chars": 10053,
+      "total_paragraphs": 229,
+      "total_sentences": 235,
+      "total_words": 1403,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0043
+    },
+    {
+      "chapter_idx": 145,
+      "title": "XXI.",
+      "start_offset": 1039277,
+      "end_offset": 1040489,
+      "total_chars": 1212,
+      "total_paragraphs": 16,
+      "total_sentences": 16,
+      "total_words": 158,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 146,
+      "title": "XXII.",
+      "start_offset": 1040489,
+      "end_offset": 1065154,
+      "total_chars": 24665,
+      "total_paragraphs": 535,
+      "total_sentences": 581,
+      "total_words": 3329,
+      "dialog_sentences": 3,
+      "dialog_ratio": 0.0052
+    },
+    {
+      "chapter_idx": 147,
+      "title": "I",
+      "start_offset": 1065154,
+      "end_offset": 1114076,
+      "total_chars": 48922,
+      "total_paragraphs": 1099,
+      "total_sentences": 1184,
+      "total_words": 6669,
+      "dialog_sentences": 12,
+      "dialog_ratio": 0.0101
+    },
+    {
+      "chapter_idx": 148,
+      "title": "I.",
+      "start_offset": 1114076,
+      "end_offset": 1124177,
+      "total_chars": 10101,
+      "total_paragraphs": 255,
+      "total_sentences": 266,
+      "total_words": 1307,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 149,
+      "title": "I.",
+      "start_offset": 1124177,
+      "end_offset": 1159975,
+      "total_chars": 35798,
+      "total_paragraphs": 810,
+      "total_sentences": 840,
+      "total_words": 4667,
+      "dialog_sentences": 7,
+      "dialog_ratio": 0.0083
+    },
+    {
+      "chapter_idx": 150,
       "title": "ЧАСТЬ 1",
-      "start_offset": 1153267,
-      "end_offset": 1153353,
+      "start_offset": 1159975,
+      "end_offset": 1160061,
       "total_chars": 86,
       "total_paragraphs": 2,
       "total_sentences": 2,
@@ -97,10 +1813,10 @@
       "dialog_ratio": 0.5
     },
     {
-      "chapter_idx": 8,
+      "chapter_idx": 151,
       "title": "Глава I",
-      "start_offset": 1153353,
-      "end_offset": 1153584,
+      "start_offset": 1160061,
+      "end_offset": 1160292,
       "total_chars": 231,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -109,10 +1825,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 9,
+      "chapter_idx": 152,
       "title": "Глава II",
-      "start_offset": 1153584,
-      "end_offset": 1153820,
+      "start_offset": 1160292,
+      "end_offset": 1160528,
       "total_chars": 236,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -121,10 +1837,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 10,
+      "chapter_idx": 153,
       "title": "Глава III",
-      "start_offset": 1153820,
-      "end_offset": 1154138,
+      "start_offset": 1160528,
+      "end_offset": 1160846,
       "total_chars": 318,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -133,10 +1849,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 11,
+      "chapter_idx": 154,
       "title": "Глава IV",
-      "start_offset": 1154138,
-      "end_offset": 1154495,
+      "start_offset": 1160846,
+      "end_offset": 1161203,
       "total_chars": 357,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -145,10 +1861,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 12,
+      "chapter_idx": 155,
       "title": "Глава V",
-      "start_offset": 1154495,
-      "end_offset": 1154708,
+      "start_offset": 1161203,
+      "end_offset": 1161416,
       "total_chars": 213,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -157,10 +1873,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 13,
+      "chapter_idx": 156,
       "title": "Глава VI",
-      "start_offset": 1154708,
-      "end_offset": 1155026,
+      "start_offset": 1161416,
+      "end_offset": 1161734,
       "total_chars": 318,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -169,10 +1885,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 14,
+      "chapter_idx": 157,
       "title": "Глава VII",
-      "start_offset": 1155026,
-      "end_offset": 1155465,
+      "start_offset": 1161734,
+      "end_offset": 1162173,
       "total_chars": 439,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -181,10 +1897,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 15,
+      "chapter_idx": 158,
       "title": "Глава VIII",
-      "start_offset": 1155465,
-      "end_offset": 1155580,
+      "start_offset": 1162173,
+      "end_offset": 1162288,
       "total_chars": 115,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -193,10 +1909,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 16,
+      "chapter_idx": 159,
       "title": "Глава IX",
-      "start_offset": 1155580,
-      "end_offset": 1155745,
+      "start_offset": 1162288,
+      "end_offset": 1162453,
       "total_chars": 165,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -205,10 +1921,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 17,
+      "chapter_idx": 160,
       "title": "Глава X",
-      "start_offset": 1155745,
-      "end_offset": 1155960,
+      "start_offset": 1162453,
+      "end_offset": 1162668,
       "total_chars": 215,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -217,10 +1933,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 18,
+      "chapter_idx": 161,
       "title": "Глава XI",
-      "start_offset": 1155960,
-      "end_offset": 1156348,
+      "start_offset": 1162668,
+      "end_offset": 1163056,
       "total_chars": 388,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -229,10 +1945,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 19,
+      "chapter_idx": 162,
       "title": "Глава XII",
-      "start_offset": 1156348,
-      "end_offset": 1156528,
+      "start_offset": 1163056,
+      "end_offset": 1163236,
       "total_chars": 180,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -241,10 +1957,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 20,
+      "chapter_idx": 163,
       "title": "Глава XIII",
-      "start_offset": 1156528,
-      "end_offset": 1156812,
+      "start_offset": 1163236,
+      "end_offset": 1163520,
       "total_chars": 284,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -253,10 +1969,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 21,
+      "chapter_idx": 164,
       "title": "Глава XIV",
-      "start_offset": 1156812,
-      "end_offset": 1156948,
+      "start_offset": 1163520,
+      "end_offset": 1163656,
       "total_chars": 136,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -265,10 +1981,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 22,
+      "chapter_idx": 165,
       "title": "Глава XV",
-      "start_offset": 1156948,
-      "end_offset": 1157175,
+      "start_offset": 1163656,
+      "end_offset": 1163883,
       "total_chars": 227,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -277,10 +1993,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 23,
+      "chapter_idx": 166,
       "title": "Глава XVI",
-      "start_offset": 1157175,
-      "end_offset": 1157304,
+      "start_offset": 1163883,
+      "end_offset": 1164012,
       "total_chars": 129,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -289,10 +2005,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 24,
+      "chapter_idx": 167,
       "title": "Глава XVII",
-      "start_offset": 1157304,
-      "end_offset": 1157562,
+      "start_offset": 1164012,
+      "end_offset": 1164270,
       "total_chars": 258,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -301,10 +2017,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 25,
+      "chapter_idx": 168,
       "title": "Глава XVIII",
-      "start_offset": 1157562,
-      "end_offset": 1157742,
+      "start_offset": 1164270,
+      "end_offset": 1164450,
       "total_chars": 180,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -313,10 +2029,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 26,
+      "chapter_idx": 169,
       "title": "Глава XIX",
-      "start_offset": 1157742,
-      "end_offset": 1157922,
+      "start_offset": 1164450,
+      "end_offset": 1164630,
       "total_chars": 180,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -325,10 +2041,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 27,
+      "chapter_idx": 170,
       "title": "Глава XX",
-      "start_offset": 1157922,
-      "end_offset": 1158102,
+      "start_offset": 1164630,
+      "end_offset": 1164810,
       "total_chars": 180,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -337,10 +2053,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 28,
+      "chapter_idx": 171,
       "title": "Глава XXI",
-      "start_offset": 1158102,
-      "end_offset": 1158237,
+      "start_offset": 1164810,
+      "end_offset": 1164945,
       "total_chars": 135,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -349,10 +2065,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 29,
+      "chapter_idx": 172,
       "title": "Глава XXII",
-      "start_offset": 1158237,
-      "end_offset": 1158406,
+      "start_offset": 1164945,
+      "end_offset": 1165114,
       "total_chars": 169,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -361,10 +2077,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 30,
+      "chapter_idx": 173,
       "title": "Глава XXIII",
-      "start_offset": 1158406,
-      "end_offset": 1158605,
+      "start_offset": 1165114,
+      "end_offset": 1165313,
       "total_chars": 199,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -373,10 +2089,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 31,
+      "chapter_idx": 174,
       "title": "Глава XXIV",
-      "start_offset": 1158605,
-      "end_offset": 1158715,
+      "start_offset": 1165313,
+      "end_offset": 1165423,
       "total_chars": 110,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -385,10 +2101,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 32,
+      "chapter_idx": 175,
       "title": "Глава XXV",
-      "start_offset": 1158715,
-      "end_offset": 1158896,
+      "start_offset": 1165423,
+      "end_offset": 1165604,
       "total_chars": 181,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -397,10 +2113,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 33,
+      "chapter_idx": 176,
       "title": "ЧАСТЬ 2",
-      "start_offset": 1158896,
-      "end_offset": 1158982,
+      "start_offset": 1165604,
+      "end_offset": 1165690,
       "total_chars": 86,
       "total_paragraphs": 2,
       "total_sentences": 2,
@@ -409,10 +2125,10 @@
       "dialog_ratio": 0.5
     },
     {
-      "chapter_idx": 34,
+      "chapter_idx": 177,
       "title": "Глава I",
-      "start_offset": 1158982,
-      "end_offset": 1159292,
+      "start_offset": 1165690,
+      "end_offset": 1166000,
       "total_chars": 310,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -421,10 +2137,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 35,
+      "chapter_idx": 178,
       "title": "Глава II",
-      "start_offset": 1159292,
-      "end_offset": 1159568,
+      "start_offset": 1166000,
+      "end_offset": 1166276,
       "total_chars": 276,
       "total_paragraphs": 1,
       "total_sentences": 9,
@@ -433,10 +2149,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 36,
+      "chapter_idx": 179,
       "title": "Глава III",
-      "start_offset": 1159568,
-      "end_offset": 1159838,
+      "start_offset": 1166276,
+      "end_offset": 1166546,
       "total_chars": 270,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -445,10 +2161,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 37,
+      "chapter_idx": 180,
       "title": "Глава IV",
-      "start_offset": 1159838,
-      "end_offset": 1160219,
+      "start_offset": 1166546,
+      "end_offset": 1166927,
       "total_chars": 381,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -457,10 +2173,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 38,
+      "chapter_idx": 181,
       "title": "Глава V",
-      "start_offset": 1160219,
-      "end_offset": 1160413,
+      "start_offset": 1166927,
+      "end_offset": 1167121,
       "total_chars": 194,
       "total_paragraphs": 1,
       "total_sentences": 2,
@@ -469,10 +2185,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 39,
+      "chapter_idx": 182,
       "title": "Глава VI",
-      "start_offset": 1160413,
-      "end_offset": 1160619,
+      "start_offset": 1167121,
+      "end_offset": 1167327,
       "total_chars": 206,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -481,10 +2197,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 40,
+      "chapter_idx": 183,
       "title": "Глава VII",
-      "start_offset": 1160619,
-      "end_offset": 1160905,
+      "start_offset": 1167327,
+      "end_offset": 1167613,
       "total_chars": 286,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -493,10 +2209,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 41,
+      "chapter_idx": 184,
       "title": "Глава VIII",
-      "start_offset": 1160905,
-      "end_offset": 1161397,
+      "start_offset": 1167613,
+      "end_offset": 1168105,
       "total_chars": 492,
       "total_paragraphs": 1,
       "total_sentences": 9,
@@ -505,10 +2221,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 42,
+      "chapter_idx": 185,
       "title": "Глава IX",
-      "start_offset": 1161397,
-      "end_offset": 1161680,
+      "start_offset": 1168105,
+      "end_offset": 1168388,
       "total_chars": 283,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -517,10 +2233,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 43,
+      "chapter_idx": 186,
       "title": "Глава X",
-      "start_offset": 1161680,
-      "end_offset": 1161934,
+      "start_offset": 1168388,
+      "end_offset": 1168642,
       "total_chars": 254,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -529,10 +2245,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 44,
+      "chapter_idx": 187,
       "title": "Глава XI",
-      "start_offset": 1161934,
-      "end_offset": 1162086,
+      "start_offset": 1168642,
+      "end_offset": 1168794,
       "total_chars": 152,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -541,10 +2257,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 45,
+      "chapter_idx": 188,
       "title": "Глава XII",
-      "start_offset": 1162086,
-      "end_offset": 1162401,
+      "start_offset": 1168794,
+      "end_offset": 1169109,
       "total_chars": 315,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -553,10 +2269,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 46,
+      "chapter_idx": 189,
       "title": "Глава XIII",
-      "start_offset": 1162401,
-      "end_offset": 1162706,
+      "start_offset": 1169109,
+      "end_offset": 1169414,
       "total_chars": 305,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -565,10 +2281,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 47,
+      "chapter_idx": 190,
       "title": "Глава XIV",
-      "start_offset": 1162706,
-      "end_offset": 1163059,
+      "start_offset": 1169414,
+      "end_offset": 1169767,
       "total_chars": 353,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -577,10 +2293,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 48,
+      "chapter_idx": 191,
       "title": "Глава XV",
-      "start_offset": 1163059,
-      "end_offset": 1163414,
+      "start_offset": 1169767,
+      "end_offset": 1170122,
       "total_chars": 355,
       "total_paragraphs": 1,
       "total_sentences": 9,
@@ -589,10 +2305,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 49,
+      "chapter_idx": 192,
       "title": "Глава XVI",
-      "start_offset": 1163414,
-      "end_offset": 1163663,
+      "start_offset": 1170122,
+      "end_offset": 1170371,
       "total_chars": 249,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -601,10 +2317,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 50,
+      "chapter_idx": 193,
       "title": "Глава XVII",
-      "start_offset": 1163663,
-      "end_offset": 1163892,
+      "start_offset": 1170371,
+      "end_offset": 1170600,
       "total_chars": 229,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -613,10 +2329,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 51,
+      "chapter_idx": 194,
       "title": "Глава XVIII",
-      "start_offset": 1163892,
-      "end_offset": 1164255,
+      "start_offset": 1170600,
+      "end_offset": 1170963,
       "total_chars": 363,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -625,10 +2341,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 52,
+      "chapter_idx": 195,
       "title": "Глава XIX",
-      "start_offset": 1164255,
-      "end_offset": 1164657,
+      "start_offset": 1170963,
+      "end_offset": 1171365,
       "total_chars": 402,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -637,10 +2353,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 53,
+      "chapter_idx": 196,
       "title": "Глава XX",
-      "start_offset": 1164657,
-      "end_offset": 1165197,
+      "start_offset": 1171365,
+      "end_offset": 1171905,
       "total_chars": 540,
       "total_paragraphs": 1,
       "total_sentences": 11,
@@ -649,10 +2365,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 54,
+      "chapter_idx": 197,
       "title": "Глава XXI",
-      "start_offset": 1165197,
-      "end_offset": 1165773,
+      "start_offset": 1171905,
+      "end_offset": 1172481,
       "total_chars": 576,
       "total_paragraphs": 1,
       "total_sentences": 15,
@@ -661,10 +2377,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 55,
+      "chapter_idx": 198,
       "title": "ЧАСТЬ 3",
-      "start_offset": 1165773,
-      "end_offset": 1165859,
+      "start_offset": 1172481,
+      "end_offset": 1172567,
       "total_chars": 86,
       "total_paragraphs": 2,
       "total_sentences": 2,
@@ -673,10 +2389,10 @@
       "dialog_ratio": 0.5
     },
     {
-      "chapter_idx": 56,
+      "chapter_idx": 199,
       "title": "Глава I",
-      "start_offset": 1165859,
-      "end_offset": 1166259,
+      "start_offset": 1172567,
+      "end_offset": 1172967,
       "total_chars": 400,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -685,10 +2401,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 57,
+      "chapter_idx": 200,
       "title": "Глава II",
-      "start_offset": 1166259,
-      "end_offset": 1166630,
+      "start_offset": 1172967,
+      "end_offset": 1173338,
       "total_chars": 371,
       "total_paragraphs": 1,
       "total_sentences": 9,
@@ -697,10 +2413,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 58,
+      "chapter_idx": 201,
       "title": "Глава III",
-      "start_offset": 1166630,
-      "end_offset": 1167298,
+      "start_offset": 1173338,
+      "end_offset": 1174006,
       "total_chars": 668,
       "total_paragraphs": 1,
       "total_sentences": 12,
@@ -709,10 +2425,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 59,
+      "chapter_idx": 202,
       "title": "Глава IV",
-      "start_offset": 1167298,
-      "end_offset": 1167885,
+      "start_offset": 1174006,
+      "end_offset": 1174593,
       "total_chars": 587,
       "total_paragraphs": 1,
       "total_sentences": 15,
@@ -721,10 +2437,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 60,
+      "chapter_idx": 203,
       "title": "Глава V",
-      "start_offset": 1167885,
-      "end_offset": 1168423,
+      "start_offset": 1174593,
+      "end_offset": 1175131,
       "total_chars": 538,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -733,10 +2449,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 61,
+      "chapter_idx": 204,
       "title": "Глава VI",
-      "start_offset": 1168423,
-      "end_offset": 1168860,
+      "start_offset": 1175131,
+      "end_offset": 1175568,
       "total_chars": 437,
       "total_paragraphs": 1,
       "total_sentences": 9,
@@ -745,10 +2461,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 62,
+      "chapter_idx": 205,
       "title": "Глава VII",
-      "start_offset": 1168860,
-      "end_offset": 1169282,
+      "start_offset": 1175568,
+      "end_offset": 1175990,
       "total_chars": 422,
       "total_paragraphs": 1,
       "total_sentences": 9,
@@ -757,10 +2473,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 63,
+      "chapter_idx": 206,
       "title": "Глава VIII",
-      "start_offset": 1169282,
-      "end_offset": 1169427,
+      "start_offset": 1175990,
+      "end_offset": 1176135,
       "total_chars": 145,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -769,10 +2485,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 64,
+      "chapter_idx": 207,
       "title": "Глава IX",
-      "start_offset": 1169427,
-      "end_offset": 1169990,
+      "start_offset": 1176135,
+      "end_offset": 1176698,
       "total_chars": 563,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -781,10 +2497,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 65,
+      "chapter_idx": 208,
       "title": "Глава X",
-      "start_offset": 1169990,
-      "end_offset": 1170398,
+      "start_offset": 1176698,
+      "end_offset": 1177106,
       "total_chars": 408,
       "total_paragraphs": 1,
       "total_sentences": 9,
@@ -793,10 +2509,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 66,
+      "chapter_idx": 209,
       "title": "Глава XI",
-      "start_offset": 1170398,
-      "end_offset": 1170972,
+      "start_offset": 1177106,
+      "end_offset": 1177680,
       "total_chars": 574,
       "total_paragraphs": 1,
       "total_sentences": 10,
@@ -805,10 +2521,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 67,
+      "chapter_idx": 210,
       "title": "Глава XII",
-      "start_offset": 1170972,
-      "end_offset": 1171327,
+      "start_offset": 1177680,
+      "end_offset": 1178035,
       "total_chars": 355,
       "total_paragraphs": 1,
       "total_sentences": 10,
@@ -817,10 +2533,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 68,
+      "chapter_idx": 211,
       "title": "Глава XIII",
-      "start_offset": 1171327,
-      "end_offset": 1171707,
+      "start_offset": 1178035,
+      "end_offset": 1178415,
       "total_chars": 380,
       "total_paragraphs": 1,
       "total_sentences": 9,
@@ -829,10 +2545,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 69,
+      "chapter_idx": 212,
       "title": "Глава XIV",
-      "start_offset": 1171707,
-      "end_offset": 1171899,
+      "start_offset": 1178415,
+      "end_offset": 1178607,
       "total_chars": 192,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -841,10 +2557,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 70,
+      "chapter_idx": 213,
       "title": "Глава XV",
-      "start_offset": 1171899,
-      "end_offset": 1172397,
+      "start_offset": 1178607,
+      "end_offset": 1179105,
       "total_chars": 498,
       "total_paragraphs": 1,
       "total_sentences": 9,
@@ -853,10 +2569,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 71,
+      "chapter_idx": 214,
       "title": "Глава XVI",
-      "start_offset": 1172397,
-      "end_offset": 1172623,
+      "start_offset": 1179105,
+      "end_offset": 1179331,
       "total_chars": 226,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -865,10 +2581,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 72,
+      "chapter_idx": 215,
       "title": "Глава XVII",
-      "start_offset": 1172623,
-      "end_offset": 1172995,
+      "start_offset": 1179331,
+      "end_offset": 1179703,
       "total_chars": 372,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -877,10 +2593,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 73,
+      "chapter_idx": 216,
       "title": "Глава XVIII",
-      "start_offset": 1172995,
-      "end_offset": 1173532,
+      "start_offset": 1179703,
+      "end_offset": 1180240,
       "total_chars": 537,
       "total_paragraphs": 1,
       "total_sentences": 13,
@@ -889,10 +2605,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 74,
+      "chapter_idx": 217,
       "title": "Глава XIX",
-      "start_offset": 1173532,
-      "end_offset": 1174151,
+      "start_offset": 1180240,
+      "end_offset": 1180859,
       "total_chars": 619,
       "total_paragraphs": 3,
       "total_sentences": 11,
@@ -901,10 +2617,10 @@
       "dialog_ratio": 0.0909
     },
     {
-      "chapter_idx": 75,
+      "chapter_idx": 218,
       "title": "ЧАСТЬ 1",
-      "start_offset": 1174151,
-      "end_offset": 1174237,
+      "start_offset": 1180859,
+      "end_offset": 1180945,
       "total_chars": 86,
       "total_paragraphs": 2,
       "total_sentences": 2,
@@ -913,10 +2629,10 @@
       "dialog_ratio": 0.5
     },
     {
-      "chapter_idx": 76,
+      "chapter_idx": 219,
       "title": "Глава I",
-      "start_offset": 1174237,
-      "end_offset": 1174456,
+      "start_offset": 1180945,
+      "end_offset": 1181164,
       "total_chars": 219,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -925,10 +2641,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 77,
+      "chapter_idx": 220,
       "title": "Глава II",
-      "start_offset": 1174456,
-      "end_offset": 1174815,
+      "start_offset": 1181164,
+      "end_offset": 1181523,
       "total_chars": 359,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -937,10 +2653,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 78,
+      "chapter_idx": 221,
       "title": "Глава III",
-      "start_offset": 1174815,
-      "end_offset": 1175042,
+      "start_offset": 1181523,
+      "end_offset": 1181750,
       "total_chars": 227,
       "total_paragraphs": 1,
       "total_sentences": 9,
@@ -949,10 +2665,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 79,
+      "chapter_idx": 222,
       "title": "Глава",
-      "start_offset": 1175042,
-      "end_offset": 1175436,
+      "start_offset": 1181750,
+      "end_offset": 1182144,
       "total_chars": 394,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -961,10 +2677,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 80,
+      "chapter_idx": 223,
       "title": "Глава V",
-      "start_offset": 1175436,
-      "end_offset": 1175534,
+      "start_offset": 1182144,
+      "end_offset": 1182242,
       "total_chars": 98,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -973,10 +2689,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 81,
+      "chapter_idx": 224,
       "title": "Глава VI",
-      "start_offset": 1175534,
-      "end_offset": 1175741,
+      "start_offset": 1182242,
+      "end_offset": 1182449,
       "total_chars": 207,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -985,10 +2701,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 82,
+      "chapter_idx": 225,
       "title": "Глава VII",
-      "start_offset": 1175741,
-      "end_offset": 1175957,
+      "start_offset": 1182449,
+      "end_offset": 1182665,
       "total_chars": 216,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -997,10 +2713,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 83,
+      "chapter_idx": 226,
       "title": "Глава VIII",
-      "start_offset": 1175957,
-      "end_offset": 1176196,
+      "start_offset": 1182665,
+      "end_offset": 1182904,
       "total_chars": 239,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -1009,10 +2725,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 84,
+      "chapter_idx": 227,
       "title": "Глава IX",
-      "start_offset": 1176196,
-      "end_offset": 1176386,
+      "start_offset": 1182904,
+      "end_offset": 1183094,
       "total_chars": 190,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -1021,10 +2737,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 85,
+      "chapter_idx": 228,
       "title": "Глава X",
-      "start_offset": 1176386,
-      "end_offset": 1176651,
+      "start_offset": 1183094,
+      "end_offset": 1183359,
       "total_chars": 265,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -1033,10 +2749,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 86,
+      "chapter_idx": 229,
       "title": "Глава XI",
-      "start_offset": 1176651,
-      "end_offset": 1176873,
+      "start_offset": 1183359,
+      "end_offset": 1183581,
       "total_chars": 222,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -1045,10 +2761,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 87,
+      "chapter_idx": 230,
       "title": "Глава XII",
-      "start_offset": 1176873,
-      "end_offset": 1177002,
+      "start_offset": 1183581,
+      "end_offset": 1183710,
       "total_chars": 129,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -1057,10 +2773,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 88,
+      "chapter_idx": 231,
       "title": "Глава XIII",
-      "start_offset": 1177002,
-      "end_offset": 1177207,
+      "start_offset": 1183710,
+      "end_offset": 1183915,
       "total_chars": 205,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -1069,10 +2785,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 89,
+      "chapter_idx": 232,
       "title": "Глава XIV",
-      "start_offset": 1177207,
-      "end_offset": 1177412,
+      "start_offset": 1183915,
+      "end_offset": 1184120,
       "total_chars": 205,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -1081,10 +2797,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 90,
+      "chapter_idx": 233,
       "title": "Глава XV",
-      "start_offset": 1177412,
-      "end_offset": 1177637,
+      "start_offset": 1184120,
+      "end_offset": 1184345,
       "total_chars": 225,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -1093,10 +2809,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 91,
+      "chapter_idx": 234,
       "title": "Глава XVI",
-      "start_offset": 1177637,
-      "end_offset": 1177879,
+      "start_offset": 1184345,
+      "end_offset": 1184587,
       "total_chars": 242,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -1105,10 +2821,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 92,
+      "chapter_idx": 235,
       "title": "ЧАСТЬ 2",
-      "start_offset": 1177879,
-      "end_offset": 1177965,
+      "start_offset": 1184587,
+      "end_offset": 1184673,
       "total_chars": 86,
       "total_paragraphs": 2,
       "total_sentences": 2,
@@ -1117,10 +2833,10 @@
       "dialog_ratio": 0.5
     },
     {
-      "chapter_idx": 93,
+      "chapter_idx": 236,
       "title": "Глава I",
-      "start_offset": 1177965,
-      "end_offset": 1178109,
+      "start_offset": 1184673,
+      "end_offset": 1184817,
       "total_chars": 144,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -1129,10 +2845,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 94,
+      "chapter_idx": 237,
       "title": "Глава II",
-      "start_offset": 1178109,
-      "end_offset": 1178197,
+      "start_offset": 1184817,
+      "end_offset": 1184905,
       "total_chars": 88,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -1141,10 +2857,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 95,
+      "chapter_idx": 238,
       "title": "Глава III",
-      "start_offset": 1178197,
-      "end_offset": 1178366,
+      "start_offset": 1184905,
+      "end_offset": 1185074,
       "total_chars": 169,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -1153,10 +2869,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 96,
+      "chapter_idx": 239,
       "title": "Глава IV",
-      "start_offset": 1178366,
-      "end_offset": 1178501,
+      "start_offset": 1185074,
+      "end_offset": 1185209,
       "total_chars": 135,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -1165,10 +2881,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 97,
+      "chapter_idx": 240,
       "title": "Глава V",
-      "start_offset": 1178501,
-      "end_offset": 1178629,
+      "start_offset": 1185209,
+      "end_offset": 1185337,
       "total_chars": 128,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -1177,10 +2893,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 98,
+      "chapter_idx": 241,
       "title": "Глава VI",
-      "start_offset": 1178629,
-      "end_offset": 1178923,
+      "start_offset": 1185337,
+      "end_offset": 1185631,
       "total_chars": 294,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -1189,10 +2905,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 99,
+      "chapter_idx": 242,
       "title": "Глава VII",
-      "start_offset": 1178923,
-      "end_offset": 1179068,
+      "start_offset": 1185631,
+      "end_offset": 1185776,
       "total_chars": 145,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -1201,10 +2917,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 100,
+      "chapter_idx": 243,
       "title": "Глава VIII",
-      "start_offset": 1179068,
-      "end_offset": 1179301,
+      "start_offset": 1185776,
+      "end_offset": 1186009,
       "total_chars": 233,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -1213,10 +2929,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 101,
+      "chapter_idx": 244,
       "title": "Глава IX",
-      "start_offset": 1179301,
-      "end_offset": 1179446,
+      "start_offset": 1186009,
+      "end_offset": 1186154,
       "total_chars": 145,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -1225,10 +2941,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 102,
+      "chapter_idx": 245,
       "title": "Глава X",
-      "start_offset": 1179446,
-      "end_offset": 1179846,
+      "start_offset": 1186154,
+      "end_offset": 1186554,
       "total_chars": 400,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -1237,10 +2953,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 103,
+      "chapter_idx": 246,
       "title": "Глава XI",
-      "start_offset": 1179846,
-      "end_offset": 1180030,
+      "start_offset": 1186554,
+      "end_offset": 1186738,
       "total_chars": 184,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -1249,10 +2965,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 104,
+      "chapter_idx": 247,
       "title": "Глава XII",
-      "start_offset": 1180030,
-      "end_offset": 1180220,
+      "start_offset": 1186738,
+      "end_offset": 1186928,
       "total_chars": 190,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -1261,10 +2977,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 105,
+      "chapter_idx": 248,
       "title": "Глава XIII",
-      "start_offset": 1180220,
-      "end_offset": 1180323,
+      "start_offset": 1186928,
+      "end_offset": 1187031,
       "total_chars": 103,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -1273,10 +2989,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 106,
+      "chapter_idx": 249,
       "title": "Глава XIV",
-      "start_offset": 1180323,
-      "end_offset": 1180499,
+      "start_offset": 1187031,
+      "end_offset": 1187207,
       "total_chars": 176,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -1285,10 +3001,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 107,
+      "chapter_idx": 250,
       "title": "Глава XV",
-      "start_offset": 1180499,
-      "end_offset": 1180868,
+      "start_offset": 1187207,
+      "end_offset": 1187576,
       "total_chars": 369,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -1297,10 +3013,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 108,
+      "chapter_idx": 251,
       "title": "Глава XVI",
-      "start_offset": 1180868,
-      "end_offset": 1181306,
+      "start_offset": 1187576,
+      "end_offset": 1188014,
       "total_chars": 438,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -1309,10 +3025,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 109,
+      "chapter_idx": 252,
       "title": "Глава XVII",
-      "start_offset": 1181306,
-      "end_offset": 1181557,
+      "start_offset": 1188014,
+      "end_offset": 1188265,
       "total_chars": 251,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -1321,10 +3037,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 110,
+      "chapter_idx": 253,
       "title": "Глава XVIII",
-      "start_offset": 1181557,
-      "end_offset": 1181831,
+      "start_offset": 1188265,
+      "end_offset": 1188539,
       "total_chars": 274,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -1333,10 +3049,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 111,
+      "chapter_idx": 254,
       "title": "Глава XIX",
-      "start_offset": 1181831,
-      "end_offset": 1182208,
+      "start_offset": 1188539,
+      "end_offset": 1188916,
       "total_chars": 377,
       "total_paragraphs": 1,
       "total_sentences": 9,
@@ -1345,10 +3061,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 112,
+      "chapter_idx": 255,
       "title": "Глава XX",
-      "start_offset": 1182208,
-      "end_offset": 1182508,
+      "start_offset": 1188916,
+      "end_offset": 1189216,
       "total_chars": 300,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -1357,10 +3073,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 113,
+      "chapter_idx": 256,
       "title": "Глава XXI",
-      "start_offset": 1182508,
-      "end_offset": 1182923,
+      "start_offset": 1189216,
+      "end_offset": 1189631,
       "total_chars": 415,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -1369,10 +3085,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 114,
+      "chapter_idx": 257,
       "title": "ЧАСТЬ 3",
-      "start_offset": 1182923,
-      "end_offset": 1183009,
+      "start_offset": 1189631,
+      "end_offset": 1189717,
       "total_chars": 86,
       "total_paragraphs": 2,
       "total_sentences": 2,
@@ -1381,10 +3097,10 @@
       "dialog_ratio": 0.5
     },
     {
-      "chapter_idx": 115,
+      "chapter_idx": 258,
       "title": "Глава I",
-      "start_offset": 1183009,
-      "end_offset": 1183230,
+      "start_offset": 1189717,
+      "end_offset": 1189938,
       "total_chars": 221,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -1393,10 +3109,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 116,
+      "chapter_idx": 259,
       "title": "Глава II",
-      "start_offset": 1183230,
-      "end_offset": 1183388,
+      "start_offset": 1189938,
+      "end_offset": 1190096,
       "total_chars": 158,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -1405,10 +3121,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 117,
+      "chapter_idx": 260,
       "title": "Глава III",
-      "start_offset": 1183388,
-      "end_offset": 1183628,
+      "start_offset": 1190096,
+      "end_offset": 1190336,
       "total_chars": 240,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -1417,10 +3133,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 118,
+      "chapter_idx": 261,
       "title": "Глава IV",
-      "start_offset": 1183628,
-      "end_offset": 1183748,
+      "start_offset": 1190336,
+      "end_offset": 1190456,
       "total_chars": 120,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -1429,10 +3145,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 119,
+      "chapter_idx": 262,
       "title": "Глава V",
-      "start_offset": 1183748,
-      "end_offset": 1183984,
+      "start_offset": 1190456,
+      "end_offset": 1190692,
       "total_chars": 236,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -1441,10 +3157,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 120,
+      "chapter_idx": 263,
       "title": "Глава VI",
-      "start_offset": 1183984,
-      "end_offset": 1184217,
+      "start_offset": 1190692,
+      "end_offset": 1190925,
       "total_chars": 233,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -1453,10 +3169,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 121,
+      "chapter_idx": 264,
       "title": "Глава VII",
-      "start_offset": 1184217,
-      "end_offset": 1184543,
+      "start_offset": 1190925,
+      "end_offset": 1191251,
       "total_chars": 326,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -1465,10 +3181,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 122,
+      "chapter_idx": 265,
       "title": "Глава VIII",
-      "start_offset": 1184543,
-      "end_offset": 1184642,
+      "start_offset": 1191251,
+      "end_offset": 1191350,
       "total_chars": 99,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -1477,10 +3193,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 123,
+      "chapter_idx": 266,
       "title": "Глава IX",
-      "start_offset": 1184642,
-      "end_offset": 1184893,
+      "start_offset": 1191350,
+      "end_offset": 1191601,
       "total_chars": 251,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -1489,10 +3205,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 124,
+      "chapter_idx": 267,
       "title": "Глава X",
-      "start_offset": 1184893,
-      "end_offset": 1184926,
+      "start_offset": 1191601,
+      "end_offset": 1191634,
       "total_chars": 33,
       "total_paragraphs": 1,
       "total_sentences": 1,
@@ -1501,10 +3217,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 125,
+      "chapter_idx": 268,
       "title": "Глава XI",
-      "start_offset": 1184926,
-      "end_offset": 1185198,
+      "start_offset": 1191634,
+      "end_offset": 1191906,
       "total_chars": 272,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -1513,10 +3229,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 126,
+      "chapter_idx": 269,
       "title": "Глава XII",
-      "start_offset": 1185198,
-      "end_offset": 1185356,
+      "start_offset": 1191906,
+      "end_offset": 1192064,
       "total_chars": 158,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -1525,10 +3241,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 127,
+      "chapter_idx": 270,
       "title": "Глава XIII",
-      "start_offset": 1185356,
-      "end_offset": 1185479,
+      "start_offset": 1192064,
+      "end_offset": 1192187,
       "total_chars": 123,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -1537,10 +3253,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 128,
+      "chapter_idx": 271,
       "title": "Глава XIV",
-      "start_offset": 1185479,
-      "end_offset": 1185700,
+      "start_offset": 1192187,
+      "end_offset": 1192408,
       "total_chars": 221,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -1549,10 +3265,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 129,
+      "chapter_idx": 272,
       "title": "Глава XV",
-      "start_offset": 1185700,
-      "end_offset": 1185889,
+      "start_offset": 1192408,
+      "end_offset": 1192597,
       "total_chars": 189,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -1561,10 +3277,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 130,
+      "chapter_idx": 273,
       "title": "Глава XVI",
-      "start_offset": 1185889,
-      "end_offset": 1186073,
+      "start_offset": 1192597,
+      "end_offset": 1192781,
       "total_chars": 184,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -1573,10 +3289,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 131,
+      "chapter_idx": 274,
       "title": "Глава XVII",
-      "start_offset": 1186073,
-      "end_offset": 1186235,
+      "start_offset": 1192781,
+      "end_offset": 1192943,
       "total_chars": 162,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -1585,10 +3301,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 132,
+      "chapter_idx": 275,
       "title": "Глава XVIII",
-      "start_offset": 1186235,
-      "end_offset": 1186479,
+      "start_offset": 1192943,
+      "end_offset": 1193187,
       "total_chars": 244,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -1597,10 +3313,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 133,
+      "chapter_idx": 276,
       "title": "Глава XIX",
-      "start_offset": 1186479,
-      "end_offset": 1186628,
+      "start_offset": 1193187,
+      "end_offset": 1193336,
       "total_chars": 149,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -1609,10 +3325,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 134,
+      "chapter_idx": 277,
       "title": "Глава XX",
-      "start_offset": 1186628,
-      "end_offset": 1186766,
+      "start_offset": 1193336,
+      "end_offset": 1193474,
       "total_chars": 138,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -1621,10 +3337,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 135,
+      "chapter_idx": 278,
       "title": "Глава XXI",
-      "start_offset": 1186766,
-      "end_offset": 1186959,
+      "start_offset": 1193474,
+      "end_offset": 1193667,
       "total_chars": 193,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -1633,10 +3349,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 136,
+      "chapter_idx": 279,
       "title": "Глава XXII",
-      "start_offset": 1186959,
-      "end_offset": 1187307,
+      "start_offset": 1193667,
+      "end_offset": 1194015,
       "total_chars": 348,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -1645,10 +3361,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 137,
+      "chapter_idx": 280,
       "title": "Глава XXIII",
-      "start_offset": 1187307,
-      "end_offset": 1187667,
+      "start_offset": 1194015,
+      "end_offset": 1194375,
       "total_chars": 360,
       "total_paragraphs": 1,
       "total_sentences": 9,
@@ -1657,10 +3373,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 138,
+      "chapter_idx": 281,
       "title": "Глава XXIV",
-      "start_offset": 1187667,
-      "end_offset": 1187856,
+      "start_offset": 1194375,
+      "end_offset": 1194564,
       "total_chars": 189,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -1669,10 +3385,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 139,
+      "chapter_idx": 282,
       "title": "Глава XXV",
-      "start_offset": 1187856,
-      "end_offset": 1188014,
+      "start_offset": 1194564,
+      "end_offset": 1194722,
       "total_chars": 158,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -1681,10 +3397,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 140,
+      "chapter_idx": 283,
       "title": "Глава XXVI",
-      "start_offset": 1188014,
-      "end_offset": 1188354,
+      "start_offset": 1194722,
+      "end_offset": 1195062,
       "total_chars": 340,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -1693,10 +3409,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 141,
+      "chapter_idx": 284,
       "title": "ЧАСТЬ 4",
-      "start_offset": 1188354,
-      "end_offset": 1188440,
+      "start_offset": 1195062,
+      "end_offset": 1195148,
       "total_chars": 86,
       "total_paragraphs": 2,
       "total_sentences": 2,
@@ -1705,10 +3421,10 @@
       "dialog_ratio": 0.5
     },
     {
-      "chapter_idx": 142,
+      "chapter_idx": 285,
       "title": "Глава I",
-      "start_offset": 1188440,
-      "end_offset": 1188803,
+      "start_offset": 1195148,
+      "end_offset": 1195511,
       "total_chars": 363,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -1717,10 +3433,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 143,
+      "chapter_idx": 286,
       "title": "Глава II",
-      "start_offset": 1188803,
-      "end_offset": 1188950,
+      "start_offset": 1195511,
+      "end_offset": 1195658,
       "total_chars": 147,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -1729,10 +3445,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 144,
+      "chapter_idx": 287,
       "title": "Глава III",
-      "start_offset": 1188950,
-      "end_offset": 1189077,
+      "start_offset": 1195658,
+      "end_offset": 1195785,
       "total_chars": 127,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -1741,10 +3457,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 145,
+      "chapter_idx": 288,
       "title": "Глава IV",
-      "start_offset": 1189077,
-      "end_offset": 1189274,
+      "start_offset": 1195785,
+      "end_offset": 1195982,
       "total_chars": 197,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -1753,10 +3469,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 146,
+      "chapter_idx": 289,
       "title": "Глава V",
-      "start_offset": 1189274,
-      "end_offset": 1189340,
+      "start_offset": 1195982,
+      "end_offset": 1196048,
       "total_chars": 66,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -1765,10 +3481,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 147,
+      "chapter_idx": 290,
       "title": "Глава VI",
-      "start_offset": 1189340,
-      "end_offset": 1189557,
+      "start_offset": 1196048,
+      "end_offset": 1196265,
       "total_chars": 217,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -1777,10 +3493,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 148,
+      "chapter_idx": 291,
       "title": "Глава VII",
-      "start_offset": 1189557,
-      "end_offset": 1189770,
+      "start_offset": 1196265,
+      "end_offset": 1196478,
       "total_chars": 213,
       "total_paragraphs": 1,
       "total_sentences": 9,
@@ -1789,10 +3505,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 149,
+      "chapter_idx": 292,
       "title": "Глава VIII",
-      "start_offset": 1189770,
-      "end_offset": 1190054,
+      "start_offset": 1196478,
+      "end_offset": 1196762,
       "total_chars": 284,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -1801,10 +3517,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 150,
+      "chapter_idx": 293,
       "title": "Глава IX",
-      "start_offset": 1190054,
-      "end_offset": 1190136,
+      "start_offset": 1196762,
+      "end_offset": 1196844,
       "total_chars": 82,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -1813,10 +3529,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 151,
+      "chapter_idx": 294,
       "title": "Глава X",
-      "start_offset": 1190136,
-      "end_offset": 1190397,
+      "start_offset": 1196844,
+      "end_offset": 1197105,
       "total_chars": 261,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -1825,10 +3541,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 152,
+      "chapter_idx": 295,
       "title": "Глава XI",
-      "start_offset": 1190397,
-      "end_offset": 1190591,
+      "start_offset": 1197105,
+      "end_offset": 1197299,
       "total_chars": 194,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -1837,10 +3553,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 153,
+      "chapter_idx": 296,
       "title": "Глава XII",
-      "start_offset": 1190591,
-      "end_offset": 1190768,
+      "start_offset": 1197299,
+      "end_offset": 1197476,
       "total_chars": 177,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -1849,10 +3565,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 154,
+      "chapter_idx": 297,
       "title": "Глава XIII",
-      "start_offset": 1190768,
-      "end_offset": 1191011,
+      "start_offset": 1197476,
+      "end_offset": 1197719,
       "total_chars": 243,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -1861,10 +3577,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 155,
+      "chapter_idx": 298,
       "title": "ЧАСТЬ 5",
-      "start_offset": 1191011,
-      "end_offset": 1191097,
+      "start_offset": 1197719,
+      "end_offset": 1197805,
       "total_chars": 86,
       "total_paragraphs": 2,
       "total_sentences": 2,
@@ -1873,10 +3589,10 @@
       "dialog_ratio": 0.5
     },
     {
-      "chapter_idx": 156,
+      "chapter_idx": 299,
       "title": "Глава I",
-      "start_offset": 1191097,
-      "end_offset": 1191370,
+      "start_offset": 1197805,
+      "end_offset": 1198078,
       "total_chars": 273,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -1885,10 +3601,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 157,
+      "chapter_idx": 300,
       "title": "Глава II",
-      "start_offset": 1191370,
-      "end_offset": 1191663,
+      "start_offset": 1198078,
+      "end_offset": 1198371,
       "total_chars": 293,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -1897,10 +3613,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 158,
+      "chapter_idx": 301,
       "title": "Глава III",
-      "start_offset": 1191663,
-      "end_offset": 1191934,
+      "start_offset": 1198371,
+      "end_offset": 1198642,
       "total_chars": 271,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -1909,10 +3625,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 159,
+      "chapter_idx": 302,
       "title": "Глава IV",
-      "start_offset": 1191934,
-      "end_offset": 1192095,
+      "start_offset": 1198642,
+      "end_offset": 1198803,
       "total_chars": 161,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -1921,10 +3637,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 160,
+      "chapter_idx": 303,
       "title": "Глава V",
-      "start_offset": 1192095,
-      "end_offset": 1192315,
+      "start_offset": 1198803,
+      "end_offset": 1199023,
       "total_chars": 220,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -1933,10 +3649,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 161,
+      "chapter_idx": 304,
       "title": "Глава VI",
-      "start_offset": 1192315,
-      "end_offset": 1192470,
+      "start_offset": 1199023,
+      "end_offset": 1199178,
       "total_chars": 155,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -1945,10 +3661,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 162,
+      "chapter_idx": 305,
       "title": "Глава VII",
-      "start_offset": 1192470,
-      "end_offset": 1192706,
+      "start_offset": 1199178,
+      "end_offset": 1199414,
       "total_chars": 236,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -1957,10 +3673,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 163,
+      "chapter_idx": 306,
       "title": "Глава VIII",
-      "start_offset": 1192706,
-      "end_offset": 1192938,
+      "start_offset": 1199414,
+      "end_offset": 1199646,
       "total_chars": 232,
       "total_paragraphs": 1,
       "total_sentences": 10,
@@ -1969,10 +3685,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 164,
+      "chapter_idx": 307,
       "title": "Глава IX",
-      "start_offset": 1192938,
-      "end_offset": 1193203,
+      "start_offset": 1199646,
+      "end_offset": 1199911,
       "total_chars": 265,
       "total_paragraphs": 1,
       "total_sentences": 10,
@@ -1981,10 +3697,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 165,
+      "chapter_idx": 308,
       "title": "Глава X",
-      "start_offset": 1193203,
-      "end_offset": 1193383,
+      "start_offset": 1199911,
+      "end_offset": 1200091,
       "total_chars": 180,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -1993,10 +3709,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 166,
+      "chapter_idx": 309,
       "title": "Глава XI",
-      "start_offset": 1193383,
-      "end_offset": 1193485,
+      "start_offset": 1200091,
+      "end_offset": 1200193,
       "total_chars": 102,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2005,10 +3721,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 167,
+      "chapter_idx": 310,
       "title": "Глава XII",
-      "start_offset": 1193485,
-      "end_offset": 1193697,
+      "start_offset": 1200193,
+      "end_offset": 1200405,
       "total_chars": 212,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -2017,10 +3733,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 168,
+      "chapter_idx": 311,
       "title": "Глава XIII",
-      "start_offset": 1193697,
-      "end_offset": 1193915,
+      "start_offset": 1200405,
+      "end_offset": 1200623,
       "total_chars": 218,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -2029,10 +3745,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 169,
+      "chapter_idx": 312,
       "title": "Глава XIV",
-      "start_offset": 1193915,
-      "end_offset": 1194161,
+      "start_offset": 1200623,
+      "end_offset": 1200869,
       "total_chars": 246,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -2041,10 +3757,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 170,
+      "chapter_idx": 313,
       "title": "Глава XV",
-      "start_offset": 1194161,
-      "end_offset": 1194473,
+      "start_offset": 1200869,
+      "end_offset": 1201181,
       "total_chars": 312,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -2053,10 +3769,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 171,
+      "chapter_idx": 314,
       "title": "Глава XVI",
-      "start_offset": 1194473,
-      "end_offset": 1194622,
+      "start_offset": 1201181,
+      "end_offset": 1201330,
       "total_chars": 149,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -2065,10 +3781,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 172,
+      "chapter_idx": 315,
       "title": "Глава XVII",
-      "start_offset": 1194622,
-      "end_offset": 1194743,
+      "start_offset": 1201330,
+      "end_offset": 1201451,
       "total_chars": 121,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -2077,10 +3793,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 173,
+      "chapter_idx": 316,
       "title": "Глава XVIII",
-      "start_offset": 1194743,
-      "end_offset": 1194886,
+      "start_offset": 1201451,
+      "end_offset": 1201594,
       "total_chars": 143,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -2089,10 +3805,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 174,
+      "chapter_idx": 317,
       "title": "Глава XIX",
-      "start_offset": 1194886,
-      "end_offset": 1195156,
+      "start_offset": 1201594,
+      "end_offset": 1201864,
       "total_chars": 270,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -2101,10 +3817,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 175,
+      "chapter_idx": 318,
       "title": "Глава XX",
-      "start_offset": 1195156,
-      "end_offset": 1195257,
+      "start_offset": 1201864,
+      "end_offset": 1201965,
       "total_chars": 101,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -2113,10 +3829,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 176,
+      "chapter_idx": 319,
       "title": "Глава XXI",
-      "start_offset": 1195257,
-      "end_offset": 1195633,
+      "start_offset": 1201965,
+      "end_offset": 1202341,
       "total_chars": 376,
       "total_paragraphs": 1,
       "total_sentences": 9,
@@ -2125,10 +3841,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 177,
+      "chapter_idx": 320,
       "title": "Глава XXII",
-      "start_offset": 1195633,
-      "end_offset": 1195928,
+      "start_offset": 1202341,
+      "end_offset": 1202636,
       "total_chars": 295,
       "total_paragraphs": 3,
       "total_sentences": 10,
@@ -2137,10 +3853,10 @@
       "dialog_ratio": 0.1
     },
     {
-      "chapter_idx": 178,
+      "chapter_idx": 321,
       "title": "ЧАСТЬ 1",
-      "start_offset": 1195928,
-      "end_offset": 1196014,
+      "start_offset": 1202636,
+      "end_offset": 1202722,
       "total_chars": 86,
       "total_paragraphs": 2,
       "total_sentences": 2,
@@ -2149,10 +3865,10 @@
       "dialog_ratio": 0.5
     },
     {
-      "chapter_idx": 179,
+      "chapter_idx": 322,
       "title": "Глава I",
-      "start_offset": 1196014,
-      "end_offset": 1196174,
+      "start_offset": 1202722,
+      "end_offset": 1202882,
       "total_chars": 160,
       "total_paragraphs": 1,
       "total_sentences": 2,
@@ -2161,10 +3877,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 180,
+      "chapter_idx": 323,
       "title": "Глава II",
-      "start_offset": 1196174,
-      "end_offset": 1196398,
+      "start_offset": 1202882,
+      "end_offset": 1203106,
       "total_chars": 224,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -2173,10 +3889,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 181,
+      "chapter_idx": 324,
       "title": "Глава III",
-      "start_offset": 1196398,
-      "end_offset": 1196709,
+      "start_offset": 1203106,
+      "end_offset": 1203417,
       "total_chars": 311,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -2185,10 +3901,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 182,
+      "chapter_idx": 325,
       "title": "Глава IV",
-      "start_offset": 1196709,
-      "end_offset": 1196890,
+      "start_offset": 1203417,
+      "end_offset": 1203598,
       "total_chars": 181,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2197,10 +3913,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 183,
+      "chapter_idx": 326,
       "title": "Глава V",
-      "start_offset": 1196890,
-      "end_offset": 1197028,
+      "start_offset": 1203598,
+      "end_offset": 1203736,
       "total_chars": 138,
       "total_paragraphs": 1,
       "total_sentences": 2,
@@ -2209,10 +3925,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 184,
+      "chapter_idx": 327,
       "title": "Глава VI",
-      "start_offset": 1197028,
-      "end_offset": 1197128,
+      "start_offset": 1203736,
+      "end_offset": 1203836,
       "total_chars": 100,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2221,10 +3937,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 185,
+      "chapter_idx": 328,
       "title": "Глава VII",
-      "start_offset": 1197128,
-      "end_offset": 1197330,
+      "start_offset": 1203836,
+      "end_offset": 1204038,
       "total_chars": 202,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -2233,10 +3949,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 186,
+      "chapter_idx": 329,
       "title": "Глава VIII",
-      "start_offset": 1197330,
-      "end_offset": 1197661,
+      "start_offset": 1204038,
+      "end_offset": 1204369,
       "total_chars": 331,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -2245,10 +3961,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 187,
+      "chapter_idx": 330,
       "title": "Глава IX",
-      "start_offset": 1197661,
-      "end_offset": 1198176,
+      "start_offset": 1204369,
+      "end_offset": 1204884,
       "total_chars": 515,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2257,10 +3973,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 188,
+      "chapter_idx": 331,
       "title": "Глава X",
-      "start_offset": 1198176,
-      "end_offset": 1198268,
+      "start_offset": 1204884,
+      "end_offset": 1204976,
       "total_chars": 92,
       "total_paragraphs": 1,
       "total_sentences": 2,
@@ -2269,10 +3985,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 189,
+      "chapter_idx": 332,
       "title": "Глава XI",
-      "start_offset": 1198268,
-      "end_offset": 1198524,
+      "start_offset": 1204976,
+      "end_offset": 1205232,
       "total_chars": 256,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -2281,10 +3997,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 190,
+      "chapter_idx": 333,
       "title": "Глава XII",
-      "start_offset": 1198524,
-      "end_offset": 1198869,
+      "start_offset": 1205232,
+      "end_offset": 1205577,
       "total_chars": 345,
       "total_paragraphs": 1,
       "total_sentences": 9,
@@ -2293,10 +4009,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 191,
+      "chapter_idx": 334,
       "title": "Глава XIII",
-      "start_offset": 1198869,
-      "end_offset": 1198983,
+      "start_offset": 1205577,
+      "end_offset": 1205691,
       "total_chars": 114,
       "total_paragraphs": 1,
       "total_sentences": 1,
@@ -2305,10 +4021,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 192,
+      "chapter_idx": 335,
       "title": "Глава XIV",
-      "start_offset": 1198983,
-      "end_offset": 1199112,
+      "start_offset": 1205691,
+      "end_offset": 1205820,
       "total_chars": 129,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2317,10 +4033,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 193,
+      "chapter_idx": 336,
       "title": "Глава XV",
-      "start_offset": 1199112,
-      "end_offset": 1199405,
+      "start_offset": 1205820,
+      "end_offset": 1206113,
       "total_chars": 293,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -2329,10 +4045,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 194,
+      "chapter_idx": 337,
       "title": "Глава XVI",
-      "start_offset": 1199405,
-      "end_offset": 1199588,
+      "start_offset": 1206113,
+      "end_offset": 1206296,
       "total_chars": 183,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -2341,10 +4057,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 195,
+      "chapter_idx": 338,
       "title": "Глава XVII",
-      "start_offset": 1199588,
-      "end_offset": 1199687,
+      "start_offset": 1206296,
+      "end_offset": 1206395,
       "total_chars": 99,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2353,10 +4069,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 196,
+      "chapter_idx": 339,
       "title": "Глава XVIII",
-      "start_offset": 1199687,
-      "end_offset": 1199903,
+      "start_offset": 1206395,
+      "end_offset": 1206611,
       "total_chars": 216,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -2365,10 +4081,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 197,
+      "chapter_idx": 340,
       "title": "Глава XIX",
-      "start_offset": 1199903,
-      "end_offset": 1200072,
+      "start_offset": 1206611,
+      "end_offset": 1206780,
       "total_chars": 169,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2377,10 +4093,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 198,
+      "chapter_idx": 341,
       "title": "Глава XX",
-      "start_offset": 1200072,
-      "end_offset": 1200305,
+      "start_offset": 1206780,
+      "end_offset": 1207013,
       "total_chars": 233,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -2389,10 +4105,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 199,
+      "chapter_idx": 342,
       "title": "Глава XXI",
-      "start_offset": 1200305,
-      "end_offset": 1200624,
+      "start_offset": 1207013,
+      "end_offset": 1207332,
       "total_chars": 319,
       "total_paragraphs": 1,
       "total_sentences": 9,
@@ -2401,10 +4117,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 200,
+      "chapter_idx": 343,
       "title": "Глава XXII",
-      "start_offset": 1200624,
-      "end_offset": 1200780,
+      "start_offset": 1207332,
+      "end_offset": 1207488,
       "total_chars": 156,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -2413,10 +4129,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 201,
+      "chapter_idx": 344,
       "title": "Глава XXIII",
-      "start_offset": 1200780,
-      "end_offset": 1200883,
+      "start_offset": 1207488,
+      "end_offset": 1207591,
       "total_chars": 103,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -2425,10 +4141,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 202,
+      "chapter_idx": 345,
       "title": "ЧАСТЬ 2",
-      "start_offset": 1200883,
-      "end_offset": 1200969,
+      "start_offset": 1207591,
+      "end_offset": 1207677,
       "total_chars": 86,
       "total_paragraphs": 2,
       "total_sentences": 2,
@@ -2437,10 +4153,10 @@
       "dialog_ratio": 0.5
     },
     {
-      "chapter_idx": 203,
+      "chapter_idx": 346,
       "title": "Глава I",
-      "start_offset": 1200969,
-      "end_offset": 1201175,
+      "start_offset": 1207677,
+      "end_offset": 1207883,
       "total_chars": 206,
       "total_paragraphs": 1,
       "total_sentences": 2,
@@ -2449,10 +4165,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 204,
+      "chapter_idx": 347,
       "title": "Глава II",
-      "start_offset": 1201175,
-      "end_offset": 1201501,
+      "start_offset": 1207883,
+      "end_offset": 1208209,
       "total_chars": 326,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -2461,10 +4177,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 205,
+      "chapter_idx": 348,
       "title": "Глава III",
-      "start_offset": 1201501,
-      "end_offset": 1201723,
+      "start_offset": 1208209,
+      "end_offset": 1208431,
       "total_chars": 222,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -2473,10 +4189,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 206,
+      "chapter_idx": 349,
       "title": "Глава IV",
-      "start_offset": 1201723,
-      "end_offset": 1202108,
+      "start_offset": 1208431,
+      "end_offset": 1208816,
       "total_chars": 385,
       "total_paragraphs": 1,
       "total_sentences": 9,
@@ -2485,10 +4201,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 207,
+      "chapter_idx": 350,
       "title": "Глава V",
-      "start_offset": 1202108,
-      "end_offset": 1202525,
+      "start_offset": 1208816,
+      "end_offset": 1209233,
       "total_chars": 417,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -2497,10 +4213,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 208,
+      "chapter_idx": 351,
       "title": "Глава VI",
-      "start_offset": 1202525,
-      "end_offset": 1203032,
+      "start_offset": 1209233,
+      "end_offset": 1209740,
       "total_chars": 507,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -2509,10 +4225,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 209,
+      "chapter_idx": 352,
       "title": "Глава VII",
-      "start_offset": 1203032,
-      "end_offset": 1203194,
+      "start_offset": 1209740,
+      "end_offset": 1209902,
       "total_chars": 162,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2521,10 +4237,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 210,
+      "chapter_idx": 353,
       "title": "Глава VIII",
-      "start_offset": 1203194,
-      "end_offset": 1203458,
+      "start_offset": 1209902,
+      "end_offset": 1210166,
       "total_chars": 264,
       "total_paragraphs": 1,
       "total_sentences": 10,
@@ -2533,10 +4249,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 211,
+      "chapter_idx": 354,
       "title": "Глава IX",
-      "start_offset": 1203458,
-      "end_offset": 1203581,
+      "start_offset": 1210166,
+      "end_offset": 1210289,
       "total_chars": 123,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2545,10 +4261,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 212,
+      "chapter_idx": 355,
       "title": "Глава X",
-      "start_offset": 1203581,
-      "end_offset": 1203895,
+      "start_offset": 1210289,
+      "end_offset": 1210603,
       "total_chars": 314,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -2557,10 +4273,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 213,
+      "chapter_idx": 356,
       "title": "Глава XI",
-      "start_offset": 1203895,
-      "end_offset": 1204040,
+      "start_offset": 1210603,
+      "end_offset": 1210748,
       "total_chars": 145,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2569,10 +4285,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 214,
+      "chapter_idx": 357,
       "title": "Глава XII",
-      "start_offset": 1204040,
-      "end_offset": 1204101,
+      "start_offset": 1210748,
+      "end_offset": 1210809,
       "total_chars": 61,
       "total_paragraphs": 1,
       "total_sentences": 2,
@@ -2581,10 +4297,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 215,
+      "chapter_idx": 358,
       "title": "Глава XIII",
-      "start_offset": 1204101,
-      "end_offset": 1204308,
+      "start_offset": 1210809,
+      "end_offset": 1211016,
       "total_chars": 207,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2593,10 +4309,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 216,
+      "chapter_idx": 359,
       "title": "Глава XIV",
-      "start_offset": 1204308,
-      "end_offset": 1204592,
+      "start_offset": 1211016,
+      "end_offset": 1211300,
       "total_chars": 284,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -2605,10 +4321,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 217,
+      "chapter_idx": 360,
       "title": "Глава XV",
-      "start_offset": 1204592,
-      "end_offset": 1204833,
+      "start_offset": 1211300,
+      "end_offset": 1211541,
       "total_chars": 241,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -2617,10 +4333,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 218,
+      "chapter_idx": 361,
       "title": "Глава XVI",
-      "start_offset": 1204833,
-      "end_offset": 1205068,
+      "start_offset": 1211541,
+      "end_offset": 1211776,
       "total_chars": 235,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -2629,10 +4345,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 219,
+      "chapter_idx": 362,
       "title": "Глава XVII",
-      "start_offset": 1205068,
-      "end_offset": 1205226,
+      "start_offset": 1211776,
+      "end_offset": 1211934,
       "total_chars": 158,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -2641,10 +4357,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 220,
+      "chapter_idx": 363,
       "title": "Глава XVIII",
-      "start_offset": 1205226,
-      "end_offset": 1205528,
+      "start_offset": 1211934,
+      "end_offset": 1212236,
       "total_chars": 302,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -2653,10 +4369,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 221,
+      "chapter_idx": 364,
       "title": "Глава XIX",
-      "start_offset": 1205528,
-      "end_offset": 1205741,
+      "start_offset": 1212236,
+      "end_offset": 1212449,
       "total_chars": 213,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2665,10 +4381,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 222,
+      "chapter_idx": 365,
       "title": "Глава XX",
-      "start_offset": 1205741,
-      "end_offset": 1205857,
+      "start_offset": 1212449,
+      "end_offset": 1212565,
       "total_chars": 116,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2677,10 +4393,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 223,
+      "chapter_idx": 366,
       "title": "Глава XXI",
-      "start_offset": 1205857,
-      "end_offset": 1205977,
+      "start_offset": 1212565,
+      "end_offset": 1212685,
       "total_chars": 120,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2689,10 +4405,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 224,
+      "chapter_idx": 367,
       "title": "Глава XXII",
-      "start_offset": 1205977,
-      "end_offset": 1206283,
+      "start_offset": 1212685,
+      "end_offset": 1212991,
       "total_chars": 306,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -2701,10 +4417,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 225,
+      "chapter_idx": 368,
       "title": "Глава XXIII",
-      "start_offset": 1206283,
-      "end_offset": 1206431,
+      "start_offset": 1212991,
+      "end_offset": 1213139,
       "total_chars": 148,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2713,10 +4429,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 226,
+      "chapter_idx": 369,
       "title": "Глава XXIV",
-      "start_offset": 1206431,
-      "end_offset": 1206582,
+      "start_offset": 1213139,
+      "end_offset": 1213290,
       "total_chars": 151,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2725,10 +4441,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 227,
+      "chapter_idx": 370,
       "title": "Глава XXV",
-      "start_offset": 1206582,
-      "end_offset": 1206809,
+      "start_offset": 1213290,
+      "end_offset": 1213517,
       "total_chars": 227,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -2737,10 +4453,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 228,
+      "chapter_idx": 371,
       "title": "Глава XXVI",
-      "start_offset": 1206809,
-      "end_offset": 1206980,
+      "start_offset": 1213517,
+      "end_offset": 1213688,
       "total_chars": 171,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -2749,10 +4465,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 229,
+      "chapter_idx": 372,
       "title": "Глава XXVII",
-      "start_offset": 1206980,
-      "end_offset": 1207114,
+      "start_offset": 1213688,
+      "end_offset": 1213822,
       "total_chars": 134,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2761,10 +4477,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 230,
+      "chapter_idx": 373,
       "title": "Глава XXVIII",
-      "start_offset": 1207114,
-      "end_offset": 1207382,
+      "start_offset": 1213822,
+      "end_offset": 1214090,
       "total_chars": 268,
       "total_paragraphs": 2,
       "total_sentences": 8,
@@ -2773,10 +4489,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 231,
+      "chapter_idx": 374,
       "title": "Глава XXX",
-      "start_offset": 1207382,
-      "end_offset": 1207476,
+      "start_offset": 1214090,
+      "end_offset": 1214184,
       "total_chars": 94,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -2785,10 +4501,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 232,
+      "chapter_idx": 375,
       "title": "Глава XXXI",
-      "start_offset": 1207476,
-      "end_offset": 1207624,
+      "start_offset": 1214184,
+      "end_offset": 1214332,
       "total_chars": 148,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -2797,10 +4513,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 233,
+      "chapter_idx": 376,
       "title": "Глава XXXII",
-      "start_offset": 1207624,
-      "end_offset": 1207798,
+      "start_offset": 1214332,
+      "end_offset": 1214506,
       "total_chars": 174,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -2809,10 +4525,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 234,
+      "chapter_idx": 377,
       "title": "Глава XXXIII",
-      "start_offset": 1207798,
-      "end_offset": 1207871,
+      "start_offset": 1214506,
+      "end_offset": 1214579,
       "total_chars": 73,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -2821,10 +4537,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 235,
+      "chapter_idx": 378,
       "title": "Глава XXXIV",
-      "start_offset": 1207871,
-      "end_offset": 1208028,
+      "start_offset": 1214579,
+      "end_offset": 1214736,
       "total_chars": 157,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -2833,10 +4549,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 236,
+      "chapter_idx": 379,
       "title": "Глава XXXV",
-      "start_offset": 1208028,
-      "end_offset": 1208204,
+      "start_offset": 1214736,
+      "end_offset": 1214912,
       "total_chars": 176,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -2845,10 +4561,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 237,
+      "chapter_idx": 380,
       "title": "Глава XXXVI",
-      "start_offset": 1208204,
-      "end_offset": 1208330,
+      "start_offset": 1214912,
+      "end_offset": 1215038,
       "total_chars": 126,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2857,10 +4573,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 238,
+      "chapter_idx": 381,
       "title": "Глава XXXVII",
-      "start_offset": 1208330,
-      "end_offset": 1208485,
+      "start_offset": 1215038,
+      "end_offset": 1215193,
       "total_chars": 155,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2869,10 +4585,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 239,
+      "chapter_idx": 382,
       "title": "Глава XXXVIII",
-      "start_offset": 1208485,
-      "end_offset": 1208623,
+      "start_offset": 1215193,
+      "end_offset": 1215331,
       "total_chars": 138,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -2881,10 +4597,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 240,
+      "chapter_idx": 383,
       "title": "Глава XXXIX",
-      "start_offset": 1208623,
-      "end_offset": 1208703,
+      "start_offset": 1215331,
+      "end_offset": 1215411,
       "total_chars": 80,
       "total_paragraphs": 1,
       "total_sentences": 2,
@@ -2893,10 +4609,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 241,
+      "chapter_idx": 384,
       "title": "ЧАСТЬ 3",
-      "start_offset": 1208703,
-      "end_offset": 1208789,
+      "start_offset": 1215411,
+      "end_offset": 1215497,
       "total_chars": 86,
       "total_paragraphs": 2,
       "total_sentences": 2,
@@ -2905,10 +4621,10 @@
       "dialog_ratio": 0.5
     },
     {
-      "chapter_idx": 242,
+      "chapter_idx": 385,
       "title": "Глава I",
-      "start_offset": 1208789,
-      "end_offset": 1208843,
+      "start_offset": 1215497,
+      "end_offset": 1215551,
       "total_chars": 54,
       "total_paragraphs": 1,
       "total_sentences": 1,
@@ -2917,10 +4633,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 243,
+      "chapter_idx": 386,
       "title": "Глава II",
-      "start_offset": 1208843,
-      "end_offset": 1208991,
+      "start_offset": 1215551,
+      "end_offset": 1215699,
       "total_chars": 148,
       "total_paragraphs": 1,
       "total_sentences": 2,
@@ -2929,10 +4645,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 244,
+      "chapter_idx": 387,
       "title": "Глава III",
-      "start_offset": 1208991,
-      "end_offset": 1209157,
+      "start_offset": 1215699,
+      "end_offset": 1215865,
       "total_chars": 166,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2941,10 +4657,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 245,
+      "chapter_idx": 388,
       "title": "Глава IV",
-      "start_offset": 1209157,
-      "end_offset": 1209284,
+      "start_offset": 1215865,
+      "end_offset": 1215992,
       "total_chars": 127,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -2953,10 +4669,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 246,
+      "chapter_idx": 389,
       "title": "Глава V",
-      "start_offset": 1209284,
-      "end_offset": 1209353,
+      "start_offset": 1215992,
+      "end_offset": 1216061,
       "total_chars": 69,
       "total_paragraphs": 1,
       "total_sentences": 1,
@@ -2965,10 +4681,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 247,
+      "chapter_idx": 390,
       "title": "Глава VI",
-      "start_offset": 1209353,
-      "end_offset": 1209506,
+      "start_offset": 1216061,
+      "end_offset": 1216214,
       "total_chars": 153,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -2977,10 +4693,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 248,
+      "chapter_idx": 391,
       "title": "Глава VII",
-      "start_offset": 1209506,
-      "end_offset": 1209725,
+      "start_offset": 1216214,
+      "end_offset": 1216433,
       "total_chars": 219,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -2989,10 +4705,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 249,
+      "chapter_idx": 392,
       "title": "Глава VIII",
-      "start_offset": 1209725,
-      "end_offset": 1209821,
+      "start_offset": 1216433,
+      "end_offset": 1216529,
       "total_chars": 96,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -3001,10 +4717,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 250,
+      "chapter_idx": 393,
       "title": "Глава IX",
-      "start_offset": 1209821,
-      "end_offset": 1209971,
+      "start_offset": 1216529,
+      "end_offset": 1216679,
       "total_chars": 150,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3013,10 +4729,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 251,
+      "chapter_idx": 394,
       "title": "Глава X",
-      "start_offset": 1209971,
-      "end_offset": 1210065,
+      "start_offset": 1216679,
+      "end_offset": 1216773,
       "total_chars": 94,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -3025,10 +4741,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 252,
+      "chapter_idx": 395,
       "title": "Глава XI",
-      "start_offset": 1210065,
-      "end_offset": 1210198,
+      "start_offset": 1216773,
+      "end_offset": 1216906,
       "total_chars": 133,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3037,10 +4753,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 253,
+      "chapter_idx": 396,
       "title": "Глава XII",
-      "start_offset": 1210198,
-      "end_offset": 1210288,
+      "start_offset": 1216906,
+      "end_offset": 1216996,
       "total_chars": 90,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3049,10 +4765,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 254,
+      "chapter_idx": 397,
       "title": "Глава XIII",
-      "start_offset": 1210288,
-      "end_offset": 1210412,
+      "start_offset": 1216996,
+      "end_offset": 1217120,
       "total_chars": 124,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3061,10 +4777,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 255,
+      "chapter_idx": 398,
       "title": "Глава XIV",
-      "start_offset": 1210412,
-      "end_offset": 1210558,
+      "start_offset": 1217120,
+      "end_offset": 1217266,
       "total_chars": 146,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3073,10 +4789,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 256,
+      "chapter_idx": 399,
       "title": "Глава XV",
-      "start_offset": 1210558,
-      "end_offset": 1210727,
+      "start_offset": 1217266,
+      "end_offset": 1217435,
       "total_chars": 169,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3085,10 +4801,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 257,
+      "chapter_idx": 400,
       "title": "Глава XVI",
-      "start_offset": 1210727,
-      "end_offset": 1210851,
+      "start_offset": 1217435,
+      "end_offset": 1217559,
       "total_chars": 124,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3097,10 +4813,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 258,
+      "chapter_idx": 401,
       "title": "Глава XVII",
-      "start_offset": 1210851,
-      "end_offset": 1210993,
+      "start_offset": 1217559,
+      "end_offset": 1217701,
       "total_chars": 142,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3109,10 +4825,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 259,
+      "chapter_idx": 402,
       "title": "Глава XVIII",
-      "start_offset": 1210993,
-      "end_offset": 1211181,
+      "start_offset": 1217701,
+      "end_offset": 1217889,
       "total_chars": 188,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3121,10 +4837,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 260,
+      "chapter_idx": 403,
       "title": "Глава XIX",
-      "start_offset": 1211181,
-      "end_offset": 1211306,
+      "start_offset": 1217889,
+      "end_offset": 1218014,
       "total_chars": 125,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -3133,10 +4849,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 261,
+      "chapter_idx": 404,
       "title": "Глава XX",
-      "start_offset": 1211306,
-      "end_offset": 1211370,
+      "start_offset": 1218014,
+      "end_offset": 1218078,
       "total_chars": 64,
       "total_paragraphs": 1,
       "total_sentences": 2,
@@ -3145,10 +4861,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 262,
+      "chapter_idx": 405,
       "title": "Глава XXI",
-      "start_offset": 1211370,
-      "end_offset": 1211473,
+      "start_offset": 1218078,
+      "end_offset": 1218181,
       "total_chars": 103,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3157,10 +4873,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 263,
+      "chapter_idx": 406,
       "title": "Глава XXII",
-      "start_offset": 1211473,
-      "end_offset": 1211577,
+      "start_offset": 1218181,
+      "end_offset": 1218285,
       "total_chars": 104,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -3169,10 +4885,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 264,
+      "chapter_idx": 407,
       "title": "Глава XXIII",
-      "start_offset": 1211577,
-      "end_offset": 1211776,
+      "start_offset": 1218285,
+      "end_offset": 1218484,
       "total_chars": 199,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -3181,10 +4897,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 265,
+      "chapter_idx": 408,
       "title": "Глава XXIV",
-      "start_offset": 1211776,
-      "end_offset": 1211938,
+      "start_offset": 1218484,
+      "end_offset": 1218646,
       "total_chars": 162,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -3193,10 +4909,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 266,
+      "chapter_idx": 409,
       "title": "Глава XXV",
-      "start_offset": 1211938,
-      "end_offset": 1212188,
+      "start_offset": 1218646,
+      "end_offset": 1218896,
       "total_chars": 250,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -3205,10 +4921,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 267,
+      "chapter_idx": 410,
       "title": "Глава XXVI",
-      "start_offset": 1212188,
-      "end_offset": 1212367,
+      "start_offset": 1218896,
+      "end_offset": 1219075,
       "total_chars": 179,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -3217,10 +4933,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 268,
+      "chapter_idx": 411,
       "title": "Глава XXVII",
-      "start_offset": 1212367,
-      "end_offset": 1212525,
+      "start_offset": 1219075,
+      "end_offset": 1219233,
       "total_chars": 158,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3229,10 +4945,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 269,
+      "chapter_idx": 412,
       "title": "Глава XXVIII",
-      "start_offset": 1212525,
-      "end_offset": 1212677,
+      "start_offset": 1219233,
+      "end_offset": 1219385,
       "total_chars": 152,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3241,10 +4957,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 270,
+      "chapter_idx": 413,
       "title": "Глава XXIX",
-      "start_offset": 1212677,
-      "end_offset": 1212793,
+      "start_offset": 1219385,
+      "end_offset": 1219501,
       "total_chars": 116,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3253,10 +4969,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 271,
+      "chapter_idx": 414,
       "title": "Глава XXX",
-      "start_offset": 1212793,
-      "end_offset": 1212862,
+      "start_offset": 1219501,
+      "end_offset": 1219570,
       "total_chars": 69,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -3265,10 +4981,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 272,
+      "chapter_idx": 415,
       "title": "Глава XXXI",
-      "start_offset": 1212862,
-      "end_offset": 1213049,
+      "start_offset": 1219570,
+      "end_offset": 1219757,
       "total_chars": 187,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3277,10 +4993,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 273,
+      "chapter_idx": 416,
       "title": "Глава XXXII",
-      "start_offset": 1213049,
-      "end_offset": 1213212,
+      "start_offset": 1219757,
+      "end_offset": 1219920,
       "total_chars": 163,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -3289,10 +5005,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 274,
+      "chapter_idx": 417,
       "title": "Глава XXXIII",
-      "start_offset": 1213212,
-      "end_offset": 1213294,
+      "start_offset": 1219920,
+      "end_offset": 1220002,
       "total_chars": 82,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -3301,10 +5017,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 275,
+      "chapter_idx": 418,
       "title": "Глава XXXIV",
-      "start_offset": 1213294,
-      "end_offset": 1213564,
+      "start_offset": 1220002,
+      "end_offset": 1220272,
       "total_chars": 270,
       "total_paragraphs": 3,
       "total_sentences": 7,
@@ -3313,10 +5029,10 @@
       "dialog_ratio": 0.1429
     },
     {
-      "chapter_idx": 276,
+      "chapter_idx": 419,
       "title": "ЧАСТЬ 1",
-      "start_offset": 1213564,
-      "end_offset": 1213650,
+      "start_offset": 1220272,
+      "end_offset": 1220358,
       "total_chars": 86,
       "total_paragraphs": 2,
       "total_sentences": 2,
@@ -3325,10 +5041,10 @@
       "dialog_ratio": 0.5
     },
     {
-      "chapter_idx": 277,
+      "chapter_idx": 420,
       "title": "Глава I",
-      "start_offset": 1213650,
-      "end_offset": 1213880,
+      "start_offset": 1220358,
+      "end_offset": 1220588,
       "total_chars": 230,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -3337,10 +5053,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 278,
+      "chapter_idx": 421,
       "title": "Глава II",
-      "start_offset": 1213880,
-      "end_offset": 1214290,
+      "start_offset": 1220588,
+      "end_offset": 1220998,
       "total_chars": 410,
       "total_paragraphs": 1,
       "total_sentences": 9,
@@ -3349,10 +5065,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 279,
+      "chapter_idx": 422,
       "title": "Глава III",
-      "start_offset": 1214290,
-      "end_offset": 1214493,
+      "start_offset": 1220998,
+      "end_offset": 1221201,
       "total_chars": 203,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -3361,10 +5077,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 280,
+      "chapter_idx": 423,
       "title": "Глава IV",
-      "start_offset": 1214493,
-      "end_offset": 1214906,
+      "start_offset": 1221201,
+      "end_offset": 1221614,
       "total_chars": 413,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -3373,10 +5089,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 281,
+      "chapter_idx": 424,
       "title": "Глава V",
-      "start_offset": 1214906,
-      "end_offset": 1215147,
+      "start_offset": 1221614,
+      "end_offset": 1221855,
       "total_chars": 241,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3385,10 +5101,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 282,
+      "chapter_idx": 425,
       "title": "Глава VI",
-      "start_offset": 1215147,
-      "end_offset": 1215338,
+      "start_offset": 1221855,
+      "end_offset": 1222046,
       "total_chars": 191,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -3397,10 +5113,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 283,
+      "chapter_idx": 426,
       "title": "Глава VII",
-      "start_offset": 1215338,
-      "end_offset": 1215900,
+      "start_offset": 1222046,
+      "end_offset": 1222608,
       "total_chars": 562,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -3409,10 +5125,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 284,
+      "chapter_idx": 427,
       "title": "Глава VIII",
-      "start_offset": 1215900,
-      "end_offset": 1216309,
+      "start_offset": 1222608,
+      "end_offset": 1223017,
       "total_chars": 409,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -3421,10 +5137,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 285,
+      "chapter_idx": 428,
       "title": "Глава IX",
-      "start_offset": 1216309,
-      "end_offset": 1216480,
+      "start_offset": 1223017,
+      "end_offset": 1223188,
       "total_chars": 171,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3433,10 +5149,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 286,
+      "chapter_idx": 429,
       "title": "Глава X",
-      "start_offset": 1216480,
-      "end_offset": 1216812,
+      "start_offset": 1223188,
+      "end_offset": 1223520,
       "total_chars": 332,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -3445,10 +5161,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 287,
+      "chapter_idx": 430,
       "title": "Глава XI",
-      "start_offset": 1216812,
-      "end_offset": 1216926,
+      "start_offset": 1223520,
+      "end_offset": 1223634,
       "total_chars": 114,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -3457,10 +5173,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 288,
+      "chapter_idx": 431,
       "title": "Глава XII",
-      "start_offset": 1216926,
-      "end_offset": 1217104,
+      "start_offset": 1223634,
+      "end_offset": 1223812,
       "total_chars": 178,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -3469,10 +5185,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 289,
+      "chapter_idx": 432,
       "title": "Глава XIII",
-      "start_offset": 1217104,
-      "end_offset": 1217150,
+      "start_offset": 1223812,
+      "end_offset": 1223858,
       "total_chars": 46,
       "total_paragraphs": 1,
       "total_sentences": 2,
@@ -3481,10 +5197,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 290,
+      "chapter_idx": 433,
       "title": "Глава XIV",
-      "start_offset": 1217150,
-      "end_offset": 1217475,
+      "start_offset": 1223858,
+      "end_offset": 1224183,
       "total_chars": 325,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -3493,10 +5209,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 291,
+      "chapter_idx": 434,
       "title": "Глава XV",
-      "start_offset": 1217475,
-      "end_offset": 1217669,
+      "start_offset": 1224183,
+      "end_offset": 1224377,
       "total_chars": 194,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -3505,10 +5221,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 292,
+      "chapter_idx": 435,
       "title": "Глава XVI",
-      "start_offset": 1217669,
-      "end_offset": 1217838,
+      "start_offset": 1224377,
+      "end_offset": 1224546,
       "total_chars": 169,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -3517,10 +5233,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 293,
+      "chapter_idx": 436,
       "title": "ЧАСТЬ 2",
-      "start_offset": 1217838,
-      "end_offset": 1217924,
+      "start_offset": 1224546,
+      "end_offset": 1224632,
       "total_chars": 86,
       "total_paragraphs": 2,
       "total_sentences": 2,
@@ -3529,10 +5245,10 @@
       "dialog_ratio": 0.5
     },
     {
-      "chapter_idx": 294,
+      "chapter_idx": 437,
       "title": "Глава I",
-      "start_offset": 1217924,
-      "end_offset": 1218069,
+      "start_offset": 1224632,
+      "end_offset": 1224777,
       "total_chars": 145,
       "total_paragraphs": 1,
       "total_sentences": 2,
@@ -3541,10 +5257,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 295,
+      "chapter_idx": 438,
       "title": "Глава II",
-      "start_offset": 1218069,
-      "end_offset": 1218300,
+      "start_offset": 1224777,
+      "end_offset": 1225008,
       "total_chars": 231,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -3553,10 +5269,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 296,
+      "chapter_idx": 439,
       "title": "Глава III",
-      "start_offset": 1218300,
-      "end_offset": 1218510,
+      "start_offset": 1225008,
+      "end_offset": 1225218,
       "total_chars": 210,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3565,10 +5281,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 297,
+      "chapter_idx": 440,
       "title": "Глава IV",
-      "start_offset": 1218510,
-      "end_offset": 1218691,
+      "start_offset": 1225218,
+      "end_offset": 1225399,
       "total_chars": 181,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3577,10 +5293,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 298,
+      "chapter_idx": 441,
       "title": "Глава V",
-      "start_offset": 1218691,
-      "end_offset": 1218862,
+      "start_offset": 1225399,
+      "end_offset": 1225570,
       "total_chars": 171,
       "total_paragraphs": 1,
       "total_sentences": 2,
@@ -3589,10 +5305,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 299,
+      "chapter_idx": 442,
       "title": "Глава VI",
-      "start_offset": 1218862,
-      "end_offset": 1219121,
+      "start_offset": 1225570,
+      "end_offset": 1225829,
       "total_chars": 259,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -3601,10 +5317,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 300,
+      "chapter_idx": 443,
       "title": "Глава VII",
-      "start_offset": 1219121,
-      "end_offset": 1219307,
+      "start_offset": 1225829,
+      "end_offset": 1226015,
       "total_chars": 186,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -3613,10 +5329,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 301,
+      "chapter_idx": 444,
       "title": "Глава VIII",
-      "start_offset": 1219307,
-      "end_offset": 1219385,
+      "start_offset": 1226015,
+      "end_offset": 1226093,
       "total_chars": 78,
       "total_paragraphs": 1,
       "total_sentences": 2,
@@ -3625,10 +5341,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 302,
+      "chapter_idx": 445,
       "title": "Глава IX",
-      "start_offset": 1219385,
-      "end_offset": 1219488,
+      "start_offset": 1226093,
+      "end_offset": 1226196,
       "total_chars": 103,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -3637,10 +5353,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 303,
+      "chapter_idx": 446,
       "title": "Глава X",
-      "start_offset": 1219488,
-      "end_offset": 1219866,
+      "start_offset": 1226196,
+      "end_offset": 1226574,
       "total_chars": 378,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -3649,10 +5365,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 304,
+      "chapter_idx": 447,
       "title": "Глава XI",
-      "start_offset": 1219866,
-      "end_offset": 1220032,
+      "start_offset": 1226574,
+      "end_offset": 1226740,
       "total_chars": 166,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -3661,10 +5377,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 305,
+      "chapter_idx": 448,
       "title": "Глава XII",
-      "start_offset": 1220032,
-      "end_offset": 1220252,
+      "start_offset": 1226740,
+      "end_offset": 1226960,
       "total_chars": 220,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3673,10 +5389,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 306,
+      "chapter_idx": 449,
       "title": "Глава XIII",
-      "start_offset": 1220252,
-      "end_offset": 1220385,
+      "start_offset": 1226960,
+      "end_offset": 1227093,
       "total_chars": 133,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -3685,10 +5401,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 307,
+      "chapter_idx": 450,
       "title": "Глава XIV",
-      "start_offset": 1220385,
-      "end_offset": 1220597,
+      "start_offset": 1227093,
+      "end_offset": 1227305,
       "total_chars": 212,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -3697,10 +5413,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 308,
+      "chapter_idx": 451,
       "title": "Глава XV",
-      "start_offset": 1220597,
-      "end_offset": 1220909,
+      "start_offset": 1227305,
+      "end_offset": 1227617,
       "total_chars": 312,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3709,10 +5425,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 309,
+      "chapter_idx": 452,
       "title": "Глава XVI",
-      "start_offset": 1220909,
-      "end_offset": 1221067,
+      "start_offset": 1227617,
+      "end_offset": 1227775,
       "total_chars": 158,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3721,10 +5437,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 310,
+      "chapter_idx": 453,
       "title": "Глава XVII",
-      "start_offset": 1221067,
-      "end_offset": 1221369,
+      "start_offset": 1227775,
+      "end_offset": 1228077,
       "total_chars": 302,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -3733,10 +5449,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 311,
+      "chapter_idx": 454,
       "title": "Глава XVIII",
-      "start_offset": 1221369,
-      "end_offset": 1221649,
+      "start_offset": 1228077,
+      "end_offset": 1228357,
       "total_chars": 280,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -3745,10 +5461,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 312,
+      "chapter_idx": 455,
       "title": "Глава XIX",
-      "start_offset": 1221649,
-      "end_offset": 1221935,
+      "start_offset": 1228357,
+      "end_offset": 1228643,
       "total_chars": 286,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -3757,10 +5473,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 313,
+      "chapter_idx": 456,
       "title": "ЧАСТЬ 3",
-      "start_offset": 1221935,
-      "end_offset": 1222021,
+      "start_offset": 1228643,
+      "end_offset": 1228729,
       "total_chars": 86,
       "total_paragraphs": 2,
       "total_sentences": 2,
@@ -3769,10 +5485,10 @@
       "dialog_ratio": 0.5
     },
     {
-      "chapter_idx": 314,
+      "chapter_idx": 457,
       "title": "Глава I",
-      "start_offset": 1222021,
-      "end_offset": 1222085,
+      "start_offset": 1228729,
+      "end_offset": 1228793,
       "total_chars": 64,
       "total_paragraphs": 1,
       "total_sentences": 1,
@@ -3781,10 +5497,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 315,
+      "chapter_idx": 458,
       "title": "Глава II",
-      "start_offset": 1222085,
-      "end_offset": 1222187,
+      "start_offset": 1228793,
+      "end_offset": 1228895,
       "total_chars": 102,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -3793,10 +5509,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 316,
+      "chapter_idx": 459,
       "title": "Глава III",
-      "start_offset": 1222187,
-      "end_offset": 1222364,
+      "start_offset": 1228895,
+      "end_offset": 1229072,
       "total_chars": 177,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -3805,10 +5521,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 317,
+      "chapter_idx": 460,
       "title": "Глава IV",
-      "start_offset": 1222364,
-      "end_offset": 1222592,
+      "start_offset": 1229072,
+      "end_offset": 1229300,
       "total_chars": 228,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -3817,10 +5533,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 318,
+      "chapter_idx": 461,
       "title": "Глава V",
-      "start_offset": 1222592,
-      "end_offset": 1222745,
+      "start_offset": 1229300,
+      "end_offset": 1229453,
       "total_chars": 153,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3829,10 +5545,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 319,
+      "chapter_idx": 462,
       "title": "Глава VI",
-      "start_offset": 1222745,
-      "end_offset": 1222839,
+      "start_offset": 1229453,
+      "end_offset": 1229547,
       "total_chars": 94,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -3841,10 +5557,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 320,
+      "chapter_idx": 463,
       "title": "Глава VII",
-      "start_offset": 1222839,
-      "end_offset": 1223023,
+      "start_offset": 1229547,
+      "end_offset": 1229731,
       "total_chars": 184,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -3853,10 +5569,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 321,
+      "chapter_idx": 464,
       "title": "Глава VIII",
-      "start_offset": 1223023,
-      "end_offset": 1223259,
+      "start_offset": 1229731,
+      "end_offset": 1229967,
       "total_chars": 236,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -3865,10 +5581,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 322,
+      "chapter_idx": 465,
       "title": "Глава IX",
-      "start_offset": 1223259,
-      "end_offset": 1223394,
+      "start_offset": 1229967,
+      "end_offset": 1230102,
       "total_chars": 135,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -3877,10 +5593,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 323,
+      "chapter_idx": 466,
       "title": "Глава X",
-      "start_offset": 1223394,
-      "end_offset": 1223637,
+      "start_offset": 1230102,
+      "end_offset": 1230345,
       "total_chars": 243,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3889,10 +5605,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 324,
+      "chapter_idx": 467,
       "title": "Глава XI",
-      "start_offset": 1223637,
-      "end_offset": 1223855,
+      "start_offset": 1230345,
+      "end_offset": 1230563,
       "total_chars": 218,
       "total_paragraphs": 1,
       "total_sentences": 7,
@@ -3901,10 +5617,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 325,
+      "chapter_idx": 468,
       "title": "Глава XII",
-      "start_offset": 1223855,
-      "end_offset": 1224026,
+      "start_offset": 1230563,
+      "end_offset": 1230734,
       "total_chars": 171,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3913,10 +5629,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 326,
+      "chapter_idx": 469,
       "title": "Глава XIII",
-      "start_offset": 1224026,
-      "end_offset": 1224193,
+      "start_offset": 1230734,
+      "end_offset": 1230901,
       "total_chars": 167,
       "total_paragraphs": 1,
       "total_sentences": 2,
@@ -3925,10 +5641,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 327,
+      "chapter_idx": 470,
       "title": "Глава XIV",
-      "start_offset": 1224193,
-      "end_offset": 1224305,
+      "start_offset": 1230901,
+      "end_offset": 1231013,
       "total_chars": 112,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -3937,10 +5653,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 328,
+      "chapter_idx": 471,
       "title": "Глава XV",
-      "start_offset": 1224305,
-      "end_offset": 1224516,
+      "start_offset": 1231013,
+      "end_offset": 1231224,
       "total_chars": 211,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -3949,10 +5665,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 329,
+      "chapter_idx": 472,
       "title": "Глава XVI",
-      "start_offset": 1224516,
-      "end_offset": 1224644,
+      "start_offset": 1231224,
+      "end_offset": 1231352,
       "total_chars": 128,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -3961,10 +5677,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 330,
-      "title": "Глава Х",
-      "start_offset": 1224644,
-      "end_offset": 1224755,
+      "chapter_idx": 473,
+      "title": "Глава",
+      "start_offset": 1231352,
+      "end_offset": 1231463,
       "total_chars": 111,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -3973,10 +5689,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 331,
+      "chapter_idx": 474,
       "title": "Глава XVIII",
-      "start_offset": 1224755,
-      "end_offset": 1224919,
+      "start_offset": 1231463,
+      "end_offset": 1231627,
       "total_chars": 164,
       "total_paragraphs": 1,
       "total_sentences": 1,
@@ -3985,10 +5701,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 332,
+      "chapter_idx": 475,
       "title": "Глава XIX",
-      "start_offset": 1224919,
-      "end_offset": 1225003,
+      "start_offset": 1231627,
+      "end_offset": 1231711,
       "total_chars": 84,
       "total_paragraphs": 1,
       "total_sentences": 2,
@@ -3997,10 +5713,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 333,
+      "chapter_idx": 476,
       "title": "ЧАСТЬ 4",
-      "start_offset": 1225003,
-      "end_offset": 1225089,
+      "start_offset": 1231711,
+      "end_offset": 1231797,
       "total_chars": 86,
       "total_paragraphs": 2,
       "total_sentences": 2,
@@ -4009,10 +5725,10 @@
       "dialog_ratio": 0.5
     },
     {
-      "chapter_idx": 334,
+      "chapter_idx": 477,
       "title": "Глава I",
-      "start_offset": 1225089,
-      "end_offset": 1225233,
+      "start_offset": 1231797,
+      "end_offset": 1231941,
       "total_chars": 144,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -4021,10 +5737,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 335,
+      "chapter_idx": 478,
       "title": "Глава II",
-      "start_offset": 1225233,
-      "end_offset": 1225302,
+      "start_offset": 1231941,
+      "end_offset": 1232010,
       "total_chars": 69,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -4033,10 +5749,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 336,
+      "chapter_idx": 479,
       "title": "Глава III",
-      "start_offset": 1225302,
-      "end_offset": 1225450,
+      "start_offset": 1232010,
+      "end_offset": 1232158,
       "total_chars": 148,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -4045,10 +5761,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 337,
+      "chapter_idx": 480,
       "title": "Глава IV",
-      "start_offset": 1225450,
-      "end_offset": 1225778,
+      "start_offset": 1232158,
+      "end_offset": 1232486,
       "total_chars": 328,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -4057,10 +5773,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 338,
+      "chapter_idx": 481,
       "title": "Глава V",
-      "start_offset": 1225778,
-      "end_offset": 1225874,
+      "start_offset": 1232486,
+      "end_offset": 1232582,
       "total_chars": 96,
       "total_paragraphs": 1,
       "total_sentences": 1,
@@ -4069,10 +5785,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 339,
+      "chapter_idx": 482,
       "title": "Глава VI",
-      "start_offset": 1225874,
-      "end_offset": 1225949,
+      "start_offset": 1232582,
+      "end_offset": 1232657,
       "total_chars": 75,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -4081,10 +5797,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 340,
+      "chapter_idx": 483,
       "title": "Глава VII",
-      "start_offset": 1225949,
-      "end_offset": 1226050,
+      "start_offset": 1232657,
+      "end_offset": 1232758,
       "total_chars": 101,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -4093,10 +5809,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 341,
+      "chapter_idx": 484,
       "title": "Глава VIII",
-      "start_offset": 1226050,
-      "end_offset": 1226116,
+      "start_offset": 1232758,
+      "end_offset": 1232824,
       "total_chars": 66,
       "total_paragraphs": 1,
       "total_sentences": 2,
@@ -4105,22 +5821,34 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 342,
+      "chapter_idx": 485,
       "title": "Глава IX",
-      "start_offset": 1226116,
-      "end_offset": 1226287,
-      "total_chars": 171,
+      "start_offset": 1232824,
+      "end_offset": 1232968,
+      "total_chars": 144,
       "total_paragraphs": 1,
-      "total_sentences": 6,
-      "total_words": 26,
+      "total_sentences": 5,
+      "total_words": 23,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 343,
+      "chapter_idx": 486,
+      "title": "IV.",
+      "start_offset": 1232968,
+      "end_offset": 1232995,
+      "total_chars": 27,
+      "total_paragraphs": 1,
+      "total_sentences": 1,
+      "total_words": 3,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 487,
       "title": "Глава X",
-      "start_offset": 1226287,
-      "end_offset": 1226753,
+      "start_offset": 1232995,
+      "end_offset": 1233461,
       "total_chars": 466,
       "total_paragraphs": 2,
       "total_sentences": 10,
@@ -4129,10 +5857,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 344,
+      "chapter_idx": 488,
       "title": "Глава XI",
-      "start_offset": 1226753,
-      "end_offset": 1226967,
+      "start_offset": 1233461,
+      "end_offset": 1233675,
       "total_chars": 214,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -4141,10 +5869,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 345,
+      "chapter_idx": 489,
       "title": "Глава XII",
-      "start_offset": 1226967,
-      "end_offset": 1227157,
+      "start_offset": 1233675,
+      "end_offset": 1233865,
       "total_chars": 190,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -4153,10 +5881,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 346,
+      "chapter_idx": 490,
       "title": "Глава XIII",
-      "start_offset": 1227157,
-      "end_offset": 1227387,
+      "start_offset": 1233865,
+      "end_offset": 1234095,
       "total_chars": 230,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -4165,10 +5893,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 347,
+      "chapter_idx": 491,
       "title": "Глава XIV",
-      "start_offset": 1227387,
-      "end_offset": 1227454,
+      "start_offset": 1234095,
+      "end_offset": 1234162,
       "total_chars": 67,
       "total_paragraphs": 1,
       "total_sentences": 2,
@@ -4177,10 +5905,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 348,
+      "chapter_idx": 492,
       "title": "Глава XV",
-      "start_offset": 1227454,
-      "end_offset": 1227608,
+      "start_offset": 1234162,
+      "end_offset": 1234316,
       "total_chars": 154,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -4189,10 +5917,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 349,
+      "chapter_idx": 493,
       "title": "Глава XVI",
-      "start_offset": 1227608,
-      "end_offset": 1227777,
+      "start_offset": 1234316,
+      "end_offset": 1234485,
       "total_chars": 169,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -4201,10 +5929,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 350,
+      "chapter_idx": 494,
       "title": "Глава XVII",
-      "start_offset": 1227777,
-      "end_offset": 1227911,
+      "start_offset": 1234485,
+      "end_offset": 1234619,
       "total_chars": 134,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -4213,10 +5941,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 351,
+      "chapter_idx": 495,
       "title": "Глава XVIII",
-      "start_offset": 1227911,
-      "end_offset": 1228165,
+      "start_offset": 1234619,
+      "end_offset": 1234873,
       "total_chars": 254,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -4225,10 +5953,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 352,
+      "chapter_idx": 496,
       "title": "Глава XIX",
-      "start_offset": 1228165,
-      "end_offset": 1228252,
+      "start_offset": 1234873,
+      "end_offset": 1234960,
       "total_chars": 87,
       "total_paragraphs": 1,
       "total_sentences": 2,
@@ -4237,10 +5965,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 353,
+      "chapter_idx": 497,
       "title": "Глава XX",
-      "start_offset": 1228252,
-      "end_offset": 1228506,
+      "start_offset": 1234960,
+      "end_offset": 1235214,
       "total_chars": 254,
       "total_paragraphs": 3,
       "total_sentences": 6,
@@ -4249,10 +5977,10 @@
       "dialog_ratio": 0.1667
     },
     {
-      "chapter_idx": 354,
+      "chapter_idx": 498,
       "title": "ЧАСТЬ 1",
-      "start_offset": 1228506,
-      "end_offset": 1228592,
+      "start_offset": 1235214,
+      "end_offset": 1235300,
       "total_chars": 86,
       "total_paragraphs": 2,
       "total_sentences": 2,
@@ -4261,10 +5989,10 @@
       "dialog_ratio": 0.5
     },
     {
-      "chapter_idx": 355,
+      "chapter_idx": 499,
       "title": "Глава I",
-      "start_offset": 1228592,
-      "end_offset": 1228687,
+      "start_offset": 1235300,
+      "end_offset": 1235395,
       "total_chars": 95,
       "total_paragraphs": 1,
       "total_sentences": 1,
@@ -4273,10 +6001,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 356,
+      "chapter_idx": 500,
       "title": "Глава II",
-      "start_offset": 1228687,
-      "end_offset": 1228727,
+      "start_offset": 1235395,
+      "end_offset": 1235435,
       "total_chars": 40,
       "total_paragraphs": 1,
       "total_sentences": 2,
@@ -4285,10 +6013,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 357,
+      "chapter_idx": 501,
       "title": "Глава III",
-      "start_offset": 1228727,
-      "end_offset": 1228876,
+      "start_offset": 1235435,
+      "end_offset": 1235584,
       "total_chars": 149,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -4297,10 +6025,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 358,
+      "chapter_idx": 502,
       "title": "Глава IV",
-      "start_offset": 1228876,
-      "end_offset": 1229074,
+      "start_offset": 1235584,
+      "end_offset": 1235782,
       "total_chars": 198,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -4309,10 +6037,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 359,
+      "chapter_idx": 503,
       "title": "Глава V",
-      "start_offset": 1229074,
-      "end_offset": 1229250,
+      "start_offset": 1235782,
+      "end_offset": 1235958,
       "total_chars": 176,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -4321,10 +6049,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 360,
+      "chapter_idx": 504,
       "title": "Глава VI",
-      "start_offset": 1229250,
-      "end_offset": 1229439,
+      "start_offset": 1235958,
+      "end_offset": 1236147,
       "total_chars": 189,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -4333,10 +6061,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 361,
+      "chapter_idx": 505,
       "title": "Глава VII",
-      "start_offset": 1229439,
-      "end_offset": 1229526,
+      "start_offset": 1236147,
+      "end_offset": 1236234,
       "total_chars": 87,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -4345,10 +6073,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 362,
+      "chapter_idx": 506,
       "title": "Глава VIII",
-      "start_offset": 1229526,
-      "end_offset": 1229695,
+      "start_offset": 1236234,
+      "end_offset": 1236403,
       "total_chars": 169,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -4357,10 +6085,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 363,
+      "chapter_idx": 507,
       "title": "Глава IX",
-      "start_offset": 1229695,
-      "end_offset": 1229834,
+      "start_offset": 1236403,
+      "end_offset": 1236542,
       "total_chars": 139,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -4369,10 +6097,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 364,
+      "chapter_idx": 508,
       "title": "Глава X",
-      "start_offset": 1229834,
-      "end_offset": 1229970,
+      "start_offset": 1236542,
+      "end_offset": 1236678,
       "total_chars": 136,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -4381,10 +6109,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 365,
+      "chapter_idx": 509,
       "title": "Глава XI",
-      "start_offset": 1229970,
-      "end_offset": 1230084,
+      "start_offset": 1236678,
+      "end_offset": 1236792,
       "total_chars": 114,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -4393,10 +6121,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 366,
+      "chapter_idx": 510,
       "title": "Глава XII",
-      "start_offset": 1230084,
-      "end_offset": 1230177,
+      "start_offset": 1236792,
+      "end_offset": 1236885,
       "total_chars": 93,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -4405,10 +6133,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 367,
+      "chapter_idx": 511,
       "title": "Глава XIII",
-      "start_offset": 1230177,
-      "end_offset": 1230294,
+      "start_offset": 1236885,
+      "end_offset": 1237002,
       "total_chars": 117,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -4417,10 +6145,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 368,
+      "chapter_idx": 512,
       "title": "Глава XIV",
-      "start_offset": 1230294,
-      "end_offset": 1230591,
+      "start_offset": 1237002,
+      "end_offset": 1237299,
       "total_chars": 297,
       "total_paragraphs": 1,
       "total_sentences": 8,
@@ -4429,10 +6157,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 369,
+      "chapter_idx": 513,
       "title": "Глава XV",
-      "start_offset": 1230591,
-      "end_offset": 1230732,
+      "start_offset": 1237299,
+      "end_offset": 1237440,
       "total_chars": 141,
       "total_paragraphs": 1,
       "total_sentences": 5,
@@ -4441,10 +6169,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 370,
+      "chapter_idx": 514,
       "title": "Глава XVI",
-      "start_offset": 1230732,
-      "end_offset": 1230908,
+      "start_offset": 1237440,
+      "end_offset": 1237616,
       "total_chars": 176,
       "total_paragraphs": 1,
       "total_sentences": 6,
@@ -4453,10 +6181,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 371,
+      "chapter_idx": 515,
       "title": "ЧАСТЬ 2",
-      "start_offset": 1230908,
-      "end_offset": 1230994,
+      "start_offset": 1237616,
+      "end_offset": 1237702,
       "total_chars": 86,
       "total_paragraphs": 2,
       "total_sentences": 2,
@@ -4465,10 +6193,10 @@
       "dialog_ratio": 0.5
     },
     {
-      "chapter_idx": 372,
+      "chapter_idx": 516,
       "title": "Глава I",
-      "start_offset": 1230994,
-      "end_offset": 1231065,
+      "start_offset": 1237702,
+      "end_offset": 1237773,
       "total_chars": 71,
       "total_paragraphs": 1,
       "total_sentences": 1,
@@ -4477,10 +6205,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 373,
+      "chapter_idx": 517,
       "title": "Глава II",
-      "start_offset": 1231065,
-      "end_offset": 1231194,
+      "start_offset": 1237773,
+      "end_offset": 1237902,
       "total_chars": 129,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -4489,10 +6217,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 374,
+      "chapter_idx": 518,
       "title": "Глава III",
-      "start_offset": 1231194,
-      "end_offset": 1231312,
+      "start_offset": 1237902,
+      "end_offset": 1238020,
       "total_chars": 118,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -4501,10 +6229,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 375,
+      "chapter_idx": 519,
       "title": "Глава IV",
-      "start_offset": 1231312,
-      "end_offset": 1231433,
+      "start_offset": 1238020,
+      "end_offset": 1238141,
       "total_chars": 121,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -4513,10 +6241,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 376,
+      "chapter_idx": 520,
       "title": "Глава V",
-      "start_offset": 1231433,
-      "end_offset": 1231616,
+      "start_offset": 1238141,
+      "end_offset": 1238324,
       "total_chars": 183,
       "total_paragraphs": 1,
       "total_sentences": 1,
@@ -4525,10 +6253,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 377,
+      "chapter_idx": 521,
       "title": "Глава VI",
-      "start_offset": 1231616,
-      "end_offset": 1231792,
+      "start_offset": 1238324,
+      "end_offset": 1238500,
       "total_chars": 176,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -4537,10 +6265,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 378,
+      "chapter_idx": 522,
       "title": "Глава VII",
-      "start_offset": 1231792,
-      "end_offset": 1231980,
+      "start_offset": 1238500,
+      "end_offset": 1238688,
       "total_chars": 188,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -4549,10 +6277,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 379,
+      "chapter_idx": 523,
       "title": "Глава VIII",
-      "start_offset": 1231980,
-      "end_offset": 1232082,
+      "start_offset": 1238688,
+      "end_offset": 1238790,
       "total_chars": 102,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -4561,10 +6289,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 380,
+      "chapter_idx": 524,
       "title": "Глава IX",
-      "start_offset": 1232082,
-      "end_offset": 1232143,
+      "start_offset": 1238790,
+      "end_offset": 1238851,
       "total_chars": 61,
       "total_paragraphs": 1,
       "total_sentences": 3,
@@ -4573,10 +6301,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 381,
+      "chapter_idx": 525,
       "title": "Глава X",
-      "start_offset": 1232143,
-      "end_offset": 1232177,
+      "start_offset": 1238851,
+      "end_offset": 1238885,
       "total_chars": 34,
       "total_paragraphs": 1,
       "total_sentences": 1,
@@ -4585,10 +6313,10 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 382,
+      "chapter_idx": 526,
       "title": "Глава XI",
-      "start_offset": 1232177,
-      "end_offset": 1232323,
+      "start_offset": 1238885,
+      "end_offset": 1239031,
       "total_chars": 146,
       "total_paragraphs": 1,
       "total_sentences": 4,
@@ -4597,16 +6325,340 @@
       "dialog_ratio": 0.0
     },
     {
-      "chapter_idx": 383,
+      "chapter_idx": 527,
       "title": "Глава XII",
-      "start_offset": 1232323,
-      "end_offset": 1335534,
-      "total_chars": 103211,
-      "total_paragraphs": 550,
-      "total_sentences": 1368,
-      "total_words": 11526,
-      "dialog_sentences": 45,
-      "dialog_ratio": 0.0329
+      "start_offset": 1239031,
+      "end_offset": 1242465,
+      "total_chars": 3434,
+      "total_paragraphs": 19,
+      "total_sentences": 43,
+      "total_words": 290,
+      "dialog_sentences": 2,
+      "dialog_ratio": 0.0465
+    },
+    {
+      "chapter_idx": 528,
+      "title": "III",
+      "start_offset": 1242465,
+      "end_offset": 1242545,
+      "total_chars": 80,
+      "total_paragraphs": 2,
+      "total_sentences": 4,
+      "total_words": 8,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 529,
+      "title": "III",
+      "start_offset": 1242545,
+      "end_offset": 1248928,
+      "total_chars": 6383,
+      "total_paragraphs": 29,
+      "total_sentences": 81,
+      "total_words": 601,
+      "dialog_sentences": 2,
+      "dialog_ratio": 0.0247
+    },
+    {
+      "chapter_idx": 530,
+      "title": "XVI",
+      "start_offset": 1248928,
+      "end_offset": 1252559,
+      "total_chars": 3631,
+      "total_paragraphs": 18,
+      "total_sentences": 48,
+      "total_words": 393,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 531,
+      "title": "I.",
+      "start_offset": 1252559,
+      "end_offset": 1256055,
+      "total_chars": 3496,
+      "total_paragraphs": 22,
+      "total_sentences": 42,
+      "total_words": 358,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0238
+    },
+    {
+      "chapter_idx": 532,
+      "title": "I",
+      "start_offset": 1256055,
+      "end_offset": 1262441,
+      "total_chars": 6386,
+      "total_paragraphs": 47,
+      "total_sentences": 90,
+      "total_words": 618,
+      "dialog_sentences": 2,
+      "dialog_ratio": 0.0222
+    },
+    {
+      "chapter_idx": 533,
+      "title": "IV",
+      "start_offset": 1262441,
+      "end_offset": 1262526,
+      "total_chars": 85,
+      "total_paragraphs": 2,
+      "total_sentences": 2,
+      "total_words": 5,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 534,
+      "title": "III",
+      "start_offset": 1262526,
+      "end_offset": 1263826,
+      "total_chars": 1300,
+      "total_paragraphs": 13,
+      "total_sentences": 23,
+      "total_words": 139,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0435
+    },
+    {
+      "chapter_idx": 535,
+      "title": "III",
+      "start_offset": 1263826,
+      "end_offset": 1265321,
+      "total_chars": 1495,
+      "total_paragraphs": 15,
+      "total_sentences": 26,
+      "total_words": 142,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0385
+    },
+    {
+      "chapter_idx": 536,
+      "title": "II",
+      "start_offset": 1265321,
+      "end_offset": 1268394,
+      "total_chars": 3073,
+      "total_paragraphs": 18,
+      "total_sentences": 44,
+      "total_words": 311,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 537,
+      "title": "III",
+      "start_offset": 1268394,
+      "end_offset": 1272282,
+      "total_chars": 3888,
+      "total_paragraphs": 19,
+      "total_sentences": 42,
+      "total_words": 369,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 538,
+      "title": "III",
+      "start_offset": 1272282,
+      "end_offset": 1274063,
+      "total_chars": 1781,
+      "total_paragraphs": 13,
+      "total_sentences": 27,
+      "total_words": 183,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 539,
+      "title": "IV",
+      "start_offset": 1274063,
+      "end_offset": 1274219,
+      "total_chars": 156,
+      "total_paragraphs": 2,
+      "total_sentences": 3,
+      "total_words": 13,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 540,
+      "title": "IV",
+      "start_offset": 1274219,
+      "end_offset": 1276539,
+      "total_chars": 2320,
+      "total_paragraphs": 17,
+      "total_sentences": 30,
+      "total_words": 229,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 541,
+      "title": "I",
+      "start_offset": 1276539,
+      "end_offset": 1280672,
+      "total_chars": 4133,
+      "total_paragraphs": 20,
+      "total_sentences": 59,
+      "total_words": 482,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0169
+    },
+    {
+      "chapter_idx": 542,
+      "title": "XVIII",
+      "start_offset": 1280672,
+      "end_offset": 1285274,
+      "total_chars": 4602,
+      "total_paragraphs": 24,
+      "total_sentences": 53,
+      "total_words": 371,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0189
+    },
+    {
+      "chapter_idx": 543,
+      "title": "II.",
+      "start_offset": 1285274,
+      "end_offset": 1288961,
+      "total_chars": 3687,
+      "total_paragraphs": 23,
+      "total_sentences": 56,
+      "total_words": 380,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 544,
+      "title": "III",
+      "start_offset": 1288961,
+      "end_offset": 1289467,
+      "total_chars": 506,
+      "total_paragraphs": 4,
+      "total_sentences": 6,
+      "total_words": 67,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 545,
+      "title": "II",
+      "start_offset": 1289467,
+      "end_offset": 1293741,
+      "total_chars": 4274,
+      "total_paragraphs": 25,
+      "total_sentences": 64,
+      "total_words": 433,
+      "dialog_sentences": 3,
+      "dialog_ratio": 0.0469
+    },
+    {
+      "chapter_idx": 546,
+      "title": "III",
+      "start_offset": 1293741,
+      "end_offset": 1294027,
+      "total_chars": 286,
+      "total_paragraphs": 6,
+      "total_sentences": 9,
+      "total_words": 15,
+      "dialog_sentences": 3,
+      "dialog_ratio": 0.3333
+    },
+    {
+      "chapter_idx": 547,
+      "title": "IV",
+      "start_offset": 1294027,
+      "end_offset": 1295325,
+      "total_chars": 1298,
+      "total_paragraphs": 12,
+      "total_sentences": 16,
+      "total_words": 129,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 548,
+      "title": "IV",
+      "start_offset": 1295325,
+      "end_offset": 1297070,
+      "total_chars": 1745,
+      "total_paragraphs": 11,
+      "total_sentences": 20,
+      "total_words": 188,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 549,
+      "title": "I",
+      "start_offset": 1297070,
+      "end_offset": 1297898,
+      "total_chars": 828,
+      "total_paragraphs": 7,
+      "total_sentences": 14,
+      "total_words": 74,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0714
+    },
+    {
+      "chapter_idx": 550,
+      "title": "IV",
+      "start_offset": 1297898,
+      "end_offset": 1300215,
+      "total_chars": 2317,
+      "total_paragraphs": 9,
+      "total_sentences": 28,
+      "total_words": 239,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 551,
+      "title": "III",
+      "start_offset": 1300215,
+      "end_offset": 1302136,
+      "total_chars": 1921,
+      "total_paragraphs": 13,
+      "total_sentences": 26,
+      "total_words": 194,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0385
+    },
+    {
+      "chapter_idx": 552,
+      "title": "II",
+      "start_offset": 1302136,
+      "end_offset": 1304458,
+      "total_chars": 2322,
+      "total_paragraphs": 15,
+      "total_sentences": 38,
+      "total_words": 205,
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0263
+    },
+    {
+      "chapter_idx": 553,
+      "title": "I",
+      "start_offset": 1304458,
+      "end_offset": 1306712,
+      "total_chars": 2254,
+      "total_paragraphs": 11,
+      "total_sentences": 28,
+      "total_words": 226,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    },
+    {
+      "chapter_idx": 554,
+      "title": "IV",
+      "start_offset": 1306712,
+      "end_offset": 1342528,
+      "total_chars": 35816,
+      "total_paragraphs": 338,
+      "total_sentences": 504,
+      "total_words": 4864,
+      "dialog_sentences": 29,
+      "dialog_ratio": 0.0575
     }
   ]
 }
