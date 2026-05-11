@@ -31,7 +31,15 @@ ALT_CHEKHOV_PATH = Path('/storage/emulated/0/Documents/чехов-письмо.t
 def list_books():
     if not OUTPUTS_DIR.exists():
         return []
-    return sorted([p.name for p in OUTPUTS_DIR.iterdir() if p.is_dir()])
+    reserved = {'processed', 'tables', '__pycache__', '.git', '.DS_Store'}
+    books = []
+    for p in OUTPUTS_DIR.iterdir():
+        try:
+            if p.is_dir() and p.name not in reserved and not p.name.startswith('.'):
+                books.append(p.name)
+        except Exception:
+            continue
+    return sorted(books)
 
 
 def list_files(book: str):

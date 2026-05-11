@@ -8,16 +8,17 @@ export async function viewBooks(){
   }
   mount.innerHTML = '<p>Загружаю список книг…</p>'
   const { books } = await api.books()
-  if(!books?.length){
+  const visibleBooks = (books || []).filter(b => !['processed', 'tables', '__pycache__'].includes(b))
+  if(!visibleBooks?.length){
     mount.innerHTML = '<p>Книги не найдены. Добавьте raw-файлы и запустите анализ.</p>'
     return
   }
-  const items = books.map(b => `
+  const items = visibleBooks.map(b => `
     <li style="display:flex; gap:8px; align-items:center; justify-content:space-between;">
       <div>
         <a href="#/book/${encodeURIComponent(b)}" style="font-weight:600;">${b}</a>
       </div>
-      <div style="display:flex; gap:6px;">
+      <div style="display:flex; gap:6px; flex-wrap:wrap;">
         <a href="#/book/${encodeURIComponent(b)}/viz/tokens">Tokens</a>
         <a href="#/book/${encodeURIComponent(b)}/viz/wordcloud">Cloud</a>
         <a href="#/book/${encodeURIComponent(b)}/viz/network">Network</a>
