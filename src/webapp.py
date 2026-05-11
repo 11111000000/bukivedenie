@@ -315,6 +315,78 @@ class Handler(BaseHTTPRequestHandler):
                 except Exception as e:
                     return self._json({'error': f'cannot send file: {e}'}, status=500)
 
+            # New: provide a simple HTML cloud built from tokens.csv for quick preview
+            if path == '/api/cloud_html':
+                book = qs.get('book', [''])[0]
+                if not book:
+                    return self._json({'error': 'book param required'}, status=400)
+                # try to find tokens.csv in outputs/<book>/tokens.csv or outputs/tables/<book>_tokens.csv
+                candidates = [OUTPUTS_DIR / book / 'tokens.csv', OUTPUTS_DIR / 'tables' / f"{book}_tokens.csv", OUTPUTS_DIR / book / 'tokens.csv']
+                found = None
+                for c in candidates:
+                    if c.exists():
+                        found = c; break
+                if not found:
+                    return self._json({'error': 'tokens.csv not found for book'}, status=404)
+                try:
+                    import csv
+                    rows = []
+                    with open(found, 'r', encoding='utf-8', newline='') as fh:
+                        reader = csv.reader(fh)
+                        headers = next(reader, [])
+                        for r in reader:
+                            if not r: continue
+                            rows.append(r)
+                    # find token/count indices
+                    token_idx = None
+                    count_idx = None
+                    for i,h in enumerate(headers):
+                        lh = h.lower()
+                        if lh in ('token','word') and token_idx is None: token_idx = i
+                        if lh in ('count','frequency') and count_idx is None: count_idx = i
+                    if token_idx is None:
+                        return self._json({'error': 'tokens.csv does not contain token column'}, status=500)
+                    # build simple HTML
+                    spans = []
+                    values = []
+                    for r in rows:
+                        tok = r[token_idx] if token_idx < len(r) else ''
+                        if not tok: continue
+                        c = 1
+                        if count_idx is not None and count_idx < len(r):
+                            try:
+                                c = int(float(r[count_idx]))
+                            except Exception:
+                                try:
+                                    c = int(r[count_idx])
+                                except Exception:
+                                    c = 1
+                        values.append(c)
+                        spans.append((tok, c))
+                    if not spans:
+                        return self._json({'error': 'no tokens found'}, status=500)
+                    maxc = max(values); minc = min(values)
+                    palette = ['#1f77b4','#ff7f0e','#2ca02c','#d62728','#9467bd','#8c564b','#e377c2','#7f7f7f','#bcbd22','#17becf']
+                    parts = ['<div style="padding:12px; background:#fff;">']
+                    for tok,c in spans[:200]:
+                        if maxc == minc:
+                            size = 20
+                        else:
+                            size = int(12 + (c - minc) / (maxc - minc) * 56)
+                        color = palette[hash(tok) % len(palette)]
+                        parts.append(f'<span style="font-size:{size}px; margin:6px; display:inline-block; color:{color};">{html.escape(tok)}</span>')
+                    parts.append('</div>')
+                    html_out = '\n'.join(parts)
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'text/html; charset=utf-8')
+                    self.send_header('Content-Length', str(len(html_out.encode('utf-8'))))
+                    self.end_headers()
+                    self.wfile.write(html_out.encode('utf-8'))
+                    return
+                except Exception as e:
+                    slog(f'cloud_html error: {e}')
+                    return self._json({'error': str(e)}, status=500)
+
             if path == '/api/file_download':
                 book = qs.get('book', [''])[0]
                 name = qs.get('name', [''])[0]
@@ -357,9 +429,16 @@ class Handler(BaseHTTPRequestHandler):
                     return self._json({'error': 'book param required'}, status=400)
                 # run script synchronously (blocking)
                 try:
-                    script = PROJECT_ROOT / 'scripts' / 'plot_wordcloud_from_counts.py'
-                    cmd = [sys.executable, str(script), '--text-id', book]
-                    proc = subprocess.run(cmd, capture_output=True)
+                    # Prefer internal pipeline or legacy script in src/legacy_scripts
+                    legacy_script = PROJECT_ROOT / 'src' / 'legacy_scripts' / 'plot_wordcloud_counts_legacy.py'
+                    if (PROJECT_ROOT / 'src' / 'cloud').exists():
+                        cmd = [sys.executable, '-c', 'import src.cloud; print("delegated")']
+                        proc = subprocess.run(cmd, capture_output=True)
+                    elif legacy_script.exists():
+                        cmd = [sys.executable, str(legacy_script), '--text-id', book]
+                        proc = subprocess.run(cmd, capture_output=True)
+                    else:
+                        return self._json({'error': 'plot script not found'}, status=500)
                     stdout = proc.stdout.decode('utf-8', errors='replace') if proc.stdout else ''
                     stderr = proc.stderr.decode('utf-8', errors='replace') if proc.stderr else ''
                     if proc.returncode != 0:

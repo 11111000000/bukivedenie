@@ -14,6 +14,12 @@ from .config import ExtractorConfig
 
 logger = logging.getLogger(__name__)
 
+# Ensure module-level logger has a default handler when used as script
+if not logger.handlers:
+    handler = logging.StreamHandler()
+    handler.setFormatter(logging.Formatter('[%(levelname)s] %(message)s'))
+    logger.addHandler(handler)
+
 
 def ensure_dir(path: Path) -> Path:
     """Создание директории если не существует."""
@@ -22,20 +28,26 @@ def ensure_dir(path: Path) -> Path:
 
 
 def _atomic_write_text(path: Path, content: str, encoding: str = 'utf-8') -> None:
-    """Безопасная атомарная запись текстового файла через временный файл и os.replace."""
+    """Safe atomic write using temporary file and os.replace.
+
+    Falls back to simple write if atomic replace fails (e.g., across filesystems).
+    """
     tmp_dir = path.parent
-    tmp_fd, tmp_path = tempfile.mkstemp(prefix=path.name, dir=str(tmp_dir))
     try:
+        tmp_fd, tmp_path = tempfile.mkstemp(prefix=path.name, dir=str(tmp_dir))
         with os.fdopen(tmp_fd, 'w', encoding=encoding) as f:
             f.write(content)
         os.replace(tmp_path, str(path))
     except Exception:
-        # Очистим временный файл
+        # Best-effort cleanup and fallback
         try:
-            os.unlink(tmp_path)
+            if 'tmp_path' in locals() and Path(tmp_path).exists():
+                Path(tmp_path).unlink()
         except Exception:
             pass
-        raise
+        # Fallback to non-atomic write
+        with open(path, 'w', encoding=encoding) as f:
+            f.write(content)
 
 
 def write_csv(
@@ -246,22 +258,37 @@ def export_results(
         paths['tokens'] = tokens_path
         # Автоматически запускаем генерацию облака слов в фоне (не блокируем экспорт).
         try:
-            project_root = Path(__file__).resolve().parent.parent.parent
-            script = project_root / 'scripts' / 'plot_wordcloud_from_counts.py'
-            if script.exists():
-                log_file = book_dir / 'cloud_generation.log'
-                # Запускаем отдельный процесс, перенаправляя stdout/stderr в лог
-                with open(log_file, 'a', encoding='utf-8') as lf:
-                    lf.write(f"=== Cloud generation started: {datetime.now().isoformat()}\n")
-                    try:
-                        # Используем sys.executable для корректного интерпретатора
-                        p = subprocess.Popen([sys.executable, str(script), '--text-id', book_id], stdout=lf, stderr=lf)
-                        logger.info("Запущен процесс генерации облака слов (pid=%s) для %s", p.pid, book_id)
-                    except Exception as e:
-                        lf.write(f"Error launching cloud generation: {e}\n")
-                        logger.error("Не удалось запустить генерацию облака для %s: %s", book_id, e)
+            # Prefer calling internal cloud generator if available under src.cloud.pipeline
+            try:
+                from src.cloud import pipeline as cloud_pipeline  # type: ignore
+            except Exception:
+                # Fallback: look for legacy scripts folder but do not fail if absent
+                project_root = Path(__file__).resolve().parent.parent.parent
+                # legacy script location moved to src/legacy_scripts
+                script = project_root / 'src' / 'legacy_scripts' / 'plot_wordcloud_counts_legacy.py'
+                if script.exists():
+                    log_file = book_dir / 'cloud_generation.log'
+                    # Запускаем отдельный процесс, перенаправляя stdout/stderr в лог
+                    with open(log_file, 'a', encoding='utf-8') as lf:
+                        lf.write(f"=== Cloud generation started: {datetime.now().isoformat()}\n")
+                        try:
+                            p = subprocess.Popen([sys.executable, str(script), '--text-id', book_id], stdout=lf, stderr=lf)
+                            logger.info("Запущен процесс генерации облака слов (pid=%s) для %s", getattr(p, 'pid', 'N/A'), book_id)
+                        except Exception as e:
+                            lf.write(f"Error launching cloud generation: {e}\n")
+                            logger.error("Не удалось запустить генерацию облака для %s: %s", book_id, e)
+                else:
+                    logger.debug("Plot script not found, skipping cloud generation: %s", script)
             else:
-                logger.debug("Plot script not found, skipping cloud generation: %s", script)
+                try:
+                    # Run generator asynchronously but within process to avoid new interpreter spawn
+                    if hasattr(cloud_pipeline, 'generate_for_book'):
+                        cloud_pipeline.generate_for_book(book_dir, book_id, token_freqs)
+                        logger.info("Cloud generation delegated to internal pipeline for %s", book_id)
+                    else:
+                        logger.debug("Internal cloud pipeline present but missing generate_for_book API")
+                except Exception as e:
+                    logger.error("Internal cloud generation failed for %s: %s", book_id, e)
         except Exception as e:
             logger.error("Ошибка при попытке запустить генерацию облака для %s: %s", book_id, e)
     except Exception as e:

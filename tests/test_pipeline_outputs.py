@@ -8,7 +8,7 @@ from pathlib import Path
 import json
 
 ROOT = Path(__file__).parent.parent
-SCRIPTS = ROOT / 'scripts'
+SCRIPTS = ROOT / 'src' / 'legacy_scripts'
 OUTPUTS = ROOT / 'outputs'
 RAW_DIR = ROOT / 'data' / 'raw'
 

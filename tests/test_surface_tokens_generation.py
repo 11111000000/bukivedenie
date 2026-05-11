@@ -10,7 +10,7 @@ RAW_DIR = ROOT / 'data' / 'raw'
 
 
 def run_generate(args):
-    cmd = [sys.executable, str(SCRIPTS / 'generate_word_counts.py'), '--text-id', 'test_book', '--input-dir', str(RAW_DIR), '--output-dir', str(OUTPUTS)] + args
+    cmd = [sys.executable, str(SCRIPTS / 'wordcounts_legacy.py'), '--text-id', 'test_book', '--input-dir', str(RAW_DIR), '--output-dir', str(OUTPUTS)] + args
     print('Running:', ' '.join(cmd))
     proc = subprocess.run(cmd, capture_output=True)
     stdout = proc.stdout.decode('utf-8', errors='replace') if proc.stdout else ''

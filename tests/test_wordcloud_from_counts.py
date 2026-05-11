@@ -26,7 +26,7 @@ def ensure_min_counts(text_id='test_book'):
 
 def run_script(text_id='test_book'):
     path = ensure_min_counts(text_id)
-    cmd = [sys.executable, str(SCRIPTS / 'plot_wordcloud_from_counts.py'), '--text-id', text_id, '--counts-path', str(path), '--top-n', '3', '--min-count', '1']
+    cmd = [sys.executable, str(SCRIPTS / 'plot_wordcloud_counts_legacy.py'), '--text-id', text_id, '--counts-path', str(path), '--top-n', '3', '--min-count', '1']
     proc = subprocess.run(cmd, capture_output=True)
     return proc
 
@@ -46,7 +46,7 @@ def test_generates_png_and_meta(tmp_path):
 def test_errors_are_verbose(tmp_path):
     os.chdir(ROOT)
     # несуществующий файл
-    cmd = [sys.executable, str(SCRIPTS / 'plot_wordcloud_from_counts.py'), '--text-id', 'nope', '--counts-path', str(TABLES / 'nope.csv')]
+    cmd = [sys.executable, str(SCRIPTS / 'plot_wordcloud_counts_legacy.py'), '--text-id', 'nope', '--counts-path', str(TABLES / 'nope.csv')]
     proc = subprocess.run(cmd, capture_output=True)
     assert proc.returncode != 0
     stderr = proc.stderr.decode('utf-8', errors='replace')

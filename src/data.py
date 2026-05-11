@@ -1,23 +1,25 @@
 # Data manager: paths and simple IO helpers
 from pathlib import Path
-import os
+from typing import Optional
 
-BASE = Path(__file__).resolve().parents[2]  # desim/bukivedenie/.. -> desim/bukivedenie
+from .project import PROJECT_ROOT, DATA_DIR, OUTPUTS_DIR
 
-RAW = Path('data/raw')
-PROCESSED = Path('data/processed')
-OUTPUTS = Path('outputs')
+# Standardized directories relative to project root
+RAW = PROJECT_ROOT / 'data' / 'raw'
+PROCESSED = PROJECT_ROOT / 'data' / 'processed'
+OUTPUTS = PROJECT_ROOT / 'outputs'
 
-def find_text_path(text_id, input_dir='data/raw'):
-    raw = Path(input_dir)
+
+def find_text_path(text_id: str, input_dir: Optional[Path] = None) -> Optional[Path]:
+    """Find a text file by id. Searches for <id>.txt and <id>.fb2.txt under input_dir or RAW."""
+    raw = Path(input_dir) if input_dir else RAW
     for p in [raw / f"{text_id}.txt", raw / f"{text_id}.fb2.txt"]:
         if p.exists():
             return p
     return None
 
 
-def ensure_dirs():
+def ensure_dirs() -> None:
+    """Create standard data/output directories if missing."""
     for p in [RAW, PROCESSED, OUTPUTS]:
-        p = Path(p)
-        p = Path('desim/bukivedenie') / p
         p.mkdir(parents=True, exist_ok=True)

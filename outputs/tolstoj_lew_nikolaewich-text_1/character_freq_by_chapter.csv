@@ -86,7 +86,6 @@ Ch,ch,6,1
 Ch,ch,20,2
 Cond,cond,3,1
 Connaissez,connaissez,14,1
-Contez,contez,2,1
 Contrat,contrat,3,1
 Cousinage,cousinage,8,1
 Defileen,defileen,56,1
@@ -123,7 +122,6 @@ Feind,feind,56,2
 Feinde,feinde,26,2
 Feindes,feindes,56,1
 Fiez,fiez,17,1
-Figurez,figurez,20,1
 Flaeche,flaeche,56,1
 Flanke,flanke,56,1
 Fluegel,fluegel,56,4
@@ -133,7 +131,7 @@ Gegentheil,gegentheil,56,1
 Genlis,genlis,9,3
 George,george,2,1
 Gomme,gomme,20,1
-Gommunikations-Linie,gommunikations-linie,26,1
+Gommunikations,gommunikations,26,1
 Gott,gott,26,1
 Ha,ha,5,1
 Herr,herr,55,1
@@ -143,7 +141,7 @@ Hесвицкий,hесвицкий,36,1
 Jacquot,jacquot,11,2
 Julie,julie,20,1
 Kaiser Alexander,kaiser alexander,27,1
-Kaiserlich-Russische Arm,kaiserlich-russische arm,26,1
+Kaiserlich,kaiserlich,26,1
 Kobelnitz,kobelnitz,56,2
 Kolonne,kolonne,56,3
 Kouraguine,kouraguine,47,1
@@ -154,6 +152,7 @@ Langeron,langeron,55,1
 Lech,lech,26,2
 Lemarrois,lemarrois,40,1
 Lichtenstein,lichtenstein,55,1
+Linie,linie,26,1
 Lise,lise,0,1
 Lise,lise,1,1
 Lise,lise,5,4
@@ -213,6 +212,7 @@ Pitt,pitt,11,1
 Providence,providence,20,1
 Prsch,prsch,55,1
 Prusse,prusse,20,1
+Puissant,puissant,20,2
 Quant,quant,20,1
 Quarante,quarante,26,1
 Quelques,quelques,63,1
@@ -224,6 +224,7 @@ Russen,russen,61,1
 Russie,russie,3,1
 Russie,russie,20,2
 Russie,russie,37,3
+Russische Arm,russische arm,26,1
 Sacr,sacr,38,1
 Sauveur,sauveur,20,4
 Sch,sch,27,2
@@ -236,8 +237,7 @@ Souvara,souvara,38,1
 Taisez,taisez,55,1
 Teiche,teiche,56,1
 Thabor,thabor,35,2
-Thuerassa-Walde,thuerassa-walde,56,1
-Tout-Puissant,tout-puissant,20,2
+Thuerassa,thuerassa,56,1
 Tr,tr,16,1
 Tr,tr,40,1
 Ufern,ufern,26,1
@@ -253,6 +253,7 @@ Voil,voil,48,1
 Voil,voil,63,1
 Vortheil,vortheil,26,1
 Wald,wald,56,1
+Walde,walde,56,1
 Weise,weise,26,1
 Welt,welt,27,2
 Wimpfen,wimpfen,55,1
@@ -519,10 +520,10 @@ Zum Henker,zum henker,61,1
 Бога,бог,3,1
 Бога,бог,8,1
 Бога,бог,12,1
-Бога,бог,15,2
+Бога,бог,15,3
 Бога,бог,16,1
 Бога,бог,23,1
-Бога,бог,28,2
+Бога,бог,28,3
 Бога,бог,30,1
 Бога,бог,36,1
 Бога,бог,41,2
@@ -792,8 +793,6 @@ Zum Henker,zum henker,61,1
 Горит,горит,43,1
 Гостиерадек,гостиерадек,62,2
 Гостиная Анны Павловны,гостина анн павловн,1,1
-Государи,государ,52,1
-Государи,государ,63,4
 Графинюшка,графинюшк,50,1
 Грачик,грачик,27,2
 Грачик,грачик,31,2
@@ -982,6 +981,7 @@ Zum Henker,zum henker,61,1
 Италии,итали,21,1
 Италии,итали,40,1
 Итальянки,итальянк,29,1
+Йорк,йорк,22,1
 Казнь,казнь,3,1
 Кале,кал,11,1
 Каменскиим,каменскиим,25,2
@@ -1108,7 +1108,6 @@ Zum Henker,zum henker,61,1
 Ларрея,ларре,63,1
 Лафатер,лафатер,63,1
 Легли,легл,49,1
-Лейб,лейб,55,1
 Леля,лел,46,2
 Лепешки,лепешк,40,1
 Лех,лех,63,2
@@ -1148,11 +1147,10 @@ Zum Henker,zum henker,61,1
 Мальчишкам,мальчишкам,26,1
 Мамонтовы,мамонтов,16,1
 Мари,мар,63,7
+Марии,мари,26,1
+Марии,мари,35,2
 Марии Феодоровны,мари феодоровн,0,2
 Марии Феодоровны,мари феодоровн,45,1
-Марией-Терезией,марией-терези,35,1
-Марии-Терезии,марии-терези,26,1
-Марии-Терезии,марии-терези,35,1
 Марк,марк,53,5
 Марсовом,марсов,59,1
 Марьей,марь,20,6
@@ -1345,7 +1343,6 @@ Zum Henker,zum henker,61,1
 Новосильцев,новосильц,59,2
 Новосильцев,новосильц,63,1
 Новосильцову,новосильцов,0,1
-Новый-Йорк,новый-йорк,22,1
 Ностица,ностиц,26,1
 Ностица,ностиц,37,1
 Нравственное,нравственно,43,1
@@ -1739,6 +1736,8 @@ Zum Henker,zum henker,61,1
 "Теляниным
 Ростову",теляниным ростов,27,1
 Теплая,тепла,42,1
+Терезии,терези,26,1
+Терезии,терези,35,2
 Тетенька,тетеньк,50,1
 Тимохин,тимох,25,6
 Тимохин,тимох,43,2
@@ -1757,7 +1756,6 @@ Zum Henker,zum henker,61,1
 Традиридира,традиридир,53,1
 Трауне,траун,29,1
 Треснуло,треснуло,27,1
-Тринадцать,тринадцать,8,1
 Трубач,трубач,42,1
 Тулон,тулон,35,1
 Тулон,тулон,40,1
@@ -1786,7 +1784,6 @@ Zum Henker,zum henker,61,1
 Ульмом,ульм,37,1
 Ульмом,ульм,38,1
 Ульмом,ульм,63,2
-Унтер,унтер,60,1
 Ура,ур,42,1
 Успокойте,успокойт,0,1
 Устройте,устройт,63,1
@@ -1798,7 +1795,6 @@ Zum Henker,zum henker,61,1
 Фердинанда,фердинанд,24,1
 Фердинанда,фердинанд,26,4
 Фердинанда,фердинанд,33,3
-Флигель,флигель,32,1
 Франца,франц,26,1
 Франца,франц,32,1
 Франца,франц,33,3

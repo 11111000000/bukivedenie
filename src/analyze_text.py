@@ -20,9 +20,6 @@ import typer
 logging.basicConfig(level=logging.INFO, format='[%(levelname)s] %(message)s')
 logger = logging.getLogger(__name__)
 
-# Добавляем src в path для импортов
-sys.path.insert(0, str(Path(__file__).parent))
-
 from extractor.config import ExtractorConfig
 from extractor.core import TextPipeline
 from extractor.chapters import build_chapter_summary

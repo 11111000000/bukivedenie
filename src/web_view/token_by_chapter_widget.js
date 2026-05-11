@@ -2,15 +2,21 @@
 // No imports for fallback; use api helper if available
 async function fetchTokenFreqCSV(book) {
   const path = '/api/file?book=' + encodeURIComponent(book) + '&name=' + encodeURIComponent('token_freq_by_chapter.csv');
-  if (window.api) {
-    const r = await window.api(path);
-    if (r && r.content) return r.content;
-    throw new Error(r && r.error ? r.error : 'cannot fetch token_freq_by_chapter.csv');
+  try {
+    if (window.api) {
+      const r = await window.api(path);
+      if (r && r.content) return r.content;
+      return null; // not available
+    }
+    const resp = await fetch(path);
+    if (!resp.ok) return null;
+    const j = await resp.json();
+    return j.content || null;
+  } catch (e) {
+    // network error or other issue — treat as missing and let caller use API fallback
+    console.warn('fetchTokenFreqCSV failed, will fallback to /api/token_by_chapter', e);
+    return null;
   }
-  const resp = await fetch(path);
-  if (!resp.ok) throw new Error('cannot fetch token_freq_by_chapter.csv');
-  const j = await resp.json();
-  return j.content || '';
 }
 
 function parseCSVToRows(text) {
@@ -51,40 +57,13 @@ export async function mountTokenByChapter(containerId, book) {
     try {
       // First try CSV cache/source
       if (!csvCache) {
-        try {
-          const txt = await fetchTokenFreqCSV(book);
-          csvCache = parseCSVToRows(txt);
-        } catch (csvErr) {
-          // CSV not available; fall back to server API
-          if (window.api) {
-            const resp = await window.api('/api/token_by_chapter?book=' + encodeURIComponent(book) + '&token=' + encodeURIComponent(qlow));
-            if (resp && resp.counts) {
-              const rows = resp.counts.map(c=>({chapter_idx: c.chapter_idx, title: c.title, count: Number(c.count)}));
-              // render
-              let html = '<table><thead><tr><th>chapter_idx</th><th>title</th><th>count</th></tr></thead><tbody>';
-              for(const rr of rows) html += `<tr><td>${rr.chapter_idx}</td><td>${rr.title}</td><td>${rr.count}</td></tr>`;
-              html += '</tbody></table>';
-              out.innerHTML = html;
-              return;
-            } else {
-              out.innerHTML = '<i>Токен не найден или сервер не поддерживает /api/token_by_chapter</i>';
-              return;
-            }
-          } else {
-            // direct fetch fallback
-            const resp = await fetch('/api/token_by_chapter?book=' + encodeURIComponent(book) + '&token=' + encodeURIComponent(qlow));
-            if (resp.ok) {
-              const j = await resp.json();
-              if (j && j.counts) {
-                const rows = j.counts.map(c=>({chapter_idx: c.chapter_idx, title: c.title, count: Number(c.count)}));
-                let html = '<table><thead><tr><th>chapter_idx</th><th>title</th><th>count</th></tr></thead><tbody>';
-                for(const rr of rows) html += `<tr><td>${rr.chapter_idx}</td><td>${rr.title}</td><td>${rr.count}</td></tr>`;
-                html += '</tbody></table>';
-                out.innerHTML = html;
-                return;
-              }
-            }
-            throw csvErr;
+        const txt = await fetchTokenFreqCSV(book);
+        if (txt) {
+          try {
+            csvCache = parseCSVToRows(txt);
+          } catch(parseErr){
+            console.warn('Failed to parse token_freq_by_chapter.csv, will fallback to API', parseErr);
+            csvCache = null;
           }
         }
       }
@@ -104,9 +83,38 @@ export async function mountTokenByChapter(containerId, book) {
         return;
       }
 
-      out.innerHTML = '<i>Не удалось получить данные по токенам</i>';
+      // CSV not available or parsing failed — try server API
+      try {
+        let resp;
+        if (window.api) resp = await window.api('/api/token_by_chapter?book=' + encodeURIComponent(book) + '&token=' + encodeURIComponent(qlow));
+        else {
+          const r = await fetch('/api/token_by_chapter?book=' + encodeURIComponent(book) + '&token=' + encodeURIComponent(qlow));
+          resp = await r.json();
+        }
+        if (resp && resp.counts) {
+          const rows = resp.counts.map(c=>({chapter_idx: c.chapter_idx, title: c.title, count: Number(c.count)}));
+          let html = '<table><thead><tr><th>chapter_idx</th><th>title</th><th>count</th></tr></thead><tbody>';
+          for(const rr of rows) html += `<tr><td>${rr.chapter_idx}</td><td>${rr.title}</td><td>${rr.count}</td></tr>`;
+          html += '</tbody></table>';
+          out.innerHTML = html;
+          return;
+        } else {
+          const msg = (resp && resp.error) ? resp.error : 'Данные по токенам недоступны';
+          out.innerHTML = '<i>' + msg + '</i>';
+          if (window.showUIError) window.showUIError('Ошибка получения частоты по главам', msg, { token: qlow, book });
+          return;
+        }
+      } catch(apiErr){
+        console.warn('API token_by_chapter failed', apiErr);
+        out.innerHTML = '<i>Не удалось получить данные по токенам (API недоступен)</i>';
+        if (window.showUIError) window.showUIError('Ошибка получения частоты по главам', String(apiErr), { token: qlow, book });
+        return;
+      }
+
     } catch(e){
-      out.innerHTML = '<i>Error: '+String(e)+'</i>';
+      console.error('Unexpected error in token_by_chapter widget', e);
+      out.innerHTML = '<i>Ошибка: '+String(e)+'</i>';
+      if (window.showUIError) window.showUIError('Внутренняя ошибка виджета', String(e), { token: qlow, book });
     }
   });
 }

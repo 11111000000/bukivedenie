@@ -1,0 +1,5 @@
+=== Cloud generation started: 2026-05-11T17:29:37.854333
+✗ Таблица частот не найдена: outputs/tables/tolstoj_lew_nikolaewich-text_2_word_counts.csv
+  Подсказка: выполните
+    python src/analyze_text.py analyze --input data/raw/tolstoj_lew_nikolaewich-text_2.txt --output-dir outputs --lang ru
+  или запустите scripts/generate_word_counts.py --text-id tolstoj_lew_nikolaewich-text_2 или укажите --counts-path.

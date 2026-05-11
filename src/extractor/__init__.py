@@ -7,7 +7,7 @@ from .config import ExtractorConfig
 from .core import TextPipeline
 from .io import export_results
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 __all__ = [
     "ExtractorConfig",
     "TextPipeline",

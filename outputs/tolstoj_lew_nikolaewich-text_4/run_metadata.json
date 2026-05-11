@@ -1,8 +1,8 @@
 {
   "book_id": "tolstoj_lew_nikolaewich-text_4",
-  "start_time": "2026-05-11T14:45:14.957836",
-  "end_time": "2026-05-11T14:45:14.957861",
-  "duration_seconds": 2.5e-05,
+  "start_time": "2026-05-11T17:52:22.693789",
+  "end_time": "2026-05-11T17:52:22.693809",
+  "duration_seconds": 2e-05,
   "config": {
     "lang": "ru",
     "ner_mode": "heuristic",
