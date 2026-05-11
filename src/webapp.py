@@ -44,11 +44,13 @@ def list_files(book: str):
     """
     book_dir = OUTPUTS_DIR / book
     files = []
+    # collect files from book directory if present
     if book_dir.exists() and book_dir.is_dir():
-        files = sorted([p.name for p in book_dir.iterdir() if p.is_file()])
-        return files
+        for p in book_dir.iterdir():
+            if p.is_file():
+                files.append(p.name)
 
-    # Fallback: search in OUTPUTS_DIR/tables, OUTPUTS_DIR/processed and OUTPUTS_DIR for files named with book prefix
+    # Fallback: search in OUTPUTS_DIR/tables and OUTPUTS_DIR/processed for files named with book prefix
     tables_dir = OUTPUTS_DIR / 'tables'
     if tables_dir.exists() and tables_dir.is_dir():
         for p in tables_dir.iterdir():
@@ -65,7 +67,9 @@ def list_files(book: str):
     for p in OUTPUTS_DIR.iterdir():
         if p.is_file() and p.name.lower().startswith(book.lower() + '_'):
             files.append(p.name)
-    return sorted(files)
+    # dedupe and sort
+    uniq = sorted(dict.fromkeys(files))
+    return uniq
 
 
 def list_raw_files():
