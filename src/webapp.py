@@ -48,12 +48,19 @@ def list_files(book: str):
         files = sorted([p.name for p in book_dir.iterdir() if p.is_file()])
         return files
 
-    # Fallback: search in OUTPUTS_DIR/tables and OUTPUTS_DIR for files named with book prefix
+    # Fallback: search in OUTPUTS_DIR/tables, OUTPUTS_DIR/processed and OUTPUTS_DIR for files named with book prefix
     tables_dir = OUTPUTS_DIR / 'tables'
     if tables_dir.exists() and tables_dir.is_dir():
         for p in tables_dir.iterdir():
             if p.is_file() and p.name.lower().startswith(book.lower() + '_'):
                 files.append(str(Path('tables') / p.name))
+
+    processed_dir = OUTPUTS_DIR / 'processed'
+    if processed_dir.exists() and processed_dir.is_dir():
+        for p in processed_dir.iterdir():
+            if p.is_file() and p.name.lower().startswith(book.lower() + '_'):
+                files.append(str(Path('processed') / p.name))
+
     # also search top-level outputs for files starting with book_
     for p in OUTPUTS_DIR.iterdir():
         if p.is_file() and p.name.lower().startswith(book.lower() + '_'):

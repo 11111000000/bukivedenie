@@ -77,6 +77,35 @@ function renderFilesList(book, files) {
   return;
 }
 
+// Helper to resolve logical filename to actual (book/name)
+function resolveActualFromList(book, logical, files){
+  if (!logical) return null;
+  const lower = logical.toLowerCase();
+  // exact match
+  for (const f of files){ if (f.toLowerCase() === lower) return {book: book, name: f}; }
+  // file equals logical without book prefix
+  for (const f of files){ const lf = f.toLowerCase(); if (lf.endsWith('/' + lower) || lf === lower) {
+    if (f.includes('/')){ const parts = f.split('/'); return {book: parts[0], name: parts.slice(1).join('/')}; }
+    return {book: book, name: f}; }
+  }
+  // files in tables with prefix book_logical -> tables/test_book_tokens.csv
+  for (const f of files){ const lf = f.toLowerCase(); if (lf.endsWith('_' + lower)){
+    if (f.includes('/')){ const parts = f.split('/'); return {book: parts[0], name: parts.slice(1).join('/')}; }
+    // if file is at top-level like test_book_tokens.csv return it as name and book stays as 'tables' or attempt to infer
+    if (f.toLowerCase().startsWith(book.toLowerCase() + '_')){
+      // likely in top-level outputs as p.name; return as name and book as '' (will call /api/file?book=&name=... which server handles)
+      return {book: 'tables', name: f};
+    }
+    return {book: book, name: f};
+  }}
+  // contains
+  for (const f of files){ if (f.toLowerCase().includes(lower)){
+    if (f.includes('/')){ const parts = f.split('/'); return {book: parts[0], name: parts.slice(1).join('/')}; }
+    return {book: book, name: f};
+  }}
+  return null;
+}
+
 // Update existing sidebar buttons with presence/actual filename info
 function updateSidebarState(book, files) {
   const menu = document.getElementById('fileMenuList');
@@ -85,17 +114,15 @@ function updateSidebarState(book, files) {
   availableBtns.forEach(btn => {
     const logical = btn.dataset.logical;
     if (!logical) return;
-    const lowerName = logical.toLowerCase();
-    const actual = files.find(f => {
-      const lf = f.toLowerCase();
-      return lf === lowerName || lf.endsWith('_' + lowerName) || lf.endsWith('/' + lowerName) || lf.endsWith(lowerName) || lf.includes(lowerName);
-    }) || '';
-    if (actual) {
-      btn.dataset.actual = actual;
+    const resolved = resolveActualFromList(book, logical, files);
+    if (resolved) {
+      btn.dataset.actual = resolved.name;
+      btn.dataset.book = resolved.book;
       btn.classList.remove('missing');
-      btn.textContent = logical + ' — ' + actual;
+      btn.textContent = logical + ' — ' + resolved.name;
     } else {
       btn.dataset.actual = '';
+      btn.dataset.book = '';
       btn.classList.add('missing');
       btn.textContent = logical + ' (not)';
     }
@@ -207,13 +234,12 @@ function initSidebarStatic(){
       // fetch files for book and try to resolve actual filename
       const resp = await api('/api/files?book=' + encodeURIComponent(book));
       const files = (resp && resp.files) || [];
-      const lowerName = name.toLowerCase();
-      const actual = files.find(f => {
-        const lf = f.toLowerCase();
-        return lf === lowerName || lf.endsWith('_' + lowerName) || lf.endsWith('/' + lowerName) || lf.endsWith(lowerName) || lf.includes(lowerName);
-      }) || null;
-      const present = !!actual;
-      openTab(actual ? book : book, actual || name, present, e.currentTarget);
+      const resolved = resolveActualFromList(book, name, files);
+      if (resolved) {
+        openTab(resolved.book || book, resolved.name, true, e.currentTarget);
+      } else {
+        openTab(book, name, false, e.currentTarget);
+      }
     };
     menu.appendChild(btn);
   });
