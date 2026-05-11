@@ -53,26 +53,12 @@ if [ -d "$FRONTEND_DIR" ]; then
     (
       cd "$FRONTEND_DIR" || exit 1
 
-      # Only install when dependencies are missing or caller explicitly requests reinstall.
-      NEED_INSTALL=0
-      if [ "${DEV_REINSTALL:-0}" = "1" ]; then
-        NEED_INSTALL=1
-      elif [ ! -d node_modules ] || [ ! -x node_modules/.bin/rollup ]; then
-        NEED_INSTALL=1
-      fi
-
-      if [ "$NEED_INSTALL" -eq 1 ]; then
-        echo "Installing frontend deps..."
-        if [ -f package-lock.json ]; then
-          echo "Running: npm ci --no-bin-links --legacy-peer-deps --no-audit --unsafe-perm --prefer-offline --no-fund"
-          npm ci --no-bin-links --legacy-peer-deps --no-audit --unsafe-perm --prefer-offline --no-fund || \
-          npm install --no-bin-links --legacy-peer-deps --no-audit --unsafe-perm --prefer-offline --no-fund || exit 1
-        else
-          echo "Running: npm install --no-bin-links --legacy-peer-deps --no-audit --unsafe-perm --prefer-offline --no-fund"
-          npm install --no-bin-links --legacy-peer-deps --no-audit --unsafe-perm --prefer-offline --no-fund || exit 1
-        fi
+      # Dependencies are expected to be installed via make dev-setup.
+      # Keep dev-all fast: do not auto-install here.
+      if [ ! -d node_modules ] || [ ! -x node_modules/.bin/rollup ]; then
+        echo "node_modules missing or rollup not found. Run: make dev-setup" >&2
       else
-        echo "Dependencies already present; skipping npm install"
+        echo "Dependencies present; skipping npm install"
       fi
 
       # start rollup watcher if available, otherwise try browser-sync

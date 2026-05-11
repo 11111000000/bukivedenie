@@ -1,5 +1,5 @@
 all:
-	@echo 'Makefile targets: frontend-install, dev, build, deploy, dev-all'
+	@echo 'Makefile targets: frontend-install, dev-setup, dev-all, frontend-dev, frontend-build, dev-rollup, clean'
 
 # Install frontend deps (tries --no-bin-links fallback for Termux).
 # We disable npm progress spinner and force CI mode to avoid interactive spinners on Termux/CI.
@@ -18,6 +18,10 @@ frontend-build:
 	cp -r frontend/dist/* src/web_view/
 
 frontend-deploy: frontend-build
+
+# One-time dev setup (install deps only)
+dev-setup:
+	@sh scripts/frontend_install.sh
 
 # Start backend + frontend in parallel (dev), use scripts/dev.sh
 dev-all:

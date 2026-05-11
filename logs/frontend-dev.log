@@ -1,1 +1,3 @@
-Running: npm install --no-bin-links
+Installing frontend deps...
+Running: npm ci --no-bin-links --legacy-peer-deps --no-audit --unsafe-perm --prefer-offline --no-fund
+npm warn Unknown cli config "--unsafe-perm". This will stop working in the next major version of npm.
