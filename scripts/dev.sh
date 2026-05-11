@@ -49,17 +49,32 @@ done
 # Start frontend watcher (rollup/browser-sync) if possible; fallback to local python dev server
 if [ -d "$FRONTEND_DIR" ]; then
   if command -v node >/dev/null 2>&1 && command -v npm >/dev/null 2>&1; then
-    echo "Node detected. Attempting to ensure dependencies and start frontend watcher (rollup) in $FRONTEND_DIR"
+    echo "Node detected. Starting frontend watcher (skip dependency install if node_modules already exists) in $FRONTEND_DIR"
     (
       cd "$FRONTEND_DIR" || exit 1
-      # prefer npm install (updates lockfile if needed) with no-bin-links fallback for Termux
-      if [ -f package-lock.json ]; then
-        echo "Running: npm install --no-bin-links"
-        npm install --no-bin-links || npm install || true
-      else
-        echo "Running: npm install --no-bin-links"
-        npm install --no-bin-links || npm install || true
+
+      # Only install when dependencies are missing or caller explicitly requests reinstall.
+      NEED_INSTALL=0
+      if [ "${DEV_REINSTALL:-0}" = "1" ]; then
+        NEED_INSTALL=1
+      elif [ ! -d node_modules ] || [ ! -x node_modules/.bin/rollup ]; then
+        NEED_INSTALL=1
       fi
+
+      if [ "$NEED_INSTALL" -eq 1 ]; then
+        echo "Installing frontend deps..."
+        if [ -f package-lock.json ]; then
+          echo "Running: npm ci --no-bin-links --legacy-peer-deps --no-audit --unsafe-perm --prefer-offline --no-fund"
+          npm ci --no-bin-links --legacy-peer-deps --no-audit --unsafe-perm --prefer-offline --no-fund || \
+          npm install --no-bin-links --legacy-peer-deps --no-audit --unsafe-perm --prefer-offline --no-fund || exit 1
+        else
+          echo "Running: npm install --no-bin-links --legacy-peer-deps --no-audit --unsafe-perm --prefer-offline --no-fund"
+          npm install --no-bin-links --legacy-peer-deps --no-audit --unsafe-perm --prefer-offline --no-fund || exit 1
+        fi
+      else
+        echo "Dependencies already present; skipping npm install"
+      fi
+
       # start rollup watcher if available, otherwise try browser-sync
       npm run dev:rollup || npm run dev:bs || exit 1
     ) > "$FRONTEND_LOG" 2>&1 &

@@ -128,6 +128,18 @@ def safe_join(base: Path, name: str) -> Path:
 
 
 class Handler(BaseHTTPRequestHandler):
+    def end_headers(self):
+        # Allow frontend dev server / browser access from 5173 and other local origins.
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type, Accept, Origin, X-Requested-With')
+        self.send_header('Access-Control-Max-Age', '86400')
+        super().end_headers()
+
+    def do_OPTIONS(self):
+        self.send_response(HTTPStatus.NO_CONTENT)
+        self.end_headers()
+
     def _json(self, obj, status=200):
         data = json.dumps(obj, ensure_ascii=False).encode('utf-8')
         self.send_response(status)
