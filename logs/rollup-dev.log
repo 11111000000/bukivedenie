@@ -1,0 +1,9 @@
+[4mrollup v2.79.1[24m
+[36mbundles [1msrc/main.js[22m → [1mdist[22m...[39m
+[1m[32mhttp://0.0.0.0:5173[39m[22m -> /storage/emulated/0/Projects/bukivedenie/frontend/dist
+[1m[32mhttp://0.0.0.0:5173[39m[22m -> /storage/emulated/0/Projects/bukivedenie/frontend/public
+[1m[32mLiveReload enabled[39m[22m
+[1m[33m(!) Circular dependencies[39m[22m
+node_modules/d3-interpolate/src/value.js -> node_modules/d3-interpolate/src/array.js -> node_modules/d3-interpolate/src/value.js
+node_modules/d3-interpolate/src/value.js -> node_modules/d3-interpolate/src/object.js -> node_modules/d3-interpolate/src/value.js
+[32mcreated [1mdist[22m in [1m19s[22m[39m

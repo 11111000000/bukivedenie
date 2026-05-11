@@ -146,7 +146,31 @@ class Handler(BaseHTTPRequestHandler):
                 # serve the SPA
                 idx = WEB_ROOT / 'index.html'
                 if not idx.exists():
-                    return self._text('Index not found', status=404)
+                    # Try alternative known locations or inline fallback to avoid hard 404
+                    alt1 = PROJECT_ROOT / 'frontend' / 'dist' / 'index.html'
+                    alt2 = PROJECT_ROOT / 'src' / 'web_view' / 'index.html'
+                    cand = None
+                    for p in (alt1, alt2):
+                        try:
+                            if p.exists():
+                                cand = p; break
+                        except Exception:
+                            pass
+                    if cand is not None:
+                        with open(cand, 'r', encoding='utf-8') as f:
+                            return self._text(f.read(), content_type='text/html; charset=utf-8')
+                    # Minimal inline fallback to guide the user
+                    fallback = (
+                        '<!doctype html><html><head><meta charset="utf-8">'
+                        '<meta name="viewport" content="width=device-width,initial-scale=1">'
+                        '<title>Frontend not found</title></head>'
+                        '<body style="font-family:system-ui, sans-serif; padding:16px;">'
+                        '<h1>Frontend index not found</h1>'
+                        '<p>Expected file at src/web_view/index.html.</p>'
+                        '<p>Please rebuild frontend or ensure the file exists.</p>'
+                        '</body></html>'
+                    )
+                    return self._text(fallback, status=200, content_type='text/html; charset=utf-8')
                 with open(idx, 'r', encoding='utf-8') as f:
                     content = f.read()
                 return self._text(content, content_type='text/html; charset=utf-8')
