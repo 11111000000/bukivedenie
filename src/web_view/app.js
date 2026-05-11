@@ -31,9 +31,10 @@ function makeId(book, name) {
   return ('file_' + book + '_' + name).replace(/[^a-zA-Z0-9_\-]/g, '_');
 }
 
-async function renderFileInto(book, name, containerId) {
+async function renderFileInto(book, name, containerOrId) {
   try {
-    const container = document.getElementById(containerId);
+    const container = (typeof containerOrId === 'string') ? document.getElementById(containerOrId) : containerOrId;
+    if (!container) return;
     const ext = name.split('.').pop().toLowerCase();
     if (ext === 'csv') {
       // Use /api/file (JSON with content) as primary source; parse CSV client-side to avoid file_json server issues
@@ -55,7 +56,7 @@ async function renderFileInto(book, name, containerId) {
       catch (e) { container.innerText = resp.content; }
     } else { container.innerHTML = '<pre>' + resp.content + '</pre>'; }
   } catch (e) {
-    const container = document.getElementById(containerId);
+    const container = (typeof containerOrId === 'string') ? document.getElementById(containerOrId) : containerOrId;
     if (container) container.innerText = 'Error loading file';
   }
 }
@@ -83,7 +84,7 @@ function renderFilesList(book, files) {
     const lowerName = name.toLowerCase();
     const actual = files.find(f => {
       const lf = f.toLowerCase();
-      return lf === lowerName || lf.endsWith('_' + lowerName) || lf.endsWith('/' + lowerName) || lf.endsWith(lowerName);
+      return lf === lowerName || lf.endsWith('_' + lowerName) || lf.endsWith('/' + lowerName) || lf.endsWith(lowerName) || lf.includes(lowerName);
     }) || null;
     const present = !!actual;
 

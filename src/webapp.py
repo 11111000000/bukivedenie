@@ -35,10 +35,30 @@ def list_books():
 
 
 def list_files(book: str):
+    """
+    List files for a book. Primary source is outputs/<book> directory.
+    If that directory does not exist, also search common output folders (outputs/tables)
+    for files that include the book id as prefix (e.g. test_book_tokens.csv) and return
+    them as relative paths (e.g. 'tables/test_book_tokens.csv') so frontend can request
+    /api/file?book=tables&name=test_book_tokens.csv.
+    """
     book_dir = OUTPUTS_DIR / book
-    if not book_dir.exists() or not book_dir.is_dir():
-        return []
-    return sorted([p.name for p in book_dir.iterdir() if p.is_file()])
+    files = []
+    if book_dir.exists() and book_dir.is_dir():
+        files = sorted([p.name for p in book_dir.iterdir() if p.is_file()])
+        return files
+
+    # Fallback: search in OUTPUTS_DIR/tables and OUTPUTS_DIR for files named with book prefix
+    tables_dir = OUTPUTS_DIR / 'tables'
+    if tables_dir.exists() and tables_dir.is_dir():
+        for p in tables_dir.iterdir():
+            if p.is_file() and p.name.lower().startswith(book.lower() + '_'):
+                files.append(str(Path('tables') / p.name))
+    # also search top-level outputs for files starting with book_
+    for p in OUTPUTS_DIR.iterdir():
+        if p.is_file() and p.name.lower().startswith(book.lower() + '_'):
+            files.append(p.name)
+    return sorted(files)
 
 
 def list_raw_files():

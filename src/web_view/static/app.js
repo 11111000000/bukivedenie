@@ -1,4 +1,4 @@
-import { renderCSV, renderRows } from '/static/file_renderer.js';
+// Non-module fallback app that uses the static renderer (window.renderFileInto)
 
 // API helper
 async function api(path, opts) {
@@ -30,64 +30,79 @@ function makeId(book, name) {
   return ('file_' + book + '_' + name).replace(/[^a-zA-Z0-9_\-]/g, '_');
 }
 
-async function renderFileInto(book, name, containerId) {
-  try {
-    const container = document.getElementById(containerId);
-    const ext = name.split('.').pop().toLowerCase();
-    if (ext === 'csv') {
-      const rawResp = await api('/api/file?book=' + encodeURIComponent(book) + '&name=' + encodeURIComponent(name));
-      if (rawResp && rawResp.content) {
-        renderCSV(container, rawResp.content);
-        return;
-      }
-      const resp = await api('/api/file_json?book=' + encodeURIComponent(book) + '&name=' + encodeURIComponent(name));
-      if (resp && resp.rows) { renderRows(container, resp.rows); return; }
-      container.innerText = 'Error: ' + ((resp && resp.error) ? resp.error : 'cannot load file');
-      return;
-    }
-    const resp = await api('/api/file?book=' + encodeURIComponent(book) + '&name=' + encodeURIComponent(name));
-    if (resp.error) { container.innerText = 'Error: ' + resp.error; return; }
-    if (ext === 'json') {
-      try { const obj = JSON.parse(resp.content); container.innerHTML = '<pre>' + JSON.stringify(obj, null, 2) + '</pre>'; }
-      catch (e) { container.innerText = resp.content; }
-    } else { container.innerHTML = '<pre>' + resp.content + '</pre>'; }
-  } catch (e) {
-    const container = document.getElementById(containerId);
-    if (container) container.innerText = 'Error loading file';
-  }
-}
-
 const FILE_KEYS = [
   'tokens.csv','hapax.csv','punctuation_counts.csv','characters.csv','character_freq_by_chapter.csv','cooccurrence_edges.csv','sentiment_by_chapter.csv','complexity_metrics.json','chapters_summary.json','run_metadata.json'
 ];
 const FILE_DESCRIPTIONS = {
   'tokens.csv':'Частоты токенов (token, count, rank, per_1k)',
   'surface_tokens.csv':'Surface tokens (case-preserving) - вспомогательная таблица для NER',
-  'sentences.jsonl':'Sentences JSONL (tokenized sentences) - вспомогательная для NER',
+  'sentences.jsonl':'Sentences JSONL (tokenized sentences) - вспомагательная для NER',
   'characters.csv':'Список обнаруженных персонажей (name, occurrences, context)'
 };
 
 function renderFilesList(book, files) {
-  const container = document.getElementById('filesContainer');
-  container.innerHTML = '';
-  FILE_KEYS.forEach(name => {
-    const present = files.includes(name);
-    const id = makeId(book, name);
-    const desc = FILE_DESCRIPTIONS[name] || 'Файл результата';
-    const box = document.createElement('div');
-    box.style.border = '1px solid #ddd'; box.style.padding = '8px'; box.style.marginBottom = '8px';
-    const h = document.createElement('h4'); h.innerText = name + (present ? '' : ' (not generated)'); box.appendChild(h);
-    const d = document.createElement('div'); d.style.color = '#666'; d.style.marginBottom = '6px'; d.innerText = desc; box.appendChild(d);
-    const content = document.createElement('div'); content.id = id; box.appendChild(content);
-    if (present) {
-      const dl = document.createElement('button'); dl.innerText = 'Скачать'; dl.style.marginRight = '8px';
-      dl.onclick = () => { window.location = '/api/file_download?book=' + encodeURIComponent(book) + '&name=' + encodeURIComponent(name); };
-      box.insertBefore(dl, content);
-    }
-    container.appendChild(box);
-    if (present) renderFileInto(book, name, id);
-    else document.getElementById(id).innerHTML = '<i>File not generated</i>';
+  const menu = document.getElementById('fileMenuList');
+  const headers = document.getElementById('tabHeaders');
+  const content = document.getElementById('tabContent');
+  menu.innerHTML = ''; headers.innerHTML = ''; content.innerHTML = '';
+
+  const available = FILE_KEYS.concat(Object.keys(FILE_DESCRIPTIONS)).filter((v,i,a)=>a.indexOf(v)===i);
+
+  available.forEach(name => {
+    const lowerName = name.toLowerCase();
+    const actual = files.find(f => {
+      const lf = f.toLowerCase();
+      return lf === lowerName || lf.endsWith('_' + lowerName) || lf.endsWith('/' + lowerName) || lf.endsWith(lowerName);
+    }) || null;
+    const present = !!actual;
+
+    const btn = document.createElement('div');
+    btn.className = 'file-menu-button' + (present ? '' : ' missing');
+    btn.textContent = name + (present ? (' — ' + actual) : ' (not)');
+    btn.onclick = () => openTab(book, actual || name, present);
+    menu.appendChild(btn);
   });
+
+  // open first generated file if any, otherwise open logical first to show placeholder
+  const firstActual = files.find(f => available.some(a => f.toLowerCase().endsWith(a.toLowerCase())) ) || null;
+  if (firstActual) openTab(book, firstActual, true);
+  else if (available.length) openTab(book, available[0], false);
+}
+
+function openTab(book, name, present) {
+  const headers = document.getElementById('tabHeaders');
+  const content = document.getElementById('tabContent');
+  const id = makeId(book, name);
+  if (document.getElementById('tab_' + id)) {
+    Array.from(headers.children).forEach(h=>h.classList.remove('active'));
+    document.getElementById('tab_' + id).classList.add('active');
+    Array.from(content.children).forEach(c=>c.style.display='none');
+    document.getElementById('panel_' + id).style.display = 'block';
+    return;
+  }
+  const hbtn = document.createElement('button'); hbtn.id = 'tab_' + id; hbtn.textContent = name; hbtn.style.marginRight='8px'; hbtn.onclick = ()=>{
+    Array.from(headers.children).forEach(h=>h.classList.remove('active'));
+    hbtn.classList.add('active');
+    Array.from(content.children).forEach(c=>c.style.display='none');
+    document.getElementById('panel_' + id).style.display = 'block';
+  };
+  headers.appendChild(hbtn);
+
+  const panel = document.createElement('div'); panel.id = 'panel_' + id; panel.style.display='block'; panel.style.padding='8px';
+  panel.textContent = 'Loading...';
+  content.appendChild(panel);
+
+  if (present && window.renderFileInto) {
+    // use the static renderer which exposes renderFileInto globally
+    try {
+      const bookId = book || name.split('_').slice(0, -1).join('_') || '';
+      window.renderFileInto(bookId, name, panel);
+    } catch (e) {
+      panel.textContent = 'Error rendering file: ' + e;
+    }
+  } else {
+    panel.textContent = 'File not generated for this book';
+  }
 }
 
 async function loadBookFiles(book) {
