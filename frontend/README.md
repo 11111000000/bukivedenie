@@ -1,16 +1,18 @@
-**Frontend**
+# Frontend
 
-- Source of truth: `frontend/`
-- Dev server: `npm run dev`
-- Build: `npm run build`
-- Deploy alias: `npm run deploy`
+- Источник правды: `frontend/`
+- Dev-сервер: `npm run dev`
+- Сборка: `npm run build`
 - Smoke: `npm run smoke`
+- Nix backend: `nix run --impure .#backend`
+- Nix dev: `nix run --impure .#dev`
+- Nix smoke: `nix run --impure .#smoke`
 
-The backend serves `frontend/index.html` and `frontend/dist/*`.
+Бэкенд раздаёт `frontend/index.html` и `frontend/dist/*`.
 
-The smoke run follows the dashboard-first route and writes artifacts to `artifacts/ui-smoke/`.
+Smoke стартует с `#/book/<book>` и пишет артефакты в `artifacts/ui-smoke/`.
 
-If you need a manual check:
+Для ручной проверки:
 
 ```bash
 cd frontend

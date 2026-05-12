@@ -1,34 +1,55 @@
-**Start Here**
+# bukivedenie
 
-1. Enter the Nix dev shell: `nix develop`
-2. Install frontend deps: `make frontend-install`
-3. Start development: `make dev`
-4. Open the app at `http://127.0.0.1:5173`
-5. Build for checks or release: `make frontend-build`
+Python-бэкенд + ванильный ES-module фронтенд для работы с книгами, визуализациями и smoke-проверками.
 
-**Nix shell**
+## Что важно знать
 
-- Uses the system `nixpkgs` input via `<nixpkgs>`.
-- Targeted baseline: `25.11`.
-- Available tools: `python3`, `pytest`, `nodejs`, `chromium`, `git`, `curl`, `make`.
-- `nix develop` is the fastest way to get the full build/test environment.
-- If `direnv` is installed, run `direnv allow` once in the repo and the shell will load automatically.
-- `CHROME_PATH` is set inside the shell for smoke runs.
+- Канонический UI живёт в `frontend/`.
+- Бэкенд живёт в `src/webapp.py`.
+- Браузерный smoke пишет артефакты в `artifacts/ui-smoke/`.
+- Основной экран фронтенда: `#/books`.
 
-**Where to edit**
+## Что есть в репозитории
 
-- UI code: `frontend/src/`
-- Entry and routing: `frontend/src/main.js`, `frontend/src/router.js`
-- API layer: `frontend/src/api.js`
-- Backend API: `src/webapp.py`
+- `flake.nix` — dev-shell и `nix run`-приложения.
+- `frontend/package.json` — команды фронтенда (`dev`, `build`, `test`, `smoke`).
+- `scripts/backend.sh` — запуск только бэкенда на `127.0.0.1:8000`.
+- `scripts/dev.sh` и `scripts/dev_rollup.sh` — полный цикл backend + frontend.
+- `scripts/ui_smoke.sh` и `scripts/ui_smoke.mjs` — smoke с артефактами и автозапуском бэкенда при необходимости.
 
-**Helpful commands**
+## Быстрый цикл разработки
 
-- `nix develop` - enter the dev shell
-- `pytest` - run backend tests inside the shell
-- `node --version` - verify Node availability
-- `make ui-smoke` - run the browser smoke check from the dashboard-first `#/book/<book>` route and write artifacts to `artifacts/ui-smoke/`
-- `python -m src.webapp --host 127.0.0.1 --port 8000` - start only the backend
+1. Войти в shell: `nix develop --impure`
+2. Установить зависимости фронтенда: `make frontend-install`
+3. Запустить разработку: `make dev`
+4. Открыть приложение: `http://127.0.0.1:5173`
+5. Проверить smoke: `make ui-smoke`
 
-The canonical UI lives in `frontend/`.
-The backend serves `frontend/index.html` and `frontend/dist/*`.
+## Запуск по слоям
+
+- Только shell: `nix develop --impure`
+- Только бэкенд: `nix run --impure .#backend` или `python -m src.webapp --host 127.0.0.1 --port 8000`
+- Только фронтенд-сборка: `make frontend-build`
+- Только тесты Python: `pytest`
+- Только тесты фронтенда: `cd frontend && npm test`
+- Только smoke: `nix run --impure .#smoke` или `make ui-smoke`
+
+## Где смотреть результат
+
+- Логи: `logs/`
+- Smoke-артефакты: `artifacts/ui-smoke/`
+- HTML снимки: `artifacts/ui-smoke/html/`
+- Скриншоты: `artifacts/ui-smoke/screens/`
+- Итог smoke: `artifacts/ui-smoke/report.json`
+
+## Что установит `nix develop`
+
+- `python3`
+- `pytest`
+- `nodejs_22`
+- `chromium`
+- `git`
+- `curl`
+- `make`
+
+`direnv allow` можно выполнить один раз, чтобы shell поднимался автоматически.
