@@ -6,3 +6,20 @@ src/web_view/main.js
 src/web_view/main.js.map
 src/web_view/static/js/main.js.map
 src/web_view/
+
+# Ignore environment and local config
+.env
+.envrc
+
+# Artifacts and generated UI smoke outputs
+artifacts/
+
+# Node modules (frontend) - frontend has its own .gitignore, keep root safe
+frontend/node_modules/
+
+# Python cache and compiled files
+__pycache__/
+*.pyc
+
+# Editor/temp
+.DS_Store
