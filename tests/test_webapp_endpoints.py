@@ -50,6 +50,7 @@ def test_endpoints_basic():
     # books should return JSON
     data = get_json('/api/books')
     assert 'books' in data
+    assert 'items' in data
 
     # raw_files returns list
     data = get_json('/api/raw_files')
@@ -134,3 +135,22 @@ def test_book_summary_payload_aggregates_existing_outputs(tmp_path, monkeypatch)
         {'punct': '.', 'count': 12, 'rank': 1, 'per_1k': 80.0},
         {'punct': ' ', 'count': 3, 'rank': 2, 'per_1k': 20.0},
     ]
+
+
+def test_file_download_sanitizes_content_disposition_name(tmp_path, monkeypatch):
+    webapp = importlib.import_module('src.webapp')
+    outputs_dir = tmp_path / 'outputs'
+    book_dir = outputs_dir / 'alpha'
+    book_dir.mkdir(parents=True)
+    (book_dir / 'bad"name.txt').write_text('hello', encoding='utf-8')
+
+    monkeypatch.setattr(webapp, 'OUTPUTS_DIR', outputs_dir)
+
+    port = PORT + 2
+    th = Thread(target=run_server, kwargs={'port': port}, daemon=True)
+    th.start()
+    assert wait_port(HOST, port), 'server did not start'
+
+    with urlopen(f'http://{HOST}:{port}/api/file_download?book=alpha&name=bad%22name.txt') as r:
+        assert r.status == 200
+        assert r.headers['Content-Disposition'] == 'attachment; filename="bad_name.txt"'

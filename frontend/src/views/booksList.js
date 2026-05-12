@@ -4,6 +4,7 @@ const WIDGETS = [
   { key: 'atlas', title: 'Book Atlas', description: 'Selected-book map, file counts, and fast routes.' },
   { key: 'viewer', title: 'Text Viewer', description: 'Preview the current source text and linked fragments.' },
   { key: 'tokens', title: 'Top Tokens', description: 'High-signal words in a compact bar chart.' },
+  { key: 'rhythm', title: 'Punctuation Timeline', description: 'Lightweight preview from book_summary punctuation data.' },
   { key: 'wordcloud', title: 'Word Cloud', description: 'Loose lexical scan for the book vocabulary.' },
   { key: 'network', title: 'Character Network', description: 'Relationship graph with its own scroll.' },
   { key: 'sentiment', title: 'Sentiment', description: 'Chapter-by-chapter sentiment drift.' },
@@ -62,6 +63,31 @@ export function buildTokenSummary(rows, limit=5){
   }))
 }
 
+export function buildPunctuationPreview(timeline, limit=6){
+  return (timeline || []).slice(0, limit).map((item, idx) => {
+    const label = String(item?.symbol ?? item?.punctuation ?? item?.mark ?? item?.char ?? item?.label ?? item?.name ?? item?.[0] ?? `#${idx + 1}`)
+    const count = Number(item?.count ?? item?.total ?? item?.value ?? item?.[1] ?? 0) || 0
+    return { label, count }
+  })
+}
+
+export function buildAtlasSummary(book, files, tokenSummary){
+  const selectedFiles = files || []
+  const textFiles = selectedFiles.filter(isTextLikeFile)
+  const primaryTextFile = pickPrimaryTextFile(selectedFiles)
+  const tokensFile = pickTokensFile(selectedFiles)
+  const topToken = tokenSummary?.[0] || null
+
+  return {
+    fileCountText: selectedFiles.length === 1 ? '1 file available' : `${selectedFiles.length} files available`,
+    textCountText: textFiles.length === 1 ? '1 text fragment' : `${textFiles.length} text fragments`,
+    primaryTextFile,
+    tokensFile,
+    topToken,
+    viewerHref: primaryTextFile ? `#/book/${encodeURIComponent(book)}/file/${encodeURIComponent(primaryTextFile)}` : '',
+  }
+}
+
 export async function viewBooks(book=''){
   const mount = document.getElementById('view')
   if(!mount){
@@ -87,10 +113,13 @@ export async function viewBooks(book=''){
       .then(resp => resp?.type === 'csv' ? buildTokenSummary(resp.rows || []) : [])
       .catch(() => [])
     : []
+  const bookSummary = await api.bookSummary(selected).catch(() => null)
   const textPreview = primaryTextFile
     ? await api.fileParsed(selected, primaryTextFile)
       .then(resp => previewText(resp?.content ?? resp?.data ?? '')).catch(() => '')
     : ''
+  const atlasSummary = buildAtlasSummary(selected, selectedFiles, tokenSummary)
+  const punctuationPreview = buildPunctuationPreview(bookSummary?.punctuation_timeline || [])
   const widgets = WIDGETS.map(widget => `
     <section class="dashboard-widget dashboard-widget--${widget.key}">
       <header class="dashboard-widget__header">
@@ -105,18 +134,22 @@ export async function viewBooks(book=''){
           <div class="dashboard-atlas">
             <div class="dashboard-atlas__selected">Selected book</div>
             <a class="dashboard-atlas__book" href="${bookHref(selected)}">${escapeHtml(selected)}</a>
-            <p>${selectedFiles.length ? `${fileCountText}.` : 'No files available yet.'} ${textFiles.length ? `${textCountText}.` : 'No text fragments detected yet.'}</p>
-            <div class="dashboard-atlas__stats">
-              <span>${fileCountText}</span>
-              <span>${textCountText}</span>
-              <span>${primaryTextFile ? 'Preview ready' : 'No preview source'}</span>
+            <p>${selectedFiles.length ? `${atlasSummary.fileCountText}.` : 'No files available yet.'} ${textFiles.length ? `${atlasSummary.textCountText}.` : 'No text fragments detected yet.'}</p>
+            <div class="dashboard-atlas__preview">
+              <div class="dashboard-text-viewer__meta">Primary text</div>
+              ${atlasSummary.primaryTextFile ? `
+                <a href="${atlasSummary.viewerHref}">${escapeHtml(atlasSummary.primaryTextFile)}</a>
+                <a class="dashboard-widget__link" href="${atlasSummary.viewerHref}">Open in viewer</a>
+              ` : '<p>No primary text source detected yet.</p>'}
             </div>
-            ${primaryTextFile ? `
-              <div class="dashboard-atlas__preview">
-                <div class="dashboard-text-viewer__meta">Primary text</div>
-                <a href="#/book/${encodeURIComponent(selected)}/file/${encodeURIComponent(primaryTextFile)}">${escapeHtml(primaryTextFile)}</a>
-                ${textPreview ? `<pre>${escapeHtml(textPreview)}</pre>` : ''}
-              </div>
+            <div class="dashboard-atlas__stats">
+              <span>${atlasSummary.fileCountText}</span>
+              <span>${atlasSummary.textCountText}</span>
+              <span>${atlasSummary.tokensFile ? `Token file: ${escapeHtml(atlasSummary.tokensFile)}` : 'No token file'}</span>
+              <span>${atlasSummary.topToken ? `Top token: ${escapeHtml(atlasSummary.topToken.token)} (${atlasSummary.topToken.count})` : 'No token summary'}</span>
+            </div>
+            ${atlasSummary.primaryTextFile ? `
+              ${textPreview ? `<pre>${escapeHtml(textPreview)}</pre>` : ''}
             ` : ''}
             <div class="dashboard-atlas__fragments">
               <strong>Text fragments</strong>
@@ -145,13 +178,26 @@ export async function viewBooks(book=''){
             <div class="dashboard-text-viewer__meta">
               ${tokensFile ? `Linked file: <a href="#/book/${encodeURIComponent(selected)}/viz/tokens">${escapeHtml(tokensFile)}</a>` : 'No token file detected yet.'}
             </div>
-            ${tokenSummary.length ? `
+              ${tokenSummary.length ? `
               <ul class="dashboard-fragment-list">
                 ${tokenSummary.map(({ token, count }) => `
                   <li><strong>${escapeHtml(token)}</strong> <span>${count}</span></li>
                 `).join('')}
               </ul>
             ` : '<p>Token data is not available for this book yet.</p>'}
+          </div>
+        ` : widget.key === 'rhythm' ? `
+          <div class="dashboard-rhythm-summary">
+            <div class="dashboard-text-viewer__meta">
+              ${punctuationPreview.length ? 'Previewing punctuation counts from book_summary.' : 'No punctuation timeline available yet.'}
+            </div>
+            ${punctuationPreview.length ? `
+              <ul class="dashboard-fragment-list">
+                ${punctuationPreview.map(({ label, count }) => `
+                  <li><strong>${escapeHtml(label)}</strong> <span>${count}</span></li>
+                `).join('')}
+              </ul>
+            ` : '<p>Punctuation timeline is not available for this book yet.</p>'}
           </div>
         ` : `
           <div class="dashboard-widget__empty">Open ${escapeHtml(widget.title)} to inspect ${escapeHtml(selected)}.</div>
@@ -160,7 +206,7 @@ export async function viewBooks(book=''){
     </section>
   `).join('')
   const bookItems = visibleBooks.map(b => `
-    <a class="book-chip${b === selected ? ' is-active' : ''}" href="${bookHref(b)}">
+    <a class="book-chip${b === selected ? ' is-active' : ''}" href="${bookHref(b)}" aria-current="${b === selected ? 'page' : 'false'}">
       <strong>${escapeHtml(b)}</strong>
       <span>${b === selected ? 'Active' : 'Book'}</span>
     </a>
@@ -170,7 +216,7 @@ export async function viewBooks(book=''){
       <aside class="dashboard-books">
         <hgroup>
           <h2>Книги</h2>
-          <p>Selected atlas: ${escapeHtml(selected)}</p>
+          <p>Choose a book to refresh the dashboard.</p>
         </hgroup>
         <div class="book-chip-list">${bookItems}</div>
       </aside>
@@ -178,7 +224,7 @@ export async function viewBooks(book=''){
         <header class="dashboard-hero">
           <hgroup>
             <h2>${escapeHtml(selected)}</h2>
-            <p>Atlas view for the selected book. Jump into files or open a widget below.</p>
+            <p>Selected book dashboard. Jump into files or open a widget below.</p>
           </hgroup>
           <a class="dashboard-widget__link" href="#/book/${encodeURIComponent(selected)}">Book overview</a>
         </header>

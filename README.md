@@ -27,7 +27,7 @@
 - `nix develop` - enter the dev shell
 - `pytest` - run backend tests inside the shell
 - `node --version` - verify Node availability
-- `make ui-smoke` - run the browser smoke check and write artifacts to `artifacts/ui-smoke/`
+- `make ui-smoke` - run the browser smoke check from the dashboard-first `#/book/<book>` route and write artifacts to `artifacts/ui-smoke/`
 - `python -m src.webapp --host 127.0.0.1 --port 8000` - start only the backend
 
 The canonical UI lives in `frontend/`.

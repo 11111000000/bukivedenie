@@ -88,6 +88,7 @@ export const api = {
   books: () => fetchJson('/api/books'),
   files: (book) => fetchJson(`/api/files?book=${encodeURIComponent(book)}`),
   fileParsed: (book, name) => fetchJson(`/api/file_parsed?book=${encodeURIComponent(book)}&name=${encodeURIComponent(name)}`),
+  bookSummary: (book) => fetchJson(`/api/book_summary?book=${encodeURIComponent(book)}`),
   tokenByChapter: (book, token) => fetchJson(`/api/token_by_chapter?book=${encodeURIComponent(book)}&token=${encodeURIComponent(token)}`),
   runAnalysis: (raw) => fetchJson(`/api/run_analysis?raw=${encodeURIComponent(raw)}`),
   cloudGenerate: (book) => fetchJson(`/api/cloud_generate?book=${encodeURIComponent(book)}`),

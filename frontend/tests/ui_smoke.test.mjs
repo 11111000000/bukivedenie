@@ -4,6 +4,7 @@ import { BROWSER_PATH_CANDIDATES, DEFAULT_OUT_DIR, ROUTES, artifactPaths, browse
 
 test('smoke route manifest stays stable', () => {
   const dashboard = ROUTES.find(route => route.name === 'dashboard')
+  const overview = ROUTES.find(route => route.name === 'overview')
   const fileRoute = ROUTES.find(route => route.name === 'file')
 
   assert.ok(ROUTES.length >= 6)
@@ -14,6 +15,12 @@ test('smoke route manifest stays stable', () => {
     hash: '#/book/{book}',
     kind: 'dashboard',
     ready: '#view hgroup, #view details, #view a.contrast',
+  })
+  assert.deepEqual(overview, {
+    name: 'overview',
+    hash: '#/book/{book}',
+    kind: 'overview',
+    ready: '#view details',
   })
   assert.equal(fileRoute?.ready, '#view table, #view pre')
   assert.equal(slugify('Heatmap / token × chapter'), 'heatmap-token-chapter')
