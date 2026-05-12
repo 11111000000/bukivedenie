@@ -12,6 +12,20 @@ FRONTEND_NODE_MODULES="$FRONTEND_DIR/node_modules"
 BACKEND_LOG="$ROOT_DIR/logs/backend-dev.log"
 FRONTEND_LOG="$ROOT_DIR/logs/frontend-dev.log"
 
+command -v nc >/dev/null 2>&1 || true
+
+wait_for_port() {
+  host=$1
+  port=$2
+  for _ in {1..60}; do
+    if command -v nc >/dev/null 2>&1 && nc -z "$host" "$port" 2>/dev/null; then
+      return 0
+    fi
+    sleep 0.5
+  done
+  return 1
+}
+
 mkdir -p "$ROOT_DIR/logs"
 
 pids=()
@@ -36,16 +50,8 @@ pid_backend=$!
 pids+=("$pid_backend")
 echo "Backend PID=$pid_backend, log=$BACKEND_LOG"
 
-# Wait for backend to open port
-printf "Waiting for backend to be ready..."
-for i in {1..60}; do
-  if nc -z 127.0.0.1 8000 2>/dev/null; then
-    echo " ready"
-    break
-  fi
-  printf "."
-  sleep 0.5
-done
+echo "Waiting for backend to be ready..."
+wait_for_port 127.0.0.1 8000 || echo "Backend readiness check timed out; continuing"
 
 # Start frontend watcher with Rollup live-reload; fallback to browser-sync or local python dev server
 if [ -d "$FRONTEND_DIR" ]; then
@@ -89,10 +95,7 @@ else
   echo "Frontend dir not found: $FRONTEND_DIR" >&2
 fi
 
-# Tail logs (both) in foreground
-# Use tail -f to follow logs; exit when children exit
-
-# Tail both logs in background if available
+# Tail logs (both) in foreground when available
 if command -v tail >/dev/null 2>&1; then
   echo "Tailing logs. Press Ctrl-C to stop."
   touch "$BACKEND_LOG" "$FRONTEND_LOG"

@@ -19,6 +19,8 @@ import json as _json
 import subprocess
 import sys
 
+_BOOK_SUMMARY_CACHE = {}
+
 PROJECT_ROOT = Path(__file__).parent.parent.resolve()
 OUTPUTS_DIR = PROJECT_ROOT / 'outputs'
 RAW_DIR = PROJECT_ROOT / 'data' / 'raw'
@@ -28,18 +30,43 @@ WEB_ROOT = PROJECT_ROOT / 'frontend'
 ALT_CHEKHOV_PATH = Path('/storage/emulated/0/Documents/чехов-письмо.txt')
 
 
-def list_books():
-    if not OUTPUTS_DIR.exists():
-        return []
-    reserved = {'processed', 'tables', '__pycache__', '.git', '.DS_Store'}
-    books = []
-    for p in OUTPUTS_DIR.iterdir():
+def _raw_books_index():
+    """Return {book_id: raw_relative_path} derived from data/raw."""
+    if not RAW_DIR.exists():
+        return {}
+    items = {}
+    for p in sorted(RAW_DIR.rglob('*.txt')):
         try:
-            if p.is_dir() and p.name not in reserved and not p.name.startswith('.'):
-                books.append(p.name)
+            rel = p.relative_to(RAW_DIR).as_posix()
         except Exception:
-            continue
-    return sorted(books)
+            rel = p.name
+        book_id = p.stem
+        if book_id not in items:
+            items[book_id] = rel
+    return items
+
+
+def _book_ready(book: str) -> bool:
+    return bool(list_files(book))
+
+
+def list_books():
+    index = _raw_books_index()
+    return sorted(index.keys())
+
+
+def list_book_states():
+    index = _raw_books_index()
+    items = []
+    for book in sorted(index.keys()):
+        raw = index[book]
+        items.append({
+            'book': book,
+            'raw': raw,
+            'ready': _book_ready(book),
+            'analysis': f'/api/run_analysis?raw={raw}',
+        })
+    return items
 
 
 def list_files(book: str):
@@ -119,6 +146,89 @@ def list_raw_files():
     return files
 
 
+def _read_csv_rows(path: Path, limit: int | None = None):
+    import csv
+    rows = []
+    with open(path, 'r', encoding='utf-8', newline='') as fh:
+        reader = csv.DictReader(fh)
+        for row in reader:
+            normalized = {}
+            for key, value in row.items():
+                if value is None:
+                    normalized[key] = value
+                    continue
+                text = value.strip()
+                if key in ('count', 'rank', 'chapters', 'tokens', 'words', 'punctuation_marks'):
+                    try:
+                        normalized[key] = int(float(text))
+                        continue
+                    except Exception:
+                        pass
+                if key == 'per_1k':
+                    try:
+                        normalized[key] = float(text)
+                        continue
+                    except Exception:
+                        pass
+                normalized[key] = value
+            rows.append(normalized)
+            if limit is not None and len(rows) >= limit:
+                break
+    return rows
+
+
+def _load_chapters_summary(book_dir: Path):
+    path = book_dir / 'chapters_summary.json'
+    if not path.exists():
+        return []
+    try:
+        parsed = json.loads(path.read_text(encoding='utf-8'))
+    except Exception:
+        return []
+    if isinstance(parsed, dict):
+        parsed = parsed.get('chapters') or []
+    return parsed if isinstance(parsed, list) else []
+
+
+def _load_book_summary(book: str):
+    book_dir = OUTPUTS_DIR / book
+    tokens_path = book_dir / 'tokens.csv'
+    chapters_path = book_dir / 'chapters_summary.json'
+    punct_path = book_dir / 'punctuation_counts.csv'
+    cache_key = (
+        book,
+        str(book_dir),
+        str(tokens_path.stat().st_mtime_ns) if tokens_path.exists() else 'missing',
+        str(chapters_path.stat().st_mtime_ns) if chapters_path.exists() else 'missing',
+        str(punct_path.stat().st_mtime_ns) if punct_path.exists() else 'missing',
+    )
+    cached = _BOOK_SUMMARY_CACHE.get(book)
+    if cached and cached[0] == cache_key:
+        return cached[1]
+
+    chapters = _load_chapters_summary(book_dir)
+
+    text_index = _read_csv_rows(tokens_path, limit=1000) if tokens_path.exists() else []
+    punctuation_timeline = _read_csv_rows(punct_path, limit=1000) if punct_path.exists() else []
+
+    summary = {
+        'chapters': len(chapters),
+        'words': sum(int(ch.get('total_words') or 0) for ch in chapters if isinstance(ch, dict)),
+        'tokens': len(text_index),
+        'punctuation_marks': len(punctuation_timeline),
+    }
+    payload = {
+        'book': book,
+        'ready': bool(text_index or chapters or punctuation_timeline),
+        'summary': summary,
+        'text_index': text_index,
+        'fragments': chapters,
+        'punctuation_timeline': punctuation_timeline,
+    }
+    _BOOK_SUMMARY_CACHE[book] = (cache_key, payload)
+    return payload
+
+
 def safe_join(base: Path, name: str) -> Path:
     # Prevent path traversal
     target = (base / name).resolve()
@@ -193,7 +303,15 @@ class Handler(BaseHTTPRequestHandler):
             if path == '/api/books':
                 books = list_books()
                 slog(f'books endpoint: count={len(books)} sample={books[:10]}')
-                return self._json({'books': books})
+                return self._json({'books': books, 'items': list_book_states()})
+
+            if path == '/api/book_summary':
+                book = qs.get('book', [''])[0]
+                if not book:
+                    return self._json({'error': 'book param required'}, status=400)
+                if not (OUTPUTS_DIR / book).exists() and not _load_chapters_summary(OUTPUTS_DIR / book):
+                    return self._json({'error': 'book not found'}, status=404)
+                return self._json(_load_book_summary(book))
 
             if path == '/api/files':
                 book = qs.get('book', [''])[0]

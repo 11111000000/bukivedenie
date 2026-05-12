@@ -38,79 +38,99 @@
   },
   "routes": [
     {
+      "name": "dashboard",
+      "status": "passed",
+      "url": "http://127.0.0.1:39677/?smoke=1#/book/test_book",
+      "html": "html/test-book__dashboard.html",
+      "screenshot": "screens/test-book__dashboard.png",
+      "notes": []
+    },
+    {
       "name": "books",
       "status": "passed",
-      "url": "http://127.0.0.1:34961/?smoke=1#/books",
-      "html": "html/books.html",
-      "screenshot": "screens/books.png",
+      "url": "http://127.0.0.1:39677/?smoke=1#/books",
+      "html": "html/test-book__books.html",
+      "screenshot": "screens/test-book__books.png",
       "notes": []
     },
     {
       "name": "overview",
       "status": "passed",
-      "url": "http://127.0.0.1:34961/?smoke=1#/book/test_book",
-      "html": "html/overview.html",
-      "screenshot": "screens/overview.png",
+      "url": "http://127.0.0.1:39677/?smoke=1#/book/test_book",
+      "html": "html/test-book__overview.html",
+      "screenshot": "screens/test-book__overview.png",
       "notes": []
     },
     {
       "name": "tokens",
       "status": "passed",
-      "url": "http://127.0.0.1:34961/?smoke=1#/book/test_book/viz/tokens",
-      "html": "html/tokens.html",
-      "screenshot": "screens/tokens.png",
+      "url": "http://127.0.0.1:39677/?smoke=1#/book/test_book/viz/tokens",
+      "html": "html/test-book__tokens.html",
+      "screenshot": "screens/test-book__tokens.png",
       "notes": []
     },
     {
       "name": "wordcloud",
       "status": "passed",
-      "url": "http://127.0.0.1:34961/?smoke=1#/book/test_book/viz/wordcloud",
-      "html": "html/wordcloud.html",
-      "screenshot": "screens/wordcloud.png",
+      "url": "http://127.0.0.1:39677/?smoke=1#/book/test_book/viz/wordcloud",
+      "html": "html/test-book__wordcloud.html",
+      "screenshot": "screens/test-book__wordcloud.png",
       "notes": []
     },
     {
       "name": "network",
       "status": "passed",
-      "url": "http://127.0.0.1:34961/?smoke=1#/book/test_book/viz/network",
-      "html": "html/network.html",
-      "screenshot": "screens/network.png",
+      "url": "http://127.0.0.1:39677/?smoke=1#/book/test_book/viz/network",
+      "html": "html/test-book__network.html",
+      "screenshot": "screens/test-book__network.png",
       "notes": []
     },
     {
       "name": "sentiment",
       "status": "passed",
-      "url": "http://127.0.0.1:34961/?smoke=1#/book/test_book/viz/sentiment",
-      "html": "html/sentiment.html",
-      "screenshot": "screens/sentiment.png",
+      "url": "http://127.0.0.1:39677/?smoke=1#/book/test_book/viz/sentiment",
+      "html": "html/test-book__sentiment.html",
+      "screenshot": "screens/test-book__sentiment.png",
       "notes": []
     },
     {
       "name": "heatmap",
       "status": "passed",
-      "url": "http://127.0.0.1:34961/?smoke=1#/book/test_book/viz/heatmap",
-      "html": "html/heatmap.html",
-      "screenshot": "screens/heatmap.png",
+      "url": "http://127.0.0.1:39677/?smoke=1#/book/test_book/viz/heatmap",
+      "html": "html/test-book__heatmap.html",
+      "screenshot": "screens/test-book__heatmap.png",
       "notes": []
     },
     {
       "name": "files",
       "status": "passed",
-      "url": "http://127.0.0.1:34961/?smoke=1#/book/test_book/files",
-      "html": "html/files.html",
-      "screenshot": "screens/files.png",
+      "url": "http://127.0.0.1:39677/?smoke=1#/book/test_book/files",
+      "html": "html/test-book__files.html",
+      "screenshot": "screens/test-book__files.png",
       "notes": []
     },
     {
       "name": "file",
       "status": "passed",
-      "url": "http://127.0.0.1:34961/?smoke=1#/book/test_book/file/chapters_summary.json",
-      "html": "html/file.html",
-      "screenshot": "screens/file.png",
+      "url": "http://127.0.0.1:39677/?smoke=1#/book/test_book/file/chapters_summary.json",
+      "html": "html/test-book__file.html",
+      "screenshot": "screens/test-book__file.png",
       "notes": []
     }
   ],
   "console": [
+    {
+      "type": "info",
+      "text": "API base resolved to http://127.0.0.1:8000"
+    },
+    {
+      "type": "info",
+      "text": "GET http://127.0.0.1:8000/api/files?book=test_book (timeout 30000ms)"
+    },
+    {
+      "type": "info",
+      "text": "OK GET http://127.0.0.1:8000/api/files?book=test_book"
+    },
     {
       "type": "info",
       "text": "API base resolved to http://127.0.0.1:8000"
@@ -130,6 +150,38 @@
     {
       "type": "info",
       "text": "OK GET http://127.0.0.1:8000/api/files?book=test_book"
+    },
+    {
+      "type": "info",
+      "text": "GET http://127.0.0.1:8000/api/file_parsed?book=test_book&name=tokens.csv (timeout 30000ms)"
+    },
+    {
+      "type": "info",
+      "text": "OK GET http://127.0.0.1:8000/api/file_parsed?book=test_book&name=tokens.csv"
+    },
+    {
+      "type": "info",
+      "text": "GET http://127.0.0.1:8000/api/file_parsed?book=test_book&name=processed%2Ftest_book_normalized.txt (timeout 30000ms)"
+    },
+    {
+      "type": "info",
+      "text": "OK GET http://127.0.0.1:8000/api/file_parsed?book=test_book&name=processed%2Ftest_book_normalized.txt"
+    },
+    {
+      "type": "info",
+      "text": "API base resolved to http://127.0.0.1:8000"
+    },
+    {
+      "type": "info",
+      "text": "GET http://127.0.0.1:8000/api/files?book=test_book (timeout 30000ms)"
+    },
+    {
+      "type": "info",
+      "text": "OK GET http://127.0.0.1:8000/api/files?book=test_book"
+    },
+    {
+      "type": "info",
+      "text": "API base resolved to http://127.0.0.1:8000"
     },
     {
       "type": "info",
@@ -157,6 +209,10 @@
     },
     {
       "type": "info",
+      "text": "API base resolved to http://127.0.0.1:8000"
+    },
+    {
+      "type": "info",
       "text": "GET http://127.0.0.1:8000/api/files?book=test_book (timeout 30000ms)"
     },
     {
@@ -173,6 +229,10 @@
     },
     {
       "type": "info",
+      "text": "API base resolved to http://127.0.0.1:8000"
+    },
+    {
+      "type": "info",
       "text": "GET http://127.0.0.1:8000/api/files?book=test_book (timeout 30000ms)"
     },
     {
@@ -186,6 +246,10 @@
     {
       "type": "info",
       "text": "OK GET http://127.0.0.1:8000/api/file_parsed?book=test_book&name=cooccurrence_edges.csv"
+    },
+    {
+      "type": "info",
+      "text": "API base resolved to http://127.0.0.1:8000"
     },
     {
       "type": "info",
@@ -206,6 +270,10 @@
     {
       "type": "warning",
       "text": "WARN The input spec uses Vega-Lite v5, but the current version of Vega-Lite is v6.4.3."
+    },
+    {
+      "type": "info",
+      "text": "API base resolved to http://127.0.0.1:8000"
     },
     {
       "type": "info",
@@ -353,11 +421,19 @@
     },
     {
       "type": "info",
+      "text": "API base resolved to http://127.0.0.1:8000"
+    },
+    {
+      "type": "info",
       "text": "GET http://127.0.0.1:8000/api/files?book=test_book (timeout 30000ms)"
     },
     {
       "type": "info",
       "text": "OK GET http://127.0.0.1:8000/api/files?book=test_book"
+    },
+    {
+      "type": "info",
+      "text": "API base resolved to http://127.0.0.1:8000"
     },
     {
       "type": "info",

@@ -51,7 +51,7 @@ async function render(){
   try{
     if(p[0] === '' || p[0] === 'books'){
       emitRoute(location.hash || '#/books', 'books')
-      return viewBooks()
+      return viewBooks(p[1] ? decodeURIComponent(p[1]) : '')
     }
     if(p[0] === 'about'){
       emitRoute(location.hash || '#/about', 'about')

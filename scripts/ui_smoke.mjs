@@ -6,7 +6,10 @@ import path from 'node:path'
 import { spawnSync } from 'node:child_process'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 
+export const DEFAULT_OUT_DIR = 'artifacts/ui-smoke'
+
 export const ROUTES = [
+  { name: 'dashboard', hash: '#/book/{book}', kind: 'dashboard', ready: '#view hgroup, #view details, #view a.contrast' },
   { name: 'books', hash: '#/books', kind: 'books', ready: '#view a[href^="#/book/"]' },
   { name: 'overview', hash: '#/book/{book}', kind: 'overview', ready: '#view details' },
   { name: 'tokens', hash: '#/book/{book}/viz/tokens', kind: 'chart', ready: '#chart canvas, #chart svg' },
@@ -18,10 +21,31 @@ export const ROUTES = [
   { name: 'file', hash: '#/book/{book}/file/{file}', kind: 'file', ready: '#view table, #view pre' },
 ]
 
+export const BROWSER_PATH_CANDIDATES = [
+  process.env.SMOKE_BROWSER_PATH,
+  process.env.BROWSER_PATH,
+  process.env.CHROME_PATH,
+  process.env.CHROMIUM_PATH,
+  process.env.PLAYWRIGHT_CHROMIUM_PATH,
+  process.env.PREFIX ? path.join(process.env.PREFIX, 'bin', 'chromium') : null,
+  process.env.PREFIX ? path.join(process.env.PREFIX, 'bin', 'chromium-browser') : null,
+  '/data/data/com.termux/files/usr/bin/chromium',
+  '/data/data/com.termux/files/usr/bin/chromium-browser',
+  '/run/current-system/sw/bin/chromium',
+  '/usr/bin/chromium',
+  '/usr/bin/chromium-browser',
+  '/usr/bin/google-chrome',
+  'chromium',
+  'chromium-browser',
+  'google-chrome',
+  'google-chrome-stable',
+  'chrome',
+].filter(Boolean)
+
 export function slugify(value){
   return String(value || 'route')
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/[^\p{L}\p{N}]+/gu, '-')
     .replace(/^-+|-+$/g, '') || 'route'
 }
 
@@ -33,28 +57,43 @@ export function routeUrl(baseUrl, route, book, fileName){
   return `${cleanBase}/${hash}`
 }
 
+export function artifactPaths(outDir, routeName, book){
+  const routeSlug = slugify(routeName)
+  const bookSlug = slugify(book)
+  const fileSlug = bookSlug && bookSlug !== 'route' ? `${bookSlug}__${routeSlug}` : routeSlug
+  return {
+    htmlPath: path.join(outDir, 'html', `${fileSlug}.html`),
+    screenshotPath: path.join(outDir, 'screens', `${fileSlug}.png`),
+  }
+}
+
+export function browserLaunchArgs(browserPath, headful){
+  return {
+    headless: !headful,
+    executablePath: browserPath,
+    args: [process.getuid && process.getuid() === 0 ? '--no-sandbox' : '', '--disable-dev-shm-usage', '--window-size=1440,1200'].filter(Boolean),
+  }
+}
+
+export async function launchBrowser(chromium, browserPath, headful){
+  try{
+    return await chromium.launch(browserLaunchArgs(browserPath, headful))
+  }catch{
+    return null
+  }
+}
+
+export function isDashboardRoute(route){
+  return route?.kind === 'dashboard' || route?.name === 'dashboard'
+}
+
 export function resolveBrowserPath(){
-  const candidates = [
-    process.env.SMOKE_BROWSER_PATH,
-    process.env.BROWSER_PATH,
-    '/run/current-system/sw/bin/chromium',
-    '/usr/bin/chromium',
-    '/usr/bin/chromium-browser',
-    '/usr/bin/google-chrome',
-    'chromium',
-    'chromium-browser',
-    'google-chrome',
-    'google-chrome-stable',
-    'chrome',
-  ].filter(Boolean)
-  for(const candidate of candidates){
+  for(const candidate of BROWSER_PATH_CANDIDATES){
     if(path.isAbsolute(candidate)){
-      try{
-        if(awaitExists(candidate)) return candidate
-      }catch{}
+      if(awaitExists(candidate)) return candidate
       continue
     }
-    const probe = spawnSync('node', ['-e', `const {spawnSync}=require('node:child_process'); const p=spawnSync('sh',['-lc','command -v ${candidate}'],{encoding:'utf8'}); process.stdout.write((p.stdout||'').trim())`], { encoding: 'utf8' })
+    const probe = spawnSync('sh', ['-lc', `command -v ${candidate}`], { encoding: 'utf8' })
     const resolved = probe?.stdout?.trim()
     if(resolved && existsSync(resolved)) return resolved
   }
@@ -156,10 +195,12 @@ async function run(){
   const args = parseArgs(process.argv.slice(2))
   const apiBase = args.apiBase || process.env.SMOKE_API_BASE || 'http://127.0.0.1:8000'
   const uiHint = args.url || process.env.SMOKE_URL || ''
-  const outDir = path.resolve(args.out || process.env.SMOKE_OUT || 'artifacts/ui-smoke')
-  const browserPath = resolveBrowserPath()
+  const outDir = path.resolve(args.out || process.env.SMOKE_OUT || DEFAULT_OUT_DIR)
+  let browserPath = resolveBrowserPath()
   const selected = await preflight(apiBase, args.book || process.env.SMOKE_BOOK)
   await ensureDir(outDir)
+  await ensureDir(path.join(outDir, 'html'))
+  await ensureDir(path.join(outDir, 'screens'))
 
   const report = {
     baseUrl: uiHint || apiBase,
@@ -178,58 +219,33 @@ async function run(){
 
   await writeJson(path.join(outDir, 'api.json'), selected)
 
-  if(!browserPath){
-    await writeJson(path.join(outDir, 'report.json'), report)
-    await writeText(path.join(outDir, 'console.log'), 'browser unavailable, saved API preflight only\n')
-    return report
-  }
-
   const staticServer = await startStaticServer(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../frontend'))
   const baseUrl = uiHint || staticServer.url
 
   let chromium
-  try{
-    const scriptDir = path.dirname(fileURLToPath(import.meta.url))
-    const playwrightPath = path.resolve(scriptDir, '../frontend/node_modules/playwright-core/index.js')
-    const mod = await import(pathToFileURL(playwrightPath).href)
-    chromium = mod.chromium || mod.default?.chromium || mod.default
-  }catch(error){
-    report.browserAvailable = false
-    report.browserPath = null
-    await writeJson(path.join(outDir, 'report.json'), { ...report, error: `playwright-core unavailable: ${String(error?.message || error)}` })
-    await writeText(path.join(outDir, 'console.log'), 'playwright-core unavailable, saved API preflight only\n')
-    return report
+  if(browserPath){
+    try{
+      const scriptDir = path.dirname(fileURLToPath(import.meta.url))
+      const playwrightPath = path.resolve(scriptDir, '../frontend/node_modules/playwright-core/index.js')
+      const mod = await import(pathToFileURL(playwrightPath).href)
+      chromium = mod.chromium || mod.default?.chromium || mod.default
+    }catch(error){
+      browserPath = null
+      report.browserAvailable = false
+      report.browserPath = null
+      report.console.push({ type: 'warning', text: `playwright-core unavailable: ${String(error?.message || error)}` })
+    }
   }
 
-  const browser = await chromium.launch({
-    headless: !args.headful,
-    executablePath: browserPath,
-    args: [process.getuid && process.getuid() === 0 ? '--no-sandbox' : '', '--disable-dev-shm-usage'].filter(Boolean),
-  })
+  const browser = browserPath && chromium ? await launchBrowser(chromium, browserPath, args.headful) : null
+  if(browserPath && chromium && !browser){
+    report.console.push({ type: 'warning', text: `browser launch failed for ${browserPath}, continuing browserless` })
+    browserPath = null
+    report.browserAvailable = false
+    report.browserPath = null
+  }
 
   try{
-    const page = await browser.newPage({ viewport: { width: 1440, height: 1200 } })
-    page.on('console', msg => {
-      report.console.push({ type: msg.type(), text: msg.text() })
-    })
-    page.on('pageerror', error => {
-      report.pageErrors.push(String(error?.message || error))
-    })
-    page.on('requestfailed', request => {
-      report.requestFailures.push({ url: request.url(), failure: request.failure()?.errorText || 'failed' })
-    })
-      page.on('response', response => {
-        const url = response.url()
-        if((url.startsWith(baseUrl) || url.startsWith(apiBase)) && !response.ok()){
-          report.responseFailures.push({ url, status: response.status() })
-        }
-      })
-
-    await page.addInitScript(({ apiBaseValue }) => {
-      window.__API_BASE__ = apiBaseValue
-      window.__SMOKE__ = true
-    }, { apiBaseValue: apiBase })
-
     const book = selected.selectedBook || 'unknown'
     const files = selected.files || []
     const fileName = files[0] || 'tokens.csv'
@@ -259,32 +275,72 @@ async function run(){
       const [beforeHash, afterHash = ''] = target.split('#')
       const url = `${beforeHash}${beforeHash.includes('?') ? '&' : '?'}smoke=1${afterHash ? `#${afterHash}` : ''}`
       result.url = url
-      const htmlPath = path.join(outDir, 'html', `${slugify(name)}.html`)
-      const pngPath = path.join(outDir, 'screens', `${slugify(name)}.png`)
+      const { htmlPath, screenshotPath: pngPath } = artifactPaths(outDir, name, book)
       try{
-        await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 })
-        await page.waitForFunction(() => !!document.getElementById('app'), null, { timeout: 30000 })
-        await page.waitForFunction(() => !!document.getElementById('view'), null, { timeout: 30000 })
-        await page.waitForFunction(() => window.__APP_READY__ === true, null, { timeout: 30000 }).catch(() => {})
-        await page.waitForFunction((selector) => !!document.querySelector(selector), job.route.ready, { timeout: 30000 }).catch(() => {})
-        const html = await page.content()
-        await writeText(htmlPath, html)
-        await page.screenshot({ path: pngPath, fullPage: true })
-        result.status = 'passed'
-        result.html = path.relative(outDir, htmlPath)
-        result.screenshot = path.relative(outDir, pngPath)
+        if(browser){
+          const page = await browser.newPage({ viewport: { width: 1440, height: 1200 } })
+          page.on('console', msg => {
+            report.console.push({ type: msg.type(), text: msg.text() })
+          })
+          page.on('pageerror', error => {
+            report.pageErrors.push(String(error?.message || error))
+          })
+          page.on('requestfailed', request => {
+            report.requestFailures.push({ url: request.url(), failure: request.failure()?.errorText || 'failed' })
+          })
+          page.on('response', response => {
+            const url = response.url()
+            if((url.startsWith(baseUrl) || url.startsWith(apiBase)) && !response.ok()){
+              report.responseFailures.push({ url, status: response.status() })
+            }
+          })
+
+          await page.addInitScript(({ apiBaseValue }) => {
+            window.__API_BASE__ = apiBaseValue
+            window.__SMOKE__ = true
+          }, { apiBaseValue: apiBase })
+
+          await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 })
+          await page.waitForFunction(() => !!document.getElementById('app'), null, { timeout: 30000 })
+          await page.waitForFunction(() => !!document.getElementById('view'), null, { timeout: 30000 })
+          await page.waitForFunction(() => window.__APP_READY__ === true, null, { timeout: 30000 }).catch(() => {})
+          await page.waitForFunction((selector) => !!document.querySelector(selector), job.route.ready, { timeout: 30000 }).catch(() => {})
+          const html = await page.content()
+          await writeText(htmlPath, html)
+          await page.screenshot({ path: pngPath, fullPage: true })
+          result.status = 'passed'
+          result.html = path.relative(outDir, htmlPath)
+          result.screenshot = path.relative(outDir, pngPath)
+          await page.close().catch(() => {})
+        }else{
+          const response = await fetch(url)
+          const html = await response.text()
+          await writeText(htmlPath, html)
+          result.status = response.ok ? 'passed' : 'failed'
+          result.html = path.relative(outDir, htmlPath)
+          if(!response.ok){
+            result.notes.push(`fetch status ${response.status}`)
+          }
+          if(isDashboardRoute(job.route) && !response.ok){
+            result.notes.push('dashboard route unavailable in browserless mode')
+          }
+        }
       }catch(error){
         result.status = 'failed'
         result.notes.push(String(error?.message || error))
-        try{
-          const html = await page.content()
-          await writeText(htmlPath, html)
-          result.html = path.relative(outDir, htmlPath)
-        }catch{}
-        try{
-          await page.screenshot({ path: pngPath, fullPage: true })
-          result.screenshot = path.relative(outDir, pngPath)
-        }catch{}
+        if(browser){
+          try{
+            const page = await browser.newPage({ viewport: { width: 1440, height: 1200 } })
+            const html = await page.content()
+            await writeText(htmlPath, html)
+            result.html = path.relative(outDir, htmlPath)
+          }catch{}
+          try{
+            const page = await browser.newPage({ viewport: { width: 1440, height: 1200 } })
+            await page.screenshot({ path: pngPath, fullPage: true })
+            result.screenshot = path.relative(outDir, pngPath)
+          }catch{}
+        }
       }
       report.routes.push(result)
     }
@@ -303,7 +359,7 @@ async function run(){
 
 if(import.meta.url === `file://${process.argv[1]}`){
   run().catch(async error => {
-    const outDir = path.resolve(process.env.SMOKE_OUT || 'artifacts/ui-smoke')
+     const outDir = path.resolve(process.env.SMOKE_OUT || DEFAULT_OUT_DIR)
     await ensureDir(outDir).catch(() => {})
     await writeJson(path.join(outDir, 'report.json'), { ok: false, error: String(error?.message || error) }).catch(() => {})
     console.error(error)

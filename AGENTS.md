@@ -12,14 +12,19 @@ Minimal rules for agent work in this repo.
 - Use TDD: failing test first, then minimal fix, then verify.
 - For frontend visualizations, always collect artifacts: logs, HTML snapshot, and screenshot when possible.
 - Keep browserless smoke available so work can proceed in container and Termux-style environments.
+- Use the Nix shell for all build, test, and smoke work when available.
+- Preferred entry: `direnv allow` once, then `nix develop` or just enter the repo shell.
+- The shell should provide `python3`, `pytest`, `node`, `chromium`, `git`, `curl`, and `make`.
+- Prefer Nix-provided tools over host binaries for reproducibility.
 
 ## Canonical workflow
 1. Read the relevant surface files.
 2. Add or update a failing test.
 3. Implement the smallest fix.
-4. Run `npm test` or the smallest scoped test target.
-5. Run `npm run smoke` or `make ui-smoke`.
-6. Inspect `artifacts/ui-smoke/`.
+4. Enter the Nix shell with `nix develop` if not already active.
+5. Run `pytest`, `npm test`, or the smallest scoped test target from inside the shell.
+6. Run `npm run smoke` or `make ui-smoke` from inside the shell.
+7. Inspect `artifacts/ui-smoke/`.
 
 ## Artifact conventions
 - Use `artifacts/ui-smoke/` for smoke output.
