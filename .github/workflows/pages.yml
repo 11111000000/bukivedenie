@@ -28,9 +28,11 @@ jobs:
         working-directory: ./frontend
         run: npm run build
 
-      - name: Deploy to gh-pages branch
+      - name: Deploy to gh-pages branch (fork)
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./frontend/dist
           publish_branch: gh-pages
+          # ensure deploying to user's fork instead of upstream when run on fork
+          external_repository: 11111000000/bukivedenie
