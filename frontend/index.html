@@ -43,7 +43,7 @@
         try{
           const isLocal = ['127.0.0.1','localhost'].includes(location.hostname) || location.port === '5173'
           const urlParams = new URLSearchParams(location.search)
-          const want = isLocal || urlParams.has('dev') || localStorage.getItem('devtools') === '1'
+          const want = !urlParams.has('smoke') && (isLocal || urlParams.has('dev') || localStorage.getItem('devtools') === '1')
           if(!want) return
           const s = document.createElement('script')
           // overlay: unobtrusive dev badge to open dev console
