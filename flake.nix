@@ -3,6 +3,15 @@
 
   outputs = { self }: let
     pkgs = import <nixpkgs> { };
+    devScript = pkgs.writeShellScriptBin "bukivedenie-dev" ''
+      exec ${pkgs.bashInteractive}/bin/bash ${builtins.toString ./scripts/dev_rollup.sh}
+    '';
+    backendScript = pkgs.writeShellScriptBin "bukivedenie-backend" ''
+      exec ${pkgs.bashInteractive}/bin/bash ${builtins.toString ./scripts/backend.sh}
+    '';
+    smokeScript = pkgs.writeShellScriptBin "bukivedenie-smoke" ''
+      exec ${pkgs.bashInteractive}/bin/bash ${builtins.toString ./scripts/ui_smoke.sh} "$@"
+    '';
     shell = pkgs.mkShell {
       packages = with pkgs; [
         bashInteractive
@@ -23,5 +32,24 @@
     };
   in {
     devShells.${pkgs.stdenv.hostPlatform.system}.default = shell;
+
+    apps.${pkgs.stdenv.hostPlatform.system} = {
+      dev = {
+        type = "app";
+        program = "${devScript}/bin/bukivedenie-dev";
+      };
+      backend = {
+        type = "app";
+        program = "${backendScript}/bin/bukivedenie-backend";
+      };
+      smoke = {
+        type = "app";
+        program = "${smokeScript}/bin/bukivedenie-smoke";
+      };
+      default = {
+        type = "app";
+        program = "${devScript}/bin/bukivedenie-dev";
+      };
+    };
   };
 }

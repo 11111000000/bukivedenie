@@ -1,5 +1,15 @@
 import { api } from '../api.js'
 
+export function buildViewerContext(book, name){
+  const encodedBook = encodeURIComponent(book)
+  const encodedName = encodeURIComponent(name)
+  return {
+    bookHref: `#/book/${encodedBook}`,
+    filesHref: `#/book/${encodedBook}/files`,
+    fileHref: `#/book/${encodedBook}/file/${encodedName}`,
+  }
+}
+
 export async function viewFile(book, name){
   const el = document.getElementById('view')
   if(!el){
@@ -7,6 +17,7 @@ export async function viewFile(book, name){
     return
   }
   el.innerHTML = `<h2>${book}: ${name}</h2><p>Загружаю…</p>`
+  const ctx = buildViewerContext(book, name)
   const resp = await api.fileParsed(book, name)
   if(resp.type === 'csv'){
     const { headers = [], rows = [] } = resp
@@ -14,6 +25,11 @@ export async function viewFile(book, name){
     const body = rows.map(r=>`<tr>${headers.map((h,i)=>`<td>${escapeHtml(String(r[i]??''))}</td>`).join('')}</tr>`).join('')
     el.innerHTML = `
       <h2>${book}: ${name}</h2>
+      <p style="margin-top:-0.25rem;">
+        Selected book: <a href="${ctx.bookHref}">${escapeHtml(book)}</a> ·
+        <a href="${ctx.filesHref}">Files</a> ·
+        <a href="${ctx.fileHref}">This file</a>
+      </p>
       <div style="overflow:auto; max-width:100%;">
         <table role="grid">
           <thead>${head}</thead>
@@ -25,16 +41,26 @@ export async function viewFile(book, name){
     const data = resp.data ?? resp.content
     el.innerHTML = `
       <h2>${book}: ${name}</h2>
+      <p style="margin-top:-0.25rem;">
+        Selected book: <a href="${ctx.bookHref}">${escapeHtml(book)}</a> ·
+        <a href="${ctx.filesHref}">Files</a> ·
+        <a href="${ctx.fileHref}">This file</a>
+      </p>
       <pre style="white-space:pre-wrap;">${escapeHtml(typeof data==='string'?data:JSON.stringify(data,null,2))}</pre>
     `
   } else if(resp.type === 'jsonl'){
     const data = resp.data || []
     el.innerHTML = `
       <h2>${book}: ${name}</h2>
+      <p style="margin-top:-0.25rem;">
+        Selected book: <a href="${ctx.bookHref}">${escapeHtml(book)}</a> ·
+        <a href="${ctx.filesHref}">Files</a> ·
+        <a href="${ctx.fileHref}">This file</a>
+      </p>
       <pre style="white-space:pre;">${escapeHtml(data.map(o=>JSON.stringify(o)).join('\n'))}</pre>
     `
   } else {
-    el.innerHTML = `<h2>${book}: ${name}</h2><p>Неизвестный тип файла</p>`
+    el.innerHTML = `<h2>${book}: ${name}</h2><p style="margin-top:-0.25rem;">Selected book: <a href="${ctx.bookHref}">${escapeHtml(book)}</a> · <a href="${ctx.filesHref}">Files</a></p><p>Неизвестный тип файла</p>`
   }
 }
 

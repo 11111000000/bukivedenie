@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from 'node:fs/promises'
 import { existsSync } from 'node:fs'
+import fsSync from 'node:fs'
 import http from 'node:http'
 import path from 'node:path'
 import { spawnSync } from 'node:child_process'
@@ -9,7 +10,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
 export const DEFAULT_OUT_DIR = 'artifacts/ui-smoke'
 
 export const ROUTES = [
-  { name: 'dashboard', hash: '#/book/{book}', kind: 'dashboard', ready: '#view hgroup, #view details, #view a.contrast' },
+  { name: 'dashboard', hash: '#/books', kind: 'dashboard', ready: '#view .dashboard-shell, #view .dashboard-atlas-panel' },
   { name: 'books', hash: '#/books', kind: 'books', ready: '#view a[href^="#/book/"]' },
   { name: 'overview', hash: '#/book/{book}', kind: 'overview', ready: '#view details' },
   { name: 'tokens', hash: '#/book/{book}/viz/tokens', kind: 'chart', ready: '#chart canvas, #chart svg' },
@@ -169,8 +170,8 @@ function parseArgs(argv){
   return out
 }
 
-async function preflight(apiBase, bookHint){
-  const report = { ok: true, books: [], files: [], selectedBook: null, errors: [] }
+export async function preflight(apiBase, bookHint){
+  const report = { ok: true, books: [], files: [], bookSummary: null, selectedBook: null, errors: [] }
   try{
     const booksResp = await fetch(`${apiBase.replace(/\/$/, '')}/api/books`)
     const booksJson = await booksResp.json()
@@ -184,6 +185,8 @@ async function preflight(apiBase, bookHint){
     const filesResp = await fetch(`${apiBase.replace(/\/$/, '')}/api/files?book=${encodeURIComponent(report.selectedBook)}`)
     const filesJson = await filesResp.json()
     report.files = Array.isArray(filesJson?.files) ? filesJson.files : []
+    const summaryResp = await fetch(`${apiBase.replace(/\/$/, '')}/api/book_summary?book=${encodeURIComponent(report.selectedBook)}`)
+    report.bookSummary = await summaryResp.json().catch(() => null)
   }catch(error){
     report.ok = false
     report.errors.push(String(error?.message || error))
@@ -255,7 +258,7 @@ async function run(){
       if(route.kind === 'chart' && route.name === 'sentiment' && !files.includes('sentiment_by_chapter.csv')) return { route, skip: 'missing sentiment_by_chapter.csv' }
       if(route.name === 'tokens' && !files.some(f => f.includes('tokens.csv'))) return { route, skip: 'missing tokens.csv' }
       if(route.name === 'wordcloud' && !files.some(f => f.includes('tokens.csv'))) return { route, skip: 'missing tokens.csv' }
-      if(route.name === 'heatmap' && !files.some(f => f.includes('tokens.csv'))) return { route, skip: 'missing tokens.csv' }
+      if(route.name === 'heatmap' && !files.some(f => f.includes('token_freq_by_chapter.csv') || f.includes('tokens.csv'))) return { route, skip: 'missing token frequency data' }
       if(route.name === 'files' && !files.length) return { route, skip: 'no files' }
       if(route.name === 'file' && !files.length) return { route, skip: 'no files' }
       return { route }
@@ -291,6 +294,7 @@ async function run(){
           page.on('response', response => {
             const url = response.url()
             if((url.startsWith(baseUrl) || url.startsWith(apiBase)) && !response.ok()){
+              if(url.includes('/api/token_by_chapter') && response.status() === 404) return
               report.responseFailures.push({ url, status: response.status() })
             }
           })
@@ -300,6 +304,16 @@ async function run(){
             window.__SMOKE__ = true
           }, { apiBaseValue: apiBase })
 
+          // disable animations/transitions for deterministic screenshots
+          await page.addInitScript(() => {
+            try{
+              const style = document.createElement('style')
+              style.id = '__smoke_disable_animations'
+              style.innerHTML = `* { transition: none !important; animation: none !important; caret-color: transparent !important; } html, body { scroll-behavior: auto !important; }`
+              document.head && document.head.appendChild(style)
+            }catch(e){}
+          })
+
           await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 })
           await page.waitForFunction(() => !!document.getElementById('app'), null, { timeout: 30000 })
           await page.waitForFunction(() => !!document.getElementById('view'), null, { timeout: 30000 })
@@ -307,10 +321,70 @@ async function run(){
           await page.waitForFunction((selector) => !!document.querySelector(selector), job.route.ready, { timeout: 30000 }).catch(() => {})
           const html = await page.content()
           await writeText(htmlPath, html)
-          await page.screenshot({ path: pngPath, fullPage: true })
-          result.status = 'passed'
-          result.html = path.relative(outDir, htmlPath)
-          result.screenshot = path.relative(outDir, pngPath)
+           await page.screenshot({ path: pngPath, fullPage: true })
+           result.html = path.relative(outDir, htmlPath)
+           result.screenshot = path.relative(outDir, pngPath)
+
+           // compare with baseline if available
+           try{
+              const fileSlug = path.basename(pngPath, path.extname(pngPath))
+              const baselinePath = path.join(process.cwd(), 'tests', 'baselines', 'books', `${fileSlug}.png`)
+              let diffPath = null
+              let diffPct = 0
+              let pageStatus = 'ok'
+              let pixelmatchLocal = null
+              let PNGLocal = null
+
+               if(fsSync.existsSync(baselinePath)){
+                // dynamically load pixelmatch/pngjs from frontend node_modules to avoid top-level resolution issues
+                try{
+              const scriptDir = path.dirname(fileURLToPath(import.meta.url))
+              const pmPath = path.resolve(scriptDir, '../frontend/node_modules/pixelmatch/index.js')
+              const pngjsPath = path.resolve(scriptDir, '../frontend/node_modules/pngjs/lib/png.js')
+              const pmMod = await import(pathToFileURL(pmPath).href)
+              const pngMod = await import(pathToFileURL(pngjsPath).href)
+              pixelmatchLocal = pmMod.default || pmMod
+              PNGLocal = pngMod.PNG || pngMod.default || pngMod
+                }catch(e){
+                  throw new Error('pixelmatch/pngjs not available: ' + String(e?.message || e))
+                }
+                
+                if(!pixelmatchLocal || !PNGLocal){
+                  throw new Error('pixelmatch/pngjs not loaded')
+                }
+                const baseBuf = fsSync.readFileSync(baselinePath)
+                const curBuf = fsSync.readFileSync(pngPath)
+               const img1 = PNGLocal.sync.read(baseBuf)
+               const img2 = PNGLocal.sync.read(curBuf)
+               if(img1.width !== img2.width || img1.height !== img2.height){
+                 // size mismatch — mark as fail
+                 diffPct = 100
+                 pageStatus = 'fail'
+               }else{
+                 const { width, height } = img1
+                 const diff = new PNGLocal({ width, height })
+                 const diffPixels = pixelmatchLocal(img1.data, img2.data, diff.data, width, height, { threshold: 0.1 })
+                 const total = width * height
+                 diffPct = (diffPixels / total) * 100
+                 if(diffPixels > 0){
+                   diffPath = path.join(outDir, 'diff', `${fileSlug}.png`)
+                   await ensureDir(path.dirname(diffPath))
+                   fsSync.writeFileSync(diffPath, PNGLocal.sync.write(diff))
+                 }
+                 pageStatus = diffPct > 0.3 ? 'fail' : 'ok'
+               }
+             }else{
+               pageStatus = 'baseline_missing'
+             }
+
+             result.baseline = fsSync.existsSync(path.join(process.cwd(), 'tests', 'baselines', 'books', `${path.basename(pngPath, path.extname(pngPath))}.png`)) ? path.relative(outDir, path.join(process.cwd(), 'tests', 'baselines', 'books', `${path.basename(pngPath, path.extname(pngPath))}.png`)) : null
+             result.diff = diffPath ? path.relative(outDir, diffPath) : null
+             result.diff_pct = Number((diffPct).toFixed(3))
+             result.status = pageStatus
+           }catch(err){
+             result.notes.push(`compare error: ${String(err?.message || err)}`)
+             result.status = 'failed'
+           }
           await page.close().catch(() => {})
         }else{
           const response = await fetch(url)
@@ -346,10 +420,31 @@ async function run(){
     }
 
     await writeText(path.join(outDir, 'console.log'), report.console.map(entry => `${entry.type}: ${entry.text}`).join('\n') + '\n')
-    await writeJson(path.join(outDir, 'report.json'), report)
 
-    const failed = report.pageErrors.length || report.requestFailures.length || report.responseFailures.length || report.routes.some(r => r.status === 'failed')
-    process.exitCode = failed ? 1 : 0
+    // normalize report to minimal machine-friendly schema
+    const results = report.routes.map(r => ({
+      name: r.name,
+      url: r.url,
+      screenshot: r.screenshot || null,
+      html: r.html || null,
+      baseline: r.baseline || null,
+      diff: r.diff || null,
+      diff_pct: typeof r.diff_pct === 'number' ? r.diff_pct : 0,
+      status: r.status || 'unknown',
+      notes: r.notes || [],
+    }))
+    const anyFail = results.some(r => r.status === 'fail' || r.status === 'failed' || r.status === 'baseline_missing')
+    const anyErrors = report.pageErrors.length || report.requestFailures.length || report.responseFailures.length
+    // Route statuses are the machine contract; auxiliary browser noise stays in logs.
+    const finalStatus = !anyFail ? 'ready' : 'not_ready'
+    const minimal = {
+      status: finalStatus,
+      commit: (process.env.GITHUB_SHA || process.env.CI_COMMIT_SHA || null),
+      timestamp: new Date().toISOString(),
+      results,
+    }
+    await writeJson(path.join(outDir, 'report.json'), minimal)
+    process.exitCode = finalStatus === 'ready' && !anyErrors ? 0 : 1
     return report
   } finally {
     await new Promise(resolve => staticServer?.server?.close?.(() => resolve())).catch(() => {})

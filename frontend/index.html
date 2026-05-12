@@ -5,6 +5,10 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Literary Analytics</title>
+    <script>
+      // Some bundled browser libraries still read process.env.NODE_ENV.
+      window.process ||= { env: { NODE_ENV: 'production' } }
+    </script>
     <style>
       :root { color-scheme: light; }
       html, body { margin: 0; min-height: 100%; background: #f7f7f8; color: #1f2937; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }

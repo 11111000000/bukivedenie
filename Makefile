@@ -19,7 +19,7 @@ dev-rollup:
 	bash scripts/dev_rollup.sh
 
 ui-smoke:
-	cd frontend && npm run smoke
+	bash scripts/ui_smoke.sh
 
 # Enter the full build/test shell from Nix.
 shell:

@@ -19,18 +19,27 @@ import os
 import sys
 import re
 import json
+import csv
 from pathlib import Path
 from collections import Counter
 from typing import List, Set
 
-# Проверка зависимостей
 try:
     import pandas as pd
-    from razdel import tokenize
-except ImportError as e:
-    print(f"✗ Ошибка импорта: {e}")
-    print("Установите зависимости: pip install razdel pandas pyyaml")
-    sys.exit(1)
+except ImportError:
+    pd = None
+
+try:
+    from razdel import sentenize, tokenize
+    from razdel import tokenize as razdel_tokenize
+except ImportError:
+    sentenize = None
+    tokenize = None
+    razdel_tokenize = None
+
+
+TOKEN_RE = re.compile(r"[A-Za-zА-Яа-яЁё]+(?:-[A-Za-zА-Яа-яЁё]+)*", re.UNICODE)
+SENTENCE_RE = re.compile(r".*?(?:[.!?…]+(?:\s+|$)|$)", re.DOTALL)
 
 
 # --- Константы ---
@@ -105,7 +114,10 @@ def tokenize_and_filter(
     Возвращает список слов (в нижнем регистре) после фильтрации.
     БЕЗ лемматизации - работает с формами слов.
     """
-    tokens = [t.text for t in tokenize(text)]
+    if tokenize is not None:
+        tokens = [t.text for t in tokenize(text)]
+    else:
+        tokens = [m.group(0) for m in TOKEN_RE.finditer(text)]
 
     filtered = []
     for token in tokens:
@@ -168,9 +180,39 @@ def save_to_csv(
     # Сортировка по убыванию частоты
     data.sort(key=lambda x: x['count'], reverse=True)
 
-    df = pd.DataFrame(data)
-    df.to_csv(output_path, index=False, encoding='utf-8')
-    print(f"✓ Сохранено {len(df)} уникальных терминов в {output_path}")
+    if pd is not None:
+        df = pd.DataFrame(data)
+        df.to_csv(output_path, index=False, encoding='utf-8')
+        saved_count = len(df)
+    else:
+        with open(output_path, 'w', encoding='utf-8', newline='') as fh:
+            writer = csv.DictWriter(fh, fieldnames=['text_id', 'term', 'count', 'per_1k'])
+            writer.writeheader()
+            writer.writerows(data)
+        saved_count = len(data)
+    print(f"✓ Сохранено {saved_count} уникальных терминов в {output_path}")
+
+
+def _tokenize_sentence(text: str):
+    if razdel_tokenize is not None:
+        return list(razdel_tokenize(text))
+    return [type('Token', (), {'text': m.group(0), 'start': m.start(), 'stop': m.end()}) for m in TOKEN_RE.finditer(text)]
+
+
+def _sentences_with_offsets(text: str):
+    if sentenize is not None:
+        return list(sentenize(text))
+    sentences = []
+    pos = 0
+    for match in SENTENCE_RE.finditer(text):
+        chunk = match.group(0)
+        if not chunk:
+            continue
+        start = pos
+        end = start + len(chunk)
+        sentences.append(type('Sentence', (), {'text': chunk, 'start': start, 'stop': end}))
+        pos = end
+    return sentences
 
 
 def find_text_file(text_id: str, raw_dir: str) -> Path:
@@ -307,16 +349,15 @@ def main():
     if args.dump_sentences or args.dump_surfaces:
         try:
             print('→ Генерация токенизированных предложений (для --dump-sentences/--dump-surfaces)')
-            from razdel import sentenize, tokenize as razdel_tokenize
             sentences = []
             surfaces = {}
             sent_index = 0
-            for s in sentenize(normalized_text):
+            for s in _sentences_with_offsets(normalized_text):
                 st = s.text
                 start = s.start
                 end = s.stop
                 toks = []
-                for t in razdel_tokenize(st):
+                for t in _tokenize_sentence(st):
                     tok_text = t.text
                     toks.append({'text': tok_text, 'start': start + t.start, 'end': start + t.stop, 'is_first': (t.start==0)})
                     lower = tok_text.lower()

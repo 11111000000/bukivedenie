@@ -14,11 +14,21 @@ FRONTEND_LOG="$ROOT_DIR/logs/frontend-dev.log"
 
 command -v nc >/dev/null 2>&1 || true
 
-wait_for_port() {
-  host=$1
-  port=$2
+wait_for_http() {
+  url=$1
   for _ in {1..60}; do
-    if command -v nc >/dev/null 2>&1 && nc -z "$host" "$port" 2>/dev/null; then
+    if "$PYTHON_CMD" - "$url" <<'PY' >/dev/null 2>&1
+import sys
+import urllib.request
+
+url = sys.argv[1]
+try:
+    with urllib.request.urlopen(url, timeout=1) as resp:
+        resp.read(1)
+except Exception:
+    raise SystemExit(1)
+PY
+    then
       return 0
     fi
     sleep 0.5
@@ -51,7 +61,7 @@ pids+=("$pid_backend")
 echo "Backend PID=$pid_backend, log=$BACKEND_LOG"
 
 echo "Waiting for backend to be ready..."
-wait_for_port 127.0.0.1 8000 || echo "Backend readiness check timed out; continuing"
+wait_for_http http://127.0.0.1:8000/api/books || echo "Backend readiness check timed out; continuing"
 
 # Start frontend watcher with Rollup live-reload; fallback to browser-sync or local python dev server
 if [ -d "$FRONTEND_DIR" ]; then

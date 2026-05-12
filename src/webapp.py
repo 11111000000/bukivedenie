@@ -11,6 +11,7 @@ import argparse
 import html
 import json
 import os
+from collections import Counter
 from http import HTTPStatus
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from pathlib import Path
@@ -20,6 +21,9 @@ import subprocess
 import sys
 
 _BOOK_SUMMARY_CACHE = {}
+ANALYSIS_TIMEOUT_SECONDS = 600
+PLOT_TIMEOUT_SECONDS = 600
+PUNCTUATION_MARKS = ['.', ',', '—', '?', '!', ':', ';', '…']
 
 PROJECT_ROOT = Path(__file__).parent.parent.resolve()
 OUTPUTS_DIR = PROJECT_ROOT / 'outputs'
@@ -60,10 +64,12 @@ def list_book_states():
     items = []
     for book in sorted(index.keys()):
         raw = index[book]
+        ready = _book_ready(book)
         items.append({
             'book': book,
             'raw': raw,
-            'ready': _book_ready(book),
+            'ready': ready,
+            'status': 'ready' if ready else 'pending',
             'analysis': f'/api/run_analysis?raw={raw}',
         })
     return items
@@ -99,9 +105,10 @@ def list_files(book: str):
                 files.append(str(Path('processed') / p.name))
 
     # also search top-level outputs for files starting with book_
-    for p in OUTPUTS_DIR.iterdir():
-        if p.is_file() and p.name.lower().startswith(book.lower() + '_'):
-            files.append(p.name)
+    if OUTPUTS_DIR.exists():
+        for p in OUTPUTS_DIR.iterdir():
+            if p.is_file() and p.name.lower().startswith(book.lower() + '_'):
+                files.append(p.name)
     # dedupe and sort
     uniq = sorted(dict.fromkeys(files))
     return uniq
@@ -146,6 +153,33 @@ def list_raw_files():
     return files
 
 
+def _is_valid_book_id(book: str) -> bool:
+    if not book:
+        return False
+    if book in ('.', '..'):
+        return False
+    return '/' not in book and '\\' not in book and Path(book).name == book
+
+
+def _book_dir(book: str) -> Path:
+    if not _is_valid_book_id(book):
+        raise ValueError('Invalid book id')
+    return OUTPUTS_DIR / book
+
+
+def _raw_text_path_for_book(book: str) -> Path | None:
+    raw_index = _raw_books_index()
+    rel = raw_index.get(book)
+    if rel:
+        candidate = RAW_DIR / rel
+        if candidate.exists():
+            return candidate
+    candidate = RAW_DIR / f'{book}.txt'
+    if candidate.exists():
+        return candidate
+    return None
+
+
 def _read_csv_rows(path: Path, limit: int | None = None):
     import csv
     rows = []
@@ -157,6 +191,8 @@ def _read_csv_rows(path: Path, limit: int | None = None):
                 if value is None:
                     normalized[key] = value
                     continue
+                if isinstance(value, list):
+                    value = value[0] if value else ''
                 text = value.strip()
                 if key in ('count', 'rank', 'chapters', 'tokens', 'words', 'punctuation_marks'):
                     try:
@@ -177,6 +213,24 @@ def _read_csv_rows(path: Path, limit: int | None = None):
     return rows
 
 
+def _clamp_page_size(value, default=256, maximum=2000):
+    try:
+        size = int(value)
+    except Exception:
+        return default
+    if size < 1:
+        return default
+    return min(size, maximum)
+
+
+def _normalize_book_data(book: str):
+    book_dir = _book_dir(book)
+    tokens_path = book_dir / 'tokens.csv'
+    chapters_path = book_dir / 'chapters_summary.json'
+    punct_path = book_dir / 'punctuation_counts.csv'
+    return book_dir, tokens_path, chapters_path, punct_path
+
+
 def _load_chapters_summary(book_dir: Path):
     path = book_dir / 'chapters_summary.json'
     if not path.exists():
@@ -190,11 +244,110 @@ def _load_chapters_summary(book_dir: Path):
     return parsed if isinstance(parsed, list) else []
 
 
+def _chapter_fragment(row: dict, idx: int):
+    return {
+        'fragment_id': f'chapter-{row.get("chapter_idx", idx)}',
+        'chapter_idx': int(row.get('chapter_idx', idx) or idx),
+        'title': row.get('title') or f'Chapter {idx + 1}',
+        'kind': 'chapter',
+        'start_offset': row.get('start_offset'),
+        'end_offset': row.get('end_offset'),
+        'chars': row.get('total_chars', 0),
+        'paragraphs': row.get('total_paragraphs', 0),
+        'sentences': row.get('total_sentences', 0),
+        'words': row.get('total_words', 0),
+        'dialog_sentences': row.get('dialog_sentences', 0),
+        'dialog_ratio': row.get('dialog_ratio', 0),
+    }
+
+
+def _load_raw_text(book: str):
+    path = _raw_text_path_for_book(book)
+    if not path:
+        return None, ''
+    try:
+        return path, path.read_text(encoding='utf-8')
+    except Exception:
+        return path, ''
+
+
+def _count_punctuation(text: str):
+    counts = Counter(ch for ch in text if ch in PUNCTUATION_MARKS)
+    return {mark: int(counts.get(mark, 0)) for mark in PUNCTUATION_MARKS}
+
+
+def _build_fragments(book: str, offset=0, size=256):
+    book_dir, tokens_path, chapters_path, punct_path = _normalize_book_data(book)
+    chapters = _load_chapters_summary(book_dir)
+    total = len(chapters)
+    start = max(0, offset)
+    end = min(total, start + size)
+    raw_path, raw_text = _load_raw_text(book)
+    items = []
+    for idx, row in enumerate(chapters[start:end], start=start):
+        fragment = _chapter_fragment(row if isinstance(row, dict) else {}, idx)
+        if raw_text and isinstance(row, dict):
+            begin = row.get('start_offset')
+            finish = row.get('end_offset')
+            if isinstance(begin, int) and isinstance(finish, int) and 0 <= begin <= finish <= len(raw_text):
+                fragment['excerpt'] = raw_text[begin:finish][:320]
+        items.append(fragment)
+    return {
+        'book': book,
+        'offset': start,
+        'size': size,
+        'total': total,
+        'items': items,
+        'source': str(raw_path) if raw_path else None,
+    }
+
+
+def _build_punctuation_timeline(book: str, offset=0, size=256):
+    book_dir, tokens_path, chapters_path, punct_path = _normalize_book_data(book)
+    chapters = _load_chapters_summary(book_dir)
+    total = len(chapters)
+    start = max(0, offset)
+    end = min(total, start + size)
+    raw_path, raw_text = _load_raw_text(book)
+    items = []
+    if raw_text and chapters:
+        for idx, row in enumerate(chapters[start:end], start=start):
+            if not isinstance(row, dict):
+                continue
+            begin = row.get('start_offset')
+            finish = row.get('end_offset')
+            if not isinstance(begin, int) or not isinstance(finish, int):
+                continue
+            slice_text = raw_text[max(0, begin):min(len(raw_text), finish)]
+            counts = _count_punctuation(slice_text)
+            items.append({
+                'idx': idx,
+                'title': row.get('title') or f'Chapter {idx + 1}',
+                'start_offset': begin,
+                'end_offset': finish,
+                'total_chars': max(0, finish - begin),
+                'counts': counts,
+                'total': sum(counts.values()),
+            })
+    elif punct_path.exists():
+        rows = _read_csv_rows(punct_path)
+        total = len(rows)
+        for idx, row in enumerate(rows[start:end], start=start):
+            items.append({'idx': idx, **row})
+    return {
+        'book': book,
+        'offset': start,
+        'size': size,
+        'total': total if total else len(items),
+        'items': items,
+        'marks': PUNCTUATION_MARKS,
+        'source': str(raw_path) if raw_path else None,
+    }
+
+
 def _load_book_summary(book: str):
-    book_dir = OUTPUTS_DIR / book
+    book_dir, tokens_path, chapters_path, punct_path = _normalize_book_data(book)
     tokens_path = book_dir / 'tokens.csv'
-    chapters_path = book_dir / 'chapters_summary.json'
-    punct_path = book_dir / 'punctuation_counts.csv'
     cache_key = (
         book,
         str(book_dir),
@@ -217,24 +370,105 @@ def _load_book_summary(book: str):
         'tokens': len(text_index),
         'punctuation_marks': len(punctuation_timeline),
     }
+    ready = bool(text_index or chapters or punctuation_timeline)
     payload = {
         'book': book,
-        'ready': bool(text_index or chapters or punctuation_timeline),
+        'ready': ready,
+        'status': 'ready' if ready else 'pending',
         'summary': summary,
         'text_index': text_index,
-        'fragments': chapters,
+        'fragments': [_chapter_fragment(row if isinstance(row, dict) else {}, idx) for idx, row in enumerate(chapters)],
         'punctuation_timeline': punctuation_timeline,
     }
     _BOOK_SUMMARY_CACHE[book] = (cache_key, payload)
     return payload
 
 
+def _build_book_index(book: str, offset=0, size=256):
+    """Return a paged chapter index using the same fragment row shape as book_fragments."""
+    book_dir, tokens_path, chapters_path, punct_path = _normalize_book_data(book)
+    chapters = _load_chapters_summary(book_dir)
+    total = len(chapters)
+    start = max(0, offset)
+    end = min(total, start + size)
+    raw_path, raw_text = _load_raw_text(book)
+    items = []
+    for idx, row in enumerate(chapters[start:end], start=start):
+        fragment = _chapter_fragment(row if isinstance(row, dict) else {}, idx)
+        if raw_text and isinstance(row, dict):
+            begin = row.get('start_offset')
+            finish = row.get('end_offset')
+            if isinstance(begin, int) and isinstance(finish, int) and 0 <= begin <= finish <= len(raw_text):
+                fragment['excerpt'] = raw_text[begin:finish][:320]
+        items.append(fragment)
+    return {
+        'book': book,
+        'offset': start,
+        'size': size,
+        'total': total,
+        'items': items,
+    }
+
+
+def _build_chapter_stats(book: str):
+    """Return per-chapter stats including punctuation counts derived from raw text when available.
+    Falls back to zeros if raw text or offsets are not available.
+    """
+    book_dir, tokens_path, chapters_path, punct_path = _normalize_book_data(book)
+    chapters = _load_chapters_summary(book_dir)
+    raw_path, raw_text = _load_raw_text(book)
+    items = []
+    for idx, ch in enumerate(chapters):
+        if not isinstance(ch, dict):
+            ch = {}
+        begin = ch.get('start_offset')
+        end = ch.get('end_offset')
+        counts = {mark: 0 for mark in PUNCTUATION_MARKS}
+        total = 0
+        chars = None
+        if raw_text and isinstance(begin, int) and isinstance(end, int) and 0 <= begin <= end <= len(raw_text):
+            snippet = raw_text[begin:end]
+            counts = _count_punctuation(snippet)
+            total = sum(counts.values())
+            chars = max(0, end - begin)
+        items.append({
+            'chapter_idx': int(ch.get('chapter_idx', idx)),
+            'title': ch.get('title') or f'Chapter {idx+1}',
+            'start_offset': begin,
+            'end_offset': end,
+            'chars': chars if chars is not None else ch.get('total_chars', 0),
+            'punctuation_counts': counts,
+            'punctuation_total': total,
+            'paragraphs': ch.get('total_paragraphs', 0),
+            'sentences': ch.get('total_sentences', 0),
+            'words': ch.get('total_words', 0),
+        })
+    return {'book': book, 'chapters': items}
+
+
+def _safe_download_filename(name: str) -> str:
+    base = Path(name).name
+    return base.replace('"', '_').replace('\r', '').replace('\n', '')
+
+
 def safe_join(base: Path, name: str) -> Path:
     # Prevent path traversal
+    base_resolved = base.resolve()
     target = (base / name).resolve()
-    if not str(target).startswith(str(base.resolve())):
-        raise ValueError('Invalid path')
+    try:
+        if not target.is_relative_to(base_resolved):
+            raise ValueError('Invalid path')
+    except AttributeError:
+        if target != base_resolved and base_resolved not in target.parents:
+            raise ValueError('Invalid path')
     return target
+
+
+def _parse_offset(value):
+    try:
+        return int(value or 0)
+    except Exception as e:
+        raise ValueError('invalid offset') from e
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -251,9 +485,15 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def _json(self, obj, status=200):
+        return self._json(obj, status=status, extra_headers=None)
+
+    def _json(self, obj, status=200, extra_headers=None):
         data = json.dumps(obj, ensure_ascii=False).encode('utf-8')
         self.send_response(status)
         self.send_header('Content-Type', 'application/json; charset=utf-8')
+        if extra_headers:
+            for k, v in extra_headers.items():
+                self.send_header(k, v)
         self.send_header('Content-Length', str(len(data)))
         self.end_headers()
         self.wfile.write(data)
@@ -309,9 +549,152 @@ class Handler(BaseHTTPRequestHandler):
                 book = qs.get('book', [''])[0]
                 if not book:
                     return self._json({'error': 'book param required'}, status=400)
-                if not (OUTPUTS_DIR / book).exists() and not _load_chapters_summary(OUTPUTS_DIR / book):
+                if not _is_valid_book_id(book):
+                    return self._json({'error': 'invalid book param'}, status=400)
+                book_dir = OUTPUTS_DIR / book
+                if not book_dir.exists() and not _load_chapters_summary(book_dir):
                     return self._json({'error': 'book not found'}, status=404)
                 return self._json(_load_book_summary(book))
+
+            if path == '/api/book_fragments':
+                book = qs.get('book', [''])[0]
+                if not book:
+                    return self._json({'error': 'book param required'}, status=400)
+                if not _is_valid_book_id(book):
+                    return self._json({'error': 'invalid book param'}, status=400)
+                offset = qs.get('offset', ['0'])[0]
+                size = _clamp_page_size(qs.get('size', ['256'])[0])
+                try:
+                    page_offset = _parse_offset(offset)
+                except ValueError:
+                    return self._json({'error': 'invalid offset'}, status=400)
+                payload = _build_fragments(book, page_offset, size)
+                if payload['total'] == 0 and payload['items'] == []:
+                    return self._json({'error': 'book not found'}, status=404)
+                return self._json(payload)
+
+            if path == '/api/book_index':
+                book = qs.get('book', [''])[0]
+                if not book:
+                    return self._json({'error': 'book param required'}, status=400)
+                if not _is_valid_book_id(book):
+                    return self._json({'error': 'invalid book param'}, status=400)
+                offset = qs.get('offset', ['0'])[0]
+                size = _clamp_page_size(qs.get('size', ['256'])[0])
+                try:
+                    page_offset = _parse_offset(offset)
+                except ValueError:
+                    return self._json({'error': 'invalid offset'}, status=400)
+                payload = _build_book_index(book, page_offset, size)
+                if payload['total'] == 0 and payload['items'] == []:
+                    return self._json({'error': 'book not found'}, status=404)
+                return self._json(payload)
+
+            if path == '/api/chapter_stats':
+                book = qs.get('book', [''])[0]
+                if not book:
+                    return self._json({'error': 'book param required'}, status=400)
+                if not _is_valid_book_id(book):
+                    return self._json({'error': 'invalid book param'}, status=400)
+                book_dir = OUTPUTS_DIR / book
+                if not book_dir.exists() and not _load_chapters_summary(book_dir):
+                    return self._json({'error': 'book not found'}, status=404)
+                return self._json(_build_chapter_stats(book))
+
+            if path == '/api/compare_books':
+                a = qs.get('a', [''])[0]
+                b = qs.get('b', [''])[0]
+                if not a or not b:
+                    return self._json({'error': 'a and b params required'}, status=400)
+                if not _is_valid_book_id(a) or not _is_valid_book_id(b):
+                    return self._json({'error': 'invalid book id'}, status=400)
+                # load summaries (cheap)
+                try:
+                    sa = _load_book_summary(a)
+                except Exception:
+                    return self._json({'error': f'book not found: {a}'}, status=404)
+                try:
+                    sb = _load_book_summary(b)
+                except Exception:
+                    return self._json({'error': f'book not found: {b}'}, status=404)
+                # compute a lightweight token overlap from text_index (top N)
+                ta = {r.get('token') for r in sa.get('text_index', [])[:200]}
+                tb = {r.get('token') for r in sb.get('text_index', [])[:200]}
+                shared = len([t for t in ta if t in tb and t])
+                return self._json({'a': sa, 'b': sb, 'shared_top_tokens': shared})
+
+            if path == '/api/motif_series':
+                book = qs.get('book', [''])[0]
+                term = qs.get('term', [''])[0]
+                if not book or not term:
+                    return self._json({'error': 'book and term required'}, status=400)
+                if not _is_valid_book_id(book):
+                    return self._json({'error': 'invalid book id'}, status=400)
+                # require sentences.jsonl to compute motif series
+                sent_path = OUTPUTS_DIR / 'processed' / f'{book}_sentences.jsonl'
+                if not sent_path.exists():
+                    alt = OUTPUTS_DIR / book / 'sentences.jsonl'
+                    if alt.exists():
+                        sent_path = alt
+                if not sent_path.exists():
+                    return self._json({'error': 'sentences jsonl not found'}, status=404)
+                # build simple per-chapter counts using chapters_summary offsets
+                chapters = _load_chapters_summary(OUTPUTS_DIR / book)
+                bins = []
+                for i, ch in enumerate(chapters):
+                    if isinstance(ch, dict):
+                        bins.append({'idx': i, 'start': ch.get('start_offset'), 'end': ch.get('end_offset'), 'count': 0})
+                    else:
+                        bins.append({'idx': i, 'start': None, 'end': None, 'count': 0})
+                tlower = term.lower()
+                try:
+                    with open(sent_path, 'r', encoding='utf-8') as fh:
+                        for line in fh:
+                            line = line.strip()
+                            if not line: continue
+                            try:
+                                obj = json.loads(line)
+                            except Exception:
+                                continue
+                            start = obj.get('start_offset')
+                            try:
+                                start = int(start) if start is not None else None
+                            except Exception:
+                                start = None
+                            tokens = obj.get('tokens') or []
+                            # find a bin
+                            bidx = None
+                            if start is not None:
+                                for bitem in bins:
+                                    if isinstance(bitem.get('start'), int) and isinstance(bitem.get('end'), int):
+                                        if bitem['start'] <= start < bitem['end']:
+                                            bidx = bitem['idx']; break
+                            if bidx is None:
+                                continue
+                            for tok in tokens:
+                                txt = tok.get('text') if isinstance(tok, dict) else (tok if isinstance(tok, str) else str(tok))
+                                if txt and txt.lower() == tlower:
+                                    bins[bidx]['count'] += 1
+                except Exception as e:
+                    return self._json({'error': f'failed to compute motif_series: {e}'}, status=500)
+                return self._json({'book': book, 'term': term, 'series': [{'idx': b['idx'], 'count': b['count']} for b in bins]})
+
+            if path == '/api/punctuation_timeline':
+                book = qs.get('book', [''])[0]
+                if not book:
+                    return self._json({'error': 'book param required'}, status=400)
+                if not _is_valid_book_id(book):
+                    return self._json({'error': 'invalid book param'}, status=400)
+                offset = qs.get('offset', ['0'])[0]
+                size = _clamp_page_size(qs.get('size', ['256'])[0])
+                try:
+                    page_offset = _parse_offset(offset)
+                except ValueError:
+                    return self._json({'error': 'invalid offset'}, status=400)
+                payload = _build_punctuation_timeline(book, page_offset, size)
+                if payload['total'] == 0 and payload['items'] == []:
+                    return self._json({'error': 'book not found'}, status=404)
+                return self._json(payload)
 
             if path == '/api/files':
                 book = qs.get('book', [''])[0]
@@ -350,7 +733,7 @@ class Handler(BaseHTTPRequestHandler):
                 if not candidate.exists():
                     # final fallback: attempt safe_join with provided book/name (may raise)
                     try:
-                        candidate = safe_join(OUTPUTS_DIR / book, unquote_plus(name))
+                        candidate = safe_join(OUTPUTS_DIR / book, name)
                     except Exception:
                         return self._json({'error': 'file not found'}, status=404)
                 file_path = candidate
@@ -421,7 +804,10 @@ class Handler(BaseHTTPRequestHandler):
                 if not book or not name:
                     return self._json({'error': 'book and name params required'}, status=400)
                 # safe join
-                file_path = safe_join(OUTPUTS_DIR / book, unquote_plus(name))
+                try:
+                    file_path = safe_join(OUTPUTS_DIR / book, name)
+                except ValueError:
+                    return self._json({'error': 'invalid path'}, status=400)
                 if not file_path.exists():
                     return self._json({'error': 'file not found'}, status=404)
                 # read text
@@ -448,7 +834,10 @@ class Handler(BaseHTTPRequestHandler):
                 name = qs.get('name', [''])[0]
                 if not book or not name:
                     return self._json({'error': 'book and name params required'}, status=400)
-                file_path = safe_join(OUTPUTS_DIR / 'figures' / 'wordclouds' / book, unquote_plus(name))
+                try:
+                    file_path = safe_join(OUTPUTS_DIR / 'figures' / 'wordclouds' / book, name)
+                except ValueError:
+                    return self._json({'error': 'invalid path'}, status=400)
                 if not file_path.exists():
                     return self._json({'error': 'file not found'}, status=404)
                 try:
@@ -550,7 +939,10 @@ class Handler(BaseHTTPRequestHandler):
                 name = qs.get('name', [''])[0]
                 if not book or not name:
                     return self._json({'error': 'book and name params required'}, status=400)
-                file_path = safe_join(OUTPUTS_DIR / book, unquote_plus(name))
+                try:
+                    file_path = safe_join(OUTPUTS_DIR / book, name)
+                except ValueError:
+                    return self._json({'error': 'invalid path'}, status=400)
                 if not file_path.exists():
                     return self._json({'error': 'file not found'}, status=404)
                 try:
@@ -559,9 +951,10 @@ class Handler(BaseHTTPRequestHandler):
                     return self._json({'error': f'cannot read file: {e}'}, status=500)
                 # serve as attachment
                 try:
+                    safe_name = _safe_download_filename(name)
                     self.send_response(200)
                     self.send_header('Content-Type', 'application/octet-stream')
-                    self.send_header('Content-Disposition', f'attachment; filename="{name}"')
+                    self.send_header('Content-Disposition', f'attachment; filename="{safe_name}"')
                     self.send_header('Content-Length', str(len(data)))
                     self.end_headers()
                     self.wfile.write(data)
@@ -591,10 +984,10 @@ class Handler(BaseHTTPRequestHandler):
                     legacy_script = PROJECT_ROOT / 'src' / 'legacy_scripts' / 'plot_wordcloud_counts_legacy.py'
                     if (PROJECT_ROOT / 'src' / 'cloud').exists():
                         cmd = [sys.executable, '-c', 'import src.cloud; print("delegated")']
-                        proc = subprocess.run(cmd, capture_output=True)
+                        proc = subprocess.run(cmd, capture_output=True, timeout=PLOT_TIMEOUT_SECONDS)
                     elif legacy_script.exists():
                         cmd = [sys.executable, str(legacy_script), '--text-id', book]
-                        proc = subprocess.run(cmd, capture_output=True)
+                        proc = subprocess.run(cmd, capture_output=True, timeout=PLOT_TIMEOUT_SECONDS)
                     else:
                         return self._json({'error': 'plot script not found'}, status=500)
                     stdout = proc.stdout.decode('utf-8', errors='replace') if proc.stdout else ''
@@ -602,6 +995,10 @@ class Handler(BaseHTTPRequestHandler):
                     if proc.returncode != 0:
                         return self._json({'error': 'plot failed', 'stdout': stdout, 'stderr': stderr}, status=500)
                     return self._json({'book': book, 'stdout': stdout, 'stderr': stderr})
+                except subprocess.TimeoutExpired as e:
+                    stdout = e.stdout.decode('utf-8', errors='replace') if getattr(e, 'stdout', None) else ''
+                    stderr = e.stderr.decode('utf-8', errors='replace') if getattr(e, 'stderr', None) else ''
+                    return self._json({'error': 'plot timed out', 'stdout': stdout, 'stderr': stderr}, status=HTTPStatus.GATEWAY_TIMEOUT)
                 except Exception as e:
                     return self._json({'error': str(e)}, status=500)
 
@@ -615,7 +1012,7 @@ class Handler(BaseHTTPRequestHandler):
                     if raw_name == 'чехов-письмо.txt' and ALT_CHEKHOV_PATH.exists():
                         raw_path = ALT_CHEKHOV_PATH
                     else:
-                        raw_path = safe_join(RAW_DIR, unquote_plus(raw_name))
+                        raw_path = safe_join(RAW_DIR, raw_name)
                     if not raw_path.exists():
                         return self._json({'error': 'raw file not found'}, status=404)
 
@@ -623,7 +1020,7 @@ class Handler(BaseHTTPRequestHandler):
                     script = PROJECT_ROOT / 'src' / 'analyze_text.py'
                     cmd = [sys.executable, str(script), 'analyze', '--input', str(raw_path), '--output-dir', str(OUTPUTS_DIR), '--lang', 'ru']
                     # Run subprocess synchronously and capture output
-                    proc = subprocess.run(cmd, capture_output=True)
+                    proc = subprocess.run(cmd, capture_output=True, timeout=ANALYSIS_TIMEOUT_SECONDS)
                     # sanitize stdout/stderr to valid utf-8 strings
                     stdout = proc.stdout.decode('utf-8', errors='replace') if proc.stdout is not None else ''
                     stderr = proc.stderr.decode('utf-8', errors='replace') if proc.stderr is not None else ''
@@ -641,6 +1038,12 @@ class Handler(BaseHTTPRequestHandler):
                     book_id = raw_path.stem
                     files = list_files(book_id)
                     return self._json({'book': book_id, 'files': files, 'stdout': stdout, 'stderr': stderr})
+                except ValueError:
+                    return self._json({'error': 'invalid raw path'}, status=400)
+                except subprocess.TimeoutExpired as e:
+                    stdout = e.stdout.decode('utf-8', errors='replace') if getattr(e, 'stdout', None) else ''
+                    stderr = e.stderr.decode('utf-8', errors='replace') if getattr(e, 'stderr', None) else ''
+                    return self._json({'error': 'analysis timed out', 'stdout': stdout, 'stderr': stderr}, status=HTTPStatus.GATEWAY_TIMEOUT)
                 except Exception as e:
                     return self._json({'error': str(e)}, status=500)
 
