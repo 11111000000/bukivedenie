@@ -1,0 +1,16 @@
+{
+  "chapters": [
+    {
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "start_offset": 0,
+      "end_offset": 8318,
+      "total_chars": 8318,
+      "total_paragraphs": 6,
+      "total_sentences": 74,
+      "total_words": 1316,
+      "dialog_sentences": 0,
+      "dialog_ratio": 0.0
+    }
+  ]
+}

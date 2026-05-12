@@ -1,0 +1,7 @@
+=== Cloud generation started: 2026-05-11T16:02:35.101405
+✗ Модуль wordcloud недоступен. Установите: pip install wordcloud
+=== Cloud generation started: 2026-05-11T17:52:22.975780
+✗ Таблица частот не найдена: outputs/tables/tolstoj_lew_nikolaewich-text_4_word_counts.csv
+  Подсказка: выполните
+    python src/analyze_text.py analyze --input data/raw/tolstoj_lew_nikolaewich-text_4.txt --output-dir outputs --lang ru
+  или запустите scripts/generate_word_counts.py --text-id tolstoj_lew_nikolaewich-text_4 или укажите --counts-path.

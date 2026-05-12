@@ -1,0 +1,29 @@
+=== Cloud generation started: 2026-05-11T15:56:24.304387
+✗ Модуль wordcloud недоступен. Установите: pip install wordcloud
+=== Cloud generation started: 2026-05-11T15:58:56.268572
+✗ Модуль wordcloud недоступен. Установите: pip install wordcloud
+=== Cloud generation started: 2026-05-11T16:52:32.063389
+✗ Таблица частот не найдена: outputs/tables/tolstoj_lew_nikolaewich-text_1_word_counts.csv
+  Подсказка: выполните
+    python src/analyze_text.py analyze --input data/raw/tolstoj_lew_nikolaewich-text_1.txt --output-dir outputs --lang ru
+  или запустите scripts/generate_word_counts.py --text-id tolstoj_lew_nikolaewich-text_1 или укажите --counts-path.
+=== Cloud generation started: 2026-05-11T17:23:34.187963
+✗ Таблица частот не найдена: outputs/tables/tolstoj_lew_nikolaewich-text_1_word_counts.csv
+  Подсказка: выполните
+    python src/analyze_text.py analyze --input data/raw/tolstoj_lew_nikolaewich-text_1.txt --output-dir outputs --lang ru
+  или запустите scripts/generate_word_counts.py --text-id tolstoj_lew_nikolaewich-text_1 или укажите --counts-path.
+=== Cloud generation started: 2026-05-11T17:29:22.244518
+✗ Таблица частот не найдена: outputs/tables/tolstoj_lew_nikolaewich-text_1_word_counts.csv
+  Подсказка: выполните
+    python src/analyze_text.py analyze --input data/raw/tolstoj_lew_nikolaewich-text_1.txt --output-dir outputs --lang ru
+  или запустите scripts/generate_word_counts.py --text-id tolstoj_lew_nikolaewich-text_1 или укажите --counts-path.
+=== Cloud generation started: 2026-05-11T17:48:55.342305
+✗ Таблица частот не найдена: outputs/tables/tolstoj_lew_nikolaewich-text_1_word_counts.csv
+  Подсказка: выполните
+    python src/analyze_text.py analyze --input data/raw/tolstoj_lew_nikolaewich-text_1.txt --output-dir outputs --lang ru
+  или запустите scripts/generate_word_counts.py --text-id tolstoj_lew_nikolaewich-text_1 или укажите --counts-path.
+=== Cloud generation started: 2026-05-11T18:13:05.723847
+✗ Таблица частот не найдена: outputs/tables/tolstoj_lew_nikolaewich-text_1_word_counts.csv
+  Подсказка: выполните
+    python src/analyze_text.py analyze --input data/raw/tolstoj_lew_nikolaewich-text_1.txt --output-dir outputs --lang ru
+  или запустите scripts/generate_word_counts.py --text-id tolstoj_lew_nikolaewich-text_1 или укажите --counts-path.

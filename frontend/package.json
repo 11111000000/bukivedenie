@@ -1,0 +1,31 @@
+{
+  "name": "frontend",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "setup": "npm ci --no-bin-links --legacy-peer-deps --no-audit --unsafe-perm --prefer-offline --no-fund",
+    "dev:rollup": "node ./node_modules/rollup/dist/bin/rollup -c -w",
+    "dev:bs": "browser-sync start --proxy 'http://127.0.0.1:8000' --files '../src/web_view/**/*' --no-open --port 5173",
+    "build": "rollup -c",
+    "preview": "node ./node_modules/rollup/dist/bin/rollup -c --silent",
+    "deploy": "npm run build && mkdir -p ../src/web_view && cp -r dist/* ../src/web_view/"
+  },
+  
+  "dependencies": {
+    "vega": "^6.2.0",
+    "vega-embed": "^7.1.0",
+    "vega-lite": "^6.4.3",
+    "vis-network": "^10.0.3",
+    "wordcloud": "^1.2.3"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.2",
+    "@rollup/plugin-node-resolve": "^11.2.1",
+    "browser-sync": "^2.29.3",
+    "rollup": "^2.79.1",
+    "rollup-plugin-livereload": "^2.0.5",
+    "rollup-plugin-serve": "^1.1.1",
+    "rollup-plugin-terser": "^7.0.2"
+  }
+}

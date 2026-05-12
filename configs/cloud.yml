@@ -1,0 +1,48 @@
+# Конфигурация визуализации облака слов
+# Используется скриптом plot_wordcloud.py
+
+# Шрифт с поддержкой кириллицы (обязательно)
+# Для Termux часто доступен: /system/fonts/NotoSans-Regular.ttf
+# Или можно положить в проект: configs/fonts/DejaVuSans.ttf
+font_path: "/system/fonts/NotoSans-Regular.ttf"
+
+# Размер изображения
+width: 1600
+height: 1000
+
+# Цвет фона: white, black, transparent
+background_color: "white"
+
+# Максимальное число слов в облаке
+max_words: 400
+
+# Минимальная частота для включения слова (глобальный count)
+min_count: 5
+
+# Минимальный per_1k для включения слова (опционально)
+per1k_min: 0.0
+
+# Масштабирование веса: sqrt, log, linear
+scale: "sqrt"
+
+# Цветовая схема: viridis, plasma, magma, cividis, inferno
+colormap: "viridis"
+
+# Фиксированный seed для воспроизводимости
+random_state: 42
+
+# Вероятность горизонтального размещения (0.0–1.0)
+prefer_horizontal: 0.9
+
+# Показывать ли коллокации (биграммы) — обычно False
+collocations: false
+
+# DPI при сохранении PNG
+dpi: 200
+
+# Опционально: маска (PNG с прозрачностью) для формы облака
+# mask_path: null
+mask_path: null
+
+# Единица учёта по умолчанию: lemmas или forms
+unit_default: "lemmas"
