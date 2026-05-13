@@ -41,7 +41,8 @@ try {
   await page.goto(url, { waitUntil: 'networkidle0' })
   // give some time for any charts to render
   await new Promise((r) => setTimeout(r, 1000))
-  await page.pdf({ path: outPdf, format: 'A4', printBackground: true })
+  // render as 16:9 at 1280x720
+  await page.pdf({ path: outPdf, width: '1280px', height: '720px', printBackground: true })
   console.log('Wrote PDF to', outPdf)
 } finally {
   await browser.close()

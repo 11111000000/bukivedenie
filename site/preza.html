@@ -6,12 +6,13 @@
   <title>Презентация — Bukivedenie</title>
   <style>
     /* presentation layout and typography */
-    :root{ --slide-width: 1024px; --slide-height: 576px; --page-margin: 20px; --frame-color: #e6e9ef }
+    :root{ --slide-width: 1280px; --slide-height: 720px; --page-margin: 20px; --frame-color: #e6e9ef }
+    @page { size: 1280px 720px; margin: 0 }
     body{font-family: Inter, Arial, Helvetica, sans-serif; margin:0; padding:20px; background:#f6f7fb; color:#222}
-    .slide{page-break-after:always; margin:12px auto; width:var(--slide-width); box-shadow: 0 6px 20px rgba(20,24,36,0.06); background:#fff; padding:20px; border-radius:8px; border:1px solid var(--frame-color)}
+    .slide{page-break-after:always; page-break-inside:avoid; margin:12px auto; width:var(--slide-width); height:var(--slide-height); box-shadow: 0 6px 20px rgba(20,24,36,0.06); background:#fff; padding:28px; border-radius:8px; border:1px solid var(--frame-color); box-sizing:border-box}
     .slide-inner{display:flex; gap:20px; align-items:flex-start}
-    .slide .text{flex: 1 1 40%}
-    .slide .media{flex: 1 1 60%; display:flex; align-items:center; justify-content:center}
+    .slide .text{flex: 1 1 45%; padding: 8px 12px}
+    .slide .media{flex: 1 1 55%; display:flex; align-items:center; justify-content:center}
     img{max-width:100%; height:auto; border-radius:6px}
     h1,h2{margin:4px 0 8px; font-weight:700}
     h1{font-size:28px}
@@ -22,8 +23,9 @@
 
     /* title / cover slide */
     .title-slide{background:linear-gradient(180deg,#0b3d91,#0a2b66); color:#fff; text-align:center}
-    .title-slide h2{font-size:36px; margin:18px 0}
-    .title-slide .muted{color:rgba(255,255,255,0.85)}
+    .title-slide .slide-inner{display:block; padding-top:80px}
+    .title-slide h2{font-size:44px; margin:18px 0; line-height:1.05}
+    .title-slide .muted{color:rgba(255,255,255,0.9); margin-top:12px}
 
     /* intro slide (image + text) */
     .intro-slide .slide-inner{flex-direction:row}

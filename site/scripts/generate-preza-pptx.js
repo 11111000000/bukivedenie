@@ -17,7 +17,8 @@ function extractSlides(html) {
     const img = imgm ? imgm[1].trim() : null
     const pm = part.match(/<p[^>]*class="caption"[^>]*>([\s\S]*?)<\/p>/i)
     const caption = pm ? pm[1].replace(/<[^>]+>/g,'').trim() : ''
-    return { title, img, caption }
+    // preserve raw HTML fragment to detect class names
+    return { title, img, caption, raw: part }
   })
   return slides
 }
@@ -29,20 +30,27 @@ async function main(){
   pres.layout = 'LAYOUT_WIDE'
 
   for (const s of slides) {
+    // choose template by presence of image and whether it's a cover
+    const isCover = /cover-slide/.test(s.raw || '') || /class=["'][^>]*cover-slide/.test(s.raw || '')
     const slide = pres.addSlide()
-    // title
-    slide.addText(s.title || '', { x:0.5, y:0.25, w:9, h:0.6, fontSize:24, bold:true })
-    // image if exists
+    if (isCover) {
+      // large centered title
+      slide.addText(s.title || '', { x:0.5, y:1.2, w:9, h:1.6, fontSize:36, bold:true, align:'center', color:'363636' })
+      if (s.caption) slide.addText(s.caption, { x:1, y:3.0, w:8, h:1.0, fontSize:14, color:'666666', align:'center' })
+      continue
+    }
+
+    // content slide: title left, image right
+    slide.addText(s.title || '', { x:0.5, y:0.2, w:8.5, h:0.8, fontSize:24, bold:true })
     if (s.img) {
-      // resolve relative path
       const imgPath = path.resolve(path.dirname(prezaPath), s.img)
       if (fs.existsSync(imgPath)) {
-        slide.addImage({ path: imgPath, x:0.5, y:1.1, w:9, h:4.5 })
+        // place image on right half
+        slide.addImage({ path: imgPath, x:5.0, y:1.1, w:4.5, h:3.5 })
       }
     }
-    // caption
     if (s.caption) {
-      slide.addText(s.caption, { x:0.5, y:5.8, w:9, h:1.2, fontSize:12 })
+      slide.addText(s.caption, { x:0.5, y:4.9, w:8.5, h:0.6, fontSize:12, color:'666666' })
     }
   }
 
