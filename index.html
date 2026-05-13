@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Лингвистический атлас книг — shell</title>
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <!-- Minimal app styles (uses existing site/src/style.css) -->
+    <style>
+      /* Small overrides for the shell layout */
+      html,body{height:100%;margin:0}
+      body{display:flex;flex-direction:column}
+      header.shell-header{
+        display:flex;align-items:center;gap:24px;padding:12px 16px;background:var(--panel,#fff);border-bottom:1px solid var(--line,#e6eef8)}
+      .shell-title{font-size:1.1rem;font-weight:700;margin:0}
+      nav.shell-menu{display:flex;gap:12px;margin-left:auto}
+      nav.shell-menu a{padding:8px 12px;border-radius:8px;color:var(--accent,#3558a6);text-decoration:none}
+      nav.shell-menu a.active{background:var(--accent,#3558a6);color:#fff}
+      iframe.content-frame{border:0;width:100%;flex:1;height:calc(100vh - 64px);background:transparent}
+      @media (max-width:640px){nav.shell-menu{gap:8px}iframe.content-frame{height:calc(100vh - 96px)}}
+    </style>
+    <link rel="stylesheet" crossorigin href="./assets/style-DXMHjp9e.css">
+  </head>
+  <body>
+    <header class="shell-header">
+      <div style="display:flex;align-items:center;gap:12px">
+        <img src="./favicon.svg" alt="logo" width="36" height="36" style="display:block" />
+        <h1 class="shell-title">Лингвистический атлас книг</h1>
+      </div>
+      <nav class="shell-menu" role="navigation" aria-label="Main menu">
+        <a href="#" data-src="lingvistics.html" class="active">Лингвистика</a>
+        <a href="#" data-src="war-and-peace-map.html">Карта</a>
+        <a href="#" data-src="war-and-peace-cloud.html">Облако</a>
+        <a href="#" data-src="war-and-peace-characters.html">Персонажи</a>
+        <a href="#" data-src="war-characters.html">Персонажи (связи)</a>
+        <a href="#" data-src="war-and-peace-timeline.html">Таймлайн</a>
+      </nav>
+    </header>
+
+    <iframe id="content-frame" class="content-frame" src="lingvistics.html" title="content"></iframe>
+
+    <script>
+      // Menu click handler: update iframe src
+      const menu = document.querySelectorAll('nav.shell-menu a');
+      const frame = document.getElementById('content-frame');
+      menu.forEach(a=>{
+        a.addEventListener('click', e=>{
+          e.preventDefault();
+          const src = a.getAttribute('data-src');
+          if(!src) return;
+          // mark active
+          menu.forEach(x=>x.classList.remove('active'));
+          a.classList.add('active');
+          frame.src = src;
+        })
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+{
+  "generated_at": "2026-05-13T22:57:56.933770Z",
+  "books": [
+    {
+      "id": "tolstoj_lew_nikolaewich-text_1",
+      "title": "tolstoj_lew_nikolaewich-text_1",
+      "updated": "2026-05-13T22:57:48.670317",
+      "files": [
+        "run_metadata.json",
+        "chapters_summary.json",
+        "complexity_metrics.json",
+        "characters.csv",
+        "tokens.csv",
+        "cooccurrence_edges.csv",
+        "sentiment_by_chapter.csv",
+        "character_freq_by_chapter.csv",
+        "token_freq_by_chapter.csv",
+        "punctuation_counts.csv",
+        "hapax.csv"
+      ]
+    },
+    {
+      "id": "tolstoj_lew_nikolaewich-text_2",
+      "title": "tolstoj_lew_nikolaewich-text_2",
+      "updated": "2026-05-13T22:57:50.761993",
+      "files": [
+        "run_metadata.json",
+        "chapters_summary.json",
+        "complexity_metrics.json",
+        "characters.csv",
+        "tokens.csv",
+        "cooccurrence_edges.csv",
+        "sentiment_by_chapter.csv",
+        "character_freq_by_chapter.csv",
+        "punctuation_counts.csv",
+        "hapax.csv"
+      ]
+    },
+    {
+      "id": "tolstoj_lew_nikolaewich-text_3",
+      "title": "tolstoj_lew_nikolaewich-text_3",
+      "updated": "2026-05-13T22:57:52.856906",
+      "files": [
+        "run_metadata.json",
+        "chapters_summary.json",
+        "complexity_metrics.json",
+        "characters.csv",
+        "tokens.csv",
+        "cooccurrence_edges.csv",
+        "sentiment_by_chapter.csv",
+        "character_freq_by_chapter.csv",
+        "punctuation_counts.csv",
+        "hapax.csv"
+      ]
+    },
+    {
+      "id": "tolstoj_lew_nikolaewich-text_4",
+      "title": "tolstoj_lew_nikolaewich-text_4",
+      "updated": "2026-05-13T22:57:56.723052",
+      "files": [
+        "run_metadata.json",
+        "chapters_summary.json",
+        "complexity_metrics.json",
+        "characters.csv",
+        "tokens.csv",
+        "cooccurrence_edges.csv",
+        "sentiment_by_chapter.csv",
+        "character_freq_by_chapter.csv",
+        "token_freq_by_chapter.csv",
+        "punctuation_counts.csv",
+        "hapax.csv"
+      ]
+    }
+  ]
+}
