@@ -1,0 +1,1802 @@
+[
+  {
+    "name": "Пьером",
+    "name_lower": "пьер",
+    "occurrences": 380,
+    "first_offset": 63082,
+    "chapters": "7,16,17,18,23,24,26,27,44,45,47,48,49,50,51,52,58,59,60,61,63,73,74,75,76,77,83,84,92,93,94,98,99",
+    "num_chapters": 33,
+    "context_sample": "я своего в Москве с Пьером, князь Андрей уехал"
+  },
+  {
+    "name": "Москву",
+    "name_lower": "москв",
+    "occurrences": 200,
+    "first_offset": 12454,
+    "chapters": "0,2,5,6,7,8,15,16,17,18,23,24,26,28,29,31,32,34,35,36,41,44,45,46,47,48,49,51,52,53,56,65,66,68,69,70,71,75,76,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,94,95,96,97,98,99",
+    "num_chapters": 60,
+    "context_sample": "то Наполеон пошел в Москву потому, что он захо"
+  },
+  {
+    "name": "Наполеона",
+    "name_lower": "наполеон",
+    "occurrences": 195,
+    "first_offset": 3973,
+    "chapters": "0,1,2,3,4,5,6,7,8,9,10,17,18,23,28,31,32,33,34,40,42,44,45,46,48,50,51,52,53,54,55,56,57,61,62,63,65,66,67,69,71,72,77,85,86,92,94,98,99",
+    "num_chapters": 49,
+    "context_sample": "истемы, властолюбие Наполеона, твердость Александ"
+  },
+  {
+    "name": "Андрей",
+    "name_lower": "андр",
+    "occurrences": 131,
+    "first_offset": 63096,
+    "chapters": "7,8,9,10,29,31,32,35,37,42,43,51,52,64,65,77,83,96,97,99",
+    "num_chapters": 20,
+    "context_sample": "кве с Пьером, князь Андрей уехал в Петербург\nп"
+  },
+  {
+    "name": "Наташи",
+    "name_lower": "наташ",
+    "occurrences": 124,
+    "first_offset": 108999,
+    "chapters": "11,15,16,17,18,24,42,52,65,78,79,80,81,82,83,92,94,96,97",
+    "num_chapters": 19,
+    "context_sample": "вещая его о болезни Наташи и о разрыве с князе"
+  },
+  {
+    "name": "Марья",
+    "name_lower": "марь",
+    "occurrences": 110,
+    "first_offset": 68848,
+    "chapters": "7,29,30,31,35,36,37,38,39,40,41,45,51,65,78",
+    "num_chapters": 15,
+    "context_sample": "к другому ‑‑ княжна Марья, Десаль, Николушка "
+  },
+  {
+    "name": "Кутузова",
+    "name_lower": "кутуз",
+    "occurrences": 98,
+    "first_offset": 63544,
+    "chapters": "7,33,34,42,43,46,48,49,52,58,63,68,69,70,85,89,90,99",
+    "num_chapters": 18,
+    "context_sample": "язь Андрей встретил\nКутузова, своего прежнего, в"
+  },
+  {
+    "name": "Андрея",
+    "name_lower": "андре",
+    "occurrences": 94,
+    "first_offset": 64176,
+    "chapters": "7,8,9,10,11,17,29,30,31,32,35,36,37,41,42,43,51,52,58,63,64,65,70,75,83,96,97",
+    "num_chapters": 27,
+    "context_sample": "после приезда князя Андрея в Турецкую армию, в"
+  },
+  {
+    "name": "Алпатыча",
+    "name_lower": "алпатыч",
+    "occurrences": 94,
+    "first_offset": 228344,
+    "chapters": "29,30,31,32,35,36,37,38,40,41",
+    "num_chapters": 10,
+    "context_sample": "‑‑ А Алпатыча посылают в Смоленск"
+  },
+  {
+    "name": "Чт",
+    "name_lower": "чт",
+    "occurrences": 73,
+    "first_offset": 17969,
+    "chapters": "1,5,7,10,15,16,24,25,26,29,31,32,37,39,41,42,43,44,45,47,49,51,57,58,59,62,65,66,74,76,78,79,81,82,83,87,88,89,90,91,96,97,99",
+    "num_chapters": 43,
+    "context_sample": "‑‑ Чтò ? Чтò он сказал?‑‑"
+  },
+  {
+    "name": "Ростов",
+    "name_lower": "рост",
+    "occurrences": 67,
+    "first_offset": 86429,
+    "chapters": "8,11,12,13,14,23,25,27,28,34,40,41,44,88",
+    "num_chapters": 14,
+    "context_sample": "тно, как\nего обожал Ростов в 1805‑м году, и ви"
+  },
+  {
+    "name": "Растопчина",
+    "name_lower": "растопч",
+    "occurrences": 60,
+    "first_offset": 149625,
+    "chapters": "17,23,24,27,44,45,69,71,76,77,78,79,81,89,90,91,99",
+    "num_chapters": 17,
+    "context_sample": "он достанет у графа\nРастопчина."
+  },
+  {
+    "name": "России",
+    "name_lower": "росси",
+    "occurrences": 57,
+    "first_offset": 3171,
+    "chapters": "0,1,2,5,6,7,8,17,23,24,26,28,32,33,35,41,43,44,46,51,52,55,56,65,68,69,70,71,82,89,90,97",
+    "num_chapters": 32,
+    "context_sample": " Восток, к\nграницам России, к которым точно та"
+  },
+  {
+    "name": "Балашев",
+    "name_lower": "балаш",
+    "occurrences": 56,
+    "first_offset": 23772,
+    "chapters": "2,3,4,5,6,8,28",
+    "num_chapters": 7,
+    "context_sample": "то генерал‑адъютант Балашев, одно из\nближайших "
+  },
+  {
+    "name": "Смоленской",
+    "name_lower": "смоленск",
+    "occurrences": 47,
+    "first_offset": 5852,
+    "chapters": "0,17,24,28,29,30,31,32,34,35,42,46,48,52,53,65,66,68,71,89,99",
+    "num_chapters": 21,
+    "context_sample": "ли и разоряли людей Смоленской и Московской\nгуберн"
+  },
+  {
+    "name": "Слава Богу",
+    "name_lower": "бог",
+    "occurrences": 45,
+    "first_offset": 72910,
+    "chapters": "7,10,16,17,23,24,28,32,37,38,42,43,47,52,59,63,72,75,77,81,83,92,95,97,99",
+    "num_chapters": 25,
+    "context_sample": "‑‑ Слава Богу, что могу ехать, ‑‑"
+  },
+  {
+    "name": "Петю",
+    "name_lower": "пет",
+    "occurrences": 45,
+    "first_offset": 115807,
+    "chapters": "11,15,16,24,25,26,27,78,79,80,82,83,96",
+    "num_chapters": 13,
+    "context_sample": "тей? Я бы не только Петю‑брата\nне повел бы, "
+  },
+  {
+    "name": "Александра",
+    "name_lower": "александр",
+    "occurrences": 40,
+    "first_offset": 3994,
+    "chapters": "0,1,2,3,4,5,6,8,28,85,99",
+    "num_chapters": 11,
+    "context_sample": "аполеона, твердость Александра, ошибки дипломатов\n"
+  },
+  {
+    "name": "Ах",
+    "name_lower": "ах",
+    "occurrences": 40,
+    "first_offset": 176785,
+    "chapters": "24,29,30,37,44,45,47,48,50,52,59,74,76,77,79,81,82,83,84,88,92,96,97,99",
+    "num_chapters": 24,
+    "context_sample": "‑‑ Ах да, твое дело. В гу"
+  },
+  {
+    "name": "Соне",
+    "name_lower": "сон",
+    "occurrences": 38,
+    "first_offset": 109361,
+    "chapters": "11,15,17,24,78,79,80,82,83,96",
+    "num_chapters": 10,
+    "context_sample": "полнить их желание. Соне он писал отдельно."
+  },
+  {
+    "name": "Ежели",
+    "name_lower": "ежел",
+    "occurrences": 35,
+    "first_offset": 47944,
+    "chapters": "5,6,7,8,11,24,26,28,32,35,37,41,43,44,45,46,47,52,56,63,64,72,73,75,77,82,89,91,97,99",
+    "num_chapters": 30,
+    "context_sample": "рикнул Наполеон. ‑‑ Ежели бы вы дали мне Пете"
+  },
+  {
+    "name": "Граф Бенигсен",
+    "name_lower": "бенигсен",
+    "occurrences": 32,
+    "first_offset": 22028,
+    "chapters": "2,5,8,9,10,28,29,48,49,50,69,70",
+    "num_chapters": 12,
+    "context_sample": "быть\nхозяйкой бала. Граф Бенигсен, помещик Виленской "
+  },
+  {
+    "name": "Элен",
+    "name_lower": "элен",
+    "occurrences": 31,
+    "first_offset": 23201,
+    "chapters": "2,33,72,73,99",
+    "num_chapters": 5,
+    "context_sample": "ночи еще танцовали. Элен, не имевшая достойн"
+  },
+  {
+    "name": "Ростовых",
+    "name_lower": "ростовых",
+    "occurrences": 31,
+    "first_offset": 135560,
+    "chapters": "15,16,17,18,24,25,44,78,79,80,81,82,83,84,88,92,95,97",
+    "num_chapters": 18,
+    "context_sample": "ву, и всё семейство\nРостовых перебралось от Марь"
+  },
+  {
+    "name": "Дрон",
+    "name_lower": "дрон",
+    "occurrences": 30,
+    "first_offset": 303544,
+    "chapters": "36,37,38,40,41",
+    "num_chapters": 5,
+    "context_sample": "м управлял староста Дрон, которого старый кн"
+  },
+  {
+    "name": "Мавра Кузьминишна",
+    "name_lower": "кузьминишн",
+    "occurrences": 25,
+    "first_offset": 623854,
+    "chapters": "79,80,83,88",
+    "num_chapters": 4,
+    "context_sample": " ключница, старушка Мавра Кузьминишна, отделилась от толп"
+  },
+  {
+    "name": "Bourienne",
+    "name_lower": "bourienne",
+    "occurrences": 24,
+    "first_offset": 67481,
+    "chapters": "7,29,35,37",
+    "num_chapters": 4,
+    "context_sample": "е годы своей жизни.\nBourienne была та же радостно"
+  },
+  {
+    "name": "Ильина",
+    "name_lower": "иль",
+    "occurrences": 24,
+    "first_offset": 113731,
+    "chapters": "11,12,13,14,40,41",
+    "num_chapters": 6,
+    "context_sample": "на молодого офицера Ильина, который\nжался окол"
+  },
+  {
+    "name": "Петербурга",
+    "name_lower": "петербург",
+    "occurrences": 21,
+    "first_offset": 21005,
+    "chapters": "2,5,6,7,8,28,33,34,45,52,68,72,73,78,99",
+    "num_chapters": 15,
+    "context_sample": "мператор приехал из Петербурга. Общего плана\nдейст"
+  },
+  {
+    "name": "Только",
+    "name_lower": "только",
+    "occurrences": 21,
+    "first_offset": 37409,
+    "chapters": "4,12,16,17,23,24,26,32,38,48,62,74,75,86,90,96,97,99",
+    "num_chapters": 18,
+    "context_sample": "лаве правительства.\nТолько этою необходимостью"
+  },
+  {
+    "name": "Граф",
+    "name_lower": "граф",
+    "occurrences": 21,
+    "first_offset": 174675,
+    "chapters": "24,44,45,47,49,71,76,78,79,81,82,83,88,90,95,96",
+    "num_chapters": 16,
+    "context_sample": "‑‑ Граф! что это дурно, что"
+  },
+  {
+    "name": "Eh",
+    "name_lower": "eh",
+    "occurrences": 20,
+    "first_offset": 34730,
+    "chapters": "3,6,33,34,52,57,62,70,72,73,77,93,94,98",
+    "num_chapters": 14,
+    "context_sample": "‑‑ Eh bien, général, tout"
+  },
+  {
+    "name": "Лысые Горы",
+    "name_lower": "гор",
+    "occurrences": 20,
+    "first_offset": 66670,
+    "chapters": "7,31,32,35,36,38,42,51,71,78,79,81",
+    "num_chapters": 12,
+    "context_sample": "язь\nАндрей заехал в Лысые Горы, которые были на са"
+  },
+  {
+    "name": "Верещагин",
+    "name_lower": "верещаг",
+    "occurrences": 20,
+    "first_offset": 606524,
+    "chapters": "76,77,89,90",
+    "num_chapters": 4,
+    "context_sample": ". е. он трактирщик, Верещагин. ‑‑ Вы слышали,\nмож"
+  },
+  {
+    "name": "Герасим",
+    "name_lower": "герасим",
+    "occurrences": 20,
+    "first_offset": 660719,
+    "chapters": "84,92,93,94,98",
+    "num_chapters": 5,
+    "context_sample": " подошел к калитке. Герасим, тот самый желтый\nб"
+  },
+  {
+    "name": "Мюрат",
+    "name_lower": "мюрат",
+    "occurrences": 19,
+    "first_offset": 32861,
+    "chapters": "3,4,50,61,62,63,91",
+    "num_chapters": 7,
+    "context_sample": "йствительно это был Мюрат, называемый теперь\n"
+  },
+  {
+    "name": "Барклаю",
+    "name_lower": "баркла",
+    "occurrences": 19,
+    "first_offset": 66565,
+    "chapters": "7,8,28,31,33,42,52,63,70",
+    "num_chapters": 9,
+    "context_sample": "дал ему поручение к\nБарклаю‑де‑Толли."
+  },
+  {
+    "name": "Дуняша",
+    "name_lower": "дуняш",
+    "occurrences": 19,
+    "first_offset": 296545,
+    "chapters": "35,37,38,39,40,41,79,82,83",
+    "num_chapters": 9,
+    "context_sample": "лась и увидала, что Дуняша, ее горничная, очев"
+  },
+  {
+    "name": "Барклай",
+    "name_lower": "барклай",
+    "occurrences": 18,
+    "first_offset": 51206,
+    "chapters": "5,8,9,28,42,46,63,70",
+    "num_chapters": 8,
+    "context_sample": "войны, ни для мира! Барклай, говорят, дельнее\nи"
+  },
+  {
+    "name": "Можайск",
+    "name_lower": "можайск",
+    "occurrences": 18,
+    "first_offset": 381344,
+    "chapters": "45,47,48,52,54,66,74,75,76,92",
+    "num_chapters": 10,
+    "context_sample": "то он в ночь едет в\nМожайск к войску, и чтобы т"
+  },
+  {
+    "name": "Боссе",
+    "name_lower": "босс",
+    "occurrences": 18,
+    "first_offset": 442613,
+    "chapters": "53,57,62,99",
+    "num_chapters": 4,
+    "context_sample": " не видит господина Боссе, и подозвал к себе "
+  },
+  {
+    "name": "Moscou",
+    "name_lower": "moscou",
+    "occurrences": 17,
+    "first_offset": 14880,
+    "chapters": "1,6,34,44,53,65,85,86,89,94",
+    "num_chapters": 10,
+    "context_sample": "редине которых была Moscou la ville sainte,566"
+  },
+  {
+    "name": "Empereur",
+    "name_lower": "empereur",
+    "occurrences": 17,
+    "first_offset": 15869,
+    "chapters": "1,3,4,5,6,33,53,56,94",
+    "num_chapters": 9,
+    "context_sample": "… Le voilà!… Vive l'Empereur! Les voilà donc\nles"
+  },
+  {
+    "name": "Государь",
+    "name_lower": "государь",
+    "occurrences": 17,
+    "first_offset": 21864,
+    "chapters": "2,10,27,45,62,99",
+    "num_chapters": 6,
+    "context_sample": "была принята всеми. Государь\nизъявил согласие. Г"
+  },
+  {
+    "name": "Балашеву",
+    "name_lower": "балашев",
+    "occurrences": 17,
+    "first_offset": 24078,
+    "chapters": "2,3,4,5,6",
+    "num_chapters": 5,
+    "context_sample": " даме и\nобратился к Балашеву. Только что Балашев"
+  },
+  {
+    "name": "Ростову",
+    "name_lower": "ростов",
+    "occurrences": 17,
+    "first_offset": 63973,
+    "chapters": "7,11,14,15,17,23,34,40,44,45,78,83,95",
+    "num_chapters": 13,
+    "context_sample": "ометирующим графиню Ростову, и потому он искал "
+  },
+  {
+    "name": "Одни",
+    "name_lower": "одн",
+    "occurrences": 17,
+    "first_offset": 75847,
+    "chapters": "7,24,25,32,42,43,45,47,52,64,69,70,81,85,96,98",
+    "num_chapters": 16,
+    "context_sample": "рь всё рассыпалось. Одни бессмысленные явлен"
+  },
+  {
+    "name": "Вольцоген",
+    "name_lower": "вольцоген",
+    "occurrences": 17,
+    "first_offset": 79346,
+    "chapters": "8,9,10,32,52,63",
+    "num_chapters": 6,
+    "context_sample": "сардинский выходец,\nВольцоген и многие другие. Хо"
+  },
+  {
+    "name": "Марья Генриховна",
+    "name_lower": "генриховн",
+    "occurrences": 17,
+    "first_offset": 116578,
+    "chapters": "11,12",
+    "num_chapters": 2,
+    "context_sample": ". Хоть посушимся, и Марья Генриховна там."
+  },
+  {
+    "name": "Ферапонтова",
+    "name_lower": "ферапонт",
+    "occurrences": 17,
+    "first_offset": 236528,
+    "chapters": "31",
+    "num_chapters": 1,
+    "context_sample": "м дворе, у дворника\nФерапонтова, у которого он уже "
+  },
+  {
+    "name": "Борис",
+    "name_lower": "борис",
+    "occurrences": 16,
+    "first_offset": 23016,
+    "chapters": "2,49,58",
+    "num_chapters": 3,
+    "context_sample": " подписке для бала. Борис теперь был\nбогатый "
+  },
+  {
+    "name": "Лаврушку",
+    "name_lower": "лаврушк",
+    "occurrences": 16,
+    "first_offset": 116992,
+    "chapters": "11,12,34,40,41",
+    "num_chapters": 5,
+    "context_sample": "щ, крикнул за собой Лаврушку с вещами, и пошел с"
+  },
+  {
+    "name": "Ведь",
+    "name_lower": "ведь",
+    "occurrences": 16,
+    "first_offset": 139613,
+    "chapters": "15,37,45,49,52,59,81,82,83,97,99",
+    "num_chapters": 11,
+    "context_sample": "ринимать лекарство! Ведь нельзя шутить этим,"
+  },
+  {
+    "name": "Кутузову",
+    "name_lower": "кутузов",
+    "occurrences": 16,
+    "first_offset": 271144,
+    "chapters": "33,42,43,46,49,63,71,90,99",
+    "num_chapters": 9,
+    "context_sample": "у прилично ли графу\nКутузову, самому старому ген"
+  },
+  {
+    "name": "Бородинского",
+    "name_lower": "бородинского",
+    "occurrences": 16,
+    "first_offset": 387684,
+    "chapters": "46,50,53,61,63,66,71,74,78,85,89,92,97",
+    "num_chapters": 13,
+    "context_sample": "е укрепляли позиции Бородинского поля влево под\nпрям"
+  },
+  {
+    "name": "Неману",
+    "name_lower": "неман",
+    "occurrences": 15,
+    "first_offset": 14672,
+    "chapters": "1,2,3,5,29",
+    "num_chapters": 5,
+    "context_sample": " коляске подъехал к Неману, и\nс тем чтоб осмот"
+  },
+  {
+    "name": "Вильне",
+    "name_lower": "вильн",
+    "occurrences": 15,
+    "first_offset": 20868,
+    "chapters": "2,4,5,6,8,11,68,72,99",
+    "num_chapters": 9,
+    "context_sample": "ее месяца уже жил в Вильне, делая смотры\nи ман"
+  },
+  {
+    "name": "Один Багратион",
+    "name_lower": "багратион",
+    "occurrences": 15,
+    "first_offset": 51481,
+    "chapters": "5,8,10,28,31,32,46,59,61,63",
+    "num_chapters": 10,
+    "context_sample": ", и время проходит. Один Багратион ‑‑ военный\nчеловек."
+  },
+  {
+    "name": "Болконского",
+    "name_lower": "болконского",
+    "occurrences": 15,
+    "first_offset": 76941,
+    "chapters": "8,9,10,17,23,31,37,40,42,43,49,97",
+    "num_chapters": 12,
+    "context_sample": "хо и холодно принял Болконского, и сказал\nсвоим нем"
+  },
+  {
+    "name": "Бонапарте",
+    "name_lower": "бонапарт",
+    "occurrences": 15,
+    "first_offset": 83311,
+    "chapters": "8,10,33,34,36,44,71,90,91,92,99",
+    "num_chapters": 11,
+    "context_sample": " с таким гением как Бонапарте (его опять называли"
+  },
+  {
+    "name": "Француз",
+    "name_lower": "француз",
+    "occurrences": 15,
+    "first_offset": 96040,
+    "chapters": "9,14,30,40,52,60,91,92,93,94,99",
+    "num_chapters": 11,
+    "context_sample": "совершенной\nистины. Француз бывает самоуверен п"
+  },
+  {
+    "name": "Несколько",
+    "name_lower": "несколько",
+    "occurrences": 15,
+    "first_offset": 122611,
+    "chapters": "12,25,26,32,34,42,63,65,87,91,94,95",
+    "num_chapters": 12,
+    "context_sample": "лалось в кибиточке. Несколько раз\nРостов, заверты"
+  },
+  {
+    "name": "Отчего",
+    "name_lower": "отчего",
+    "occurrences": 15,
+    "first_offset": 183720,
+    "chapters": "24,37,38,44,52,64,81",
+    "num_chapters": 7,
+    "context_sample": "‑‑ Отчего вы уезжаете? Отчего"
+  },
+  {
+    "name": "Толли",
+    "name_lower": "толл",
+    "occurrences": 14,
+    "first_offset": 66576,
+    "chapters": "7,8,28,33,42,46,52,63,70,82",
+    "num_chapters": 10,
+    "context_sample": "учение к\nБарклаю‑де‑Толли."
+  },
+  {
+    "name": "Пфуля",
+    "name_lower": "пфул",
+    "occurrences": 14,
+    "first_offset": 81028,
+    "chapters": "8,9,10,28",
+    "num_chapters": 4,
+    "context_sample": " передававший мысли Пфуля в более доступной ф"
+  },
+  {
+    "name": "Одно",
+    "name_lower": "одно",
+    "occurrences": 14,
+    "first_offset": 84566,
+    "chapters": "8,29,32,35,36,42,44,52,59,65,75,88,95",
+    "num_chapters": 13,
+    "context_sample": ", оставим\nи Дриссу. Одно, чтò нам остается у"
+  },
+  {
+    "name": "Жюли",
+    "name_lower": "жюл",
+    "occurrences": 14,
+    "first_offset": 221880,
+    "chapters": "29,44,45",
+    "num_chapters": 3,
+    "context_sample": "несмотря на то, что Жюли, теперь княгиня\nДру"
+  },
+  {
+    "name": "Офицер Тимохин",
+    "name_lower": "тимох",
+    "occurrences": 14,
+    "first_offset": 263103,
+    "chapters": "32,51,52,64,96,97",
+    "num_chapters": 6,
+    "context_sample": ",\nмускулистое мясо. Офицер Тимохин, с красным носиком,"
+  },
+  {
+    "name": "Mais",
+    "name_lower": "mais",
+    "occurrences": 14,
+    "first_offset": 272943,
+    "chapters": "33,57,72,73,77,85,94",
+    "num_chapters": 7,
+    "context_sample": "‑‑ Mais on dit qu'il est av"
+  },
+  {
+    "name": "Еще",
+    "name_lower": "ещ",
+    "occurrences": 13,
+    "first_offset": 45305,
+    "chapters": "5,14,24,31,44,45,64,75,78,81,99",
+    "num_chapters": 11,
+    "context_sample": "‑‑ Еще нет, ‑‑ вставил Нап"
+  },
+  {
+    "name": "Лицо",
+    "name_lower": "лицо",
+    "occurrences": 13,
+    "first_offset": 47540,
+    "chapters": "5,9,12,29,35,42,59,88,90,92,94,99",
+    "num_chapters": 12,
+    "context_sample": "ся\nпротив Балашева. Лицо его как будто окаме"
+  },
+  {
+    "name": "Ваша",
+    "name_lower": "ваш",
+    "occurrences": 13,
+    "first_offset": 52052,
+    "chapters": "5,37,47,64,74,87,89,90,99",
+    "num_chapters": 9,
+    "context_sample": "польских провинций. Ваша армия ропщет."
+  },
+  {
+    "name": "Синей Бороде",
+    "name_lower": "бород",
+    "occurrences": 13,
+    "first_offset": 71976,
+    "chapters": "7,34,46,48,58,61,63,66,68,69",
+    "num_chapters": 10,
+    "context_sample": "зывать ему\nсказку о Синей Бороде, но, не досказав, з"
+  },
+  {
+    "name": "Паулучи",
+    "name_lower": "паулуч",
+    "occurrences": 13,
+    "first_offset": 79315,
+    "chapters": "8,9,10,28",
+    "num_chapters": 4,
+    "context_sample": "и, генерал‑адъютант Паулучи ‑‑ сардинский выход"
+  },
+  {
+    "name": "Один",
+    "name_lower": "од",
+    "occurrences": 13,
+    "first_offset": 87598,
+    "chapters": "8,25,26,27,31,33,47,48,50,88,91,93,99",
+    "num_chapters": 13,
+    "context_sample": "ыло в другое время. Один, не желая только по"
+  },
+  {
+    "name": "Денисова",
+    "name_lower": "денис",
+    "occurrences": 13,
+    "first_offset": 152934,
+    "chapters": "17,34,42,75",
+    "num_chapters": 4,
+    "context_sample": "а вспомнила брата и Денисова. Когда\nмолились за "
+  },
+  {
+    "name": "Его",
+    "name_lower": "его",
+    "occurrences": 13,
+    "first_offset": 156134,
+    "chapters": "17,25,32,36,37,45,64,70,99",
+    "num_chapters": 9,
+    "context_sample": "вича; помяни правду Его и кротость, воздажд"
+  },
+  {
+    "name": "Мне",
+    "name_lower": "мн",
+    "occurrences": 13,
+    "first_offset": 183593,
+    "chapters": "24,29,35,37,43,45,74,75,82,88,99",
+    "num_chapters": 11,
+    "context_sample": "‑‑ Да, я забыл… Мне непременно надо дом"
+  },
+  {
+    "name": "Анны Павловны",
+    "name_lower": "павловн",
+    "occurrences": 13,
+    "first_offset": 267567,
+    "chapters": "33",
+    "num_chapters": 1,
+    "context_sample": "елывали их, а салон Анны Павловны и салон Элен были т"
+  },
+  {
+    "name": "Париже",
+    "name_lower": "париж",
+    "occurrences": 12,
+    "first_offset": 13701,
+    "chapters": "1,53,57,65,67,99",
+    "num_chapters": 6,
+    "context_sample": "смотря на то, что в Париже оставалась другая с"
+  },
+  {
+    "name": "Бертье",
+    "name_lower": "берть",
+    "occurrences": 12,
+    "first_offset": 19472,
+    "chapters": "1,6,34,62",
+    "num_chapters": 4,
+    "context_sample": "\nи, подозвав к себе Бертье, стал ходить с ним "
+  },
+  {
+    "name": "Sire",
+    "name_lower": "sire",
+    "occurrences": 12,
+    "first_offset": 34875,
+    "chapters": "3,5,10,53,57,62,65",
+    "num_chapters": 7,
+    "context_sample": "‑‑ Sire, ‑‑ отвечал Балашев"
+  },
+  {
+    "name": "Даву",
+    "name_lower": "дав",
+    "occurrences": 12,
+    "first_offset": 36806,
+    "chapters": "3,4,54,61,62",
+    "num_chapters": 5,
+    "context_sample": "е пехотного корпуса Даву опять так же задерж"
+  },
+  {
+    "name": "Пфуль",
+    "name_lower": "пфуль",
+    "occurrences": 12,
+    "first_offset": 51341,
+    "chapters": "5,8,9,10",
+    "num_chapters": 4,
+    "context_sample": "все эти придворные! Пфуль предлагает, Армфель"
+  },
+  {
+    "name": "Je",
+    "name_lower": "je",
+    "occurrences": 12,
+    "first_offset": 55997,
+    "chapters": "5,44,45,49,53,70,72,93,94,99",
+    "num_chapters": 10,
+    "context_sample": "о высокие качества. Je ne vous retiens plu"
+  },
+  {
+    "name": "Лысых Горах",
+    "name_lower": "горах",
+    "occurrences": 12,
+    "first_offset": 68922,
+    "chapters": "7,31,32,35,39,43,51",
+    "num_chapters": 7,
+    "context_sample": "мя его пребывания в Лысых Горах, все домашние обеда"
+  },
+  {
+    "name": "Михаил Иваныч",
+    "name_lower": "иваныч",
+    "occurrences": 12,
+    "first_offset": 225137,
+    "chapters": "29,30,37,38,52",
+    "num_chapters": 5,
+    "context_sample": "нул он. ‑‑ Поди ты, Михаил Иваныч!"
+  },
+  {
+    "name": "Берг",
+    "name_lower": "берг",
+    "occurrences": 12,
+    "first_offset": 252225,
+    "chapters": "31,81,82",
+    "num_chapters": 3,
+    "context_sample": "ответите, ‑‑ кричал Берг, который\nбыл теперь"
+  },
+  {
+    "name": "Князь Василий",
+    "name_lower": "василий",
+    "occurrences": 12,
+    "first_offset": 269768,
+    "chapters": "33,73",
+    "num_chapters": 2,
+    "context_sample": " Плутарх о древних. Князь Василий, занимавший всё те\n"
+  },
+  {
+    "name": "Бородинское",
+    "name_lower": "бородинско",
+    "occurrences": 12,
+    "first_offset": 383338,
+    "chapters": "46,55,56,68",
+    "num_chapters": 4,
+    "context_sample": "ны, 26‑го произошло\nБородинское сражение."
+  },
+  {
+    "name": "Колоче",
+    "name_lower": "колоч",
+    "occurrences": 12,
+    "first_offset": 389411,
+    "chapters": "46,48,54,58,59,61",
+    "num_chapters": 6,
+    "context_sample": "ыла избрана по реке Колоче,\nпересекающей больш"
+  },
+  {
+    "name": "Европы",
+    "name_lower": "европ",
+    "occurrences": 11,
+    "first_offset": 3031,
+    "chapters": "0,5,6,24,26,53,67,68,92",
+    "num_chapters": 9,
+    "context_sample": "очение сил\nзападной Европы, и в 1812 году силы"
+  },
+  {
+    "name": "Хотя",
+    "name_lower": "хот",
+    "occurrences": 11,
+    "first_offset": 32910,
+    "chapters": "3,8,23,29,32,35,36,43,44,97",
+    "num_chapters": 10,
+    "context_sample": "олитанским королем. Хотя и было совершенно н"
+  },
+  {
+    "name": "Кроме",
+    "name_lower": "кром",
+    "occurrences": 11,
+    "first_offset": 43354,
+    "chapters": "5,8,23,26,92,94,98,99",
+    "num_chapters": 8,
+    "context_sample": "\nсорокалетние люди. Кроме того видно было, чт"
+  },
+  {
+    "name": "Богучарове",
+    "name_lower": "богучаров",
+    "occurrences": 11,
+    "first_offset": 64756,
+    "chapters": "7,35,36,37,40,41,99",
+    "num_chapters": 7,
+    "context_sample": "яли его уединение в Богучарове, а потом в Швейцари"
+  },
+  {
+    "name": "Тихона",
+    "name_lower": "тихон",
+    "occurrences": 11,
+    "first_offset": 71752,
+    "chapters": "7,29,30,35,37,39",
+    "num_chapters": 6,
+    "context_sample": "е m‑lle Bourienne и Тихона, и\nспрашивал нескол"
+  },
+  {
+    "name": "Надо",
+    "name_lower": "надо",
+    "occurrences": 11,
+    "first_offset": 102234,
+    "chapters": "10,15,32,48,52,62,79,80,99",
+    "num_chapters": 9,
+    "context_sample": " Нечего поправлять. Надо исполнять в\nточност"
+  },
+  {
+    "name": "Доктора",
+    "name_lower": "доктор",
+    "occurrences": 11,
+    "first_offset": 136076,
+    "chapters": "15,35,65,97",
+    "num_chapters": 4,
+    "context_sample": "м, чтобы\nпомочь ей. Доктора ездили к Наташе и о"
+  },
+  {
+    "name": "Миром Господу",
+    "name_lower": "господ",
+    "occurrences": 11,
+    "first_offset": 152597,
+    "chapters": "17,26,27,36,59,70,79,80",
+    "num_chapters": 8,
+    "context_sample": "‑‑ \"Миром Господу помолимся\"."
+  },
+  {
+    "name": "Теперь",
+    "name_lower": "теперь",
+    "occurrences": 11,
+    "first_offset": 178779,
+    "chapters": "24,30,33,36,42,49,62,76,77,99",
+    "num_chapters": 10,
+    "context_sample": "рила по‑французcки. Теперь не время."
+  },
+  {
+    "name": "Графиня",
+    "name_lower": "графин",
+    "occurrences": 11,
+    "first_offset": 179947,
+    "chapters": "24,79,80,81,83,95,96,99",
+    "num_chapters": 8,
+    "context_sample": "ся не оглядываться. Графиня\nнеодобрительно и се"
+  },
+  {
+    "name": "Два",
+    "name_lower": "дв",
+    "occurrences": 11,
+    "first_offset": 190603,
+    "chapters": "25,40,41,65,82,87,90,91,98",
+    "num_chapters": 9,
+    "context_sample": "го не\nпонимал Петя. Два молодых мещанина шу"
+  },
+  {
+    "name": "Илья Андреич",
+    "name_lower": "андреич",
+    "occurrences": 11,
+    "first_offset": 194264,
+    "chapters": "25,26,27,29,78,81",
+    "num_chapters": 6,
+    "context_sample": "е сдавшись, но граф Илья Андреич поехал узнавать, ка"
+  },
+  {
+    "name": "Никто",
+    "name_lower": "никто",
+    "occurrences": 11,
+    "first_offset": 257564,
+    "chapters": "32,38,59,67,81,84,88,95,96",
+    "num_chapters": 9,
+    "context_sample": "л Тараса‑садовника. Никто не откликнулся. Обо"
+  },
+  {
+    "name": "Богучарово",
+    "name_lower": "богучарово",
+    "occurrences": 11,
+    "first_offset": 258610,
+    "chapters": "32,35,36,37,40,41",
+    "num_chapters": 6,
+    "context_sample": "гое было отвезено в Богучарово. Хлеб, до\n100 четве"
+  },
+  {
+    "name": "Карп",
+    "name_lower": "карп",
+    "occurrences": 11,
+    "first_offset": 302240,
+    "chapters": "36,40,41",
+    "num_chapters": 3,
+    "context_sample": "нною подводой мужик Карп, имевший большое вл"
+  },
+  {
+    "name": "Макар Алексеичем",
+    "name_lower": "алексеич",
+    "occurrences": 11,
+    "first_offset": 737572,
+    "chapters": "92,93",
+    "num_chapters": 2,
+    "context_sample": "к, шедшие следом за Макар Алексеичем, остановили его в\nс"
+  },
+  {
+    "name": "Нельзя",
+    "name_lower": "нельз",
+    "occurrences": 10,
+    "first_offset": 5662,
+    "chapters": "0,12,16,35,44,59,71,75,80,97",
+    "num_chapters": 10,
+    "context_sample": "денбургский обижен. Нельзя\nпонять, какую связь"
+  },
+  {
+    "name": "Графиня Безухова",
+    "name_lower": "безух",
+    "occurrences": 10,
+    "first_offset": 22582,
+    "chapters": "2,16,27,44,77,78,83",
+    "num_chapters": 7,
+    "context_sample": "е столько красавиц. Графиня Безухова в числе\nдругих русс"
+  },
+  {
+    "name": "Аракчеева",
+    "name_lower": "аракче",
+    "occurrences": 10,
+    "first_offset": 24353,
+    "chapters": "2,4,8,33",
+    "num_chapters": 4,
+    "context_sample": " взволнованное\nлицо Аракчеева, в то время как гос"
+  },
+  {
+    "name": "Франции",
+    "name_lower": "франци",
+    "occurrences": 10,
+    "first_offset": 35634,
+    "chapters": "3,5,33,55,66,99",
+    "num_chapters": 6,
+    "context_sample": "орблено достоинство Франции. Балашев сказал, чт"
+  },
+  {
+    "name": "Ah",
+    "name_lower": "ah",
+    "occurrences": 10,
+    "first_offset": 49974,
+    "chapters": "5,57,73,93,94,98,99",
+    "num_chapters": 7,
+    "context_sample": "it dû à mon amitié. Ah! quel beau règne,\nq"
+  },
+  {
+    "name": "Уже",
+    "name_lower": "уж",
+    "occurrences": 10,
+    "first_offset": 51932,
+    "chapters": "5,7,13,14,17,45,46,73,98",
+    "num_chapters": 9,
+    "context_sample": "‑‑ Уже неделя как началась"
+  },
+  {
+    "name": "Ему",
+    "name_lower": "ем",
+    "occurrences": 10,
+    "first_offset": 60239,
+    "chapters": "6,9,17,26,32,35,53,63,68,76",
+    "num_chapters": 10,
+    "context_sample": " этом расположении.\nЕму казалось, что он ок"
+  },
+  {
+    "name": "Анатоля Курагина",
+    "name_lower": "кураг",
+    "occurrences": 10,
+    "first_offset": 63209,
+    "chapters": "7,8,17,65,73",
+    "num_chapters": 5,
+    "context_sample": "встретить там князя Анатоля Курагина, которого он считал"
+  },
+  {
+    "name": "Десаль",
+    "name_lower": "десаль",
+    "occurrences": 10,
+    "first_offset": 67732,
+    "chapters": "7,29,30,31,35",
+    "num_chapters": 5,
+    "context_sample": "ейцарии воспитатель Десаль был одет в сюртук\nр"
+  },
+  {
+    "name": "Дриссы",
+    "name_lower": "дрисс",
+    "occurrences": 10,
+    "first_offset": 76175,
+    "chapters": "8,11,68,99",
+    "num_chapters": 4,
+    "context_sample": "крепленном лагере у Дриссы; войска второй арми"
+  },
+  {
+    "name": "Какой",
+    "name_lower": "как",
+    "occurrences": 10,
+    "first_offset": 84998,
+    "chapters": "8,11,24,31,32,38,44,59,65",
+    "num_chapters": 9,
+    "context_sample": "его. Они говорили: \"Какой\nон ни есть (всегда "
+  },
+  {
+    "name": "Ильиным",
+    "name_lower": "ильиным",
+    "occurrences": 10,
+    "first_offset": 113307,
+    "chapters": "11,12,13,34,40,41",
+    "num_chapters": 6,
+    "context_sample": "им молодым офицером Ильиным сидел под\nсгороженн"
+  },
+  {
+    "name": "Офицер",
+    "name_lower": "офицер",
+    "occurrences": 10,
+    "first_offset": 113363,
+    "chapters": "11,48,50,52,59,81,87,91",
+    "num_chapters": 8,
+    "context_sample": "рую руку шалашиком. Офицер их полка с длинными"
+  },
+  {
+    "name": "Раевского",
+    "name_lower": "раевского",
+    "occurrences": 10,
+    "first_offset": 113513,
+    "chapters": "11,29,48,50,59,74,95",
+    "num_chapters": 7,
+    "context_sample": "аба. Слышали подвиг Раевского? ‑‑ И офицер расска"
+  },
+  {
+    "name": "Тебе",
+    "name_lower": "теб",
+    "occurrences": 10,
+    "first_offset": 156000,
+    "chapters": "17,48,74,81,87,88",
+    "num_chapters": 6,
+    "context_sample": "слыши нас молящихся Тебе: укрепи силою Твоею"
+  },
+  {
+    "name": "Дронушкой",
+    "name_lower": "дронушк",
+    "occurrences": 10,
+    "first_offset": 303577,
+    "chapters": "36,37,38",
+    "num_chapters": 3,
+    "context_sample": "о старый князь\nзвал Дронушкой."
+  },
+  {
+    "name": "Il",
+    "name_lower": "il",
+    "occurrences": 10,
+    "first_offset": 441755,
+    "chapters": "53,73,85,90,94,99",
+    "num_chapters": 6,
+    "context_sample": "слова адъютанта. ‑‑ Il se font\ndémolir. Ta"
+  },
+  {
+    "name": "Васильич",
+    "name_lower": "васильич",
+    "occurrences": 10,
+    "first_offset": 631470,
+    "chapters": "80,81,82,83,88",
+    "num_chapters": 5,
+    "context_sample": "ми же, Петька,\nжми! Васильич, нажимай! ‑‑ кричал"
+  },
+  {
+    "name": "Ничего",
+    "name_lower": "ничего",
+    "occurrences": 9,
+    "first_offset": 20900,
+    "chapters": "2,8,17,29,36,44,83,97",
+    "num_chapters": 8,
+    "context_sample": "я смотры\nи маневры. Ничего не было готово для "
+  },
+  {
+    "name": "Другой",
+    "name_lower": "друг",
+    "occurrences": 9,
+    "first_offset": 87852,
+    "chapters": "8,44,45,47,48,53,59,98,99",
+    "num_chapters": 9,
+    "context_sample": "и\nугодить государю. Другой, желающий приобрест"
+  },
+  {
+    "name": "Однако",
+    "name_lower": "однако",
+    "occurrences": 9,
+    "first_offset": 116191,
+    "chapters": "11,31,43,52,63,99",
+    "num_chapters": 6,
+    "context_sample": "‑‑ Однако, мочи нет, ‑‑ сказа"
+  },
+  {
+    "name": "Schoss",
+    "name_lower": "schoss",
+    "occurrences": 9,
+    "first_offset": 141430,
+    "chapters": "15,80,81,83,96",
+    "num_chapters": 5,
+    "context_sample": ", из которых madame Schoss, охотница до этих\nв"
+  },
+  {
+    "name": "Наши",
+    "name_lower": "наш",
+    "occurrences": 9,
+    "first_offset": 177206,
+    "chapters": "24,32,40,59,60,65,82,99",
+    "num_chapters": 8,
+    "context_sample": "‑‑ Наши опять отступили. По"
+  },
+  {
+    "name": "Кремля",
+    "name_lower": "кремл",
+    "occurrences": 9,
+    "first_offset": 185717,
+    "chapters": "25,79,84,87,91",
+    "num_chapters": 5,
+    "context_sample": "щим и\nприбывающим у Кремля народом, тем больше"
+  },
+  {
+    "name": "Князь",
+    "name_lower": "князь",
+    "occurrences": 9,
+    "first_offset": 224850,
+    "chapters": "29,30,31,32,64,83",
+    "num_chapters": 6,
+    "context_sample": "‑ сказал Десаль. ‑‑ Князь в состоянии\nзнать…"
+  },
+  {
+    "name": "Эх",
+    "name_lower": "эх",
+    "occurrences": 9,
+    "first_offset": 238789,
+    "chapters": "31,41,59,64,80,87,90",
+    "num_chapters": 7,
+    "context_sample": "ьство после\nэтого?… Эх, перевешал бы разбо"
+  },
+  {
+    "name": "Солдаты",
+    "name_lower": "солдат",
+    "occurrences": 9,
+    "first_offset": 250311,
+    "chapters": "31,52,57,59,61,74,91,93,99",
+    "num_chapters": 9,
+    "context_sample": "к посмотреть пожар. Солдаты шныряли беспрестанн"
+  },
+  {
+    "name": "Бородинском",
+    "name_lower": "бородинск",
+    "occurrences": 9,
+    "first_offset": 386813,
+    "chapters": "46,56,73,78,97",
+    "num_chapters": 5,
+    "context_sample": "явшую на позиции на Бородинском поле."
+  },
+  {
+    "name": "Бородино",
+    "name_lower": "бородино",
+    "occurrences": 9,
+    "first_offset": 401197,
+    "chapters": "48,50,54,59,61",
+    "num_chapters": 5,
+    "context_sample": " ниже его (это было Бородино). Дорога переходила"
+  },
+  {
+    "name": "Dieu",
+    "name_lower": "dieu",
+    "occurrences": 8,
+    "first_offset": 15845,
+    "chapters": "1,7,34,72,73,94",
+    "num_chapters": 6,
+    "context_sample": " èa\nchauffe… Nom de Dieu… Le voilà!… Vive l'"
+  },
+  {
+    "name": "Адъютант",
+    "name_lower": "адъютант",
+    "occurrences": 8,
+    "first_offset": 18467,
+    "chapters": "1,4,43,49,53,59,62",
+    "num_chapters": 7,
+    "context_sample": " глазах императора. Адъютант сказал,\nчто вероятн"
+  },
+  {
+    "name": "Напротив",
+    "name_lower": "напротив",
+    "occurrences": 8,
+    "first_offset": 52075,
+    "chapters": "5,9,17,24,41,45,99",
+    "num_chapters": 7,
+    "context_sample": "‑‑ Напротив, ваше величество, ‑"
+  },
+  {
+    "name": "Между",
+    "name_lower": "межд",
+    "occurrences": 8,
+    "first_offset": 57672,
+    "chapters": "6,13,31,36,48,75,99",
+    "num_chapters": 7,
+    "context_sample": "ваться его успехам. Между прочим разговором о"
+  },
+  {
+    "name": "Болконский",
+    "name_lower": "болконский",
+    "occurrences": 8,
+    "first_offset": 66440,
+    "chapters": "7,24,42,78,80,83",
+    "num_chapters": 6,
+    "context_sample": "которому\nуже надоел Болконский своею деятельностью"
+  },
+  {
+    "name": "Ермолов",
+    "name_lower": "ермол",
+    "occurrences": 8,
+    "first_offset": 82602,
+    "chapters": "8,42,60,69,70,87",
+    "num_chapters": 6,
+    "context_sample": "инавший\nвозвышаться Ермолов и другие. В это вре"
+  },
+  {
+    "name": "Витебск",
+    "name_lower": "витебск",
+    "occurrences": 8,
+    "first_offset": 84539,
+    "chapters": "8,13,29,30,53",
+    "num_chapters": 5,
+    "context_sample": "ли Вильну, оставили Витебск, оставим\nи Дриссу. "
+  },
+  {
+    "name": "Николай",
+    "name_lower": "николай",
+    "occurrences": 8,
+    "first_offset": 109136,
+    "chapters": "11,14,41,78",
+    "num_chapters": 4,
+    "context_sample": "у и приехать домой. Николай, получив это письмо"
+  },
+  {
+    "name": "Народ",
+    "name_lower": "народ",
+    "occurrences": 8,
+    "first_offset": 192571,
+    "chapters": "25,31,71,90,98",
+    "num_chapters": 5,
+    "context_sample": "‑‑ Народ всё еще надеется ув"
+  },
+  {
+    "name": "Мужики",
+    "name_lower": "мужик",
+    "occurrences": 8,
+    "first_offset": 258773,
+    "chapters": "32,36,37,41,64,70,79",
+    "num_chapters": 7,
+    "context_sample": "скошен ‑‑\nвойсками. Мужики разорены, некоторые"
+  },
+  {
+    "name": "Кутузовым",
+    "name_lower": "кутузовым",
+    "occurrences": 8,
+    "first_offset": 274730,
+    "chapters": "33,43,49,63,70,89,99",
+    "num_chapters": 7,
+    "context_sample": " будто бы сказанные\nКутузовым государю: \"Я не мог"
+  },
+  {
+    "name": "Fran",
+    "name_lower": "fran",
+    "occurrences": 8,
+    "first_offset": 279785,
+    "chapters": "34,65,91,93,94,99",
+    "num_chapters": 6,
+    "context_sample": "nt trois\njours, les Franèais la gagneraient,"
+  },
+  {
+    "name": "Шевардинский",
+    "name_lower": "шевардинский",
+    "occurrences": 8,
+    "first_offset": 388111,
+    "chapters": "46,48,50",
+    "num_chapters": 3,
+    "context_sample": "вардинского редута:\nШевардинский редут, впереди той "
+  },
+  {
+    "name": "Бородиным",
+    "name_lower": "бородиным",
+    "occurrences": 8,
+    "first_offset": 390559,
+    "chapters": "46,54,59,61,66,68,99",
+    "num_chapters": 7,
+    "context_sample": "ицей, Семеновским и Бородиным (в это поле, не име"
+  },
+  {
+    "name": "Фриана",
+    "name_lower": "фриан",
+    "occurrences": 8,
+    "first_offset": 450216,
+    "chapters": "54,62",
+    "num_chapters": 2,
+    "context_sample": "ами дивизии Дессè и Фриана,\nдвинется вперед, о"
+  },
+  {
+    "name": "Иосифа Алексеевича",
+    "name_lower": "алексеевич",
+    "occurrences": 8,
+    "first_offset": 659993,
+    "chapters": "84,92",
+    "num_chapters": 2,
+    "context_sample": "зборки книг и бумаг\nИосифа Алексеевича показалось ему самы"
+  },
+  {
+    "name": "Votre Majest",
+    "name_lower": "majest",
+    "occurrences": 7,
+    "first_offset": 27311,
+    "chapters": "2,3,53",
+    "num_chapters": 3,
+    "context_sample": " engagements envers Votre Majesté, ses troupes\nont f"
+  },
+  {
+    "name": "Польши",
+    "name_lower": "польш",
+    "occurrences": 7,
+    "first_offset": 34018,
+    "chapters": "3,8,11,29,94",
+    "num_chapters": 5,
+    "context_sample": "и зачем, по дорогам Польши."
+  },
+  {
+    "name": "Во",
+    "name_lower": "во",
+    "occurrences": 7,
+    "first_offset": 46312,
+    "chapters": "5,6,7,36,45,49,73",
+    "num_chapters": 7,
+    "context_sample": "де, начал говорить.\nВо время последующей р"
+  },
+  {
+    "name": "Говорят",
+    "name_lower": "говорят",
+    "occurrences": 7,
+    "first_offset": 49009,
+    "chapters": "5,33,38,42,83,99",
+    "num_chapters": 6,
+    "context_sample": "‑‑ Говорят, вы заключили мир с"
+  },
+  {
+    "name": "Чего",
+    "name_lower": "чего",
+    "occurrences": 7,
+    "first_offset": 60922,
+    "chapters": "6,31,32,35,59,99",
+    "num_chapters": 6,
+    "context_sample": "должал Наполеон. ‑‑\nЧего я не могу понять, ‑"
+  },
+  {
+    "name": "Турцию",
+    "name_lower": "турци",
+    "occurrences": 7,
+    "first_offset": 63802,
+    "chapters": "7,9,10,43,69",
+    "num_chapters": 5,
+    "context_sample": "й квартиры, уехал в Турцию."
+  },
+  {
+    "name": "Батюшка",
+    "name_lower": "батюшк",
+    "occurrences": 7,
+    "first_offset": 71162,
+    "chapters": "7,31,40,83,92,98",
+    "num_chapters": 6,
+    "context_sample": "‑‑ Батюшка, я не хотел быть су"
+  },
+  {
+    "name": "Армфельд",
+    "name_lower": "армфельд",
+    "occurrences": 7,
+    "first_offset": 79223,
+    "chapters": "8,9,10",
+    "num_chapters": 3,
+    "context_sample": "й прусский\nминистр, Армфельд ‑‑ шведский генерал"
+  },
+  {
+    "name": "Люди",
+    "name_lower": "люд",
+    "occurrences": 7,
+    "first_offset": 82239,
+    "chapters": "8,67,68,90",
+    "num_chapters": 4,
+    "context_sample": "и другой крайности. Люди этой партии\nбыли те"
+  },
+  {
+    "name": "Аустерлицем",
+    "name_lower": "аустерлиц",
+    "occurrences": 7,
+    "first_offset": 106555,
+    "chapters": "10,43,51,52,53,62",
+    "num_chapters": 6,
+    "context_sample": " перед 8‑ю, как под\nАустерлицем. ‑‑ Какая же может "
+  },
+  {
+    "name": "Для",
+    "name_lower": "дл",
+    "occurrences": 7,
+    "first_offset": 111454,
+    "chapters": "11,67,76,91,93,98,99",
+    "num_chapters": 7,
+    "context_sample": "ей в\nглавном штабе. Для гусар же Павлоградс"
+  },
+  {
+    "name": "Несмотря",
+    "name_lower": "несмотр",
+    "occurrences": 7,
+    "first_offset": 145498,
+    "chapters": "16,25,44,47,48,78,94",
+    "num_chapters": 7,
+    "context_sample": "илась за эту\nмысль. Несмотря на запрещение докто"
+  },
+  {
+    "name": "Ростовым",
+    "name_lower": "ростовым",
+    "occurrences": 7,
+    "first_offset": 170496,
+    "chapters": "23,41,80,81,82,92",
+    "num_chapters": 6,
+    "context_sample": "али молитву, обещал\nРостовым привезти им от граф"
+  },
+  {
+    "name": "Наконец",
+    "name_lower": "наконец",
+    "occurrences": 7,
+    "first_offset": 191548,
+    "chapters": "25,48,50,77,83,99",
+    "num_chapters": 6,
+    "context_sample": "ушки, бежали\nназад. Наконец вышли еще четверо м"
+  },
+  {
+    "name": "Толпа",
+    "name_lower": "толп",
+    "occurrences": 7,
+    "first_offset": 203752,
+    "chapters": "26,45,60,87,88,90",
+    "num_chapters": 6,
+    "context_sample": "стоном, видал Пьер. Толпа подошла к\nстолу, не"
+  },
+  {
+    "name": "Хорошо",
+    "name_lower": "хорошо",
+    "occurrences": 7,
+    "first_offset": 238627,
+    "chapters": "31,33,76,80,91,99",
+    "num_chapters": 6,
+    "context_sample": "ить, ‑‑ говорил он. Хорошо кто один. Одна\nголо"
+  },
+  {
+    "name": "Какое",
+    "name_lower": "како",
+    "occurrences": 7,
+    "first_offset": 243328,
+    "chapters": "31,41,49,82,94,99",
+    "num_chapters": 6,
+    "context_sample": "осил Ферапонтов. ‑‑ Какое\nрешение вышло?"
+  },
+  {
+    "name": "Билибина",
+    "name_lower": "билиб",
+    "occurrences": 7,
+    "first_offset": 269354,
+    "chapters": "33,73,99",
+    "num_chapters": 3,
+    "context_sample": " царствовало\nмнение Билибина, бывшего теперь в П"
+  },
+  {
+    "name": "Богучарова",
+    "name_lower": "богучар",
+    "occurrences": 7,
+    "first_offset": 287871,
+    "chapters": "35,36,40,41",
+    "num_chapters": 4,
+    "context_sample": " в 15‑ти верстах от\nБогучарова, была разграблена у"
+  },
+  {
+    "name": "Можно",
+    "name_lower": "можно",
+    "occurrences": 7,
+    "first_offset": 290358,
+    "chapters": "35,59,79,80,82,83",
+    "num_chapters": 6,
+    "context_sample": "ор. ‑‑ Я вас искал. Можно кое‑что\nпонять из т"
+  },
+  {
+    "name": "Некоторые",
+    "name_lower": "некоторы",
+    "occurrences": 7,
+    "first_offset": 338355,
+    "chapters": "41,44,50,64,66,70",
+    "num_chapters": 6,
+    "context_sample": "ательство и раздор. Некоторые мужики стали\nговори"
+  },
+  {
+    "name": "Кайсаров",
+    "name_lower": "кайсар",
+    "occurrences": 7,
+    "first_offset": 411073,
+    "chapters": "49,63,70",
+    "num_chapters": 3,
+    "context_sample": "емя к Пьеру подошел Кайсаров, адъютант Кутузова."
+  },
+  {
+    "name": "Paris",
+    "name_lower": "paris",
+    "occurrences": 7,
+    "first_offset": 443629,
+    "chapters": "53,65,94",
+    "num_chapters": 3,
+    "context_sample": "‑‑ Sire, tout Paris regrette votre abse"
+  },
+  {
+    "name": "Москвою",
+    "name_lower": "москво",
+    "occurrences": 7,
+    "first_offset": 446828,
+    "chapters": "53,56,78,85,95,99",
+    "num_chapters": 6,
+    "context_sample": "в великой битве под Москвою!\""
+  },
+  {
+    "name": "Рапп",
+    "name_lower": "рапп",
+    "occurrences": 7,
+    "first_offset": 461981,
+    "chapters": "57,99",
+    "num_chapters": 2,
+    "context_sample": "Sire,699 ‑‑ отвечал Рапп."
+  },
+  {
+    "name": "Семеновского",
+    "name_lower": "семеновского",
+    "occurrences": 7,
+    "first_offset": 490195,
+    "chapters": "60,62,63,64,66",
+    "num_chapters": 5,
+    "context_sample": "собенности налево у Семеновского, кипело что‑то в ды"
+  },
+  {
+    "name": "Московской",
+    "name_lower": "московск",
+    "occurrences": 6,
+    "first_offset": 5865,
+    "chapters": "0,10,26,31,78",
+    "num_chapters": 5,
+    "context_sample": " людей Смоленской и Московской\nгуберний, и были уб"
+  },
+  {
+    "name": "Вислу",
+    "name_lower": "висл",
+    "occurrences": 6,
+    "first_offset": 6545,
+    "chapters": "0,5,99",
+    "num_chapters": 3,
+    "context_sample": "ести свои войска за Вислу и отдать назад герц"
+  },
+  {
+    "name": "Было",
+    "name_lower": "было",
+    "occurrences": 6,
+    "first_offset": 18896,
+    "chapters": "1,13,25,81,82,90",
+    "num_chapters": 6,
+    "context_sample": "в поскакали за ним.\nБыло холодно и жутко на "
+  },
+  {
+    "name": "Штейнов",
+    "name_lower": "штейн",
+    "occurrences": 6,
+    "first_offset": 50538,
+    "chapters": "5,6,8,9,10",
+    "num_chapters": 5,
+    "context_sample": "‑\nОн призвал к себе Штейнов, Армфельдтов, Бениг"
+  },
+  {
+    "name": "Винцингероде",
+    "name_lower": "винцингерод",
+    "occurrences": 6,
+    "first_offset": 50572,
+    "chapters": "5,6,8,9,28",
+    "num_chapters": 5,
+    "context_sample": "льдтов, Бенигсенов, Винцингероде. Штейн\n‑‑ прогнанны"
+  },
+  {
+    "name": "Болконскому",
+    "name_lower": "болконском",
+    "occurrences": 6,
+    "first_offset": 77225,
+    "chapters": "8,9,10,42,52",
+    "num_chapters": 5,
+    "context_sample": "вестие было приятно Болконскому. Интерес\nцентра про"
+  },
+  {
+    "name": "Или",
+    "name_lower": "ил",
+    "occurrences": 6,
+    "first_offset": 102031,
+    "chapters": "10,40,84,87,99",
+    "num_chapters": 5,
+    "context_sample": "ю с открытым тылом. Или атака von diesem It"
+  },
+  {
+    "name": "Раевский",
+    "name_lower": "раевский",
+    "occurrences": 6,
+    "first_offset": 115177,
+    "chapters": "11,63,70",
+    "num_chapters": 3,
+    "context_sample": " теснота, что ежели Раевский и вывел\nсыновей, то"
+  },
+  {
+    "name": "Настасья Ивановна",
+    "name_lower": "ивановн",
+    "occurrences": 6,
+    "first_offset": 142542,
+    "chapters": "16,45",
+    "num_chapters": 2,
+    "context_sample": "енно то же,\nчто шут Настасья Ивановна. Внутренний страж т"
+  },
+  {
+    "name": "Кремль",
+    "name_lower": "кремль",
+    "occurrences": 6,
+    "first_offset": 186083,
+    "chapters": "25,91,98,99",
+    "num_chapters": 4,
+    "context_sample": "скою целью он шел в Кремль, так прижали его к\n"
+  },
+  {
+    "name": "Много",
+    "name_lower": "много",
+    "occurrences": 6,
+    "first_offset": 202515,
+    "chapters": "26,34,38,60,99",
+    "num_chapters": 5,
+    "context_sample": "он не мог говорить. Много голосов кричало и г"
+  },
+  {
+    "name": "Десалем",
+    "name_lower": "десал",
+    "occurrences": 6,
+    "first_offset": 221149,
+    "chapters": "29,35",
+    "num_chapters": 2,
+    "context_sample": "и и разговаривала с\nДесалем; другую часть дня о"
+  },
+  {
+    "name": "Старый",
+    "name_lower": "старый",
+    "occurrences": 6,
+    "first_offset": 225414,
+    "chapters": "29,32,36,41,80,99",
+    "num_chapters": 6,
+    "context_sample": "ча переглядывались. Старый князь вернулся посп"
+  },
+  {
+    "name": "Христа",
+    "name_lower": "христ",
+    "occurrences": 6,
+    "first_offset": 235152,
+    "chapters": "31,36,40,53,72,90",
+    "num_chapters": 6,
+    "context_sample": " Яков Алпатыч; ради Христа, нас\nпожалей, ‑‑ пр"
+  },
+  {
+    "name": "Увидав",
+    "name_lower": "увидав",
+    "occurrences": 6,
+    "first_offset": 248414,
+    "chapters": "31,32,35,40,47",
+    "num_chapters": 5,
+    "context_sample": "очадцы Ферапонтова. Увидав дым и\nдаже огни пож"
+  },
+  {
+    "name": "Vous",
+    "name_lower": "vous",
+    "occurrences": 6,
+    "first_offset": 274633,
+    "chapters": "33,63,73,93",
+    "num_chapters": 4,
+    "context_sample": "ч не был при армии. Vous savez ce qu'il a di"
+  },
+  {
+    "name": "Слушаю",
+    "name_lower": "слуша",
+    "occurrences": 6,
+    "first_offset": 306378,
+    "chapters": "36,65,84,99",
+    "num_chapters": 4,
+    "context_sample": "‑‑ Слушаю, ‑‑ отвечал Дрон, н"
+  },
+  {
+    "name": "Куда",
+    "name_lower": "куд",
+    "occurrences": 6,
+    "first_offset": 380645,
+    "chapters": "45,59,74,82,88",
+    "num_chapters": 5,
+    "context_sample": "‑‑ Куда ж ты едешь?‑‑ крикн"
+  },
+  {
+    "name": "Шевардине",
+    "name_lower": "шевардин",
+    "occurrences": 6,
+    "first_offset": 381952,
+    "chapters": "45,46,48,57,62",
+    "num_chapters": 5,
+    "context_sample": "ние 24‑го числа\nпри Шевардине.) На рассвете Пьер "
+  },
+  {
+    "name": "Бородине",
+    "name_lower": "бородин",
+    "occurrences": 6,
+    "first_offset": 383425,
+    "chapters": "46,48,58,66",
+    "num_chapters": 4,
+    "context_sample": "при Шевардине и при\nБородине? Для чего было дано"
+  },
+  {
+    "name": "Шевардинского",
+    "name_lower": "шевардинского",
+    "occurrences": 6,
+    "first_offset": 388089,
+    "chapters": "46,54,61",
+    "num_chapters": 3,
+    "context_sample": "ом служит положение Шевардинского редута:\nШевардински"
+  },
+  {
+    "name": "Долохов",
+    "name_lower": "долох",
+    "occurrences": 6,
+    "first_offset": 413177,
+    "chapters": "49,51,75",
+    "num_chapters": 3,
+    "context_sample": " ополченец. Это был Долохов."
+  }
+]

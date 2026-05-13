@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Презентация — Bukivedenie</title>
   <style>
+    /* presentation tweaks: centered title slides, full-bleed images */
+    .title-slide { background: linear-gradient(180deg,#0b3d91,#072a6b); color: #fff; padding: 80px 30px; text-align:center }
+    .title-slide img{ max-width:90%; height:auto; border:none; box-shadow: 0 8px 30px rgba(0,0,0,0.45); margin: 24px auto; display:block }
+    .title-slide h2{ color: #fff; font-size: 40px; margin: 8px 0 8px }
+    .muted{color:#cbd6f0} 
+
     body{font-family: Arial, Helvetica, sans-serif; margin:0; padding:20px; background:#fff}
     .slide{page-break-after:always; margin-bottom:40px}
     img{max-width:100%; height:auto; border:1px solid #ddd}
@@ -17,7 +23,19 @@
 <body>
   <h1>Визуализация и исследование данных — на примере «Война и мир»</h1>
   <p class="muted">Министерство образования Иркутской области · Сиб. отделение РАН · Региональная конференция «Наука. Технологии. Интеллект»</p>
-  <p class="muted">Выполнила: Косова Лада Петровна, ученица 11 «Д», МАОУ «Ангарский лицей №1». Руководитель: Косов Пётр Борисович.</p>
+  <p class="muted">Выполнила: Косова Лада Петровна, ученица 11 «Д», МАОУ «Ангарский лицей №1». Руководитель: Косов Пётр Борисович.
+  <section class="slide title-slide">
+    <h2>Визуализация и исследование данных</h2>
+    <img src="presentation/slide-01-title.png" alt="Титульный слайд"/>
+    <p class="caption">Иллюстрация, сгенерированная AITUNNEL.</p>
+  </section>
+
+  <section class="slide title-slide">
+    <h2>Введение</h2>
+    <img src="presentation/slide-02-intro.png" alt="Вступление"/>
+    <p class="caption">Краткое введение и цель работы.</p>
+  </section>
+</p>
 
   <!-- Slide: Введение -->
   <section class="slide">

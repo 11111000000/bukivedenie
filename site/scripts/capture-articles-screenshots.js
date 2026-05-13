@@ -86,8 +86,8 @@ try {
     }
   }
 
-  // build a simple presentation HTML in the output dir's parent
-  const htmlPath = join(outDir, '..', 'index.html')
+  // build a simple presentation HTML next to other site pages (preza.html)
+  const htmlPath = join(outDir, '..', 'preza.html')
   const slides = items.map((it, idx) => `
     <section class="slide">
       <h2>${idx+1}. ${escapeHtml(it.title)}</h2>

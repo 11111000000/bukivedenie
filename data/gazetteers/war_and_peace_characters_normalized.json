@@ -1,0 +1,177 @@
+[
+  {
+    "id": "kuragin_anatole",
+    "original_name": "Анатоль Курагин",
+    "canonical_name": "Анатоль Курагин",
+    "canonical_lower": "анатоль курагин",
+    "aliases": []
+  },
+  {
+    "id": "bolkonsky_andrei",
+    "original_name": "Андрей Болконский",
+    "canonical_name": "Андрей Болконский",
+    "canonical_lower": "андрей болконский",
+    "aliases": []
+  },
+  {
+    "id": "drubetskaya_anna",
+    "original_name": "Анна Михайловна Друбецкая",
+    "canonical_name": "Анна Михайловна Друбецкая",
+    "canonical_lower": "анна михайловна друбецкая",
+    "aliases": []
+  },
+  {
+    "id": "drubetskoy_boris",
+    "original_name": "Борис Друбецкой",
+    "canonical_name": "Борис Друбецкой",
+    "canonical_lower": "борис друбецкой",
+    "aliases": []
+  },
+  {
+    "id": "kuragin_vasili",
+    "original_name": "Василий Курагин",
+    "canonical_name": "Василий Курагин",
+    "canonical_lower": "василий курагин",
+    "aliases": []
+  },
+  {
+    "id": "rostov_vera",
+    "original_name": "Вера Ростова",
+    "canonical_name": "Вера Ростова",
+    "canonical_lower": "вера ростова",
+    "aliases": []
+  },
+  {
+    "id": "karagina_julie",
+    "original_name": "Жюли Карагина",
+    "canonical_name": "Жюли Карагина",
+    "canonical_lower": "жюли карагина",
+    "aliases": []
+  },
+  {
+    "id": "rostov_ilya",
+    "original_name": "Илья Ростов",
+    "canonical_name": "Илья Ростов",
+    "canonical_lower": "илья ростов",
+    "aliases": []
+  },
+  {
+    "id": "kuragin_ipolit",
+    "original_name": "Ипполит Курагин",
+    "canonical_name": "Ипполит Курагин",
+    "canonical_lower": "ипполит курагин",
+    "aliases": []
+  },
+  {
+    "id": "bezukhov_kirill",
+    "original_name": "Кирилл Безухов",
+    "canonical_name": "Кирилл Безухов",
+    "canonical_lower": "кирилл безухов",
+    "aliases": []
+  },
+  {
+    "id": "bolkonskaya_liza",
+    "original_name": "Лиза Болконская",
+    "canonical_name": "Лиза Болконская",
+    "canonical_lower": "лиза болконская",
+    "aliases": []
+  },
+  {
+    "id": "bezukhov_marie",
+    "original_name": "Мари Безухова",
+    "canonical_name": "Мари Безухова",
+    "canonical_lower": "мари безухова",
+    "aliases": []
+  },
+  {
+    "id": "bolkonskaya_marya",
+    "original_name": "Марья Болконская",
+    "canonical_name": "Марья Болконская",
+    "canonical_lower": "марья болконская",
+    "aliases": []
+  },
+  {
+    "id": "bolkonsky_michael",
+    "original_name": "Михаил Болконский",
+    "canonical_name": "Михаил Болконский",
+    "canonical_lower": "михаил болконский",
+    "aliases": []
+  },
+  {
+    "id": "rostova_natasha",
+    "original_name": "Наталья (графиня) Ростова",
+    "canonical_name": "Наталья Ростова",
+    "canonical_lower": "наталья ростова",
+    "aliases": []
+  },
+  {
+    "id": "bezukhov_natacha",
+    "original_name": "Наташа Безухова",
+    "canonical_name": "Наташа Безухова",
+    "canonical_lower": "наташа безухова",
+    "aliases": []
+  },
+  {
+    "id": "rostov_natasha",
+    "original_name": "Наташа Ростова",
+    "canonical_name": "Наташа Ростова",
+    "canonical_lower": "наташа ростова",
+    "aliases": []
+  },
+  {
+    "id": "bolkonsky_nikolai",
+    "original_name": "Николай (старший) Болконский",
+    "canonical_name": "Николай Болконский",
+    "canonical_lower": "николай болконский",
+    "aliases": []
+  },
+  {
+    "id": "rostov_nikolai",
+    "original_name": "Николай Ростов",
+    "canonical_name": "Николай Ростов",
+    "canonical_lower": "николай ростов",
+    "aliases": []
+  },
+  {
+    "id": "bolkonsky_nikolai_son",
+    "original_name": "Николенька Болконский",
+    "canonical_name": "Николенька Болконский",
+    "canonical_lower": "николенька болконский",
+    "aliases": []
+  },
+  {
+    "id": "bezukhov_peter",
+    "original_name": "Петр Безухов",
+    "canonical_name": "Петр Безухов",
+    "canonical_lower": "петр безухов",
+    "aliases": []
+  },
+  {
+    "id": "rostov_petya",
+    "original_name": "Петя Ростов",
+    "canonical_name": "Петя Ростов",
+    "canonical_lower": "петя ростов",
+    "aliases": []
+  },
+  {
+    "id": "bezukhov_pierre",
+    "original_name": "Пьер Безухов",
+    "canonical_name": "Пьер Безухов",
+    "canonical_lower": "пьер безухов",
+    "aliases": []
+  },
+  {
+    "id": "sonya",
+    "original_name": "Соня Александровна",
+    "canonical_name": "Соня Александровна",
+    "canonical_lower": "соня александровна",
+    "aliases": []
+  },
+  {
+    "id": "kuragina_helene",
+    "original_name": "Элен Курагина",
+    "canonical_name": "Элен Курагина",
+    "canonical_lower": "элен курагина",
+    "aliases": []
+  }
+]

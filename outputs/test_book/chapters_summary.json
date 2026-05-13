@@ -7,10 +7,10 @@
       "end_offset": 318,
       "total_chars": 318,
       "total_paragraphs": 4,
-      "total_sentences": 13,
+      "total_sentences": 14,
       "total_words": 51,
-      "dialog_sentences": 4,
-      "dialog_ratio": 0.3077
+      "dialog_sentences": 5,
+      "dialog_ratio": 0.3571
     },
     {
       "chapter_idx": 1,
@@ -19,10 +19,10 @@
       "end_offset": 828,
       "total_chars": 510,
       "total_paragraphs": 5,
-      "total_sentences": 17,
+      "total_sentences": 18,
       "total_words": 82,
-      "dialog_sentences": 3,
-      "dialog_ratio": 0.1765
+      "dialog_sentences": 4,
+      "dialog_ratio": 0.2222
     },
     {
       "chapter_idx": 2,

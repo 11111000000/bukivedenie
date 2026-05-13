@@ -363,6 +363,9 @@ class TextPipeline:
         if self.NUMBER_PATTERN.match(text):
             return 'number'
         if self.WORD_PATTERN.match(text):
+            # Исключаем токены, которые не содержат букв (напр. "_____")
+            if not any(ch.isalpha() for ch in text):
+                return 'symbol'
             # Проверка на римские цифры
             if re.match(r'^[IVXLCM]+$', text, re.IGNORECASE):
                 return 'roman'

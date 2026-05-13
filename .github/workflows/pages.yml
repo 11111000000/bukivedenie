@@ -15,24 +15,30 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
 
-      - name: Install frontend dependencies
-        working-directory: ./frontend
+      - name: Build static data manifest
+        run: python scripts/build_site_data.py --source outputs --target site/public/data
+
+      - name: Install site dependencies
+        working-directory: ./site
         run: npm ci --engine-strict=false
 
-      - name: Build frontend
-        working-directory: ./frontend
+      - name: Build site
+        working-directory: ./site
         run: npm run build
 
       - name: Deploy to gh-pages branch (fork)
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./frontend/dist
+          publish_dir: ./site/dist
           publish_branch: gh-pages
-          # ensure deploying to user's fork instead of upstream when run on fork
-          external_repository: 11111000000/bukivedenie

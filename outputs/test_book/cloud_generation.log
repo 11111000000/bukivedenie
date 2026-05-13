@@ -54,3 +54,13 @@
 ✗ Модуль wordcloud недоступен. Установите: pip install wordcloud
 === Cloud generation started: 2026-05-11T18:30:33.306679
 ✗ Модуль wordcloud недоступен. Установите: pip install wordcloud
+=== Cloud generation started: 2026-05-14T01:42:50.635724
+Traceback (most recent call last):
+  File "/home/az/Code/bukivedenie/src/legacy_scripts/plot_wordcloud_counts_legacy.py", line 26, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+=== Cloud generation started: 2026-05-14T01:45:06.002532
+Traceback (most recent call last):
+  File "/home/az/Code/bukivedenie/src/legacy_scripts/plot_wordcloud_counts_legacy.py", line 26, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'

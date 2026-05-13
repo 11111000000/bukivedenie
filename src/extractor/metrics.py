@@ -8,6 +8,22 @@ from collections import Counter, defaultdict
 from dataclasses import dataclass
 
 from .core import Chapter, Token
+from .ner_heuristic import STOP_WORDS_RU, STOP_WORDS_EN
+
+# Базовый глобальный стоп‑лист для частотников. Можно расширять при необходимости.
+GLOBAL_STOPWORDS = set()
+try:
+    GLOBAL_STOPWORDS = set(w.lower() for w in (STOP_WORDS_RU | STOP_WORDS_EN))
+except Exception:
+    GLOBAL_STOPWORDS = set()
+# Добавим короткие служебные слова, часто мешающие (русские и английские)
+GLOBAL_STOPWORDS.update({
+    'и','в','на','с','по','к','о','об','из','за','у','при','но','ну','же','бы','ли','то','эти','это','тот','та','так','очень'
+})
+# Дополнения для артефактов сканированного текста / сноски/метаданные
+GLOBAL_STOPWORDS.update({
+    'стр','строка','г','р','ч','гл','сноске','изд','том','см','т','и.т.д','т.е'
+})
 
 
 @dataclass
@@ -37,6 +53,8 @@ def compute_token_frequencies(
                 for token in sentence.tokens:
                     if token.token_type == 'word':
                         key = token.lemma if (use_lemmas and token.lemma) else token.text_lower
+                        if key in GLOBAL_STOPWORDS:
+                            continue
                         counter[key] += 1
     
     # Фильтрация по min_count
@@ -71,6 +89,8 @@ def compute_hapax(chapters: List[Chapter]) -> List[Dict[str, Any]]:
             for sentence in paragraph.sentences:
                 for token in sentence.tokens:
                     if token.token_type == 'word':
+                        if token.text_lower in GLOBAL_STOPWORDS:
+                            continue
                         counter[token.text_lower] += 1
     
     hapax = [
@@ -131,6 +151,8 @@ def compute_yules_k(chapters: List[Chapter]) -> float:
             for sentence in paragraph.sentences:
                 for token in sentence.tokens:
                     if token.token_type == 'word':
+                        if token.text_lower in GLOBAL_STOPWORDS:
+                            continue
                         counter[token.text_lower] += 1
     
     if not counter:

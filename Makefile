@@ -1,17 +1,9 @@
 all:
-	@echo 'Makefile targets: frontend-install, frontend-build, build-data, dev, dev-server, dev-rollup, ui-smoke, clean'
+	@echo 'Makefile targets: site-install, site-data, site-build, site-dev, site-preview, dev, ui-smoke, build-data, build-data-fast, clean'
 
-# Install frontend deps (tries --no-bin-links fallback for Termux).
-# We disable npm progress spinner and force CI mode to avoid interactive spinners on Termux/CI.
-# Output is tee'd to logs/frontend-install.log so you can inspect the full log.
-frontend-install:
-	@sh scripts/frontend_install.sh
-
-frontend-build:
-	cd frontend && npm run build
-	mkdir -p frontend/dist/data
-	rm -rf frontend/dist/data/dist
-	cp -R data/dist frontend/dist/data/
+# Install site deps.
+site-install:
+	cd site && npm install
 
 build-data:
 	python -m src.static_dist.build_dist --input data/raw --out data/dist --top-n 100
@@ -19,20 +11,29 @@ build-data:
 build-data-fast:
 	python -m src.static_dist.build_dist --input data/raw --out data/dist --top-n 50 --no-cooccur --no-sentiment --no-hapax
 
-# dev: build static data and frontend artifacts
-dev:
-	$(MAKE) build-data-fast frontend-build
+site-data:
+	python scripts/build_site_data.py --source outputs --target site/public/data
+	python scripts/build_war_and_peace_data.py --source data/dist --target site/public/data/war-and-peace
 
-# dev-server: start backend + rollup watcher (Termux-friendly)
-dev-server:
-	bash scripts/dev_rollup.sh
+site-build: site-data
+	cd site && npm run build
 
-# dev-rollup: alias for the server-mode workflow
-dev-rollup:
-	bash scripts/dev_rollup.sh
+# dev: prepare site data and run the static site in dev mode
+site-dev: site-data
+	cd site && npm run dev
+
+# preview the built site locally
+site-preview: site-build
+	cd site && npm run preview
+
+dev: site-dev
+
+site-open: site-build
+	sh -c '(cd site; npm run preview -- --host 127.0.0.1 >/tmp/bukivedenie-site-preview.log 2>&1 & echo $$! > /tmp/bukivedenie-site-preview.pid; trap "kill $$(cat /tmp/bukivedenie-site-preview.pid) >/dev/null 2>&1 || true" EXIT INT TERM; sleep 2; node scripts/open-with-console.js http://127.0.0.1:4173)'
 
 ui-smoke:
-	bash scripts/ui_smoke.sh
+	python scripts/build_site_data.py --source outputs --target site/public/data
+	cd site && npm run build
 
 # Enter the full build/test shell from Nix.
 shell:
@@ -40,5 +41,4 @@ shell:
 
 # Clean target (optional)
 clean:
-	rm -rf frontend/node_modules frontend/dist
-	rm -f logs/frontend-install.log
+	rm -rf site/node_modules site/dist site/public/data

@@ -95,8 +95,9 @@ def _count_summary(chapters_summary: List[Dict[str, Any]], token_freqs: List[Dic
     }
 
 
-def _selected_top_tokens(token_freqs: List[Dict[str, Any]], top_n: int) -> set[str]:
-    return {str(row.get('token', '')).strip() for row in token_freqs[:top_n] if str(row.get('token', '')).strip()}
+def _selected_top_tokens(token_freqs: List[Dict[str, Any]], top_n: int) -> Optional[set[str]]:
+    s = {str(row.get('token', '')).strip() for row in token_freqs[:top_n] if str(row.get('token', '')).strip()}
+    return s if s else None
 
 
 def _book_payload(raw_path: Path, dist_dir: Path, top_n: int = 100, options: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:

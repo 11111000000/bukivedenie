@@ -2,6 +2,8 @@
 logs/
 src/__pycache__/
 frontend/dist/
+site/dist/
+site/public/data/
 src/web_view/main.js
 src/web_view/main.js.map
 src/web_view/static/js/main.js.map
@@ -23,3 +25,12 @@ __pycache__/
 
 # Editor/temp
 .DS_Store
+
+# site/node modules and generated presentation assets
+site/node_modules/
+site/pnode_modules/
+site/presentation/screens/
+site/presentation/*.png
+
+# local server logs
+logs/

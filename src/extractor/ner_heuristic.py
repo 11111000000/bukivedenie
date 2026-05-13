@@ -21,6 +21,7 @@ class CharacterCandidate:
     sentence_start_count: int = 0
     chapters: Set[int] = field(default_factory=set)
     contexts: List[str] = field(default_factory=list)
+    seen_in_dialog: bool = False
 
 
 # Стоп-слова для NER (не считать именами)
@@ -39,6 +40,13 @@ STOP_WORDS_RU = {
     # Добавленные по запросу (часто ложные срабатывания)
     'всяких', 'всякий', 'всякое', 'дай', 'пусть', 'другое', 'потом'
 }
+
+# Дополняем стоп‑лист короткими служебными словами (частицы/предлоги/союзы),
+# чтобы уменьшить ложные положительные срабатывания на заглавные вводные слова.
+STOP_WORDS_RU.update({
+    'и','в','на','с','по','к','о','об','из','за','у','при',
+    'но','ну','же','бы','ли','то','этот','эта','это','так','вот'
+})
 
 STOP_WORDS_EN = {
     'he', 'she', 'it', 'they', 'we', 'you', 'i',
@@ -112,18 +120,37 @@ class NERHeuristic:
                 continue
             if self._morph is not None:
                 try:
-                    parsed = self._morph.parse(token)[0]
-                    lemma = parsed.normal_form
+                    # Выбираем наиболее подходный разбор, предпочитая имена/фамилии/отчества
+                    parses = self._morph.parse(token)
+                    chosen = parses[0]
+                    for p in parses:
+                        try:
+                            tg = str(p.tag)
+                        except Exception:
+                            tg = ''
+                        # ищем метки Name/Surn/Patr или вариант с именительным падежом
+                        if 'Name' in tg or 'Surn' in tg or 'Patr' in tg:
+                            chosen = p
+                            break
+                    # Попробуем инфлексировать в именительный падеж — если возможно, получим корректную форму
+                    try:
+                        inf = chosen.inflect({'nomn'})
+                        if inf:
+                            lemma = inf.word
+                        else:
+                            lemma = chosen.normal_form
+                    except Exception:
+                        lemma = chosen.normal_form
                 except Exception:
                     lemma = token.lower()
-            else:
-                lw = token.lower()
-                # Простая эвристика: убрать типичные падежные/окончания
-                for suf in ('ова','ева','ина','ына','ов','ев','ин','ын','а','я','у','ю','ом','ем','ой','ей','е','и','ы'):
-                    if lw.endswith(suf) and len(lw) > len(suf) + 1:
-                        lw = lw[:-len(suf)]
-                        break
-                lemma = lw
+        else:
+            lw = token.lower()
+            # Простая эвристика: убрать типичные падежные/окончания
+            for suf in ('ова','ева','ина','ына','ов','ев','ин','ын','а','я','у','ю','ом','ем','ой','ей','е','и','ы'):
+                if lw.endswith(suf) and len(lw) > len(suf) + 1:
+                    lw = lw[:-len(suf)]
+                    break
+            lemma = lw
             parts.append(lemma)
         return ' '.join(parts)
     
@@ -190,6 +217,12 @@ class NERHeuristic:
                 cand.chapters.add(chapter_idx)
                 if len(cand.contexts) < 5:
                     cand.contexts.append(text[max(0, span_start-20):span_start+len(name_norm)+20])
+                # если встретилось в предложении, пометить seen_in_dialog по флагу is_start_of_sentence or контексту
+                # Простая эвристика: если предложение помечено как диалог (тире в начале) — отметим
+                # Здесь у нас нет прямого доступа к sentence.is_dialog, но если span_text встречается рядом с "—" в том же параграфе,
+                # попробуем простую проверку: символ перед совпадением — тире
+                if span_start > 0 and text[max(0, span_start-2):span_start].strip().startswith('—'):
+                    cand.seen_in_dialog = True
             else:
                 cand = CharacterCandidate(
                     name=name_norm,
@@ -199,6 +232,7 @@ class NERHeuristic:
                     sentence_start_count=1 if is_start_of_sentence else 0,
                     chapters={chapter_idx},
                     contexts=[text[max(0, span_start-20):span_start+len(name_norm)+20]],
+                    seen_in_dialog=(span_start > 0 and text[max(0, span_start-2):span_start].strip().startswith('—')),
                 )
                 candidates[name_lower] = cand
 
@@ -244,7 +278,17 @@ class NERHeuristic:
         """
         Фильтрация кандидатов по минимальному числу вхождений.
         """
-        return [c for c in candidates if c.occurrences >= min_occurrences]
+        # Ужесточённая фильтрация: оставляем кандидатов, которые либо встречаются >= min_occurrences,
+        # либо были отмечены как встречающиеся в диалоге (seen_in_dialog), что повышает шанс быть персонажем.
+        filtered = []
+        for c in candidates:
+            if c.occurrences >= min_occurrences:
+                filtered.append(c)
+                continue
+            if getattr(c, 'seen_in_dialog', False):
+                filtered.append(c)
+                continue
+        return filtered
     
     def to_records(
         self, 
@@ -279,6 +323,72 @@ def extract_characters(
     """
     ner = NERHeuristic(lang=lang)
     candidates = ner.extract_candidates(chapters)
+
+    # Попробуем загрузить локальный gazetteer персонажей из ../W-and-P если он доступен и книга похожа на "war_and_peace"
+    # Это простая интеграция: если файл /home/az/Code/W-and-P/персонажи_уник.csv доступен — загрузим имена
+    gw = []
+    try:
+        import csv, os
+        # Prefer repository-level gazetteer if present
+        repo_root = Path(__file__).resolve().parents[2]
+        repo_gw = repo_root / 'data' / 'gazetteers' / 'war_and_peace_characters.csv'
+        home_gw = Path(os.path.expanduser('~/Code/W-and-P/персонажи_уник.csv'))
+        gw_path = None
+        if repo_gw.exists():
+            gw_path = str(repo_gw)
+        elif home_gw.exists():
+            gw_path = str(home_gw)
+
+        if gw_path:
+            with open(gw_path, 'r', encoding='utf-8') as gf:
+                # try to detect delimiter/header
+                # prefer csv.DictReader
+                rdr = csv.DictReader(gf)
+                for r in rdr:
+                    name = r.get('name') or r.get('Name') or r.get('имя') or ''
+                    if name:
+                        gw.append(name.strip())
+    except Exception:
+        gw = []
+
+    # Ускоренное включение кандидатов из gazetteer: если найдено совпадение по нормализованной форме — пометим его
+    gw_norm = set()
+    for g in gw:
+        try:
+            gw_norm.add(ner._normalize_name(g).lower())
+        except Exception:
+            gw_norm.add(g.lower())
+
+    # Также попробуем загрузить normalized CSV из репо data/gazetteers (если есть)
+    try:
+        import os, csv
+        repo_root_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+        repo_csv = os.path.join(repo_root_dir, 'data', 'gazetteers', 'war_and_peace_characters_normalized.csv')
+        if os.path.exists(repo_csv):
+            with open(repo_csv, 'r', encoding='utf-8') as rf:
+                rdr = csv.DictReader(rf)
+                for r in rdr:
+                    k = (r.get('canonical_lower') or '').strip()
+                    if k:
+                        gw_norm.add(k)
+    except Exception:
+        pass
+
+    # Пометим кандидатов, совпадающих с gazetteer.
+    # Бустим occurrences для кандидатов, чья нормализованная форма содержится в записи gazetteer
+    # или наоборот (чтобы покрыть случаи «Пьер» <-> «Пьер Безухов»).
+    if gw_norm:
+        for c in candidates:
+            for g in gw_norm:
+                if not g:
+                    continue
+                try:
+                    if c.name_lower == g or c.name_lower in g or g in c.name_lower:
+                        c.occurrences = max(c.occurrences, min_occurrences)
+                        break
+                except Exception:
+                    continue
+
     filtered = ner.filter_candidates(candidates, min_occurrences)
     return ner.to_records(filtered)
 

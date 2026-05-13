@@ -18,6 +18,14 @@
 - `data/dist/texts/<book_id>.txt` is the UTF-8 copy of the raw source text used by the static frontend.
 - Generated dist files are committed to the repository and rebuilt from `data/raw`.
 
+## Site data contract
+
+- `site/public/data/index.json` is the manifest for the GitHub Pages site.
+- `site/public/data/index.json` entries include `id`, `title`, `updated`, and `files`.
+- `site/public/data/outputs/<book_id>/` contains the raw per-book CSV/JSON inputs used by the static site.
+- The static site reads `run_metadata.json`, `chapters_summary.json`, `complexity_metrics.json`, `characters.csv`, `tokens.csv`, `cooccurrence_edges.csv`, `sentiment_by_chapter.csv`, `character_freq_by_chapter.csv`, `punctuation_counts.csv`, and `hapax.csv` when present.
+- Missing files are allowed and must degrade gracefully in the UI.
+
 ## Frontend dashboard shell contract
 
 - The books shell keeps the selected-book context in app state and reuses it when the `/books` route is reopened without an explicit book.

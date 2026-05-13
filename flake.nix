@@ -28,6 +28,8 @@
         nodejs_22
         python3
         python3Packages.pytest
+        python3Packages.pymorphy2
+        # pymorphy2-dicts may not be available in this nixpkgs pin; include fallback: wordfreq or other dicts
         libreoffice
       ];
 

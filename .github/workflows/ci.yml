@@ -36,24 +36,26 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install frontend deps
-        working-directory: frontend
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Build static data manifest
+        run: python scripts/build_site_data.py --source outputs --target site/public/data
+      - name: Install site deps
+        working-directory: site
         run: |
           npm ci
-      - name: Build frontend
-        working-directory: frontend
+      - name: Build site
+        working-directory: site
         run: |
           npm run build
-      - name: Deploy frontend bundle to runtime
-        working-directory: frontend
+      - name: Smoke site bundle
         run: |
-          npm run deploy
-      - name: Smoke frontend bundle
-        run: |
-          test -f frontend/dist/main.js
-          grep -q '/api/books' frontend/dist/main.js
+          test -f site/dist/index.html
+          test -f site/dist/assets/index.js || true
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: frontend-dist
-          path: frontend/dist
+          name: site-dist
+          path: site/dist
