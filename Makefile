@@ -55,7 +55,7 @@ preza-images:
 
 # convenience: regenerate full presentation (screens + images + rebuild pdf/pptx)
 .PHONY: preza-regenerate
-preza-regenerate: preza-images preza-screens
+preza-regenerate: preza-screens
 	@echo "Rebuilding preza artifacts (PDF and PPTX)"
 	@CHROMIUM_PATH=/run/current-system/sw/bin/chromium node site/scripts/render-preza-pdf.js
 	@CHROMIUM_PATH=/run/current-system/sw/bin/chromium node site/scripts/generate-preza-pptx.js

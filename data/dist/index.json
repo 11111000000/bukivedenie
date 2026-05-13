@@ -2,36 +2,6 @@
   "generated_at": "2026-05-13T09:26:43.839490Z",
   "books": [
     {
-      "book_id": "test_book",
-      "title": "test_book",
-      "raw_path": "test_book.txt",
-      "text_path": "texts/test_book.txt",
-      "json_path": "books/test_book.json",
-      "ready": true,
-      "status": "ready",
-      "summary": {
-        "chapters": 3,
-        "words": 190,
-        "tokens": 143,
-        "punctuation_marks": 6
-      }
-    },
-    {
-      "book_id": "tolstoj_lew_nikolaewich-text_0060",
-      "title": "tolstoj_lew_nikolaewich-text_0060.fb2",
-      "raw_path": "tolstoj_lew_nikolaewich-text_0060.fb2.txt",
-      "text_path": "texts/tolstoj_lew_nikolaewich-text_0060.txt",
-      "json_path": "books/tolstoj_lew_nikolaewich-text_0060.json",
-      "ready": true,
-      "status": "ready",
-      "summary": {
-        "chapters": 1,
-        "words": 214162,
-        "tokens": 76447,
-        "punctuation_marks": 21
-      }
-    },
-    {
       "book_id": "tolstoj_lew_nikolaewich-text_1",
       "title": "tolstoj_lew_nikolaewich-text_1",
       "raw_path": "tolstoj_lew_nikolaewich-text_1.txt",

@@ -1,4 +1,0 @@
-source,source_lower,target,target_lower,weight,context_level,chapters,num_chapters
-Иван,иван,Привет,привет,1,sentence,0,1
-Здравствуй,здравствуй,Петр,петр,1,sentence,0,1
-Анна,анн,Меня,мен,1,sentence,1,1
