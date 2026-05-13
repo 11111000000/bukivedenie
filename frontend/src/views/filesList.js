@@ -12,16 +12,26 @@ export async function viewFiles(book){
     el.innerHTML = `<h2>${book}</h2><p>Нет файлов.</p>`
     return
   }
-  const list = files.map(name => `
-    <li style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
-      <span>${name}</span>
-      <span style="display:flex; gap:6px;">
+  const list = files.map(name => {
+    let downloadUrl = `/data/dist/texts/${book}.txt`
+    if(name.endsWith('.txt')){
+      downloadUrl = `/data/dist/texts/${book}.txt`
+    }else if(name === 'tokens.csv' || name === 'token_freq_by_chapter.csv' || name === 'cooccurrence_edges.csv' || name === 'sentiment_by_chapter.csv'){
+      downloadUrl = null
+    }else if(name.endsWith('.json')){
+      downloadUrl = `/data/dist/books/${book}.json`
+    }
+    return `
+    <li style="display:grid; gap:6px; padding:10px 12px; border:1px solid var(--pico-muted-border-color); border-radius:14px; background:var(--pico-card-background-color);">
+      <strong style="overflow-wrap:anywhere;">${name}</strong>
+      <span style="display:flex; flex-wrap:wrap; gap:8px;">
         <a href="#/book/${encodeURIComponent(book)}/file/${encodeURIComponent(name)}">Открыть</a>
-        <a href="/api/file_download?book=${encodeURIComponent(book)}&name=${encodeURIComponent(name)}" target="_blank">Скачать</a>
+        ${downloadUrl ? `<a href="${downloadUrl}" target="_blank">Скачать</a>` : ''}
       </span>
-    </li>`).join('')
+    </li>`
+  }).join('')
   el.innerHTML = `
     <h2>${book}: файлы</h2>
-    <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">${list}</ul>
+    <ul style="list-style:none; padding:0; margin:0; display:grid; gap:8px;">${list}</ul>
   `
 }

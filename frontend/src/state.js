@@ -2,7 +2,7 @@
 export const STATE_KEY = '__APP_STATE__'
 
 function _ensure(){
-  if(!window[STATE_KEY]) window[STATE_KEY] = { selectedBook: null, selectedFragment: null }
+  if(!window[STATE_KEY]) window[STATE_KEY] = { selectedBook: null, selectedFragment: null, selectedWidget: null }
   return window[STATE_KEY]
 }
 

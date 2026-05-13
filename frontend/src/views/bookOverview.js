@@ -53,11 +53,11 @@ export function buildPunctuationPreview(rows=[], limit=5){
 export function buildOverviewActions(book){
   return [
     { label: 'Atlas shell', href: '#/books', kind: 'secondary' },
-    { label: 'Tokens', href: `#/book/${encodeURIComponent(book)}/viz/tokens`, kind: 'contrast' },
-    { label: 'Word Cloud', href: `#/book/${encodeURIComponent(book)}/viz/wordcloud`, kind: 'contrast' },
-    { label: 'Network', href: `#/book/${encodeURIComponent(book)}/viz/network`, kind: 'contrast' },
-    { label: 'Sentiment', href: `#/book/${encodeURIComponent(book)}/viz/sentiment`, kind: 'contrast' },
-    { label: 'Heatmap', href: `#/book/${encodeURIComponent(book)}/viz/heatmap`, kind: 'contrast' },
+    { label: 'Tokens', href: `#/books/${encodeURIComponent(book)}/widget/tokens`, kind: 'contrast' },
+    { label: 'Word Cloud', href: `#/books/${encodeURIComponent(book)}/widget/wordcloud`, kind: 'contrast' },
+    { label: 'Network', href: `#/books/${encodeURIComponent(book)}/widget/network`, kind: 'contrast' },
+    { label: 'Sentiment', href: `#/books/${encodeURIComponent(book)}/widget/sentiment`, kind: 'contrast' },
+    { label: 'Heatmap', href: `#/books/${encodeURIComponent(book)}/widget/heatmap`, kind: 'contrast' },
     { label: 'Files', href: `#/book/${encodeURIComponent(book)}/files`, kind: 'secondary' },
   ]
 }
@@ -90,7 +90,7 @@ export async function viewBookOverview(book){
           <h2 style="margin:.15rem 0 .4rem;">${escapeHtml(book)}</h2>
           <p style="margin:0; opacity:.82;">A compact dashboard built from the summary payload, fragment list, token index, and punctuation timeline.</p>
         </div>
-        <div style="display:flex; flex-wrap:wrap; gap:8px;">
+        <div style="display:grid; gap:8px; min-width:min(100%, 280px);">
           ${buildOverviewActions(book).map(action => `<a class="${action.kind}" href="${action.href}">${escapeHtml(action.label)}</a>`).join('')}
         </div>
       </header>
@@ -167,7 +167,7 @@ export async function viewBookOverview(book){
               `).join('') : '<p style="margin:0; opacity:.72;">No punctuation timeline available.</p>'}
             </div>
           </section>
-          <details style="border:1px solid var(--pico-muted-border-color); border-radius:18px; padding:14px; background:var(--pico-card-background-color);">
+      <details style="border:1px solid var(--pico-muted-border-color); border-radius:18px; padding:14px; background:var(--pico-card-background-color);">
             <summary>Files</summary>
             <pre style="white-space:pre-wrap; margin-top:10px;">${files.map(f => `- ${f}`).join('\n')}</pre>
           </details>

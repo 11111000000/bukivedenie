@@ -54,6 +54,7 @@ async function render(){
       return viewBooks(
         p[1] ? decodeURIComponent(p[1]) : '',
         p[2] === 'fragment' && p[3] ? decodeURIComponent(p[3]) : '',
+        p[2] === 'widget' && p[3] ? decodeURIComponent(p[3]) : '',
       )
     }
     if(p[0] === 'about'){
@@ -62,6 +63,13 @@ async function render(){
     }
     if(p[0] === 'book' && p[1]){
       const book = decodeURIComponent(p[1])
+      if(p[2] === 'viz' && p[3]){
+        const widget = decodeURIComponent(p[3])
+        const next = `#/books/${encodeURIComponent(book)}/widget/${encodeURIComponent(widget)}`
+        if(location.hash !== next) location.hash = next
+        emitRoute(next, 'books.widget')
+        return viewBooks(book, '', widget)
+      }
       if(p[2] === 'files'){
         emitRoute(location.hash, 'files')
         return viewFiles(book)

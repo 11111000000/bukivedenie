@@ -7,6 +7,14 @@ export async function viewHeatmap(book){
     console.error('view mount not found in viewHeatmap')
     return
   }
+  return renderInto(el, book)
+}
+
+export async function renderInto(el, book){
+  if(!el){
+    console.error('view mount not found in renderInto')
+    return
+  }
   el.innerHTML = `<h2>${book}: Heatmap (top tokens × главы)</h2><p>Загружаю…</p>`
   const { files } = await api.files(book)
   const summary = await api.bookSummary(book).catch(() => null)
@@ -15,6 +23,14 @@ export async function viewHeatmap(book){
 
   const matrix = []
   const precomputed = files.includes('token_freq_by_chapter.csv') ? 'token_freq_by_chapter.csv' : null
+  // Ensure heatmap container exists for both precomputed and on-the-fly paths.
+  if(precomputed && !document.getElementById('hm')){
+    const hm = document.createElement('div')
+    hm.id = 'hm'
+    // append without removing other parts of the view
+    el.appendChild(hm)
+  }
+
   if(precomputed){
     const { type, rows=[] } = await api.fileParsed(book, precomputed)
     if(type === 'csv' && rows.length){
@@ -58,8 +74,13 @@ export async function viewHeatmap(book){
       }
     }
   }
+  const hmEl = document.getElementById('hm')
   if(!matrix.length){
-    document.getElementById('hm').innerHTML = '<p>Нет данных для теплокарты</p>'
+    if(hmEl){
+      hmEl.innerHTML = '<p>Нет данных для теплокарты</p>'
+    }else{
+      el.innerHTML += '<p>Нет данных для теплокарты</p>'
+    }
     return
   }
   const spec = {
@@ -76,5 +97,5 @@ export async function viewHeatmap(book){
     width: 'container',
     height: { step: 18 }
   }
-  await renderSpec(document.getElementById('hm'), spec)
+  await renderSpec(hmEl, spec)
 }

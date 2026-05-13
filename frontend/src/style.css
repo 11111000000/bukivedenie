@@ -92,17 +92,30 @@ a {
 }
 
 .book-chip-list {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 6px;
-  max-height: calc(100svh - 136px);
+  max-height: none;
   overflow: auto;
   padding-right: 4px;
+}
+
+.dashboard-link-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.dashboard-link-list__item {
+  margin: 0;
 }
 
 .book-chip {
   display: grid;
   gap: 3px;
+  width: 100%;
   padding: 9px 11px;
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -195,27 +208,45 @@ a {
 .dashboard-hero__actions {
   display: grid;
   gap: 8px;
-  justify-items: end;
+  justify-items: stretch;
 }
 
-.dashboard-hero__routes,
-.dashboard-atlas__routes {
-  display: flex;
-  flex-wrap: wrap;
+.dashboard-widget-tabs,
+.dashboard-hero__routes {
+  display: grid;
   gap: 6px;
-  justify-content: flex-end;
+  justify-items: stretch;
 }
 
-.dashboard-hero__routes a,
-.dashboard-atlas__routes a {
+.dashboard-widget-tab,
+.dashboard-hero__routes a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
   font-size: 12px;
-  line-height: 1;
-  padding: 6px 8px;
-  border-radius: 999px;
+  line-height: 1.2;
+  padding: 8px 10px;
+  border-radius: 12px;
   border: 1px solid var(--border);
   text-decoration: none;
   color: var(--text-h);
   background: var(--code-bg);
+}
+
+.dashboard-widget-tabs {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.dashboard-widget-tab {
+  background: var(--bg);
+}
+
+.dashboard-widget-tab.is-active {
+  border-color: var(--accent-border);
+  background: var(--accent-bg);
 }
 
 .dashboard-hero__actions > a.secondary {
@@ -254,12 +285,6 @@ a {
   align-content: start;
 }
 
-.dashboard-atlas__routes-panel {
-  display: grid;
-  gap: 8px;
-}
-
-.dashboard-atlas__routes-panel strong,
 .dashboard-atlas__fragments strong {
   font-size: 12px;
   letter-spacing: 0.02em;
@@ -554,6 +579,7 @@ a {
 }
 
 .dashboard-fragment-list a {
+  display: block;
   text-decoration: none;
 }
 
@@ -563,8 +589,7 @@ a {
 
 .dashboard-fragment-list li.is-active a {
   background: var(--accent-bg);
-  border-radius: 999px;
-  padding: 2px 8px;
+  border-color: var(--accent-border);
 }
 
 .dashboard-widget__link {
@@ -625,12 +650,6 @@ a {
   color: var(--text);
 }
 
-.dashboard-atlas a {
-  font-size: 18px;
-  font-weight: 600;
-  text-decoration: none;
-}
-
 .dashboard-atlas__book {
   width: fit-content;
 }
@@ -642,7 +661,6 @@ a {
 }
 
 .dashboard-atlas__stats,
-.dashboard-atlas__routes,
 .dashboard-hero__routes {
   max-width: 100%;
 }
@@ -679,10 +697,7 @@ a {
 }
 
 .dashboard-fragment-list li {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  align-items: baseline;
+  display: block;
 }
 
 @supports not (background: color-mix(in srgb, black 50%, white)) {
@@ -715,9 +730,8 @@ a {
 
   .dashboard-hero__actions,
   .dashboard-hero__routes,
-  .dashboard-atlas__routes {
+  .dashboard-widget-tabs {
     justify-items: start;
-    justify-content: flex-start;
   }
 
   .dashboard-books {

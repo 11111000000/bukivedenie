@@ -1,4 +1,138 @@
 {
-  "ok": false,
-  "error": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#view')\u001b[22m\n"
+  "status": "not_ready",
+  "commit": null,
+  "timestamp": "2026-05-13T05:31:29.762Z",
+  "results": [
+    {
+      "name": "dashboard",
+      "url": "http://127.0.0.1:45785/?smoke=1#/books",
+      "screenshot": "screens/test-book__dashboard.png",
+      "html": "html/test-book__dashboard.html",
+      "baseline": null,
+      "diff": null,
+      "diff_pct": 0,
+      "status": "baseline_missing",
+      "notes": []
+    },
+    {
+      "name": "books",
+      "url": "http://127.0.0.1:45785/?smoke=1#/books",
+      "screenshot": "screens/test-book__books.png",
+      "html": "html/test-book__books.html",
+      "baseline": null,
+      "diff": null,
+      "diff_pct": 0,
+      "status": "baseline_missing",
+      "notes": []
+    },
+    {
+      "name": "overview",
+      "url": "http://127.0.0.1:45785/?smoke=1#/book/test_book",
+      "screenshot": "screens/test-book__overview.png",
+      "html": "html/test-book__overview.html",
+      "baseline": null,
+      "diff": null,
+      "diff_pct": 0,
+      "status": "baseline_missing",
+      "notes": []
+    },
+    {
+      "name": "widget",
+      "url": "http://127.0.0.1:45785/?smoke=1#/books/test_book/widget/tokens",
+      "screenshot": "screens/test-book__widget.png",
+      "html": "html/test-book__widget.html",
+      "baseline": null,
+      "diff": null,
+      "diff_pct": 0,
+      "status": "baseline_missing",
+      "notes": []
+    },
+    {
+      "name": "tokens",
+      "url": "http://127.0.0.1:45785/?smoke=1#/book/test_book/viz/tokens",
+      "screenshot": "screens/test-book__tokens.png",
+      "html": "html/test-book__tokens.html",
+      "baseline": null,
+      "diff": null,
+      "diff_pct": 0,
+      "status": "baseline_missing",
+      "notes": []
+    },
+    {
+      "name": "wordcloud",
+      "url": "http://127.0.0.1:45785/?smoke=1#/book/test_book/viz/wordcloud",
+      "screenshot": "screens/test-book__wordcloud.png",
+      "html": "html/test-book__wordcloud.html",
+      "baseline": null,
+      "diff": null,
+      "diff_pct": 0,
+      "status": "baseline_missing",
+      "notes": []
+    },
+    {
+      "name": "network",
+      "url": "http://127.0.0.1:45785/?smoke=1#/book/test_book/viz/network",
+      "screenshot": null,
+      "html": null,
+      "baseline": null,
+      "diff": null,
+      "diff_pct": 0,
+      "status": "failed",
+      "notes": [
+        "page.content: Target page, context or browser has been closed"
+      ]
+    },
+    {
+      "name": "sentiment",
+      "url": "http://127.0.0.1:45785/?smoke=1#/book/test_book/viz/sentiment",
+      "screenshot": null,
+      "html": null,
+      "baseline": null,
+      "diff": null,
+      "diff_pct": 0,
+      "status": "failed",
+      "notes": [
+        "browser.newPage: Target page, context or browser has been closed"
+      ]
+    },
+    {
+      "name": "heatmap",
+      "url": "http://127.0.0.1:45785/?smoke=1#/book/test_book/viz/heatmap",
+      "screenshot": null,
+      "html": null,
+      "baseline": null,
+      "diff": null,
+      "diff_pct": 0,
+      "status": "failed",
+      "notes": [
+        "browser.newPage: Target page, context or browser has been closed"
+      ]
+    },
+    {
+      "name": "files",
+      "url": "http://127.0.0.1:45785/?smoke=1#/book/test_book/files",
+      "screenshot": null,
+      "html": null,
+      "baseline": null,
+      "diff": null,
+      "diff_pct": 0,
+      "status": "failed",
+      "notes": [
+        "browser.newPage: Target page, context or browser has been closed"
+      ]
+    },
+    {
+      "name": "file",
+      "url": "http://127.0.0.1:45785/?smoke=1#/book/test_book/file/chapters_summary.json",
+      "screenshot": null,
+      "html": null,
+      "baseline": null,
+      "diff": null,
+      "diff_pct": 0,
+      "status": "failed",
+      "notes": [
+        "browser.newPage: Target page, context or browser has been closed"
+      ]
+    }
+  ]
 }

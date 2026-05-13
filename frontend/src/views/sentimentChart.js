@@ -7,6 +7,14 @@ export async function viewSentiment(book){
     console.error('view mount not found in viewSentiment')
     return
   }
+  return renderInto(el, book)
+}
+
+export async function renderInto(el, book){
+  if(!el){
+    console.error('view mount not found in renderInto')
+    return
+  }
   el.innerHTML = `<h2>${book}: Sentiment</h2><p>Загружаю…</p>`
   const files = await api.files(book).then(r=>r.files||[])
   const name = 'sentiment_by_chapter.csv'

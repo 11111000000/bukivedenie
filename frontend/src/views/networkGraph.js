@@ -64,6 +64,14 @@ export async function viewNetwork(book){
     console.error('view mount not found in viewNetwork')
     return
   }
+  return renderInto(el, book)
+}
+
+export async function renderInto(el, book){
+  if(!el){
+    console.error('view mount not found in renderInto')
+    return
+  }
   el.innerHTML = `<h2>${escapeHtml(book)}: Character Network</h2><p>Загружаю…</p>`
   const files = await api.files(book).then(r=>r.files||[]).catch(() => [])
   const name = 'cooccurrence_edges.csv'
@@ -126,6 +134,17 @@ export async function viewNetwork(book){
     </section>
   `
   const container = document.getElementById('net')
+  if(!container){
+    console.error('net container not found')
+    el.insertAdjacentHTML('beforeend', '<p>Network container missing</p>')
+    return
+  }
+  // ensure container has reasonable size
+  const rect = container.getBoundingClientRect()
+  if(rect.width < 40 || rect.height < 40){
+    container.innerHTML = '<p>Невозможно отобразить сеть: контейнер слишком мал</p>'
+    return
+  }
   try{
     const data = {
       nodes: new DataSet(stats.nodes),
@@ -203,6 +222,6 @@ export async function viewNetwork(book){
     new Network(container, data, options)
   }catch(e){
     console.error('Error initializing vis-network', e)
-    container.innerHTML = '<p>vis-network initialization error</p>'
+    if(container) container.innerHTML = '<p>vis-network initialization error</p>'
   }
 }

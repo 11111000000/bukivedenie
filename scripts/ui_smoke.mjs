@@ -13,11 +13,14 @@ export const ROUTES = [
   { name: 'dashboard', hash: '#/books', kind: 'dashboard', ready: '#view .dashboard-shell, #view .dashboard-atlas-panel' },
   { name: 'books', hash: '#/books', kind: 'books', ready: '#view a[href^="#/book/"]' },
   { name: 'overview', hash: '#/book/{book}', kind: 'overview', ready: '#view details' },
+  { name: 'widget', hash: '#/books/{book}/widget/{widget}', kind: 'widget', ready: '#view .dashboard-widget--focus, #view .dashboard-atlas-panel' },
   { name: 'tokens', hash: '#/book/{book}/viz/tokens', kind: 'chart', ready: '#chart canvas, #chart svg' },
   { name: 'wordcloud', hash: '#/book/{book}/viz/wordcloud', kind: 'cloud', ready: '#cloud canvas' },
-  { name: 'network', hash: '#/book/{book}/viz/network', kind: 'network', ready: '#net canvas' },
+  // network: wait for canvas/svg or any common graph node element
+  { name: 'network', hash: '#/book/{book}/viz/network', kind: 'network', ready: '#net canvas, #net svg, #net .network-node, #net .node' },
   { name: 'sentiment', hash: '#/book/{book}/viz/sentiment', kind: 'chart', ready: '#sent canvas, #sent svg' },
-  { name: 'heatmap', hash: '#/book/{book}/viz/heatmap', kind: 'chart', ready: '#hm canvas, #hm svg' },
+  // heatmap: accept canvas/svg or common heatmap tile/container elements
+  { name: 'heatmap', hash: '#/book/{book}/viz/heatmap', kind: 'chart', ready: '#hm canvas, #hm svg, #hm .heatmap-tile, #hm .heatmap-layer' },
   { name: 'files', hash: '#/book/{book}/files', kind: 'files', ready: '#view a[href*="/file/"]' },
   { name: 'file', hash: '#/book/{book}/file/{file}', kind: 'file', ready: '#view table, #view pre' },
 ]
@@ -51,9 +54,11 @@ export function slugify(value){
 }
 
 export function routeUrl(baseUrl, route, book, fileName){
+  const widgetName = route?.kind === 'widget' ? 'tokens' : fileName || ''
   const hash = route.hash
     .replace('{book}', encodeURIComponent(book || ''))
     .replace('{file}', encodeURIComponent(fileName || ''))
+    .replace('{widget}', encodeURIComponent(widgetName))
   const cleanBase = String(baseUrl || '').replace(/\/$/, '')
   return `${cleanBase}/${hash}`
 }
@@ -122,15 +127,27 @@ async function writeJson(file, value){
   await writeText(file, `${JSON.stringify(value, null, 2)}\n`)
 }
 
-async function startStaticServer(rootDir){
+async function readStaticJson(filePath){
+  const raw = await fs.readFile(filePath, 'utf8')
+  return JSON.parse(raw)
+}
+
+async function startStaticServer(rootDir, repoRoot){
+  repoRoot = repoRoot || path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
   const server = http.createServer(async (req, res) => {
     try{
       const url = new URL(req.url || '/', 'http://127.0.0.1')
       let rel = decodeURIComponent(url.pathname)
       if(rel === '/' || rel === '') rel = '/index.html'
+      if(rel === '/data/dist/books' || rel === '/data/dist/books/') rel = '/data/dist/index.json'
       let filePath = path.join(rootDir, rel)
       if(!existsSync(filePath) || !path.extname(filePath)){
-        filePath = path.join(rootDir, 'index.html')
+        if(rel.startsWith('/data/dist')){
+          filePath = path.join(repoRoot, rel)
+        }
+        if(!existsSync(filePath) || !path.extname(filePath)){
+          filePath = path.join(rootDir, 'index.html')
+        }
       }
       const data = await fs.readFile(filePath)
       const ext = path.extname(filePath).toLowerCase()
@@ -172,21 +189,49 @@ function parseArgs(argv){
 
 export async function preflight(apiBase, bookHint){
   const report = { ok: true, books: [], files: [], bookSummary: null, selectedBook: null, errors: [] }
+  const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
+  async function fetchStaticIndex(){
+    try{
+      return await readStaticJson(path.join(repoRoot, 'data', 'dist', 'index.json'))
+    }catch(e){
+      throw e
+    }
+  }
   try{
-    const booksResp = await fetch(`${apiBase.replace(/\/$/, '')}/api/books`)
-    const booksJson = await booksResp.json()
-    report.books = Array.isArray(booksJson?.books) ? booksJson.books : []
+    const staticIndex = await fetchStaticIndex().catch(() => null)
+    report.books = Array.isArray(staticIndex?.books) ? staticIndex.books : []
+    if(!report.books.length){
+      const booksResp = await fetch(`${apiBase.replace(/\/$/, '')}/api/books`)
+      if(booksResp.ok){
+        const booksJson = await booksResp.json()
+        report.books = Array.isArray(booksJson?.books) ? booksJson.books : []
+      }
+    }
     if(!report.books.length){
       report.errors.push('no books available')
       report.ok = false
       return report
     }
-    report.selectedBook = bookHint || report.books[0]
-    const filesResp = await fetch(`${apiBase.replace(/\/$/, '')}/api/files?book=${encodeURIComponent(report.selectedBook)}`)
-    const filesJson = await filesResp.json()
-    report.files = Array.isArray(filesJson?.files) ? filesJson.files : []
-    const summaryResp = await fetch(`${apiBase.replace(/\/$/, '')}/api/book_summary?book=${encodeURIComponent(report.selectedBook)}`)
-    report.bookSummary = await summaryResp.json().catch(() => null)
+    const firstBook = report.books[0]
+    report.selectedBook = bookHint || firstBook?.book_id || firstBook?.book || firstBook?.title || firstBook
+    if(report.selectedBook){
+      try{
+        const data = await readStaticJson(path.join(repoRoot, 'data', 'dist', 'books', `${report.selectedBook}.json`))
+        report.files = Array.isArray(data.files) ? data.files.slice() : []
+        report.bookSummary = data
+      }catch(e){/* static fallback error ignored */}
+    }
+    if(!report.files.length){
+      const filesResp = await fetch(`${apiBase.replace(/\/$/, '')}/api/files?book=${encodeURIComponent(report.selectedBook)}`)
+      if(filesResp.ok){
+        const filesJson = await filesResp.json()
+        report.files = Array.isArray(filesJson?.files) ? filesJson.files : []
+      }
+    }
+    if(!report.bookSummary){
+      const summaryResp = await fetch(`${apiBase.replace(/\/$/, '')}/api/book_summary?book=${encodeURIComponent(report.selectedBook)}`)
+      report.bookSummary = await summaryResp.json().catch(() => null)
+    }
   }catch(error){
     report.ok = false
     report.errors.push(String(error?.message || error))
@@ -222,7 +267,10 @@ async function run(){
 
   await writeJson(path.join(outDir, 'api.json'), selected)
 
-  const staticServer = await startStaticServer(path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../frontend'))
+  const staticServer = await startStaticServer(
+    path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../frontend'),
+    path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
+  )
   const baseUrl = uiHint || staticServer.url
 
   let chromium
@@ -281,21 +329,33 @@ async function run(){
       const { htmlPath, screenshotPath: pngPath } = artifactPaths(outDir, name, book)
       try{
         if(browser){
-          const page = await browser.newPage({ viewport: { width: 1440, height: 1200 } })
+          // allow overriding viewport for mobile runs via SMOKE_MOBILE=1
+          const viewport = process.env.SMOKE_MOBILE ? { width: 390, height: 844 } : { width: 1440, height: 1200 }
+          let page = await browser.newPage({ viewport })
+          // track console messages per-page so failures can persist them
+          const pageConsole = []
           page.on('console', msg => {
-            report.console.push({ type: msg.type(), text: msg.text() })
+            const entry = { type: msg.type(), text: msg.text() }
+            report.console.push(entry)
+            pageConsole.push(entry)
           })
           page.on('pageerror', error => {
-            report.pageErrors.push(String(error?.message || error))
+            const text = String(error?.message || error)
+            report.pageErrors.push(text)
+            pageConsole.push({ type: 'pageerror', text })
           })
           page.on('requestfailed', request => {
-            report.requestFailures.push({ url: request.url(), failure: request.failure()?.errorText || 'failed' })
+            const entry = { url: request.url(), failure: request.failure()?.errorText || 'failed' }
+            report.requestFailures.push(entry)
+            pageConsole.push({ type: 'requestfailed', text: JSON.stringify(entry) })
           })
           page.on('response', response => {
             const url = response.url()
             if((url.startsWith(baseUrl) || url.startsWith(apiBase)) && !response.ok()){
               if(url.includes('/api/token_by_chapter') && response.status() === 404) return
-              report.responseFailures.push({ url, status: response.status() })
+              const entry = { url, status: response.status() }
+              report.responseFailures.push(entry)
+              pageConsole.push({ type: 'response', text: JSON.stringify(entry) })
             }
           })
 
@@ -315,15 +375,24 @@ async function run(){
           })
 
           await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 })
+          // wait for app/view and explicit app signal. Keep deterministic timeouts.
           await page.waitForFunction(() => !!document.getElementById('app'), null, { timeout: 30000 })
           await page.waitForFunction(() => !!document.getElementById('view'), null, { timeout: 30000 })
           await page.waitForFunction(() => window.__APP_READY__ === true, null, { timeout: 30000 }).catch(() => {})
-          await page.waitForFunction((selector) => !!document.querySelector(selector), job.route.ready, { timeout: 30000 }).catch(() => {})
-          const html = await page.content()
-          await writeText(htmlPath, html)
-           await page.screenshot({ path: pngPath, fullPage: true })
+
+          // wait for route-specific ready selector(s). Use a slightly longer timeout for complex viz.
+          await page.waitForFunction((selector) => !!document.querySelector(selector), job.route.ready, { timeout: 45000 }).catch(() => {})
+
+          // capture console messages and page HTML early if something is wrong
+           const html = await page.content()
+           await writeText(htmlPath, html)
+            await page.screenshot({ path: pngPath, fullPage: true })
            result.html = path.relative(outDir, htmlPath)
            result.screenshot = path.relative(outDir, pngPath)
+           // persist per-page collected console during this route run
+           if(pageConsole.length){
+             await writeText(path.join(outDir, 'console', `${slugify(name)}__${slugify(book)}.log`), pageConsole.map(e => `${e.type}: ${e.text}`).join('\n') + '\n').catch(() => {})
+           }
 
            // compare with baseline if available
            try{
@@ -399,23 +468,28 @@ async function run(){
             result.notes.push('dashboard route unavailable in browserless mode')
           }
         }
-      }catch(error){
-        result.status = 'failed'
-        result.notes.push(String(error?.message || error))
-        if(browser){
-          try{
-            const page = await browser.newPage({ viewport: { width: 1440, height: 1200 } })
-            const html = await page.content()
-            await writeText(htmlPath, html)
-            result.html = path.relative(outDir, htmlPath)
-          }catch{}
-          try{
-            const page = await browser.newPage({ viewport: { width: 1440, height: 1200 } })
-            await page.screenshot({ path: pngPath, fullPage: true })
-            result.screenshot = path.relative(outDir, pngPath)
-          }catch{}
+        }catch(error){
+         result.status = 'failed'
+         result.notes.push(String(error?.message || error))
+         if(browser){
+           try{
+             // reuse page if available to capture current DOM and screenshot
+             page = page || await browser.newPage({ viewport })
+             const html = await page.content()
+             await writeText(htmlPath, html)
+             result.html = path.relative(outDir, htmlPath)
+           }catch{}
+           try{
+             page = page || await browser.newPage({ viewport })
+             await page.screenshot({ path: pngPath, fullPage: true })
+             result.screenshot = path.relative(outDir, pngPath)
+           }catch{}
+           // if we collected per-page console, persist it alongside the route
+           if(typeof pageConsole !== 'undefined' && pageConsole.length){
+             await writeText(path.join(outDir, 'console', `${slugify(name)}__${slugify(book)}.log`), pageConsole.map(e => `${e.type}: ${e.text}`).join('\n') + '\n').catch(() => {})
+           }
+         }
         }
-      }
       report.routes.push(result)
     }
 

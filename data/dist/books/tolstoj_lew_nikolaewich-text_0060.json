@@ -1,0 +1,792 @@
+{
+  "book": "tolstoj_lew_nikolaewich-text_0060",
+  "book_id": "tolstoj_lew_nikolaewich-text_0060",
+  "title": "tolstoj_lew_nikolaewich-text_0060.fb2",
+  "raw_path": "data/raw/tolstoj_lew_nikolaewich-text_0060.fb2.txt",
+  "text_path": "texts/tolstoj_lew_nikolaewich-text_0060.txt",
+  "generated_at": "2026-05-13T09:26:28.696078Z",
+  "ready": true,
+  "status": "ready",
+  "summary": {
+    "chapters": 1,
+    "words": 214162,
+    "tokens": 76447,
+    "punctuation_marks": 21
+  },
+  "text_index": [
+    {
+      "token": "p",
+      "count": 6714,
+      "rank": 1,
+      "per_1k": 31.3501
+    },
+    {
+      "token": "и",
+      "count": 5788,
+      "rank": 2,
+      "per_1k": 27.0263
+    },
+    {
+      "token": "в",
+      "count": 3102,
+      "rank": 3,
+      "per_1k": 14.4844
+    },
+    {
+      "token": "не",
+      "count": 2298,
+      "rank": 4,
+      "per_1k": 10.7302
+    },
+    {
+      "token": "на",
+      "count": 2045,
+      "rank": 5,
+      "per_1k": 9.5488
+    },
+    {
+      "token": "он",
+      "count": 1929,
+      "rank": 6,
+      "per_1k": 9.0072
+    },
+    {
+      "token": "что",
+      "count": 1828,
+      "rank": 7,
+      "per_1k": 8.5356
+    },
+    {
+      "token": "с",
+      "count": 1568,
+      "rank": 8,
+      "per_1k": 7.3216
+    },
+    {
+      "token": "a",
+      "count": 1342,
+      "rank": 9,
+      "per_1k": 6.2663
+    },
+    {
+      "token": "его",
+      "count": 1082,
+      "rank": 10,
+      "per_1k": 5.0523
+    },
+    {
+      "token": "online",
+      "count": 1056,
+      "rank": 11,
+      "per_1k": 4.9308
+    },
+    {
+      "token": "h",
+      "count": 1037,
+      "rank": 12,
+      "per_1k": 4.8421
+    },
+    {
+      "token": "как",
+      "count": 1008,
+      "rank": 13,
+      "per_1k": 4.7067
+    },
+    {
+      "token": "то",
+      "count": 985,
+      "rank": 14,
+      "per_1k": 4.5993
+    },
+    {
+      "token": "к",
+      "count": 950,
+      "rank": 15,
+      "per_1k": 4.4359
+    },
+    {
+      "token": "но",
+      "count": 761,
+      "rank": 16,
+      "per_1k": 3.5534
+    },
+    {
+      "token": "было",
+      "count": 735,
+      "rank": 17,
+      "per_1k": 3.432
+    },
+    {
+      "token": "d",
+      "count": 712,
+      "rank": 18,
+      "per_1k": 3.3246
+    },
+    {
+      "token": "это",
+      "count": 653,
+      "rank": 19,
+      "per_1k": 3.0491
+    },
+    {
+      "token": "я",
+      "count": 621,
+      "rank": 20,
+      "per_1k": 2.8997
+    },
+    {
+      "token": "по",
+      "count": 617,
+      "rank": 21,
+      "per_1k": 2.881
+    },
+    {
+      "token": "из",
+      "count": 587,
+      "rank": 22,
+      "per_1k": 2.7409
+    },
+    {
+      "token": "ru",
+      "count": 551,
+      "rank": 23,
+      "per_1k": 2.5728
+    },
+    {
+      "token": "xlink",
+      "count": 545,
+      "rank": 24,
+      "per_1k": 2.5448
+    },
+    {
+      "token": "она",
+      "count": 544,
+      "rank": 25,
+      "per_1k": 2.5401
+    },
+    {
+      "token": "href",
+      "count": 543,
+      "rank": 26,
+      "per_1k": 2.5355
+    },
+    {
+      "token": "за",
+      "count": 542,
+      "rank": 27,
+      "per_1k": 2.5308
+    },
+    {
+      "token": "tolstoy",
+      "count": 534,
+      "rank": 28,
+      "per_1k": 2.4934
+    },
+    {
+      "token": "https",
+      "count": 528,
+      "rank": 29,
+      "per_1k": 2.4654
+    },
+    {
+      "token": "fiction",
+      "count": 528,
+      "rank": 30,
+      "per_1k": 2.4654
+    },
+    {
+      "token": "voyna",
+      "count": 528,
+      "rank": 31,
+      "per_1k": 2.4654
+    },
+    {
+      "token": "mir",
+      "count": 528,
+      "rank": 32,
+      "per_1k": 2.4654
+    },
+    {
+      "token": "index",
+      "count": 528,
+      "rank": 33,
+      "per_1k": 2.4654
+    },
+    {
+      "token": "xhtml",
+      "count": 528,
+      "rank": 34,
+      "per_1k": 2.4654
+    },
+    {
+      "token": "сказал",
+      "count": 528,
+      "rank": 35,
+      "per_1k": 2.4654
+    },
+    {
+      "token": "от",
+      "count": 512,
+      "rank": 36,
+      "per_1k": 2.3907
+    },
+    {
+      "token": "же",
+      "count": 511,
+      "rank": 37,
+      "per_1k": 2.386
+    },
+    {
+      "token": "о",
+      "count": 504,
+      "rank": 38,
+      "per_1k": 2.3534
+    },
+    {
+      "token": "так",
+      "count": 479,
+      "rank": 39,
+      "per_1k": 2.2366
+    },
+    {
+      "token": "а",
+      "count": 470,
+      "rank": 40,
+      "per_1k": 2.1946
+    },
+    {
+      "token": "empty",
+      "count": 469,
+      "rank": 41,
+      "per_1k": 2.1899
+    },
+    {
+      "token": "line",
+      "count": 469,
+      "rank": 42,
+      "per_1k": 2.1899
+    },
+    {
+      "token": "ему",
+      "count": 461,
+      "rank": 43,
+      "per_1k": 2.1526
+    },
+    {
+      "token": "был",
+      "count": 437,
+      "rank": 44,
+      "per_1k": 2.0405
+    },
+    {
+      "token": "всё",
+      "count": 435,
+      "rank": 45,
+      "per_1k": 2.0312
+    },
+    {
+      "token": "пьер",
+      "count": 432,
+      "rank": 46,
+      "per_1k": 2.0172
+    },
+    {
+      "token": "только",
+      "count": 424,
+      "rank": 47,
+      "per_1k": 1.9798
+    },
+    {
+      "token": "бы",
+      "count": 421,
+      "rank": 48,
+      "per_1k": 1.9658
+    },
+    {
+      "token": "e",
+      "count": 401,
+      "rank": 49,
+      "per_1k": 1.8724
+    },
+    {
+      "token": "для",
+      "count": 397,
+      "rank": 50,
+      "per_1k": 1.8537
+    }
+  ],
+  "fragments": [
+    {
+      "fragment_id": "chapter-0",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "kind": "chapter",
+      "start_offset": 0,
+      "end_offset": 1818645,
+      "chars": 1818645,
+      "paragraphs": 8,
+      "sentences": 10114,
+      "words": 214162,
+      "dialog_sentences": 236,
+      "dialog_ratio": 0.0233
+    }
+  ],
+  "punctuation_timeline": [
+    {
+      "punct": "/",
+      "count": 69398,
+      "rank": 1,
+      "per_1k": 324.0444
+    },
+    {
+      "punct": "+",
+      "count": 34791,
+      "rank": 2,
+      "per_1k": 162.4518
+    },
+    {
+      "punct": ",",
+      "count": 17119,
+      "rank": 3,
+      "per_1k": 79.9348
+    },
+    {
+      "punct": "‑",
+      "count": 10271,
+      "rank": 4,
+      "per_1k": 47.959
+    },
+    {
+      "punct": "<",
+      "count": 9039,
+      "rank": 5,
+      "per_1k": 42.2064
+    },
+    {
+      "punct": ">",
+      "count": 9039,
+      "rank": 6,
+      "per_1k": 42.2064
+    },
+    {
+      "punct": ".",
+      "count": 8223,
+      "rank": 7,
+      "per_1k": 38.3962
+    },
+    {
+      "punct": "\"",
+      "count": 1786,
+      "rank": 8,
+      "per_1k": 8.3395
+    },
+    {
+      "punct": ":",
+      "count": 1458,
+      "rank": 9,
+      "per_1k": 6.8079
+    },
+    {
+      "punct": "!",
+      "count": 818,
+      "rank": 10,
+      "per_1k": 3.8195
+    },
+    {
+      "punct": "?",
+      "count": 713,
+      "rank": 11,
+      "per_1k": 3.3293
+    },
+    {
+      "punct": "=",
+      "count": 555,
+      "rank": 12,
+      "per_1k": 2.5915
+    },
+    {
+      "punct": "…",
+      "count": 514,
+      "rank": 13,
+      "per_1k": 2.4001
+    },
+    {
+      "punct": ";",
+      "count": 490,
+      "rank": 14,
+      "per_1k": 2.288
+    },
+    {
+      "punct": "'",
+      "count": 327,
+      "rank": 15,
+      "per_1k": 1.5269
+    },
+    {
+      "punct": "(",
+      "count": 246,
+      "rank": 16,
+      "per_1k": 1.1487
+    },
+    {
+      "punct": ")",
+      "count": 246,
+      "rank": 17,
+      "per_1k": 1.1487
+    },
+    {
+      "punct": "[",
+      "count": 17,
+      "rank": 18,
+      "per_1k": 0.0794
+    },
+    {
+      "punct": "]",
+      "count": 17,
+      "rank": 19,
+      "per_1k": 0.0794
+    },
+    {
+      "punct": "@",
+      "count": 3,
+      "rank": 20,
+      "per_1k": 0.014
+    },
+    {
+      "punct": "#",
+      "count": 1,
+      "rank": 21,
+      "per_1k": 0.0047
+    }
+  ],
+  "chapter_stats": {
+    "total_words": 214162,
+    "unique_words": 76447,
+    "hapax_count": 62703,
+    "dis_legomena": 5927,
+    "yules_k": 28.5184,
+    "honores_r": 1735.6043,
+    "lexical_density": 0.357,
+    "avg_sentence_length": 21.17,
+    "total_sentences": 10114
+  },
+  "token_by_chapter": [
+    {
+      "token": "ru",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 551
+    },
+    {
+      "token": "xlink",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 545
+    },
+    {
+      "token": "и",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 5788
+    },
+    {
+      "token": "p",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 6714
+    },
+    {
+      "token": "empty",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 469
+    },
+    {
+      "token": "line",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 469
+    },
+    {
+      "token": "в",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 3102
+    },
+    {
+      "token": "a",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 1342
+    },
+    {
+      "token": "href",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 543
+    },
+    {
+      "token": "на",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 2045
+    },
+    {
+      "token": "tolstoy",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 534
+    },
+    {
+      "token": "https",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 528
+    },
+    {
+      "token": "online",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 1056
+    },
+    {
+      "token": "fiction",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 528
+    },
+    {
+      "token": "voyna",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 528
+    },
+    {
+      "token": "mir",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 528
+    },
+    {
+      "token": "index",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 528
+    },
+    {
+      "token": "xhtml",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 528
+    },
+    {
+      "token": "с",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 1568
+    },
+    {
+      "token": "к",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 950
+    },
+    {
+      "token": "так",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 479
+    },
+    {
+      "token": "же",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 511
+    },
+    {
+      "token": "не",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 2298
+    },
+    {
+      "token": "как",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 1008
+    },
+    {
+      "token": "что",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 1828
+    },
+    {
+      "token": "это",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 653
+    },
+    {
+      "token": "его",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 1082
+    },
+    {
+      "token": "только",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 424
+    },
+    {
+      "token": "d",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 712
+    },
+    {
+      "token": "бы",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 421
+    },
+    {
+      "token": "было",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 735
+    },
+    {
+      "token": "он",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 1929
+    },
+    {
+      "token": "то",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 985
+    },
+    {
+      "token": "а",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 470
+    },
+    {
+      "token": "всё",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 435
+    },
+    {
+      "token": "от",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 512
+    },
+    {
+      "token": "был",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 437
+    },
+    {
+      "token": "за",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 542
+    },
+    {
+      "token": "но",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 761
+    },
+    {
+      "token": "для",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 397
+    },
+    {
+      "token": "по",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 617
+    },
+    {
+      "token": "из",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 587
+    },
+    {
+      "token": "ему",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 461
+    },
+    {
+      "token": "она",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 544
+    },
+    {
+      "token": "о",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 504
+    },
+    {
+      "token": "сказал",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 528
+    },
+    {
+      "token": "я",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 621
+    },
+    {
+      "token": "пьер",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 432
+    },
+    {
+      "token": "e",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 401
+    },
+    {
+      "token": "h",
+      "chapter_idx": 0,
+      "title": "Весь текст",
+      "count": 1037
+    }
+  ],
+  "cooccurrence_edges": [],
+  "sentiment_by_chapter": [],
+  "hapax": {
+    "total": 0,
+    "ratio": 0
+  },
+  "files": [
+    "book.json",
+    "text.txt",
+    "tokens.csv",
+    "chapters_summary.json",
+    "punctuation_counts.csv",
+    "chapter_stats.json",
+    "token_by_chapter.csv",
+    "cooccurrence_edges.csv",
+    "sentiment_by_chapter.csv"
+  ]
+}

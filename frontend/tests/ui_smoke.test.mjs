@@ -5,6 +5,7 @@ import { BROWSER_PATH_CANDIDATES, DEFAULT_OUT_DIR, ROUTES, artifactPaths, browse
 test('smoke route manifest stays stable', () => {
   const dashboard = ROUTES.find(route => route.name === 'dashboard')
   const overview = ROUTES.find(route => route.name === 'overview')
+  const widget = ROUTES.find(route => route.name === 'widget')
   const fileRoute = ROUTES.find(route => route.name === 'file')
 
   assert.ok(ROUTES.length >= 6)
@@ -23,8 +24,15 @@ test('smoke route manifest stays stable', () => {
     ready: '#view details',
   })
   assert.equal(fileRoute?.ready, '#view table, #view pre')
+  assert.deepEqual(widget, {
+    name: 'widget',
+    hash: '#/books/{book}/widget/{widget}',
+    kind: 'widget',
+    ready: '#view .dashboard-widget--focus, #view .dashboard-atlas-panel',
+  })
   assert.equal(slugify('Heatmap / token × chapter'), 'heatmap-token-chapter')
   assert.equal(routeUrl('http://127.0.0.1:8000', ROUTES[0], 'book-a', 'file.csv'), 'http://127.0.0.1:8000/#/books')
+  assert.equal(routeUrl('http://127.0.0.1:8000', widget, 'book-a', 'tokens.csv'), 'http://127.0.0.1:8000/#/books/book-a/widget/tokens')
   assert.equal(DEFAULT_OUT_DIR, 'artifacts/ui-smoke')
   assert.ok(BROWSER_PATH_CANDIDATES.includes('/data/data/com.termux/files/usr/bin/chromium'))
   assert.ok(typeof dashboard?.ready === 'string' && dashboard.ready.includes('.dashboard-atlas-panel'))
@@ -37,6 +45,14 @@ test('smoke route manifest stays stable', () => {
     screenshotPath: '/tmp/out/screens/book-atlas__file.png',
   })
   assert.equal(browserLaunchArgs('/usr/bin/chromium', true).headless, false)
+
+  // new readiness selectors for viz routes should be present
+  const network = ROUTES.find(r => r.name === 'network')
+  const heatmap = ROUTES.find(r => r.name === 'heatmap')
+  assert.ok(network && typeof network.ready === 'string')
+  assert.ok(network.ready.includes('#net .network-node') || network.ready.includes('#net .node'))
+  assert.ok(heatmap && typeof heatmap.ready === 'string')
+  assert.ok(heatmap.ready.includes('#hm .heatmap-tile') || heatmap.ready.includes('#hm .heatmap-layer'))
 })
 
 test('browser launch helper falls back cleanly when launch fails', async () => {
@@ -64,6 +80,9 @@ test('preflight captures book summary shape', async () => {
     assert.ok(Array.isArray(report.bookSummary?.text_index))
     assert.ok(Array.isArray(report.bookSummary?.fragments))
     assert.ok(Array.isArray(report.bookSummary?.punctuation_timeline))
+    // selectedBook and bookSummary shapes
+    assert.equal(typeof report.selectedBook, 'string')
+    assert.ok(report.bookSummary && typeof report.bookSummary === 'object')
   }finally{
     globalThis.fetch = originalFetch
   }

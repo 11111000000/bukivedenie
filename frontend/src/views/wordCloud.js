@@ -54,6 +54,14 @@ export async function viewWordCloud(book){
     console.error('view mount not found in viewWordCloud')
     return
   }
+  return renderInto(el, book)
+}
+
+export async function renderInto(el, book){
+  if(!el){
+    console.error('view mount not found in renderInto')
+    return
+  }
   el.innerHTML = `<h2>${escapeHtml(book)}: Word Cloud</h2><p>Загружаю…</p>`
   const files = await api.files(book).then(r=>r.files||[]).catch(() => [])
   const name = files.includes('tokens.csv') ? 'tokens.csv' : (files.find(f=>f.endsWith('_tokens.csv')) || 'tokens.csv')
@@ -128,6 +136,11 @@ export async function viewWordCloud(book){
     }
     await import('echarts-wordcloud')
     const container = document.getElementById('cloud')
+    if(!container){
+      console.error('cloud container missing')
+      el.innerHTML = '<p>WordCloud container missing</p>'
+      return
+    }
     const existing = echarts.getInstanceByDom(container)
     if(existing){
       existing.dispose()
@@ -179,6 +192,9 @@ export async function viewWordCloud(book){
     }
   }catch(e){
     console.error('WordCloud render failed', e)
-    el.innerHTML = `<p>WordCloud render failed</p>`
+    const cloudEl = document.getElementById('cloud')
+    const msg = `<p>WordCloud render failed: ${e?.message || e}</p>`
+    if(cloudEl) cloudEl.innerHTML = msg
+    else el.innerHTML = msg
   }
 }

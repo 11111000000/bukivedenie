@@ -46,6 +46,14 @@ export async function viewTokens(book){
     console.error('view mount not found in viewTokens')
     return
   }
+  return renderInto(el, book)
+}
+
+export async function renderInto(el, book){
+  if(!el){
+    console.error('view mount not found in renderInto')
+    return
+  }
   el.innerHTML = `<h2>${escapeHtml(book)}: Tokens</h2><p>Загружаю…</p>`
   const [files, summary] = await Promise.all([
     api.files(book).then(r => r.files || []).catch(() => []),
