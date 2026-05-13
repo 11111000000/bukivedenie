@@ -15,19 +15,38 @@ const outDir = path.resolve(process.cwd(), 'site', 'presentation')
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true })
 
 // produce two variations per slide (v1, v2) for A/B selection
-const baseTasks = [
-  {
-    name: 'title-slide',
-    // improved prompt for conference slide: leave space for title text, high contrast, simple icons
-    prompt: 'Conference slide background, flat vector illustration: center composition with an open book whose pages flow into stylized charts (bar, line), a small network graph and a word cloud above. Leave a clear empty area at top-left for slide title. Limited palette: deep navy #0b3d91, warm orange #ff7a3d, soft gray #f5f6f8. Minimalist, high legibility, vector shapes, subtle drop shadows, 16:9, 1920x1080',
-    file: 'slide-01-title.png',
-  },
-  {
-    name: 'intro-slide',
-    prompt: 'Conference illustration, flat vector: a researcher silhouette on the left looking at a large display of charts and text snippets on the right; schematic book pages in the background. Maintain consistent palette (navy, warm orange, soft gray). Provide clear margin for subtitle text. Clean lines, modern educational style, 16:9, 1920x1080',
-    file: 'slide-02-intro.png',
+let baseTasks = null
+try {
+  // allow external prompts file to define slides (site/scripts/aitunnel-prompts.js)
+  // it should export `module.exports = [ { name, prompt, file } ]` or default export for ESM
+  const promptsPath = path.join(process.cwd(), 'site', 'scripts', 'aitunnel-prompts.js')
+  if (fs.existsSync(promptsPath)) {
+    // import dynamically (support both CJS and ESM-like default)
+    // use require for simplicity
+    // eslint-disable-next-line no-eval
+    baseTasks = require(promptsPath)
+    if (baseTasks && baseTasks.default) baseTasks = baseTasks.default
+    console.log('Loaded prompts from', promptsPath)
   }
-]
+} catch (e) {
+  console.warn('Could not load external prompts file:', e && e.message)
+}
+
+if (!baseTasks) {
+  baseTasks = [
+    {
+      name: 'title-slide',
+      // improved prompt for conference slide: leave space for title text, high contrast, simple icons
+      prompt: 'Conference slide background, flat vector illustration: center composition with an open book whose pages flow into stylized charts (bar, line), a small network graph and a word cloud above. Leave a clear empty area at top-left for slide title. Limited palette: deep navy #0b3d91, warm orange #ff7a3d, soft gray #f5f6f8. Minimalist, high legibility, vector shapes, subtle drop shadows, 16:9, 1920x1080',
+      file: 'slide-01-title.png',
+    },
+    {
+      name: 'intro-slide',
+      prompt: 'Conference illustration, flat vector: a researcher silhouette on the left looking at a large display of charts and text snippets on the right; schematic book pages in the background. Maintain consistent palette (navy, warm orange, soft gray). Provide clear margin for subtitle text. Clean lines, modern educational style, 16:9, 1920x1080',
+      file: 'slide-02-intro.png',
+    }
+  ]
+}
 
 // expand to two variants per base task
 const tasks = []

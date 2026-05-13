@@ -19,6 +19,18 @@
       cd ${builtins.toString ./.}
       exec ${pkgs.bashInteractive}/bin/bash -lc 'python scripts/build_site_data.py --source outputs --target site/public/data && cd site && npm run build'
     '';
+    prezaScreens = pkgs.writeShellScriptBin "bukivedenie-preza-screens" ''
+      cd ${builtins.toString ./.}
+      exec ${pkgs.bashInteractive}/bin/bash -lc 'make preza-screens'
+    '';
+    prezaImages = pkgs.writeShellScriptBin "bukivedenie-preza-images" ''
+      cd ${builtins.toString ./.}
+      exec ${pkgs.bashInteractive}/bin/bash -lc 'make preza-images'
+    '';
+    prezaAll = pkgs.writeShellScriptBin "bukivedenie-preza-regenerate" ''
+      cd ${builtins.toString ./.}
+      exec ${pkgs.bashInteractive}/bin/bash -lc 'make preza-regenerate'
+    '';
     shell = pkgs.mkShell {
       packages = with pkgs; [
         bashInteractive
@@ -52,6 +64,18 @@
       smoke = {
         type = "app";
         program = "${smokeScript}/bin/bukivedenie-smoke";
+      };
+      preza-screens = {
+        type = "app";
+        program = "${prezaScreens}/bin/bukivedenie-preza-screens";
+      };
+      preza-images = {
+        type = "app";
+        program = "${prezaImages}/bin/bukivedenie-preza-images";
+      };
+      preza-regenerate = {
+        type = "app";
+        program = "${prezaAll}/bin/bukivedenie-preza-regenerate";
       };
       default = {
         type = "app";
