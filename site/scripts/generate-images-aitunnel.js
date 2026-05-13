@@ -16,15 +16,26 @@ if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true })
 
 // produce two variations per slide (v1, v2) for A/B selection
 let baseTasks = null
-// try to load external prompts file (supports ESM default export)
-const promptsPath = path.join(process.cwd(), 'site', 'scripts', 'aitunnel-prompts.js')
-if (fs.existsSync(promptsPath)) {
+// try to load external prompts file (supports ESM default export or CommonJS .cjs)
+const promptsJs = path.join(process.cwd(), 'site', 'scripts', 'aitunnel-prompts.js')
+const promptsCjs = path.join(process.cwd(), 'site', 'scripts', 'aitunnel-prompts.cjs')
+if (fs.existsSync(promptsCjs)) {
   try {
-    // dynamic import requires a file:// URL
-    const fileUrl = new URL(`file://${promptsPath}`)
+    // in ESM context use createRequire to load CommonJS
+    const { createRequire } = await import('module')
+    const require = createRequire(import.meta.url)
+    baseTasks = require(promptsCjs)
+    if (baseTasks && baseTasks.default) baseTasks = baseTasks.default
+    console.log('Loaded prompts from', promptsCjs)
+  } catch (e) {
+    console.warn('Could not load external prompts file (cjs) via require:', e && (e.message || e.toString()))
+  }
+} else if (fs.existsSync(promptsJs)) {
+  try {
+    const fileUrl = new URL(`file://${promptsJs}`)
     const mod = await import(fileUrl.href)
     baseTasks = mod.default || mod
-    console.log('Loaded prompts from', promptsPath)
+    console.log('Loaded prompts from', promptsJs)
   } catch (e) {
     console.warn('Could not load external prompts file via import:', e && (e.message || e.toString()))
   }
