@@ -34,3 +34,21 @@ site/presentation/*.png
 
 # local server logs
 logs/
+
+# Python virtualenvs and build artifacts
+.venv/
+venv/
+env/
+build/
+dist/
+pip-wheel-metadata/
+
+# pytest cache
+.pytest_cache/
+
+# backup archives (local tidy)
+backup/
+
+# temporary outputs for local tests
+outputs/*/cloud_generation.log
+outputs/*/run_metadata.json
