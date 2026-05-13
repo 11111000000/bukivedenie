@@ -8,7 +8,8 @@ const outPptx = path.resolve(new URL('.', import.meta.url).pathname, '..', 'prez
 
 function extractSlides(html) {
   // crude extraction: split by <section class="slide"> ... </section>
-  const parts = html.split(/<section[^>]*class="slide"[^>]*>/i).slice(1)
+  // split by any <section ...> and include sections that have 'slide' in class name
+  const parts = html.split(/<section[^>]*>/i).filter(p => /class=[\"''][^>]*\bslide\b[^>]*[\"']/.test(p) || p.includes('class="slide') ).map(p => p)
   const slides = parts.map(part => {
     const h2m = part.match(/<h2[^>]*>([\s\S]*?)<\/h2>/i)
     const title = h2m ? h2m[1].replace(/<[^>]+>/g,'').trim() : ''

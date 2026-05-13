@@ -5,37 +5,55 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Презентация — Bukivedenie</title>
   <style>
-    /* presentation tweaks: centered title slides, full-bleed images */
-    .title-slide { background: linear-gradient(180deg,#0b3d91,#072a6b); color: #fff; padding: 80px 30px; text-align:center }
-    .title-slide img{ max-width:90%; height:auto; border:none; box-shadow: 0 8px 30px rgba(0,0,0,0.45); margin: 24px auto; display:block }
-    .title-slide h2{ color: #fff; font-size: 40px; margin: 8px 0 8px }
-    .muted{color:#cbd6f0} 
-
-    body{font-family: Arial, Helvetica, sans-serif; margin:0; padding:20px; background:#fff}
-    .slide{page-break-after:always; margin-bottom:40px}
-    img{max-width:100%; height:auto; border:1px solid #ddd}
-    h1,h2{margin:8px 0 6px}
-    .caption{color:#444}
-    .muted{color:#666; font-size:0.9em}
+    /* presentation layout and typography */
+    :root{ --slide-width: 1024px; --slide-height: 576px; --page-margin: 20px; --frame-color: #e6e9ef }
+    body{font-family: Inter, Arial, Helvetica, sans-serif; margin:0; padding:20px; background:#f6f7fb; color:#222}
+    .slide{page-break-after:always; margin:12px auto; width:var(--slide-width); box-shadow: 0 6px 20px rgba(20,24,36,0.06); background:#fff; padding:20px; border-radius:8px; border:1px solid var(--frame-color)}
+    .slide-inner{display:flex; gap:20px; align-items:flex-start}
+    .slide .text{flex: 1 1 40%}
+    .slide .media{flex: 1 1 60%; display:flex; align-items:center; justify-content:center}
+    img{max-width:100%; height:auto; border-radius:6px}
+    h1,h2{margin:4px 0 8px; font-weight:700}
+    h1{font-size:28px}
+    h2{font-size:22px}
+    .caption{color:#444; margin-top:8px}
+    .muted{color:#666; font-size:0.95em}
     ul{margin:6px 0 12px 20px}
+
+    /* title / cover slide */
+    .title-slide{background:linear-gradient(180deg,#0b3d91,#0a2b66); color:#fff; text-align:center}
+    .title-slide h2{font-size:36px; margin:18px 0}
+    .title-slide .muted{color:rgba(255,255,255,0.85)}
+
+    /* intro slide (image + text) */
+    .intro-slide .slide-inner{flex-direction:row}
+
+    /* visual slides */
+    .visual-slide .media img{box-shadow: 0 8px 30px rgba(10,14,28,0.12)}
+
+    /* smaller devices fallback */
+    @media (max-width: 1200px){:root{--slide-width: 900px}}
+    @media (max-width: 800px){.slide{width:calc(100% - 2*var(--page-margin)); padding:12px;}}
   </style>
 </head>
 <body>
   <h1>Визуализация и исследование данных — на примере «Война и мир»</h1>
   <p class="muted">Министерство образования Иркутской области · Сиб. отделение РАН · Региональная конференция «Наука. Технологии. Интеллект»</p>
-  <p class="muted">Выполнила: Косова Лада Петровна, ученица 11 «Д», МАОУ «Ангарский лицей №1». Руководитель: Косов Пётр Борисович.
-  <section class="slide title-slide">
-    <h2>Визуализация и исследование данных</h2>
-    <img src="presentation/slide-01-title.png" alt="Титульный слайд"/>
-    <p class="caption">Иллюстрация, сгенерированная AITUNNEL.</p>
+  <p class="muted">Выполнила: Косова Лада Петровна, ученица 11 «Д», МАОУ «Ангарский лицей №1». Руководитель: Косов Пётр Борисович.</p>
+
+  <!-- Cover slide: text only -->
+  <section class="slide title-slide cover-slide">
+    <h2>Визуализация и исследование данных — на примере «Война и мир»</h2>
+    <p class="muted">Министерство образования Иркутской области · Сиб. отделение РАН · Региональная конференция «Наука. Технологии. Интеллект»</p>
+    <p class="muted">Выполнила: Косова Лада Петровна. Руководитель: Косов Пётр Борисович.</p>
   </section>
 
-  <section class="slide title-slide">
+  <!-- Intro slide: image + short text -->
+  <section class="slide intro-slide">
     <h2>Введение</h2>
     <img src="presentation/slide-02-intro.png" alt="Вступление"/>
     <p class="caption">Краткое введение и цель работы.</p>
   </section>
-</p>
 
   <!-- Slide: Введение -->
   <section class="slide">
