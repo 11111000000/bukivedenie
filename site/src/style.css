@@ -201,3 +201,7 @@ th {
     width: 100%;
   }
 }
+
+/* Shell header styles appended to keep header/iframe consistent with existing design.
+   Kept minimal so Pico-like variables in this file are used throughout. */
+.shell-header { --panel: var(--panel); }

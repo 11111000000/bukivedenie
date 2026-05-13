@@ -2,7 +2,9 @@ import * as echarts from 'echarts'
 import 'echarts-wordcloud'
 import './style.css'
 
-const DATA_ROOT = './data'
+// When this module is loaded from site/lingvistics.html (iframe),
+// data are served from site/public/data — use a path relative to the page.
+const DATA_ROOT = './public/data'
 const FALLBACK_BOOKS = [
         'tolstoj_lew_nikolaewich-text_1',
         'tolstoj_lew_nikolaewich-text_2',
