@@ -8,6 +8,10 @@ on:
     branches:
       - main
 
+# Ensure the workflow has write access to repository contents for publishing
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -31,7 +35,15 @@ jobs:
           if [ -f docs/requirements.txt ]; then pip install -r docs/requirements.txt; fi
 
       - name: Build pages data
-        run: python scripts/build_pages.py
+        run: |
+          # Prefer full regeneration when available; fallback to building site data only
+          if [ -f scripts/regenerate_all.py ]; then
+            python scripts/regenerate_all.py
+          elif [ -f scripts/build_site_data.py ]; then
+            python scripts/build_site_data.py --source outputs --target site/public/data
+          else
+            echo "No data build script found; continuing without regenerating outputs"
+          fi
 
       - name: Install site dependencies
         working-directory: ./site
