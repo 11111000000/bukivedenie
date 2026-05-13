@@ -16,20 +16,18 @@ if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true })
 
 // produce two variations per slide (v1, v2) for A/B selection
 let baseTasks = null
-try {
-  // allow external prompts file to define slides (site/scripts/aitunnel-prompts.js)
-  // it should export `module.exports = [ { name, prompt, file } ]` or default export for ESM
-  const promptsPath = path.join(process.cwd(), 'site', 'scripts', 'aitunnel-prompts.js')
-  if (fs.existsSync(promptsPath)) {
-    // import dynamically (support both CJS and ESM-like default)
-    // use require for simplicity
-    // eslint-disable-next-line no-eval
-    baseTasks = require(promptsPath)
-    if (baseTasks && baseTasks.default) baseTasks = baseTasks.default
+// try to load external prompts file (supports ESM default export)
+const promptsPath = path.join(process.cwd(), 'site', 'scripts', 'aitunnel-prompts.js')
+if (fs.existsSync(promptsPath)) {
+  try {
+    // dynamic import requires a file:// URL
+    const fileUrl = new URL(`file://${promptsPath}`)
+    const mod = await import(fileUrl.href)
+    baseTasks = mod.default || mod
     console.log('Loaded prompts from', promptsPath)
+  } catch (e) {
+    console.warn('Could not load external prompts file via import:', e && (e.message || e.toString()))
   }
-} catch (e) {
-  console.warn('Could not load external prompts file:', e && e.message)
 }
 
 if (!baseTasks) {
@@ -165,7 +163,13 @@ async function main() {
     try {
       await gen(t)
     } catch (err) {
-      console.error('Failed', t.name, err.message)
+      console.error('Failed', t.name, err && (err.message || err.toString()))
+      console.log('Falling back to local placeholder for', t.name)
+      try {
+        await createPlaceholderPng(t)
+      } catch (e) {
+        console.error('Placeholder generation also failed for', t.name, e && (e.message || e.toString()))
+      }
     }
   }
 }

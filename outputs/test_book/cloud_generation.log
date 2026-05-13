@@ -64,3 +64,13 @@ Traceback (most recent call last):
   File "/home/az/Code/bukivedenie/src/legacy_scripts/plot_wordcloud_counts_legacy.py", line 26, in <module>
     import yaml
 ModuleNotFoundError: No module named 'yaml'
+=== Cloud generation started: 2026-05-14T02:18:22.813734
+Traceback (most recent call last):
+  File "/home/az/Code/bukivedenie/src/legacy_scripts/plot_wordcloud_counts_legacy.py", line 26, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+=== Cloud generation started: 2026-05-14T02:20:37.310461
+Traceback (most recent call last):
+  File "/home/az/Code/bukivedenie/src/legacy_scripts/plot_wordcloud_counts_legacy.py", line 26, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'

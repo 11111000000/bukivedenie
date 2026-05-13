@@ -1,8 +1,8 @@
 {
   "book_id": "test_book",
-  "start_time": "2026-05-14T01:45:05.947648",
-  "end_time": "2026-05-14T01:45:05.998337",
-  "duration_seconds": 0.050689,
+  "start_time": "2026-05-14T02:20:37.284675",
+  "end_time": "2026-05-14T02:20:37.307866",
+  "duration_seconds": 0.023191,
   "config": {
     "lang": "ru",
     "ner_mode": "heuristic",
