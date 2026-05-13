@@ -68,7 +68,11 @@ export async function viewBookOverview(book){
     console.error('view mount not found in viewBookOverview')
     return
   }
-  el.innerHTML = `<h2>${escapeHtml(book)}</h2><p>Загружаю обзор…</p>`
+  // append a small loader node to avoid clearing the whole view and causing flash
+  const _loader = document.createElement('div')
+  _loader.id = 'view-loading'
+  _loader.textContent = 'Загружаю обзор…'
+  el.appendChild(_loader)
   const [files, summary, index] = await Promise.all([
     api.files(book).then(r=>r.files||[]).catch(()=>[]),
     api.bookSummary(book).catch(()=>null),
@@ -82,7 +86,7 @@ export async function viewBookOverview(book){
   const chapterStructure = buildChapterStructure(chapterRows, 8)
   try{ setState({ selectedBook: book }) }catch(e){}
 
-  el.innerHTML = `
+  const finalHTML = `
     <section style="display:grid; gap:16px;">
       <header style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-start; gap:16px;">
         <div style="max-width:64ch;">
@@ -175,4 +179,7 @@ export async function viewBookOverview(book){
       </section>
     </section>
   `
+  const frag = document.createRange().createContextualFragment(finalHTML)
+  el.replaceChildren(frag)
+  const widgetMount = document.getElementById(widgetMountId)
 }
