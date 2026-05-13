@@ -9,7 +9,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: resolve(__dirname, 'index.html'),
-        warAndPeace: resolve(__dirname, 'war-and-peace.html'),
+        warAndPeace: resolve(__dirname, 'war-and-peace-cloud.html'),
       },
     },
   },
