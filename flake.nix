@@ -1,16 +1,23 @@
 {
   description = "bukivedenie development shell";
 
-  outputs = { self }: let
-    pkgs = import <nixpkgs> { };
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/25.11";
+  };
+
+  outputs = { self, nixpkgs }: let
+    pkgs = import nixpkgs { };
     devScript = pkgs.writeShellScriptBin "bukivedenie-dev" ''
-      exec ${pkgs.bashInteractive}/bin/bash ${builtins.toString ./scripts/dev_rollup.sh}
+      cd ${builtins.toString ./.}
+      exec ${pkgs.bashInteractive}/bin/bash -lc 'python scripts/build_site_data.py --source outputs --target site/public/data && cd site && npm run dev'
     '';
-    backendScript = pkgs.writeShellScriptBin "bukivedenie-backend" ''
-      exec ${pkgs.bashInteractive}/bin/bash ${builtins.toString ./scripts/backend.sh}
+    previewScript = pkgs.writeShellScriptBin "bukivedenie-preview" ''
+      cd ${builtins.toString ./.}
+      exec ${pkgs.bashInteractive}/bin/bash -lc 'python scripts/build_site_data.py --source outputs --target site/public/data && cd site && npm run preview'
     '';
     smokeScript = pkgs.writeShellScriptBin "bukivedenie-smoke" ''
-      exec ${pkgs.bashInteractive}/bin/bash ${builtins.toString ./scripts/ui_smoke.sh} "$@"
+      cd ${builtins.toString ./.}
+      exec ${pkgs.bashInteractive}/bin/bash -lc 'python scripts/build_site_data.py --source outputs --target site/public/data && cd site && npm run build'
     '';
     shell = pkgs.mkShell {
       packages = with pkgs; [
@@ -18,16 +25,14 @@
         curl
         git
         gnumake
-        chromium
         nodejs_22
         python3
         python3Packages.pytest
+        libreoffice
       ];
 
       shellHook = ''
-        export CHROME_PATH=${pkgs.chromium}/bin/chromium
-        export PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
-        echo "Entered bukivedenie dev shell. Use: make frontend-install, make dev, make ui-smoke, pytest"
+        echo "Entered bukivedenie dev shell. Use: make site-install, make site-dev, make ui-smoke, pytest"
       '';
     };
   in {
@@ -38,9 +43,9 @@
         type = "app";
         program = "${devScript}/bin/bukivedenie-dev";
       };
-      backend = {
+      preview = {
         type = "app";
-        program = "${backendScript}/bin/bukivedenie-backend";
+        program = "${previewScript}/bin/bukivedenie-preview";
       };
       smoke = {
         type = "app";
