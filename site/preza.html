@@ -8,109 +8,173 @@
     body{font-family: Arial, Helvetica, sans-serif; margin:0; padding:20px; background:#fff}
     .slide{page-break-after:always; margin-bottom:40px}
     img{max-width:100%; height:auto; border:1px solid #ddd}
-    h2{margin:8px 0 6px}
+    h1,h2{margin:8px 0 6px}
     .caption{color:#444}
+    .muted{color:#666; font-size:0.9em}
+    ul{margin:6px 0 12px 20px}
   </style>
 </head>
 <body>
-  <h1>Презентация: результаты анализа</h1>
-  
-    <section class="slide">
-      <h2>1. Частотное ядро</h2>
-      <img src="presentation/--01.png" alt="Частотное ядро"/>
-      <p class="caption">Краткое описание (здесь добавить содержательный текст).</p>
-    </section>
-  
+  <h1>Визуализация и исследование данных — на примере «Война и мир»</h1>
+  <p class="muted">Министерство образования Иркутской области · Сиб. отделение РАН · Региональная конференция «Наука. Технологии. Интеллект»</p>
+  <p class="muted">Выполнила: Косова Лада Петровна, ученица 11 «Д», МАОУ «Ангарский лицей №1». Руководитель: Косов Пётр Борисович.</p>
 
-    <section class="slide">
-      <h2>2. Top tokens</h2>
-      <img src="presentation/top-tokens-02.png" alt="Top tokens"/>
-      <p class="caption">Краткое описание (здесь добавить содержательный текст).</p>
-    </section>
-  
+  <!-- Slide: Введение -->
+  <section class="slide">
+    <h2>Введение — цель и задачи</h2>
+    <p>Цель: создать открытый и воспроизводимый конвейер для анализа текста и генерации визуальных пособий для крупных произведений.</p>
+    <p>Задачи:</p>
+    <ul>
+      <li>Разработать формат и конвенции для визуализаций.</li>
+      <li>Автоматизировать сбор и нормализацию данных из текста.</li>
+      <li>Построить визуализации, удобные для исследования текста.</li>
+      <li>Опубликовать результаты в открытом доступе (статический сайт).</li>
+    </ul>
+  </section>
 
-    <section class="slide">
-      <h2>3. Ритм по главам</h2>
-      <img src="presentation/--03.png" alt="Ритм по главам"/>
-      <p class="caption">Краткое описание (здесь добавить содержательный текст).</p>
-    </section>
-  
+  <!-- Slide: Система разработки на телефоне -->
+  <section class="slide">
+    <h2>Система разработки (включая телефон)</h2>
+    <p>Проект можно разрабатывать и запускать в лёгком окружении (Termux на Android) или на ПК. Ключевые инструменты, использованные в процессе:</p>
+    <ul>
+      <li>Markor — заметки/черновики</li>
+      <li>Termux — среда на телефоне</li>
+      <li>GitHub — репозиторий и публикация</li>
+      <li>Agent PI — помощник при генерации кода (использовался для ускорения разработки)</li>
+      <li>Python — анализ и генерация CSV/JSON</li>
+      <li>JavaScript (Vite + ECharts) — статическая витрина</li>
+    </ul>
+    <p class="muted">(Подсказка: проект фиксирует параметры прогона в run_metadata.json — это делает результаты воспроизводимыми между машинами.)</p>
+  </section>
 
-    <section class="slide">
-      <h2>4. Тональность по главам</h2>
-      <img src="presentation/--04.png" alt="Тональность по главам"/>
-      <p class="caption">Краткое описание (здесь добавить содержательный текст).</p>
-    </section>
-  
+  <!-- Slide: Сбор данных -->
+  <section class="slide">
+    <h2>Сбор данных — пайплайн</h2>
+    <p>Пайплайн формирует готовые для визуализации таблицы/JSON:</p>
+    <ul>
+      <li>Нормализация (UTF‑8, кавычки, тире, многоточия)</li>
+      <li>Токенизация и лемматизация</li>
+      <li>Разбиение на предложения, абзацы, главы и диалоги</li>
+      <li>Выделение кандидатов на именованные сущности (правилами)</li>
+      <li>Подсчёт метрик: частоты, hapax, Yule/Honore, тональность, пунктуация</li>
+      <li>Экспорт в CSV/JSON (tokens.csv, characters.csv, cooccurrence_edges.csv и др.)</li>
+    </ul>
+  </section>
 
-    <section class="slide">
-      <h2>5. Персонажи и связи</h2>
-      <img src="presentation/--05.png" alt="Персонажи и связи"/>
-      <p class="caption">Краткое описание (здесь добавить содержательный текст).</p>
-    </section>
-  
+  <!-- Slide: Визуализация -->
+  <section class="slide">
+    <h2>Витрина и визуализация</h2>
+    <p>Frontend — статический Vite‑сайт, который загружает готовые CSV/JSON из <code>site/public/data/</code>. Это даёт простую и надёжную публикацию без отдельного API.</p>
+    <p>Преимущества: лёгкий развёртывание, reproducible artifacts, простота отката и тестирования.</p>
+  </section>
 
-    <section class="slide">
-      <h2>6. Персонажи</h2>
-      <img src="presentation/article-06.png" alt="Персонажи"/>
-      <p class="caption">Краткое описание (здесь добавить содержательный текст).</p>
-    </section>
-  
+  <!-- Slide: Реализация агента -->
+  <section class="slide">
+    <h2>Реализация кода с помощью агента</h2>
+    <p>В разработке использовался агент PI в роли помощника по коду. Ключевые наблюдения:</p>
+    <ul>
+      <li>Агент эффективен при наличии подробной спецификации — пишет много кода быстро.</li>
+      <li>Нужен тщательный код‑ревью: автогенерированный код может нарастить когнитивную долговую нагрузку.</li>
+      <li>Агент иногда усложняет структуру репозитория — после генерации требуется рефакторинг.</li>
+    </ul>
+  </section>
 
-    <section class="slide">
-      <h2>7. Hapax</h2>
-      <img src="presentation/hapax-07.png" alt="Hapax"/>
-      <p class="caption">Краткое описание (здесь добавить содержательный текст).</p>
-    </section>
-  
+  <!-- Insert generated visual slides with descriptive captions -->
+  <section class="slide">
+    <h2>Частотное ядро (frequency core)</h2>
+    <img src="presentation/--01.png" alt="Частотное ядро"/>
+    <p class="caption">График показывает распределение частот токенов после очистки и фильтрации стоп‑слов. Помогает быстро увидеть доминирующие слова и общую лексику произведения.</p>
+  </section>
 
-    <section class="slide">
-      <h2>8. Метаданные прогона</h2>
-      <img src="presentation/--08.png" alt="Метаданные прогона"/>
-      <p class="caption">Краткое описание (здесь добавить содержательный текст).</p>
-    </section>
-  
+  <section class="slide">
+    <h2>Top tokens — топ слов</h2>
+    <img src="presentation/top-tokens-02.png" alt="Top tokens"/>
+    <p class="caption">Барчарт с топ‑словами по частоте. Используется для быстрой инспекции ключевых лексем и проверки корректности нормализации/лемматизации.</p>
+  </section>
 
-    <section class="slide">
-      <h2>9. Пунктуация</h2>
-      <img src="presentation/article-09.png" alt="Пунктуация"/>
-      <p class="caption">Краткое описание (здесь добавить содержательный текст).</p>
-    </section>
-  
+  <section class="slide">
+    <h2>Ритм по главам</h2>
+    <img src="presentation/--03.png" alt="Ритм по главам"/>
+    <p class="caption">Таймлайн/диаграмма, показывающая плотность событий/текстовую активность по главам — помогает находить пики динамики и структурные особенности.</p>
+  </section>
 
-    <section class="slide">
-      <h2>10. Стиль: radar</h2>
-      <img src="presentation/-radar-10.png" alt="Стиль: radar"/>
-      <p class="caption">Краткое описание (здесь добавить содержательный текст).</p>
-    </section>
-  
+  <section class="slide">
+    <h2>Тональность по главам</h2>
+    <img src="presentation/--04.png" alt="Тональность по главам"/>
+    <p class="caption">Линейный график тональности (лексикон‑based). Оценка приближённая, но полезна для выявления эмоциональных смен в тексте.</p>
+  </section>
 
-    <section class="slide">
-      <h2>11. Главы: words × sentences</h2>
-      <img src="presentation/-words-sentences-11.png" alt="Главы: words × sentences"/>
-      <p class="caption">Краткое описание (здесь добавить содержательный текст).</p>
-    </section>
-  
+  <section class="slide">
+    <h2>Сеть персонажей</h2>
+    <img src="presentation/--05.png" alt="Персонажи и связи"/>
+    <p class="caption">Граф ко‑встречаемости персонажей: ребра — совместные появления в окне контекста, вес — частота. Позволяет визуально выделить центральных и второстепенных персонажей.</p>
+  </section>
 
-    <section class="slide">
-      <h2>12. Персонажи × главы</h2>
-      <img src="presentation/--12.png" alt="Персонажи × главы"/>
-      <p class="caption">Краткое описание (здесь добавить содержательный текст).</p>
-    </section>
-  
+  <section class="slide">
+    <h2>Список персонажей</h2>
+    <img src="presentation/article-06.png" alt="Персонажи"/>
+    <p class="caption">Таблица обнаруженных персонажей и их частоты. Нерегулярности в именах — следствие эвристического NER; требует дополнительной ручной валидации.</p>
+  </section>
 
-    <section class="slide">
-      <h2>13. Токены × главы</h2>
-      <img src="presentation/--13.png" alt="Токены × главы"/>
-      <p class="caption">Краткое описание (здесь добавить содержательный текст).</p>
-    </section>
-  
+  <section class="slide">
+    <h2>Hapax legomena</h2>
+    <img src="presentation/hapax-07.png" alt="Hapax"/>
+    <p class="caption">Список слов, встречающихся единожды. Полезно для изучения уникальной лексики и артефактов разметки.</p>
+  </section>
 
-    <section class="slide">
-      <h2>14. Zipf: rank × frequency</h2>
-      <img src="presentation/zipf-rank-frequency-14.png" alt="Zipf: rank × frequency"/>
-      <p class="caption">Краткое описание (здесь добавить содержательный текст).</p>
-    </section>
-  
+  <section class="slide">
+    <h2>Метаданные прогона</h2>
+    <img src="presentation/--08.png" alt="Метаданные прогона"/>
+    <p class="caption">run_metadata.json фиксирует параметры и время прогона — это ключ к воспроизводимости (версии, флаги, время).</p>
+  </section>
+
+  <section class="slide">
+    <h2>Пунктуация и структура</h2>
+    <img src="presentation/article-09.png" alt="Пунктуация"/>
+    <p class="caption">Анализ частот пунктуации по главам помогает обнаружить диалоги, паузы и изменение стиля повествования.</p>
+  </section>
+
+  <section class="slide">
+    <h2>Стиль: radar</h2>
+    <img src="presentation/-radar-10.png" alt="Стиль: radar"/>
+    <p class="caption">Радар‑диаграмма показывает сжатые метрики по главам/секциям (лексическая плотность, длинна предложений и пр.).</p>
+  </section>
+
+  <section class="slide">
+    <h2>Главы: words × sentences</h2>
+    <img src="presentation/-words-sentences-11.png" alt="Главы: words × sentences"/>
+    <p class="caption">Scatter plot: соотношение слов и предложений в главах — помогает находить аномально длинные/короткие главы.</p>
+  </section>
+
+  <section class="slide">
+    <h2>Персонажи × главы</h2>
+    <img src="presentation/--12.png" alt="Персонажи × главы"/>
+    <p class="caption">Тепловая карта появления персонажей по главам — удобно для отслеживания арок и смен фокуса на персонажей.</p>
+  </section>
+
+  <section class="slide">
+    <h2>Токены × главы</h2>
+    <img src="presentation/--13.png" alt="Токены × главы"/>
+    <p class="caption">Тепловая карта распределения частот ключевых токенов по главам — полезно для тематического картирования.</p>
+  </section>
+
+  <section class="slide">
+    <h2>Zipf: rank × frequency</h2>
+    <img src="presentation/zipf-rank-frequency-14.png" alt="Zipf: rank × frequency"/>
+    <p class="caption">Граф ранга и частоты токенов (закон Ципфа). Проверка ожидаемого распределения и качества токенизации.</p>
+  </section>
+
+  <!-- Slides from original draft: final / thanks -->
+  <section class="slide">
+    <h2>Реализация и выводы</h2>
+    <p>Мы показали рабочий конвейер: от текста до визуализаций и статической витрины. Артефакты хранятся в <code>outputs/&lt;book_id&gt;/</code> и экспортируются в <code>site/public/data/</code>.</p>
+    <p>Дальше: улучшение NER, валидация персонажей, сравнение разных изданий и масштабирование на корпус.</p>
+  </section>
+
+  <section class="slide">
+    <h2>Спасибо за внимание</h2>
+    <p class="muted">Вопросы и предложения — обсуждаем. Доп. материалы и код — в репозитории.</p>
+  </section>
+
 </body>
 </html>
