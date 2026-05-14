@@ -11,18 +11,15 @@
       /* Small overrides for the shell layout */
       html,body{height:100%;margin:0}
       body{display:flex;flex-direction:column}
-      header.shell-header{
-        display:flex;align-items:center;gap:24px;padding:12px 16px;background:var(--panel,#fff);border-bottom:1px solid var(--line,#e6eef8)}
-      .shell-title{font-size:1.1rem;font-weight:700;margin:0}
-      nav.shell-menu{display:flex;gap:12px;margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
-      nav.shell-menu a{padding:8px 12px;border-radius:8px;color:var(--accent,#3558a6);text-decoration:none;white-space:nowrap}
-      nav.shell-menu a.active{background:var(--accent,#3558a6);color:#fff}
-      iframe.content-frame{border:0;width:100%;flex:1;height:calc(100vh - 64px);background:transparent}
+      header.shell-header{display:grid;gap:14px;padding:clamp(12px,2vw,20px);background:var(--panel,#fff);border:1px solid var(--line,#e6eef8);border-radius:16px;box-shadow:0 1px 0 rgba(14,23,38,.03)}
+      .shell-title{font-size:clamp(1.2rem,3vw,2rem);font-weight:800;margin:0;line-height:1.1}
+      .shell-lead{margin:6px 0 0;color:var(--muted,#6a7285);max-width:78ch;line-height:1.5}
+      nav.shell-menu{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+      nav.shell-menu a{padding:10px 12px;border-radius:12px;border:1px solid var(--line,#d7deea);background:#fff;color:var(--accent,#3558a6);text-decoration:none;text-align:center;white-space:normal;line-height:1.2;min-height:44px;display:flex;align-items:center;justify-content:center}
+      nav.shell-menu a.active{background:var(--accent,#3558a6);color:#fff;border-color:var(--accent,#3558a6)}
+      iframe.content-frame{border:0;width:100%;flex:1;height:calc(100vh - 88px);background:transparent}
       @media (max-width:640px){
-        header.shell-header{flex-direction:column;align-items:stretch;gap:12px}
-        nav.shell-menu{margin-left:0;justify-content:flex-start;overflow-x:auto;padding-bottom:4px}
-        nav.shell-menu a{flex:0 0 auto}
-        iframe.content-frame{height:calc(100vh - 160px)}
+        iframe.content-frame{height:calc(100vh - 190px)}
       }
     </style>
   </head>
@@ -30,11 +27,14 @@
     <header class="shell-header">
       <div style="display:flex;align-items:center;gap:12px">
         <img src="/favicon.svg" alt="logo" width="36" height="36" style="display:block" />
-        <h1 class="shell-title">Лингвистический атлас книг</h1>
+        <div>
+          <h1 class="shell-title">Лингвистический атлас книг</h1>
+          <p class="shell-lead">Интерактивная статическая витрина: тексты, метрики, графы и презентации собраны в одном месте, чтобы всё было видно без сервера и лишних переходов.</p>
+        </div>
       </div>
       <nav class="shell-menu" role="navigation" aria-label="Main menu">
         <a href="#" data-src="lingvistics.html" class="active">Лингвистика</a>
-        <a href="#" data-src="preza.html">Презентация</a>
+        <a href="#" data-src="preza.html?v=20260514">Презентация</a>
         <a href="./preza.pdf" target="_blank" rel="noopener">PDF</a>
         <a href="./preza.pptx" target="_blank" rel="noopener">PPTX</a>
         <a href="#" data-src="war-and-peace-map.html">Карта</a>
