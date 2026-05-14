@@ -1,4 +1,4 @@
-import{i as N,c as O}from"./shared-DIh12-4I.js";/* empty css              */const A="./data",C=["tolstoj_lew_nikolaewich-text_1","tolstoj_lew_nikolaewich-text_2","tolstoj_lew_nikolaewich-text_3","tolstoj_lew_nikolaewich-text_4","чехов-письмо"],z=document.querySelector("#app");z.innerHTML=`
+import{i as N,c as O}from"./shared-D2wSthDd.js";/* empty css              */const A="./data",C=["tolstoj_lew_nikolaewich-text_1","tolstoj_lew_nikolaewich-text_2","tolstoj_lew_nikolaewich-text_3","tolstoj_lew_nikolaewich-text_4","чехов-письмо"],z=document.querySelector("#app");z.innerHTML=`
   <div class="shell">
     <header class="topbar">
       <div class="title-row">
