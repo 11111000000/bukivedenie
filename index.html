@@ -58,9 +58,19 @@
     <iframe id="content-frame" class="content-frame" src="lingvistics.html" title="content"></iframe>
 
     <script>
-      // Menu click handler: update iframe src
+      // Menu click handler: update iframe src and ensure clicked item is visible in horizontal scroller
       const menu = document.querySelectorAll('nav.shell-menu a');
       const frame = document.getElementById('content-frame');
+
+      function scrollToView(el){
+        if(!el) return;
+        try{
+          el.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+        }catch(e){
+          el.scrollIntoView();
+        }
+      }
+
       menu.forEach(a=>{
         a.addEventListener('click', e=>{
           e.preventDefault();
@@ -70,8 +80,16 @@
           menu.forEach(x=>x.classList.remove('active'));
           a.classList.add('active');
           frame.src = src;
+          // scroll menu so the active item is visible
+          scrollToView(a);
         })
       });
+
+      // ensure initial active item is visible
+      (function(){
+        const active = document.querySelector('nav.shell-menu a.active');
+        if(active) scrollToView(active);
+      })();
     </script>
   </body>
 </html>
