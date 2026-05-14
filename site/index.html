@@ -6,11 +6,11 @@
     <title>Лингвистический атлас книг — shell</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <!-- Minimal app styles (uses existing site/src/style.css) -->
-    <link rel="stylesheet" href="/src/style.css" />
+    <link rel="stylesheet" href="./src/style.css" />
     <style>
       /* Small overrides for the shell layout */
-      html,body{min-height:100%;height:auto;margin:0;overflow-x:hidden}
-      body{display:flex;flex-direction:column;min-height:100vh}
+       html,body{height:100%;min-height:100%;margin:0;overflow-x:hidden}
+       body{display:flex;flex-direction:column;min-height:100vh}
       header.shell-header{display:grid;gap:12px;padding:clamp(10px,1.8vw,18px);background:var(--panel,#fff);border:1px solid var(--line,#e6eef8);border-radius:16px;box-shadow:0 1px 0 rgba(14,23,38,.03)}
       .shell-title{font-size:clamp(1.1rem,2.6vw,2rem);font-weight:800;margin:0;line-height:1.12}
       .shell-lead{margin:4px 0 0;color:var(--muted,#6a7285);max-width:78ch;line-height:1.45}
@@ -20,9 +20,9 @@
       nav.shell-menu{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
       nav.shell-menu a{padding:10px 12px;border-radius:12px;border:1px solid var(--line,#d7deea);background:#fff;color:var(--accent,#3558a6);text-decoration:none;text-align:center;white-space:normal;line-height:1.2;min-height:44px;display:flex;align-items:center;justify-content:center}
       nav.shell-menu a.active{background:var(--accent,#3558a6);color:#fff;border-color:var(--accent,#3558a6)}
-      iframe.content-frame{border:0;width:100%;flex:1;min-height:300px;background:transparent;overflow:hidden}
+       iframe.content-frame{border:0;width:100%;flex:1 1 auto;min-height:0;height:auto;background:transparent;overflow:hidden}
       @media (max-width:640px){
-        body{min-height:-webkit-fill-available}
+         body{min-height:100dvh}
         header.shell-header{gap:10px;padding:10px}
         .shell-title{font-size:clamp(1.05rem,6vw,1.4rem)}
         .shell-lead{font-size:0.92rem;line-height:1.42}
@@ -31,14 +31,14 @@
         nav.shell-menu{display:none;grid-template-columns:1fr;gap:8px}
         nav.shell-menu a{justify-content:flex-start;text-align:left;padding:12px 14px}
         header.shell-header.open nav.shell-menu{display:grid}
-        iframe.content-frame{min-height:250px;flex:1}
+         iframe.content-frame{min-height:0;flex:1 1 auto}
       }
     </style>
   </head>
   <body>
     <header class="shell-header">
       <div style="display:flex;align-items:center;gap:12px">
-        <img src="/favicon.svg" alt="logo" width="36" height="36" style="display:block" />
+        <img src="./favicon.svg" alt="logo" width="36" height="36" style="display:block" />
         <div>
           <h1 class="shell-title">Лингвистический атлас</h1>
           <p class="shell-lead">Интерактивная статическая витрина: тексты, метрики, графы и презентации собраны в одном месте, чтобы всё было видно без сервера и лишних переходов.</p>

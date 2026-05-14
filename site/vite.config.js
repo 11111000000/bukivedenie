@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'node:path'
-import { copyFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync, readdirSync, statSync } from 'node:fs'
 
 export default defineConfig({
   appType: 'mpa',
@@ -38,29 +38,25 @@ export default defineConfig({
         }
       }
 
-      // copy presentation assets directory so CSVs and images are available on gh-pages
-      const presSrc = resolve(__dirname, 'presentation')
-      const presDest = resolve(outDir, 'presentation')
-      if (existsSync(presSrc)) {
-        mkdirSync(presDest, { recursive: true })
-        for (const entry of readdirSync(presSrc)) {
-          const s = resolve(presSrc, entry)
-          const d = resolve(presDest, entry)
-          try { copyFileSync(s, d) } catch (e) { /* ignore directories */ }
+      const copyTree = (srcDir, destDir) => {
+        if (!existsSync(srcDir)) return
+        mkdirSync(destDir, { recursive: true })
+        for (const entry of readdirSync(srcDir)) {
+          const s = resolve(srcDir, entry)
+          const d = resolve(destDir, entry)
+          if (statSync(s).isDirectory()) {
+            copyTree(s, d)
+          } else {
+            copyFileSync(s, d)
+          }
         }
       }
 
+      // copy presentation assets directory so CSVs and images are available on gh-pages
+      copyTree(resolve(__dirname, 'presentation'), resolve(outDir, 'presentation'))
+
       // copy vendor assets (ol, papaparse) into dist/vendor so pages can reference them directly
-      const vendorSrc = resolve(__dirname, 'vendor')
-      const vendorDest = resolve(outDir, 'vendor')
-      if (existsSync(vendorSrc)) {
-        mkdirSync(vendorDest, { recursive: true })
-        for (const entry of readdirSync(vendorSrc)) {
-          const s = resolve(vendorSrc, entry)
-          const d = resolve(vendorDest, entry)
-          try { copyFileSync(s, d) } catch (e) { /* ignore directories */ }
-        }
-      }
+      copyTree(resolve(__dirname, 'vendor'), resolve(outDir, 'vendor'))
     },
   }],
 })
