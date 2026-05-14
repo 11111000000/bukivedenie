@@ -60,6 +60,16 @@
   </style>
 </head>
 <body>
+  <div class="download-badges">
+    <a href="preza.pdf" download class="badge">PDF</a>
+    <a href="preza.pptx" download class="badge">PPTX</a>
+  </div>
+  <style>
+    .download-badges{position:fixed;top:16px;right:16px;z-index:100;display:flex;gap:8px}
+    .badge{display:inline-flex;align-items:center;padding:6px 12px;background:#3558a6;color:#fff;border-radius:6px;font-size:13px;font-weight:600;text-decoration:none;transition:background .2s}
+    .badge:hover{background:#2a4590}
+    @media print{.download-badges{display:none}}
+  </style>
   <!-- page-level heading removed from visual flow; title is present on the first slide -->
   <h1 class="visually-hidden">Визуализация и исследование данных — на примере «Война и мир»</h1>
   <style>
