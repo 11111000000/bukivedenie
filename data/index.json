@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-05-14T05:13:11.596885Z",
+  "generated_at": "2026-05-14T13:01:46.614132Z",
   "books": [
     {
       "id": "tolstoj_lew_nikolaewich-text_1",
       "title": "tolstoj_lew_nikolaewich-text_1",
-      "updated": "2026-05-14T05:13:03.923140",
+      "updated": "2026-05-14T13:01:38.238095",
       "files": [
         "run_metadata.json",
         "chapters_summary.json",
@@ -22,7 +22,7 @@
     {
       "id": "tolstoj_lew_nikolaewich-text_2",
       "title": "tolstoj_lew_nikolaewich-text_2",
-      "updated": "2026-05-14T05:13:05.805507",
+      "updated": "2026-05-14T13:01:40.251106",
       "files": [
         "run_metadata.json",
         "chapters_summary.json",
@@ -39,7 +39,7 @@
     {
       "id": "tolstoj_lew_nikolaewich-text_3",
       "title": "tolstoj_lew_nikolaewich-text_3",
-      "updated": "2026-05-14T05:13:07.790284",
+      "updated": "2026-05-14T13:01:42.527064",
       "files": [
         "run_metadata.json",
         "chapters_summary.json",
@@ -56,7 +56,7 @@
     {
       "id": "tolstoj_lew_nikolaewich-text_4",
       "title": "tolstoj_lew_nikolaewich-text_4",
-      "updated": "2026-05-14T05:13:11.396770",
+      "updated": "2026-05-14T13:01:46.407264",
       "files": [
         "run_metadata.json",
         "chapters_summary.json",
