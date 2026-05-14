@@ -5,7 +5,7 @@ import puppeteer from 'puppeteer-core'
 
 const argv = process.argv.slice(2)
 const base = argv.find(a => a.startsWith('--base='))?.split('=')[1] || 'http://127.0.0.1:4173'
-const outDir = argv.find(a => a.startsWith('--out='))?.split('=')[1] || 'presentation/screens'
+const outDir = argv.find(a => a.startsWith('--out='))?.split('=')[1] || 'presentation'
 const headful = process.env.SITE_HEADFUL === '1'
 
 const candidates = [
@@ -87,11 +87,11 @@ try {
   }
 
   // build a simple presentation HTML next to other site pages (preza.html)
-  const htmlPath = join(outDir, '..', 'preza.html')
+  const htmlPath = join(outDir, 'preza.html')
   const slides = items.map((it, idx) => `
     <section class="slide">
       <h2>${idx+1}. ${escapeHtml(it.title)}</h2>
-      <img src="screens/${it.file.split('/').pop()}" alt="${escapeHtml(it.title)}"/>
+      <img src="./${it.file.split('/').pop()}" alt="${escapeHtml(it.title)}"/>
       <p class="caption">Краткое описание (здесь добавить содержательный текст).</p>
     </section>
   `).join('\n')
