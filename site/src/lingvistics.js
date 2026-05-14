@@ -1,5 +1,5 @@
 import './style.css'
-import { buildShell, createChart, fetchJSON, fetchText, mountShell, normalizeRows, parseCSV } from './shared.js'
+import { buildShell, createChart, createStateMessage, fetchJSON, fetchText, mountShell, normalizeRows, parseCSV } from './shared.js'
 
 // Vite serves files from site/public at the web root.
 // The data folder on disk is site/public/data, therefore it is available as /data/...
@@ -26,6 +26,7 @@ mountShell(buildShell({
     </label>
     <div class="status" id="book-meta"></div>
   `,
+        aside: '<div class="page-note">Обзор текста, частот, связей и стилевых признаков в одном интерфейсе.</div>',
 }))
 
 const app = document.querySelector('#app-main')
@@ -63,7 +64,7 @@ function pickRows(rows, limit) {
 function renderTable(container, rows, headers) {
         const list = normalizeRows(rows)
         if (!list.length) {
-                container.innerHTML = '<div class="muted" style="padding:12px">Данных для этой таблицы нет в выбранной книге.</div>'
+                container.innerHTML = createStateMessage('Данных для этой таблицы нет в выбранной книге.')
                 return
         }
         container.innerHTML = `
@@ -253,6 +254,10 @@ async function init() {
         }
         const books = Array.isArray(manifest?.books) && manifest.books.length ? manifest.books : FALLBACK_BOOKS.map((id) => ({ id, title: id }))
         bookSelect.innerHTML = books.map((book) => `<option value="${book.id}">${book.title || book.id}</option>`).join('')
+        if (!books.length) {
+                statusEl.innerHTML = createStateMessage('Каталог пуст. Проверьте экспорт данных.', 'error')
+                return
+        }
         const render = async () => {
                 const data = await loadBook(bookSelect.value)
                 const complexity = data.complexity || {}
@@ -280,6 +285,7 @@ async function init() {
                         { key: 'ner_mode', value: data.metadata.config?.ner_mode },
                         { key: 'sentiment_mode', value: data.metadata.config?.sentiment_mode },
                 ] : [], ['key', 'value'])
+                statusEl.textContent = `Выбрана книга: ${bookSelect.value}`
         }
         bookSelect.addEventListener('change', render)
         topNInput.addEventListener('input', render)

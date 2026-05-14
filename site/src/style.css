@@ -7,6 +7,9 @@
   --line: #d7deea;
   --accent: #3558a6;
   --accent-2: #7a4fd7;
+  --accent-3: #0c8f6a;
+  --shadow: 0 10px 30px rgba(14, 23, 38, 0.06);
+  --shadow-soft: 0 1px 0 rgba(14, 23, 38, 0.03);
 }
 
 * {
@@ -34,9 +37,9 @@ a {
   max-width: 1440px;
   margin: 0 auto;
   width: 100%;
-  padding: clamp(12px, 2.2vw, 24px);
+  padding: clamp(12px, 2.2vw, 28px);
   display: grid;
-  gap: 16px;
+  gap: 18px;
 }
 
 .site-shell {
@@ -86,6 +89,13 @@ a {
   text-transform: uppercase;
 }
 
+.kicker {
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
 .site-main {
   display: grid;
   gap: 16px;
@@ -114,6 +124,7 @@ a {
   text-decoration: none;
   text-align: center;
   line-height: 1.25;
+  transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
 }
 
 .nav-link:hover,
@@ -121,6 +132,7 @@ a {
   border-color: color-mix(in srgb, var(--accent) 30%, var(--line));
   box-shadow: 0 0 0 3px rgba(53, 88, 166, 0.08);
   outline: none;
+  transform: translateY(-1px);
 }
 
 .nav-link.active {
@@ -153,6 +165,16 @@ a {
   border: 1px solid var(--line);
   background: #fff;
   color: var(--text);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.site-controls input:focus-visible,
+.site-controls select:focus-visible,
+.controls select:focus-visible,
+.controls input:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(53, 88, 166, 0.08);
 }
 
 .topbar,
@@ -160,11 +182,11 @@ a {
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 16px;
-  box-shadow: 0 1px 0 rgba(14, 23, 38, 0.03);
+  box-shadow: var(--shadow-soft);
 }
 
 .topbar {
-  padding: 16px;
+  padding: clamp(16px, 2vw, 24px);
   display: grid;
   gap: 12px;
 }
@@ -199,10 +221,28 @@ a {
   font-size: 0.95rem;
 }
 
+.state {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--muted);
+}
+
+.state.is-empty {
+  background: #fbfcff;
+}
+
+.state.is-error {
+  background: #fff5f5;
+  color: #8e1c1c;
+  border-color: #f0caca;
+}
+
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
 }
 
 .card {
@@ -210,6 +250,7 @@ a {
   border-radius: 14px;
   border: 1px solid var(--line);
   background: linear-gradient(180deg, #fff, #fbfcff);
+  box-shadow: var(--shadow-soft);
 }
 
 .card .label {
@@ -226,11 +267,11 @@ a {
 .grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+  gap: 18px;
 }
 
 .panel {
-  padding: clamp(14px, 2vw, 22px);
+  padding: clamp(14px, 2vw, 24px);
   min-width: 0;
 }
 
@@ -264,6 +305,7 @@ a {
   overflow: auto;
   border: 1px solid var(--line);
   border-radius: 12px;
+  background: #fff;
 }
 
 table {
@@ -286,6 +328,10 @@ th {
   background: #f9fbff;
 }
 
+tbody tr:nth-child(even) {
+  background: #fcfdff;
+}
+
 .muted {
   color: var(--muted);
 }
@@ -296,6 +342,36 @@ th {
   background: #fff1f1;
   color: #8e1c1c;
   border: 1px solid #f0caca;
+}
+
+.page-note {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.chart-panel,
+.viz,
+.scroll-panel {
+  min-width: 0;
+}
+
+.scroll-panel {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+table {
+  min-width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
 
 @media (max-width: 960px) {
@@ -329,6 +405,48 @@ th {
 }
 
 @media (max-width: 640px) {
+  .shell {
+    gap: 14px;
+    padding: 10px;
+  }
+
+  .site-header,
+  .topbar,
+  .panel {
+    border-radius: 14px;
+  }
+
+  .site-header,
+  .topbar {
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .brand-row,
+  .title-row,
+  .controls {
+    gap: 10px;
+  }
+
+  .brand-row h1,
+  .title-row h1 {
+    font-size: clamp(1.2rem, 5.2vw, 1.5rem);
+  }
+
+  .brand-row p,
+  .title-row p,
+  .page-note,
+  .panel-desc {
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  .eyebrow {
+    margin-bottom: 6px;
+    padding: 3px 8px;
+    font-size: 0.72rem;
+  }
+
   .site-nav {
     grid-template-columns: 1fr;
   }
@@ -346,6 +464,16 @@ th {
   }
 
   .scroll-panel {
+    border-radius: 10px;
     max-height: 280px;
+  }
+
+  table {
+    font-size: 0.88rem;
+  }
+
+  th,
+  td {
+    padding: 7px 8px;
   }
 }

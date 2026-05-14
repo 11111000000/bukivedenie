@@ -9,6 +9,11 @@ export const NAV_ITEMS = [
   { href: './war-and-peace.html', label: 'Война и мир' },
 ]
 
+export function createStateMessage(message, kind = 'empty') {
+  const cls = kind === 'error' ? 'state is-error' : 'state is-empty'
+  return `<div class="${cls}">${message}</div>`
+}
+
 export function buildShell({ title, subtitle, controls = '', aside = '' }) {
   return `
     <div class="site-shell">
@@ -17,7 +22,7 @@ export function buildShell({ title, subtitle, controls = '', aside = '' }) {
           <div>
             <div class="eyebrow">${APP_BRAND}</div>
             <h1>${title}</h1>
-            <p>${subtitle}</p>
+            <p class="page-note">${subtitle}</p>
           </div>
           <div class="header-aside">${aside}</div>
         </div>
