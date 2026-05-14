@@ -13,11 +13,16 @@
       header.shell-header{
         display:flex;align-items:center;gap:24px;padding:12px 16px;background:var(--panel,#fff);border-bottom:1px solid var(--line,#e6eef8)}
       .shell-title{font-size:1.1rem;font-weight:700;margin:0}
-      nav.shell-menu{display:flex;gap:12px;margin-left:auto}
-      nav.shell-menu a{padding:8px 12px;border-radius:8px;color:var(--accent,#3558a6);text-decoration:none}
+      nav.shell-menu{display:flex;gap:12px;margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
+      nav.shell-menu a{padding:8px 12px;border-radius:8px;color:var(--accent,#3558a6);text-decoration:none;white-space:nowrap}
       nav.shell-menu a.active{background:var(--accent,#3558a6);color:#fff}
       iframe.content-frame{border:0;width:100%;flex:1;height:calc(100vh - 64px);background:transparent}
-      @media (max-width:640px){nav.shell-menu{gap:8px}iframe.content-frame{height:calc(100vh - 96px)}}
+      @media (max-width:640px){
+        header.shell-header{flex-direction:column;align-items:stretch;gap:12px}
+        nav.shell-menu{margin-left:0;justify-content:flex-start;overflow-x:auto;padding-bottom:4px}
+        nav.shell-menu a{flex:0 0 auto}
+        iframe.content-frame{height:calc(100vh - 160px)}
+      }
     </style>
     <link rel="stylesheet" crossorigin href="./assets/style-DXMHjp9e.css">
   </head>
@@ -30,6 +35,8 @@
       <nav class="shell-menu" role="navigation" aria-label="Main menu">
         <a href="#" data-src="lingvistics.html" class="active">Лингвистика</a>
         <a href="#" data-src="preza.html">Презентация</a>
+        <a href="./preza.pdf" target="_blank" rel="noopener">PDF</a>
+        <a href="./preza.pptx" target="_blank" rel="noopener">PPTX</a>
         <a href="#" data-src="war-and-peace-map.html">Карта</a>
         <a href="#" data-src="war-and-peace-cloud.html">Облако</a>
         <a href="#" data-src="war-and-peace-characters.html">Персонажи</a>
