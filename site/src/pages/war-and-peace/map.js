@@ -1,11 +1,11 @@
 import { buildShell, mountShell, createChart, fetchText, parseCSV } from '/src/shared.js'
 
-mountShell(buildShell({ title: 'Война и мир — Сеть персонажей', subtitle: 'Cooccurrence / force graph' }))
+mountShell(buildShell({ title: 'Война и мир — Сеть персонажей', subtitle: 'Сеть показывает, кто с кем чаще связан в тексте. Узлы крупнее у более заметных персонажей, а линии помогают увидеть силу пересечений и группировки.' }))
 const nav = document.querySelector('.site-nav')
 if (nav) nav.remove()
 
 const appMain = document.querySelector('#app-main')
-appMain.innerHTML = `<article class="panel full"><div id="chart" class="viz tall"></div></article>`
+appMain.innerHTML = `<article class="panel full"><h2>Сеть персонажей</h2><p class="panel-desc">Сеть показывает, кто с кем чаще связан в тексте. Узлы крупнее у более заметных персонажей, а линии помогают увидеть силу пересечений и группировки.</p><div id="chart" class="viz tall"></div></article>`
 const chartEl = document.getElementById('chart')
 const chart = createChart(chartEl)
 
@@ -15,7 +15,7 @@ const CANDIDATES = [
 ]
 
 function showNoData() {
-  appMain.innerHTML = '<div class="panel"><div class="muted" style="padding:12px">Нет данных</div></div>'
+  appMain.innerHTML = '<div class="panel"><div class="panel-desc">Данные для сети персонажей не найдены в выбранном наборе. Попробуйте другой экспорт.</div></div>'
 }
 
 async function load() {

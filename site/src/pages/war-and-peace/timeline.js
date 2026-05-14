@@ -1,11 +1,11 @@
 import { buildShell, mountShell, createChart, fetchText, fetchJSON, parseCSV } from '/src/shared.js'
 
-mountShell(buildShell({ title: 'Война и мир — Таймлайн', subtitle: 'Тональность / Слова по главам' }))
+mountShell(buildShell({ title: 'Война и мир — Таймлайн', subtitle: 'Линия отражает изменение эмоционального тона по главам: подъемы и просадки помогают заметить напряжённые и спокойные участки книги.' }))
 const nav = document.querySelector('.site-nav')
 if (nav) nav.remove()
 
 const appMain = document.querySelector('#app-main')
-appMain.innerHTML = `<article class="panel full"><div id="chart" class="viz"></div></article>`
+appMain.innerHTML = `<article class="panel full"><h2>Тональность по главам</h2><p class="panel-desc">Линия отражает изменение эмоционального тона по главам: подъемы и просадки помогают заметить напряжённые и спокойные участки книги.</p><div id="chart" class="viz"></div></article>`
 const chartEl = document.getElementById('chart')
 const chart = createChart(chartEl)
 
@@ -19,7 +19,7 @@ const CHAP_CAND = [
 ]
 
 function showNoData() {
-  appMain.innerHTML = '<div class="panel"><div class="muted" style="padding:12px">Нет данных</div></div>'
+  appMain.innerHTML = '<div class="panel"><div class="panel-desc">Данные по главам или тональности не найдены для этой книги. Проверьте экспорт или выберите другой источник.</div></div>'
 }
 
 async function load() {

@@ -3,7 +3,7 @@ import { buildShell, mountShell, createChart, fetchText, parseCSV } from '/src/s
 mountShell(
   buildShell({
     title: 'Война и мир — Персонажи (связи)',
-    subtitle: 'Семейные и брачные связи (force graph + таблица)',
+    subtitle: 'Сеть показывает, кто с кем чаще связан в тексте. Узлы крупнее у более заметных персонажей, а линии помогают увидеть силу пересечений и группировки.',
     controls: `
       <label>Поиск
         <input id="q" type="search" placeholder="Напр. Наташа" />
@@ -34,11 +34,13 @@ appMain.innerHTML = `
   <section class="grid">
     <article class="panel">
       <h2>Граф</h2>
+      <p class="panel-desc">Сеть показывает, кто с кем чаще связан в тексте. Узлы крупнее у более заметных персонажей, а линии помогают увидеть силу пересечений и группировки.</p>
       <div id="chart" class="viz tall"></div>
-      <div id="hint" class="muted" style="padding-top:10px">Клик по узлу: подсветка соседей, справа список и таблица.</div>
+      <div id="hint" class="panel-desc">Клик по узлу подсвечивает соседей и обновляет список справа.</div>
     </article>
     <article class="panel">
       <h2>Персонажи</h2>
+      <p class="panel-desc">Таблица перечисляет персонажей, их пол, группу и заметки, а также помогает быстро найти самых связанных героев.</p>
       <div id="picked" class="muted" style="padding:0 0 10px"></div>
       <div class="scroll-panel">
         <table>
@@ -215,7 +217,7 @@ function renderPicked(pickedId, { byId }, edges) {
 }
 
 function showNoData(msg = 'Нет данных') {
-  appMain.innerHTML = `<div class="panel"><div class="muted" style="padding:12px">${esc(msg)}</div></div>`
+  appMain.innerHTML = `<div class="panel"><div class="panel-desc">${esc(msg)}</div></div>`
 }
 
 let raw = null

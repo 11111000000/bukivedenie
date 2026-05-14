@@ -14,7 +14,7 @@ const FALLBACK_BOOKS = [
 
 mountShell(buildShell({
         title: 'Лингвистический атлас книг',
-        subtitle: 'Статическая витрина outputs без backend, с локальными данными и graceful degradation.',
+        subtitle: 'Интерактивная статическая витрина: собирает тексты, метрики и связи в одном месте, чтобы быстро увидеть структуру книги без сервера и базы данных.',
         controls: `
     <label>
       Книга
@@ -32,20 +32,20 @@ const app = document.querySelector('#app-main')
 app.innerHTML = `
   <div class="cards" id="summary-cards"></div>
   <section class="grid">
-    <article class="panel full"><h2>Частотное ядро</h2><div id="wordcloud" class="viz tall"></div></article>
-    <article class="panel"><h2>Top tokens</h2><div id="tokens" class="viz"></div></article>
-    <article class="panel"><h2>Ритм по главам</h2><div id="chapters" class="viz"></div></article>
-    <article class="panel"><h2>Тональность по главам</h2><div id="sentiment" class="viz"></div></article>
-    <article class="panel full"><h2>Персонажи и связи</h2><div id="network" class="viz tall"></div></article>
-    <article class="panel"><h2>Персонажи</h2><div class="scroll-panel" id="characters-table"></div></article>
-    <article class="panel"><h2>Hapax</h2><div class="scroll-panel" id="hapax-table"></div></article>
-    <article class="panel"><h2>Метаданные прогона</h2><div class="scroll-panel" id="metadata-table"></div></article>
-    <article class="panel"><h2>Пунктуация</h2><div id="punctuation" class="viz"></div></article>
-    <article class="panel"><h2>Стиль: radar</h2><div id="style-radar" class="viz"></div></article>
-    <article class="panel full"><h2>Главы: words × sentences</h2><div id="chapter-scatter" class="viz"></div></article>
-    <article class="panel full"><h2>Персонажи × главы</h2><div id="character-heatmap" class="viz tall"></div></article>
-    <article class="panel full"><h2>Токены × главы</h2><div id="token-heatmap" class="viz tall"></div></article>
-    <article class="panel full"><h2>Zipf: rank × frequency</h2><div id="zipf" class="viz"></div></article>
+    <article class="panel full"><h2>Частотное ядро</h2><p class="panel-desc">Облако показывает самые заметные слова книги: чем крупнее слово, тем чаще оно встречается и тем сильнее влияет на общий словарь текста.</p><div id="wordcloud" class="viz tall"></div></article>
+    <article class="panel"><h2>Top tokens</h2><p class="panel-desc">Столбцы ранжируют самые частые токены, чтобы можно было быстро сравнить лидеров словаря и увидеть, какие слова доминируют в тексте.</p><div id="tokens" class="viz"></div></article>
+    <article class="panel"><h2>Ритм по главам</h2><p class="panel-desc">График по главам показывает объём текста, длину и диалоговую насыщенность, чтобы видеть, где повествование ускоряется или замедляется.</p><div id="chapters" class="viz"></div></article>
+    <article class="panel"><h2>Тональность по главам</h2><p class="panel-desc">Линия отражает изменение эмоционального тона по главам: подъемы и просадки помогают заметить напряжённые и спокойные участки книги.</p><div id="sentiment" class="viz"></div></article>
+    <article class="panel full"><h2>Персонажи и связи</h2><p class="panel-desc">Сеть показывает, кто с кем чаще связан в тексте. Узлы крупнее у более заметных персонажей, а линии помогают увидеть силу пересечений и группировки.</p><div id="network" class="viz tall"></div></article>
+    <article class="panel"><h2>Персонажи</h2><p class="panel-desc">Таблица перечисляет ключевых персонажей и их частоту, чтобы можно было быстро найти главных действующих лиц и оценить их вклад.</p><div class="scroll-panel" id="characters-table"></div></article>
+    <article class="panel"><h2>Hapax</h2><p class="panel-desc">Здесь собраны слова, которые встретились один раз. Это полезно для поиска редкой лексики, имён и уникальных деталей языка автора.</p><div class="scroll-panel" id="hapax-table"></div></article>
+    <article class="panel"><h2>Метаданные прогона</h2><p class="panel-desc">Таблица фиксирует, когда и как был получен набор данных: это помогает понимать источник, режимы обработки и качество результата.</p><div class="scroll-panel" id="metadata-table"></div></article>
+    <article class="panel"><h2>Пунктуация</h2><p class="panel-desc">Гистограмма показывает, какие знаки препинания преобладают. По ней видно ритм, паузы и общую «манеру дыхания» текста.</p><div id="punctuation" class="viz"></div></article>
+    <article class="panel"><h2>Стиль: radar</h2><p class="panel-desc">Радар собирает несколько стилевых индикаторов вместе, чтобы быстро сравнить плотность речи, длину фраз и другие признаки авторского почерка.</p><div id="style-radar" class="viz"></div></article>
+    <article class="panel full"><h2>Главы: words × sentences</h2><p class="panel-desc">Точки показывают главы как отдельные участки: чем выше и правее точка, тем длиннее и сложнее глава по структуре.</p><div id="chapter-scatter" class="viz"></div></article>
+    <article class="panel full"><h2>Персонажи × главы</h2><p class="panel-desc">Тепловая карта показывает, где именно персонажи активнее появляются в повествовании и как меняется их присутствие от главы к главе.</p><div id="character-heatmap" class="viz tall"></div></article>
+    <article class="panel full"><h2>Токены × главы</h2><p class="panel-desc">Эта карта помогает увидеть, какие слова концентрируются в отдельных главах и где возникает тематический повтор или смена лексики.</p><div id="token-heatmap" class="viz tall"></div></article>
+    <article class="panel full"><h2>Zipf: rank × frequency</h2><p class="panel-desc">Диаграмма сравнивает ранг слова и его частоту, чтобы показать, насколько словарь подчиняется типичному распределению Zipf.</p><div id="zipf" class="viz"></div></article>
   </section>
 `
 
@@ -63,7 +63,7 @@ function pickRows(rows, limit) {
 function renderTable(container, rows, headers) {
         const list = normalizeRows(rows)
         if (!list.length) {
-                container.innerHTML = '<div class="muted" style="padding:12px">Нет данных</div>'
+                container.innerHTML = '<div class="muted" style="padding:12px">Данных для этой таблицы нет в выбранной книге.</div>'
                 return
         }
         container.innerHTML = `

@@ -1,11 +1,11 @@
 import { buildShell, mountShell, createChart, fetchText, parseCSV } from '/src/shared.js'
 
-mountShell(buildShell({ title: 'Война и мир — Word Cloud', subtitle: 'Token frequency cloud' }))
+mountShell(buildShell({ title: 'Война и мир — Word Cloud', subtitle: 'Облако показывает самые заметные слова книги: чем крупнее слово, тем чаще оно встречается и тем сильнее влияет на общий словарь текста.' }))
 const nav = document.querySelector('.site-nav')
 if (nav) nav.remove()
 
 const appMain = document.querySelector('#app-main')
-appMain.innerHTML = `<article class="panel full"><div id="chart" class="viz tall"></div></article>`
+appMain.innerHTML = `<article class="panel full"><h2>Частотное ядро</h2><p class="panel-desc">Облако показывает самые заметные слова книги: чем крупнее слово, тем чаще оно встречается и тем сильнее влияет на общий словарь текста.</p><div id="chart" class="viz tall"></div></article>`
 const chartEl = document.getElementById('chart')
 const chart = createChart(chartEl)
 
@@ -15,7 +15,7 @@ const CANDIDATES = [
 ]
 
 function showNoData() {
-  appMain.innerHTML = '<div class="panel"><div class="muted" style="padding:12px">Нет данных</div></div>'
+  appMain.innerHTML = '<div class="panel"><div class="panel-desc">Данные для облака слов не найдены в выбранном наборе. Попробуйте другой экспорт.</div></div>'
 }
 
 async function load() {

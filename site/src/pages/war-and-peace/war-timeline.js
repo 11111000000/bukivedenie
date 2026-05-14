@@ -1,11 +1,11 @@
 import { buildShell, mountShell, createChart, fetchText, fetchJSON, parseCSV } from '/src/shared.js'
 
-mountShell(buildShell({ title: 'Война и мир — Хронология событий', subtitle: 'События по датам (CSV)' }))
+mountShell(buildShell({ title: 'Война и мир — Хронология событий', subtitle: 'Линия показывает, как меняется тональность и объём текста по главам, чтобы видеть ритм повествования и повороты сюжета.' }))
 const nav = document.querySelector('.site-nav')
 if (nav) nav.remove()
 
 const appMain = document.querySelector('#app-main')
-appMain.innerHTML = `<article class="panel full"><div id="chart" class="viz tall"></div></article>`
+appMain.innerHTML = `<article class="panel full"><h2>Хронология</h2><p class="panel-desc">Линия показывает, как меняется тональность и объём текста по главам, чтобы видеть ритм повествования и повороты сюжета.</p><div id="chart" class="viz tall"></div></article>`
 
 const chartEl = document.getElementById('chart')
 const chart = createChart(chartEl)
@@ -40,7 +40,7 @@ function colorForName(name) {
 }
 
 function showNoData(msg = 'Нет данных') {
-  appMain.innerHTML = `<div class="panel"><div class="muted" style="padding:12px">${msg}</div></div>`
+  appMain.innerHTML = `<div class="panel"><div class="panel-desc">${msg}</div></div>`
 }
 
 async function load() {

@@ -1,11 +1,11 @@
 import { buildShell, mountShell, createChart, fetchText, parseCSV } from '/src/shared.js'
 
-mountShell(buildShell({ title: 'Война и мир — Персонажи', subtitle: 'Частоты персонажей' }))
+mountShell(buildShell({ title: 'Война и мир — Персонажи', subtitle: 'Столбцы ранжируют самых частых персонажей, чтобы быстро увидеть главных действующих лиц и их вклад в текст.' }))
 const nav = document.querySelector('.site-nav')
 if (nav) nav.remove()
 
 const appMain = document.querySelector('#app-main')
-appMain.innerHTML = `<article class="panel"><div id="chart" class="viz"></div></article>`
+appMain.innerHTML = `<article class="panel"><h2>Персонажи</h2><p class="panel-desc">Столбцы ранжируют самых частых персонажей, чтобы быстро увидеть главных действующих лиц и их вклад в текст.</p><div id="chart" class="viz"></div></article>`
 const chartEl = document.getElementById('chart')
 const chart = createChart(chartEl)
 
@@ -15,7 +15,7 @@ const CANDIDATES = [
 ]
 
 function showNoData() {
-  appMain.innerHTML = '<div class="panel"><div class="muted" style="padding:12px">Нет данных</div></div>'
+  appMain.innerHTML = '<div class="panel"><div class="panel-desc">Список персонажей пока не найден в данных этой книги. Попробуйте другой источник или обновите экспорт.</div></div>'
 }
 
 async function load() {
