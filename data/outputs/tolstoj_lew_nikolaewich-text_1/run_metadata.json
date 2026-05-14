@@ -1,8 +1,8 @@
 {
   "book_id": "tolstoj_lew_nikolaewich-text_1",
-  "start_time": "2026-05-14T16:12:00.944889",
-  "end_time": "2026-05-14T16:12:02.784678",
-  "duration_seconds": 1.839789,
+  "start_time": "2026-05-14T16:33:27.312382",
+  "end_time": "2026-05-14T16:33:29.050127",
+  "duration_seconds": 1.737745,
   "config": {
     "lang": "ru",
     "ner_mode": "heuristic",
@@ -14,7 +14,7 @@
   },
   "env": {
     "python": "3.11.15",
-    "platform": "Linux-6.17.0-1013-azure-x86_64-with-glibc2.39"
+    "platform": "Linux-6.17.0-1010-azure-x86_64-with-glibc2.39"
   },
   "version": "0.1.0"
 }
