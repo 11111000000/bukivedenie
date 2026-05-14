@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'node:path'
+import { copyFileSync, existsSync, mkdirSync } from 'node:fs'
 
 export default defineConfig({
   appType: 'mpa',
@@ -21,4 +22,19 @@ export default defineConfig({
       },
     },
   },
+  plugins: [{
+    name: 'copy-preza-assets',
+    closeBundle() {
+      const outDir = resolve(__dirname, 'dist')
+      if (!existsSync(outDir)) return
+      for (const name of ['preza.pdf', 'preza.pptx']) {
+        const src = resolve(__dirname, name)
+        const dest = resolve(outDir, name)
+        if (existsSync(src)) {
+          mkdirSync(outDir, { recursive: true })
+          copyFileSync(src, dest)
+        }
+      }
+    },
+  }],
 })

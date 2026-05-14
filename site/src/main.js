@@ -1,6 +1,7 @@
 import * as echarts from 'echarts'
 import 'echarts-wordcloud'
 import './style.css'
+import { createStateMessage } from './shared.js'
 
 // Vite serves files from site/public at the web root.
 // The data folder on disk is site/public/data, therefore it is available as /data/...
@@ -21,7 +22,8 @@ app.innerHTML = `
       <div class="title-row">
         <div>
           <h1>Лингвистический атлас книг</h1>
-          <p>Интерактивная статическая витрина: собирает тексты, метрики и связи в одном месте, чтобы быстро увидеть структуру книги без сервера и базы данных.</p>
+          <p>Статическая витрина для быстрого обзора книги: тексты, метрики и связи собраны в одном месте без сервера и базы данных.</p>
+          <p class="page-note">Основные метрики, графы и таблицы собраны в одном экране, чтобы не терять контекст при анализе.</p>
         </div>
         <div class="status" id="status">Загрузка каталога...</div>
       </div>
@@ -42,72 +44,72 @@ app.innerHTML = `
     <section class="grid">
       <article class="panel full">
         <h2>Частотное ядро</h2>
-        <p class="panel-desc">Облако показывает самые заметные слова книги: чем крупнее слово, тем чаще оно встречается и тем сильнее влияет на общий словарь текста.</p>
+        <p class="panel-desc">Облако показывает самые частые слова книги. Чем крупнее слово, тем чаще оно встречается.</p>
         <div id="wordcloud" class="viz tall"></div>
       </article>
       <article class="panel">
-        <h2>Top tokens</h2>
-        <p class="panel-desc">Столбцы ранжируют самые частые токены, чтобы можно было быстро сравнить лидеров словаря и увидеть, какие слова доминируют в тексте.</p>
+        <h2>Самые частые токены</h2>
+        <p class="panel-desc">Столбцы показывают самые частые токены в порядке убывания, чтобы быстро сравнить лидеров словаря.</p>
         <div id="tokens" class="viz"></div>
       </article>
       <article class="panel">
         <h2>Ритм по главам</h2>
-        <p class="panel-desc">График по главам показывает объём текста, длину и диалоговую насыщенность, чтобы видеть, где повествование ускоряется или замедляется.</p>
+        <p class="panel-desc">График по главам показывает объём текста, длину предложений и долю диалога, чтобы увидеть, где повествование ускоряется.</p>
         <div id="chapters" class="viz"></div>
       </article>
       <article class="panel">
         <h2>Тональность по главам</h2>
-        <p class="panel-desc">Линия отражает изменение эмоционального тона по главам: подъемы и просадки помогают заметить напряжённые и спокойные участки книги.</p>
+        <p class="panel-desc">Линия показывает, как меняется тональность по главам. Подъёмы и просадки помогают заметить спокойные и напряжённые места.</p>
         <div id="sentiment" class="viz"></div>
       </article>
       <article class="panel full">
         <h2>Персонажи и связи</h2>
-        <p class="panel-desc">Сеть показывает, кто с кем чаще связан в тексте. Узлы крупнее у более заметных персонажей, а линии помогают увидеть силу пересечений и группировки.</p>
+        <p class="panel-desc">Сеть показывает, кто с кем чаще связан в тексте. Крупные узлы обозначают более заметных персонажей.</p>
         <div id="network" class="viz tall"></div>
       </article>
       <article class="panel">
         <h2>Персонажи</h2>
-        <p class="panel-desc">Таблица перечисляет ключевых персонажей и их частоту, чтобы можно было быстро найти главных действующих лиц и оценить их вклад.</p>
+        <p class="panel-desc">Таблица перечисляет ключевых персонажей и их частоту, чтобы быстро увидеть основной состав книги.</p>
         <div class="scroll-panel" id="characters-table"></div>
       </article>
       <article class="panel">
         <h2>Hapax</h2>
-        <p class="panel-desc">Здесь собраны слова, которые встретились один раз. Это полезно для поиска редкой лексики, имён и уникальных деталей языка автора.</p>
+        <p class="panel-desc">Гапаксы — это слова, которые встретились один раз. Они помогают быстро находить редкую лексику, имена и уникальные детали языка автора.</p>
         <div class="scroll-panel" id="hapax-table"></div>
       </article>
       <article class="panel">
         <h2>Метаданные прогона</h2>
-        <p class="panel-desc">Таблица фиксирует, когда и как был получен набор данных: это помогает понимать источник, режимы обработки и качество результата.</p>
+        <p class="panel-desc">Таблица фиксирует, когда и как был получен набор данных, чтобы было проще понять источник и режим обработки.</p>
         <div class="scroll-panel" id="metadata-table"></div>
       </article>
       <article class="panel">
         <h2>Пунктуация</h2>
-        <p class="panel-desc">Гистограмма показывает, какие знаки препинания преобладают. По ней видно ритм, паузы и общую «манеру дыхания» текста.</p>
+        <p class="panel-desc">Гистограмма показывает, какие знаки препинания преобладают. По ней видно ритм и паузы текста.</p>
         <div id="punctuation" class="viz"></div>
       </article>
       <article class="panel">
-        <h2>Стиль: radar</h2>
-        <p class="panel-desc">Радар собирает несколько стилевых индикаторов вместе, чтобы быстро сравнить плотность речи, длину фраз и другие признаки авторского почерка.</p>
+        <h2>Стиль: радар</h2>
+        <p class="panel-desc">Радар собирает несколько стилевых показателей вместе, чтобы быстро сравнить плотность речи и длину фраз.</p>
         <div id="style-radar" class="viz"></div>
       </article>
       <article class="panel full">
-        <h2>Главы: words × sentences</h2>
-        <p class="panel-desc">Точки показывают главы как отдельные участки: чем выше и правее точка, тем длиннее и сложнее глава по структуре.</p>
+        <h2>Главы: слова × предложения</h2>
+        <p class="panel-desc">Точки показывают главы как отдельные участки. Чем выше и правее точка, тем длиннее и сложнее глава.</p>
         <div id="chapter-scatter" class="viz"></div>
       </article>
       <article class="panel full">
         <h2>Персонажи × главы</h2>
-        <p class="panel-desc">Тепловая карта показывает, где именно персонажи активнее появляются в повествовании и как меняется их присутствие от главы к главе.</p>
+        <p class="panel-desc">Тепловая карта показывает, в каких главах персонажи появляются чаще и как меняется их присутствие по тексту.</p>
         <div id="character-heatmap" class="viz tall"></div>
       </article>
       <article class="panel full">
         <h2>Токены × главы</h2>
-        <p class="panel-desc">Эта карта помогает увидеть, какие слова концентрируются в отдельных главах и где возникает тематический повтор или смена лексики.</p>
+        <p class="panel-desc">Эта карта помогает увидеть, какие слова концентрируются в отдельных главах и где меняется лексика.</p>
         <div id="token-heatmap" class="viz tall"></div>
       </article>
       <article class="panel full">
-        <h2>Zipf: rank × frequency</h2>
-        <p class="panel-desc">Диаграмма сравнивает ранг слова и его частоту, чтобы показать, насколько словарь подчиняется типичному распределению Zipf.</p>
+        <h2>Zipf: ранг × частота</h2>
+        <p class="panel-desc">Диаграмма сравнивает ранг слова и его частоту, чтобы показать, насколько словарь похож на распределение Zipf.</p>
         <div id="zipf" class="viz"></div>
       </article>
     </section>
@@ -286,7 +288,7 @@ function renderCards(complexity, bookId) {
 function renderTable(container, rows, headers) {
         const list = normalizeRows(rows)
         if (!list.length) {
-                container.innerHTML = '<div class="muted" style="padding:12px">Данных для этой таблицы нет в выбранной книге.</div>'
+                container.innerHTML = createStateMessage('В выбранной книге для этой таблицы нет данных.')
                 return
         }
         container.innerHTML = `
@@ -301,13 +303,18 @@ function renderTable(container, rows, headers) {
 
 function renderWordCloud(rows) {
         const data = pickRows(normalizeRows(rows), 80).map((row) => ({ name: row.token, value: Number(row.count || row.frequency || 0) }))
+        if (!data.length) {
+                charts.wordcloud.clear()
+                charts.wordcloud.setOption({ title: { text: 'Нет словаря', left: 'center', top: 'middle', textStyle: { fontSize: 14, fontWeight: 500, color: '#667085' } }, graphic: { type: 'text', left: 'center', top: '56%', style: { text: 'Для выбранной книги не найден список токенов.', fill: '#98a2b3', fontSize: 12, textAlign: 'center', width: 260, overflow: 'break' } } })
+                return
+        }
         charts.wordcloud.setOption({
                 tooltip: {},
                 series: [{
                         type: 'wordCloud',
                         shape: 'circle',
-                        gridSize: 10,
-                        sizeRange: [14, 60],
+                        gridSize: window.matchMedia('(max-width: 720px)').matches ? 8 : 10,
+                        sizeRange: window.matchMedia('(max-width: 720px)').matches ? [12, 48] : [14, 60],
                         rotationRange: [-45, 45],
                         textStyle: { color: () => `hsl(${Math.floor(Math.random() * 360)}, 50%, 38%)` },
                         data,
@@ -317,9 +324,14 @@ function renderWordCloud(rows) {
 
 function renderTokenBar(rows, topN) {
         const data = pickRows(normalizeRows(rows), topN)
+        if (!data.length) {
+                charts.tokens.clear()
+                charts.tokens.setOption({ title: { text: 'Нет токенов', left: 'center', top: 'middle', textStyle: { fontSize: 14, fontWeight: 500, color: '#667085' } }, graphic: { type: 'text', left: 'center', top: '56%', style: { text: 'Для выбранной книги не найден список частот.', fill: '#98a2b3', fontSize: 12, textAlign: 'center', width: 260, overflow: 'break' } } })
+                return
+        }
         charts.tokens.setOption({
                 tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-                grid: { left: 120, right: 16, top: 10, bottom: 24 },
+                grid: { left: window.matchMedia('(max-width: 720px)').matches ? 88 : 120, right: 16, top: 10, bottom: 24 },
                 xAxis: { type: 'value' },
                 yAxis: { type: 'category', data: data.map((row) => row.token), inverse: true },
                 series: [{ type: 'bar', data: data.map((row) => Number(row.count || 0)), itemStyle: { color: '#3558a6' } }],
@@ -328,11 +340,16 @@ function renderTokenBar(rows, topN) {
 
 function renderChapters(rows) {
         const list = normalizeRows(rows)
+        if (!list.length) {
+                charts.chapters.clear()
+                charts.chapters.setOption({ title: { text: 'Нет глав', left: 'center', top: 'middle', textStyle: { fontSize: 14, fontWeight: 500, color: '#667085' } }, graphic: { type: 'text', left: 'center', top: '56%', style: { text: 'Для выбранной книги не найдено сводки по главам.', fill: '#98a2b3', fontSize: 12, textAlign: 'center', width: 260, overflow: 'break' } } })
+                return
+        }
         const labels = list.map((row) => `Г${row.chapter_idx ?? row.chapter ?? ''}`)
         charts.chapters.setOption({
                 tooltip: { trigger: 'axis' },
-                legend: { data: ['Слова', 'Sentences', 'Dialogue %'] },
-                grid: { left: 50, right: 24, top: 32, bottom: 24 },
+                legend: { data: ['Слова', 'Предложения', 'Диалог %'], top: 4, textStyle: { fontSize: window.matchMedia('(max-width: 720px)').matches ? 11 : 12 } },
+                grid: { left: window.matchMedia('(max-width: 720px)').matches ? 42 : 50, right: 24, top: 40, bottom: 24 },
                 xAxis: { type: 'category', data: labels },
                 yAxis: [
                         { type: 'value', name: 'count' },
@@ -340,14 +357,19 @@ function renderChapters(rows) {
                 ],
                 series: [
                         { name: 'Слова', type: 'bar', data: list.map((row) => Number(row.total_words || 0)), itemStyle: { color: '#3558a6' } },
-                        { name: 'Sentences', type: 'line', data: list.map((row) => Number(row.total_sentences || 0)), smooth: true, yAxisIndex: 0, color: '#7a4fd7' },
-                        { name: 'Dialogue %', type: 'line', data: list.map((row) => Number((row.dialog_ratio || 0) * 100)), smooth: true, yAxisIndex: 1, color: '#0c8f6a' },
+                        { name: 'Предложения', type: 'line', data: list.map((row) => Number(row.total_sentences || 0)), smooth: true, yAxisIndex: 0, color: '#7a4fd7' },
+                        { name: 'Диалог %', type: 'line', data: list.map((row) => Number((row.dialog_ratio || 0) * 100)), smooth: true, yAxisIndex: 1, color: '#0c8f6a' },
                 ],
         })
 }
 
 function renderSentiment(rows) {
         const list = normalizeRows(rows)
+        if (!list.length) {
+                charts.sentiment.clear()
+                charts.sentiment.setOption({ title: { text: 'Нет тональности', left: 'center', top: 'middle', textStyle: { fontSize: 14, fontWeight: 500, color: '#667085' } }, graphic: { type: 'text', left: 'center', top: '56%', style: { text: 'Для выбранной книги не найдено распределение тональности по главам.', fill: '#98a2b3', fontSize: 12, textAlign: 'center', width: 260, overflow: 'break' } } })
+                return
+        }
         charts.sentiment.setOption({
                 tooltip: { trigger: 'axis' },
                 grid: { left: 50, right: 16, top: 18, bottom: 24 },
@@ -366,9 +388,14 @@ function renderSentiment(rows) {
 
 function renderPunctuation(rows) {
         const data = pickRows(normalizeRows(rows), 20)
+        if (!data.length) {
+                charts.punctuation.clear()
+                charts.punctuation.setOption({ title: { text: 'Нет пунктуации', left: 'center', top: 'middle', textStyle: { fontSize: 14, fontWeight: 500, color: '#667085' } }, graphic: { type: 'text', left: 'center', top: '56%', style: { text: 'Для выбранной книги не найдено частот знаков препинания.', fill: '#98a2b3', fontSize: 12, textAlign: 'center', width: 260, overflow: 'break' } } })
+                return
+        }
         charts.punctuation.setOption({
                 tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-                grid: { left: 60, right: 18, top: 10, bottom: 24 },
+                grid: { left: window.matchMedia('(max-width: 720px)').matches ? 48 : 60, right: 18, top: 10, bottom: 24 },
                 xAxis: { type: 'category', data: data.map((row) => row.punct) },
                 yAxis: { type: 'value' },
                 series: [{ type: 'bar', data: data.map((row) => Number(row.count || 0)), itemStyle: { color: '#0c8f6a' } }],
@@ -376,6 +403,11 @@ function renderPunctuation(rows) {
 }
 
 function renderStyleRadar(complexity) {
+        if (!complexity || !Object.keys(complexity).length) {
+                charts['style-radar'].clear()
+                charts['style-radar'].setOption({ title: { text: 'Нет стилевых данных', left: 'center', top: 'middle', textStyle: { fontSize: 14, fontWeight: 500, color: '#667085' } }, graphic: { type: 'text', left: 'center', top: '56%', style: { text: 'Для выбранной книги не найдены показатели стиля.', fill: '#98a2b3', fontSize: 12, textAlign: 'center', width: 260, overflow: 'break' } } })
+                return
+        }
         charts['style-radar'].setOption({
                 tooltip: {},
                 radar: {
@@ -405,9 +437,14 @@ function renderStyleRadar(complexity) {
 
 function renderChapterScatter(rows) {
         const list = normalizeRows(rows)
+        if (!list.length) {
+                charts['chapter-scatter'].clear()
+                charts['chapter-scatter'].setOption({ title: { text: 'Нет глав', left: 'center', top: 'middle', textStyle: { fontSize: 14, fontWeight: 500, color: '#667085' } }, graphic: { type: 'text', left: 'center', top: '56%', style: { text: 'Для выбранной книги не найдено данных для сравнения глав.', fill: '#98a2b3', fontSize: 12, textAlign: 'center', width: 260, overflow: 'break' } } })
+                return
+        }
         charts['chapter-scatter'].setOption({
                 tooltip: { trigger: 'item' },
-                grid: { left: 48, right: 24, top: 18, bottom: 32 },
+                grid: { left: window.matchMedia('(max-width: 720px)').matches ? 40 : 48, right: 24, top: 18, bottom: 32 },
                 xAxis: { type: 'value', name: 'words' },
                 yAxis: { type: 'value', name: 'sentences' },
                 series: [{
@@ -424,6 +461,11 @@ function renderCharacterHeatmap(characterRows, chapterRows) {
         const chaptersRows = normalizeRows(chapterRows)
         const topCharacters = pickRows(characters.slice().sort((a, b) => Number(b.occurrences || 0) - Number(a.occurrences || 0)), 12)
         const names = topCharacters.map((row) => row.name || row.name_lower).filter(Boolean)
+        if (!names.length || !chaptersRows.length) {
+                charts['character-heatmap'].clear()
+                charts['character-heatmap'].setOption({ title: { text: 'Нет тепловой карты', left: 'center', top: 'middle', textStyle: { fontSize: 14, fontWeight: 500, color: '#667085' } }, graphic: { type: 'text', left: 'center', top: '56%', style: { text: 'Для выбранной книги не хватает данных по персонажам или главам.', fill: '#98a2b3', fontSize: 12, textAlign: 'center', width: 260, overflow: 'break' } } })
+                return
+        }
         const chapters = chaptersRows.map((row) => `Г${row.chapter_idx ?? ''}`)
         const indexByName = new Map(names.map((name, index) => [String(name).toLowerCase(), index]))
         const data = []
@@ -438,7 +480,7 @@ function renderCharacterHeatmap(characterRows, chapterRows) {
         }
         charts['character-heatmap'].setOption({
                 tooltip: { position: 'top' },
-                grid: { left: 110, right: 18, top: 16, bottom: 34 },
+                grid: { left: window.matchMedia('(max-width: 720px)').matches ? 88 : 110, right: 18, top: 16, bottom: 34 },
                 xAxis: { type: 'category', data: chapters, splitArea: { show: true } },
                 yAxis: { type: 'category', data: names, splitArea: { show: true } },
                 visualMap: { min: 0, max: Math.max(1, ...data.map((item) => item[2])), calculable: true, orient: 'horizontal', left: 'center', bottom: 0 },
@@ -451,6 +493,11 @@ function renderTokenHeatmap(tokenRows, chapterRows) {
         const chaptersRows = normalizeRows(chapterRows)
         const topTokens = pickRows(tokens.slice().sort((a, b) => Number(b.count || 0) - Number(a.count || 0)), 14)
         const names = topTokens.map((row) => row.token || row.name).filter(Boolean)
+        if (!names.length || !chaptersRows.length) {
+                charts['token-heatmap'].clear()
+                charts['token-heatmap'].setOption({ title: { text: 'Нет тепловой карты', left: 'center', top: 'middle', textStyle: { fontSize: 14, fontWeight: 500, color: '#667085' } }, graphic: { type: 'text', left: 'center', top: '56%', style: { text: 'Для выбранной книги не хватает данных по токенам или главам.', fill: '#98a2b3', fontSize: 12, textAlign: 'center', width: 260, overflow: 'break' } } })
+                return
+        }
         const chapters = chaptersRows.map((row) => `Г${row.chapter_idx ?? ''}`)
         const indexByToken = new Map(names.map((name, index) => [String(name).toLowerCase(), index]))
         const data = []
@@ -467,7 +514,7 @@ function renderTokenHeatmap(tokenRows, chapterRows) {
 
         charts['token-heatmap'].setOption({
                 tooltip: { position: 'top' },
-                grid: { left: 110, right: 18, top: 16, bottom: 34 },
+                grid: { left: window.matchMedia('(max-width: 720px)').matches ? 88 : 110, right: 18, top: 16, bottom: 34 },
                 xAxis: { type: 'category', data: chapters, splitArea: { show: true } },
                 yAxis: { type: 'category', data: names, splitArea: { show: true } },
                 visualMap: { min: 0, max: Math.max(1, ...data.map((item) => item[2])), calculable: true, orient: 'horizontal', left: 'center', bottom: 0 },
@@ -479,6 +526,12 @@ function renderZipf(rows) {
         const tokens = normalizeRows(rows)
                 .map((row) => ({ token: row.token || row.name, count: Number(row.count || row.frequency || 0), rank: Number(row.rank || 0) }))
                 .filter((row) => row.token && row.count > 0)
+
+        if (!tokens.length) {
+                charts.zipf.clear()
+                charts.zipf.setOption({ title: { text: 'Нет распределения Zipf', left: 'center', top: 'middle', textStyle: { fontSize: 14, fontWeight: 500, color: '#667085' } }, graphic: { type: 'text', left: 'center', top: '56%', style: { text: 'Для выбранной книги не найдено достаточного списка слов.', fill: '#98a2b3', fontSize: 12, textAlign: 'center', width: 260, overflow: 'break' } } })
+                return
+        }
 
         const sorted = tokens
                 .slice()
@@ -528,6 +581,12 @@ function renderNetwork(edges, characters) {
                 links.push({ source, target, value: weight, lineStyle: { width: Math.max(1, Math.min(8, weight / 2)) } })
         }
 
+        if (!nodes.length || !links.length) {
+                charts.network.clear()
+                charts.network.setOption({ title: { text: 'Нет связей', left: 'center', top: 'middle', textStyle: { fontSize: 14, fontWeight: 500, color: '#667085' } }, graphic: { type: 'text', left: 'center', top: '56%', style: { text: 'Для выбранной книги не найдено достаточно связей между персонажами.', fill: '#98a2b3', fontSize: 12, textAlign: 'center', width: 260, overflow: 'break' } } })
+                return
+        }
+
         charts.network.setOption({
                 tooltip: {},
                 series: [{
@@ -537,7 +596,7 @@ function renderNetwork(edges, characters) {
                         data: nodes,
                         links,
                         force: { repulsion: 120, edgeLength: 80 },
-                        label: { show: true, position: 'right' },
+                        label: { show: !window.matchMedia('(max-width: 720px)').matches, position: 'right' },
                         emphasis: { focus: 'adjacency' },
                 }],
         })

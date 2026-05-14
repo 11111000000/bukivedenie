@@ -11,22 +11,26 @@
       /* Small overrides for the shell layout */
       html,body{height:100%;margin:0}
       body{display:flex;flex-direction:column}
-      header.shell-header{display:grid;gap:14px;padding:clamp(12px,2vw,20px);background:var(--panel,#fff);border:1px solid var(--line,#e6eef8);border-radius:16px;box-shadow:0 1px 0 rgba(14,23,38,.03)}
-      .shell-title{font-size:clamp(1.2rem,3vw,2rem);font-weight:800;margin:0;line-height:1.1}
-      .shell-lead{margin:6px 0 0;color:var(--muted,#6a7285);max-width:78ch;line-height:1.5}
+      header.shell-header{display:grid;gap:12px;padding:clamp(10px,1.8vw,18px);background:var(--panel,#fff);border:1px solid var(--line,#e6eef8);border-radius:16px;box-shadow:0 1px 0 rgba(14,23,38,.03)}
+      .shell-title{font-size:clamp(1.1rem,2.6vw,2rem);font-weight:800;margin:0;line-height:1.12}
+      .shell-lead{margin:4px 0 0;color:var(--muted,#6a7285);max-width:78ch;line-height:1.45}
       .shell-menu-row{display:flex;align-items:center;gap:12px;justify-content:space-between}
-      .shell-menu-toggle{display:none;align-items:center;gap:8px;min-height:44px;padding:10px 14px;border-radius:12px;border:1px solid var(--line,#d7deea);background:#fff;color:var(--accent,#3558a6);font:inherit;font-weight:700;cursor:pointer}
+      .shell-menu-toggle{display:none;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 14px;border-radius:12px;border:1px solid var(--line,#d7deea);background:#fff;color:var(--accent,#3558a6);font:inherit;font-weight:700;cursor:pointer}
       .shell-menu-toggle-icon{font-size:1.1rem;line-height:1}
       nav.shell-menu{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
       nav.shell-menu a{padding:10px 12px;border-radius:12px;border:1px solid var(--line,#d7deea);background:#fff;color:var(--accent,#3558a6);text-decoration:none;text-align:center;white-space:normal;line-height:1.2;min-height:44px;display:flex;align-items:center;justify-content:center}
       nav.shell-menu a.active{background:var(--accent,#3558a6);color:#fff;border-color:var(--accent,#3558a6)}
       iframe.content-frame{border:0;width:100%;flex:1;height:calc(100vh - 88px);background:transparent}
       @media (max-width:640px){
+        header.shell-header{gap:10px;padding:10px}
+        .shell-title{font-size:clamp(1.05rem,6vw,1.4rem)}
+        .shell-lead{font-size:0.92rem;line-height:1.42}
         .shell-menu-row{display:flex}
-        .shell-menu-toggle{display:inline-flex}
+        .shell-menu-toggle{display:inline-flex;width:100%;background:linear-gradient(180deg,#fff,#f7f9ff)}
         nav.shell-menu{display:none;grid-template-columns:1fr;gap:8px}
+        nav.shell-menu a{justify-content:flex-start;text-align:left;padding:12px 14px}
         header.shell-header.open nav.shell-menu{display:grid}
-        iframe.content-frame{height:calc(100vh - 154px)}
+        iframe.content-frame{height:calc(100vh - 168px)}
       }
     </style>
   </head>
@@ -48,8 +52,8 @@
       <nav id="shell-menu" class="shell-menu" role="navigation" aria-label="Main menu">
         <a href="#" data-src="lingvistics.html" class="active">Лингвистика</a>
         <a href="#" data-src="preza.html?v=20260514">Презентация</a>
-        <a href="./preza.pdf" target="_blank" rel="noopener">PDF</a>
-        <a href="./preza.pptx" target="_blank" rel="noopener">PPTX</a>
+        <a href="./preza.pdf?v=20260514" target="_blank" rel="noopener">PDF</a>
+        <a href="./preza.pptx?v=20260514" target="_blank" rel="noopener">PPTX</a>
         <a href="#" data-src="war-and-peace-map.html">Карта</a>
         <a href="#" data-src="war-and-peace-cloud.html">Облако</a>
         <a href="#" data-src="war-and-peace-characters.html">Персонажи</a>
