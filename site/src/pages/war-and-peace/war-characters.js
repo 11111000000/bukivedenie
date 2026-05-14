@@ -68,6 +68,7 @@ const pickedEl = document.getElementById('picked')
 const DATA = {
   nodes: './data/war-and-peace/wp_characters_nodes.csv',
   edges: './data/war-and-peace/wp_character_edges.csv',
+  fallbackEdges: './data/outputs/tolstoj_lew_nikolaewich-text_1/cooccurrence_edges.csv',
 }
 
 function groupFromId(id) {
@@ -222,31 +223,78 @@ let idx = null
 let pickedId = ''
 
 async function load() {
-  const [nodesText, edgesText] = await Promise.all([fetchText(DATA.nodes), fetchText(DATA.edges)])
-  const nodesRows = parseCSV(nodesText)
-  const edgesRows = parseCSV(edgesText)
-  if (!nodesRows.length || !edgesRows.length) {
+  let nodesRows = []
+  let edgesRows = []
+  try {
+    const [nodesText, edgesText] = await Promise.all([fetchText(DATA.nodes), fetchText(DATA.edges)])
+    nodesRows = parseCSV(nodesText)
+    edgesRows = parseCSV(edgesText)
+  } catch (_) {
+    nodesRows = []
+    edgesRows = []
+  }
+
+  let nodes = []
+  let edges = []
+
+  if (nodesRows.length && edgesRows.length) {
+    nodes = nodesRows
+      .map((r) => ({
+        id: String(r.id || '').trim(),
+        name: String(r.name || '').trim(),
+        gender: String(r.gender || '').trim(),
+        remark: String(r.remark || '').trim(),
+      }))
+      .filter((n) => n.id && n.name)
+      .map((n) => ({ ...n, group: groupFromId(n.id) }))
+
+    edges = edgesRows
+      .map((r) => ({
+        source: String(r.source || '').trim(),
+        target: String(r.target || '').trim(),
+        type: normalizeRelType(r.type),
+      }))
+      .filter((e) => e.source && e.target && e.type)
+  } else {
+    // Fallback: build a simple cooccurrence graph from outputs.
+    try {
+      const text = await fetchText(DATA.fallbackEdges)
+      const rows = parseCSV(text)
+      const edgeList = rows
+        .map((r) => ({
+          source: String(r.source || r.source_lower || '').trim(),
+          target: String(r.target || r.target_lower || '').trim(),
+          weight: Number(r.weight || 0),
+        }))
+        .filter((e) => e.source && e.target && e.weight > 0)
+        .slice(0, 220)
+
+      const deg = new Map()
+      for (const e of edgeList) {
+        deg.set(e.source, (deg.get(e.source) || 0) + e.weight)
+        deg.set(e.target, (deg.get(e.target) || 0) + e.weight)
+      }
+
+      const top = Array.from(deg.entries())
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 70)
+        .map(([id]) => id)
+
+      const keep = new Set(top)
+      nodes = top.map((id) => ({ id, name: id, gender: '', remark: '', group: groupFromId(id) }))
+      edges = edgeList
+        .filter((e) => keep.has(e.source) && keep.has(e.target))
+        .map((e) => ({ source: e.source, target: e.target, type: 'cooccur' }))
+    } catch (e) {
+      showNoData(e?.message || 'Нет данных')
+      return
+    }
+  }
+
+  if (!nodes.length || !edges.length) {
     showNoData()
     return
   }
-
-  const nodes = nodesRows
-    .map((r) => ({
-      id: String(r.id || '').trim(),
-      name: String(r.name || '').trim(),
-      gender: String(r.gender || '').trim(),
-      remark: String(r.remark || '').trim(),
-    }))
-    .filter((n) => n.id && n.name)
-    .map((n) => ({ ...n, group: groupFromId(n.id) }))
-
-  const edges = edgesRows
-    .map((r) => ({
-      source: String(r.source || '').trim(),
-      target: String(r.target || '').trim(),
-      type: normalizeRelType(r.type),
-    }))
-    .filter((e) => e.source && e.target && e.type)
 
   raw = { nodes, edges }
   idx = buildIndex(nodes, edges)

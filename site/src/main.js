@@ -2,9 +2,9 @@ import * as echarts from 'echarts'
 import 'echarts-wordcloud'
 import './style.css'
 
-// When this module is loaded from site/lingvistics.html (iframe),
-// data are served from site/public/data — use a path relative to the page.
-const DATA_ROOT = './public/data'
+// Vite serves files from site/public at the web root.
+// The data folder on disk is site/public/data, therefore it is available as /data/...
+const DATA_ROOT = './data'
 const FALLBACK_BOOKS = [
         'tolstoj_lew_nikolaewich-text_1',
         'tolstoj_lew_nikolaewich-text_2',

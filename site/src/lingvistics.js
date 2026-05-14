@@ -1,9 +1,9 @@
 import './style.css'
 import { buildShell, createChart, fetchJSON, fetchText, mountShell, normalizeRows, parseCSV } from './shared.js'
 
-// When loaded from site/lingvistics.html inside the shell iframe,
-// the prebuilt assets and data are under site/public — make paths iframe-friendly.
-const DATA_ROOT = './public/data'
+// Vite serves files from site/public at the web root.
+// The data folder on disk is site/public/data, therefore it is available as /data/...
+const DATA_ROOT = './data'
 const FALLBACK_BOOKS = [
         'tolstoj_lew_nikolaewich-text_1',
         'tolstoj_lew_nikolaewich-text_2',
