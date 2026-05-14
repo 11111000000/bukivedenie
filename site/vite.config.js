@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import { resolve } from 'node:path'
-import { copyFileSync, existsSync, mkdirSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync, readdirSync } from 'node:fs'
 
 export default defineConfig({
   appType: 'mpa',
@@ -43,12 +43,22 @@ export default defineConfig({
       const presDest = resolve(outDir, 'presentation')
       if (existsSync(presSrc)) {
         mkdirSync(presDest, { recursive: true })
-        // copy files (flat copy) - preserve filenames
-        const fs = require('node:fs')
-        for (const entry of fs.readdirSync(presSrc)) {
+        for (const entry of readdirSync(presSrc)) {
           const s = resolve(presSrc, entry)
           const d = resolve(presDest, entry)
-          try { fs.copyFileSync(s, d) } catch (e) { /* ignore directories */ }
+          try { copyFileSync(s, d) } catch (e) { /* ignore directories */ }
+        }
+      }
+
+      // copy vendor assets (ol, papaparse) into dist/vendor so pages can reference them directly
+      const vendorSrc = resolve(__dirname, 'vendor')
+      const vendorDest = resolve(outDir, 'vendor')
+      if (existsSync(vendorSrc)) {
+        mkdirSync(vendorDest, { recursive: true })
+        for (const entry of readdirSync(vendorSrc)) {
+          const s = resolve(vendorSrc, entry)
+          const d = resolve(vendorDest, entry)
+          try { copyFileSync(s, d) } catch (e) { /* ignore directories */ }
         }
       }
     },
