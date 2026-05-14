@@ -30,7 +30,6 @@ __pycache__/
 site/node_modules/
 site/pnode_modules/
 site/presentation/screens/
-site/presentation/*.png
 
 # local server logs
 logs/
