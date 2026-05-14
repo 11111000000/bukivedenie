@@ -1,1 +1,0 @@
-"""Static book data generator."""
