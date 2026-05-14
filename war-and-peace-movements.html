@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <title>Карта перемещений героев «Войны и мира»</title>
 
-    <script src="/vendor/ol.js"></script>
-    <script src="/vendor/papaparse.min.js"></script>
+    <script src="./vendor/ol.js"></script>
+    <script src="./vendor/papaparse.min.js"></script>
 
     <style>
         html,body,#map{height:100%;margin:0;font:14px/1.35 system-ui,Arial,sans-serif}
@@ -82,15 +82,41 @@
 
         /* ═══ 1. загрузка ═══ */
         const searchParams = new URLSearchParams(window.location.search);
-        const placesFile = searchParams.get('places') || 'presentation/war_and_peace_places_osm.csv';
-        const movesFile  = searchParams.get('moves')  || 'presentation/war_and_peace_movements.csv';
+        const placesCandidates = [
+            searchParams.get('places'),
+            './presentation/war_and_peace_places_osm.csv',
+            './data/presentation/war_and_peace_places_osm.csv',
+        ].filter(Boolean);
+        const movesCandidates = [
+            searchParams.get('moves'),
+            './presentation/war_and_peace_movements.csv',
+            './data/presentation/war_and_peace_movements.csv',
+        ].filter(Boolean);
+
+        async function fetchFirstText(candidates) {
+            let lastErr = null;
+            for (const file of candidates) {
+                try {
+                    const response = await fetch(file);
+                    if (!response.ok) throw new Error(`${file}: ${response.status}`);
+                    return await response.text();
+                } catch (err) {
+                    lastErr = err;
+                }
+            }
+            throw lastErr || new Error('Не удалось загрузить данные');
+        }
+
         Promise.all([
-            fetch(placesFile).then(r=>r.text()),
-            fetch(movesFile).then(r=>r.text())
+            fetchFirstText(placesCandidates),
+            fetchFirstText(movesCandidates)
         ]).then(([pcsv,mcsv])=>{
             const places=parsePlaces(pcsv);
             const {chars,dates}=parseMoves(mcsv,places);
             buildMap(places,chars,dates);
+        }).catch(err => {
+            console.error(err);
+            document.body.insertAdjacentHTML('beforeend', `<div style="position:fixed;left:12px;top:12px;z-index:2000;background:#fff;padding:12px;border:1px solid #c00;color:#900;max-width:420px">Не удалось загрузить данные карты перемещений: ${String(err.message || err)}</div>`);
         });
 
         /* ---------- 1.1 места ---------- */
