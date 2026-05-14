@@ -197,10 +197,12 @@ class NERHeuristic:
             if len(words) == 1 and is_start_of_sentence:
                 continue
 
-            # Отсечение по наличию lowercase варианта в тексте: если любое слово кандидата встречается в lower_forms, считаем не именем
+            # Отсечение по наличию lowercase варианта в тексте: если любое слово кандидата
+            # встречается в lower_forms и это не сильный NER-кандидат, считаем не именем.
             skip_due_lower = False
             for w in words:
-                if w.lower() in lower_forms:
+                lw = w.lower()
+                if lw in lower_forms and lw not in self.stop_words and len(words) == 1:
                     skip_due_lower = True
                     break
             if skip_due_lower:
@@ -443,10 +445,11 @@ def character_freq_by_chapter(
                 if len(words) == 1 and is_start_of_sentence:
                     continue
 
-                # Применяем глобальный lower-form фильтр
+                # Применяем глобальный lower-form фильтр только к одиночным слабым кандидатам.
                 skip_due_lower = False
                 for w in words:
-                    if w.lower() in global_lower_forms:
+                    lw = w.lower()
+                    if lw in global_lower_forms and lw not in ner.stop_words and len(words) == 1:
                         skip_due_lower = True
                         break
                 if skip_due_lower:

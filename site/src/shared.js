@@ -5,6 +5,7 @@ export const APP_BRAND = 'Bukivedenie'
 
 export const NAV_ITEMS = [
   { href: './index.html', label: 'Лингвистика' },
+  { href: './prez.html', label: 'Презентация' },
   { href: './war-and-peace.html', label: 'Война и мир' },
 ]
 

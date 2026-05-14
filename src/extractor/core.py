@@ -241,7 +241,7 @@ class TextPipeline:
 
         # Постобработка: объединяем заведомо крошечные главы (false positives), т.к.
         # паттерн может ловить римские цифры и прочие маркеры, встречающиеся внутри текста
-        MIN_CHARS = 200
+        MIN_CHARS = 40
         if len(chapters) > 1:
             merged = []
             i = 0
@@ -261,9 +261,16 @@ class TextPipeline:
                         i += 1
                         continue
                     else:
-                        # merge into previous
-                        ps, pe, pt = merged[-1]
-                        merged[-1] = (ps, e, pt)
+                        # merge into previous when it already exists;
+                        # otherwise fold into the next chapter to avoid an empty merged list.
+                        if merged:
+                            ps, pe, pt = merged[-1]
+                            merged[-1] = (ps, e, pt)
+                        elif i + 1 < len(chapters):
+                            ns, ne, nt = chapters[i + 1]
+                            chapters[i + 1] = (s, ne, nt)
+                        else:
+                            merged.append((s, e, t))
                         i += 1
                         continue
                 else:

@@ -53,12 +53,13 @@ preza-images:
 	@echo "Generating images via AITUNNEL (requires AITUNNEL_KEY env var)"
 	@CHROMIUM_PATH=/run/current-system/sw/bin/chromium node site/scripts/generate-images-aitunnel.js
 
-# convenience: regenerate full presentation (screens + images + rebuild pdf/pptx)
+# convenience: regenerate full presentation (images + screens + rebuild pdf/pptx)
 .PHONY: preza-regenerate
-preza-regenerate: preza-screens
+preza-regenerate: preza-images preza-screens
 	@echo "Rebuilding preza artifacts (PDF and PPTX)"
 	@CHROMIUM_PATH=/run/current-system/sw/bin/chromium node site/scripts/render-preza-pdf.js
 	@CHROMIUM_PATH=/run/current-system/sw/bin/chromium node site/scripts/generate-preza-pptx.js
+	@node site/scripts/verify-preza-exports.js
 
 # Local helper: regenerate only outputs (fast)
 regen-outputs:

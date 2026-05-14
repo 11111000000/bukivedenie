@@ -3,3 +3,33 @@
   Подсказка: выполните
     python src/analyze_text.py analyze --input data/raw/tolstoj_lew_nikolaewich-text_2.txt --output-dir outputs --lang ru
   или запустите scripts/generate_word_counts.py --text-id tolstoj_lew_nikolaewich-text_2 или укажите --counts-path.
+=== Cloud generation started: 2026-05-14T07:10:39.755764
+Traceback (most recent call last):
+  File "/home/az/Code/bukivedenie/src/legacy_scripts/plot_wordcloud_counts_legacy.py", line 26, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+=== Cloud generation started: 2026-05-14T07:11:38.478269
+Traceback (most recent call last):
+  File "/home/az/Code/bukivedenie/src/legacy_scripts/plot_wordcloud_counts_legacy.py", line 26, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+=== Cloud generation started: 2026-05-14T08:08:35.010471
+Traceback (most recent call last):
+  File "/home/az/Code/bukivedenie/src/legacy_scripts/plot_wordcloud_counts_legacy.py", line 26, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+=== Cloud generation started: 2026-05-14T08:09:52.370508
+Traceback (most recent call last):
+  File "/home/az/Code/bukivedenie/src/legacy_scripts/plot_wordcloud_counts_legacy.py", line 26, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+=== Cloud generation started: 2026-05-14T08:12:20.502123
+Traceback (most recent call last):
+  File "/home/az/Code/bukivedenie/src/legacy_scripts/plot_wordcloud_counts_legacy.py", line 26, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'
+=== Cloud generation started: 2026-05-14T08:13:23.448010
+Traceback (most recent call last):
+  File "/home/az/Code/bukivedenie/src/legacy_scripts/plot_wordcloud_counts_legacy.py", line 26, in <module>
+    import yaml
+ModuleNotFoundError: No module named 'yaml'

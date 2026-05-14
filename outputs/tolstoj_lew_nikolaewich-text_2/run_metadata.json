@@ -1,20 +1,20 @@
 {
   "book_id": "tolstoj_lew_nikolaewich-text_2",
-  "start_time": "2026-05-11T17:29:37.627923",
-  "end_time": "2026-05-11T17:29:37.627950",
-  "duration_seconds": 2.7e-05,
+  "start_time": "2026-05-14T08:13:12.849285",
+  "end_time": "2026-05-14T08:13:23.141428",
+  "duration_seconds": 10.292143,
   "config": {
     "lang": "ru",
     "ner_mode": "heuristic",
     "sentiment_mode": "lexicon",
     "cooccurrence_level": "sentence",
     "use_lemmas": false,
-    "workers": 2,
+    "workers": 1,
     "chapter_pattern": null
   },
   "env": {
-    "python": "3.13.13",
-    "platform": "Android-12-aarch64-64bit-ELF"
+    "python": "3.13.12",
+    "platform": "Linux-6.6.135-x86_64-with-glibc2.40"
   },
   "version": "0.1.0"
 }

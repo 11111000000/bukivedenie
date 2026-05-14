@@ -4,16 +4,24 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Презентация — Bukivedenie</title>
+  <meta name="description" content="Визуализация и исследование данных на примере "Война и мир" — конвейер от текста до визуализаций и статической витрины." />
+  <meta name="author" content="Косова Лада Петровна" />
+  <!-- Load Inter font; falls back to system fonts if blocked -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     /* presentation layout and typography */
     :root{ --slide-width: 1280px; --slide-height: 720px; --page-margin: 20px; --frame-color: #e6e9ef }
     @page { size: 1280px 720px; margin: 0 }
     body{font-family: Inter, Arial, Helvetica, sans-serif; margin:0; padding:20px; background:#f6f7fb; color:#222}
-    .slide{page-break-after:always; page-break-inside:avoid; margin:12px auto; width:var(--slide-width); height:var(--slide-height); box-shadow: 0 6px 20px rgba(20,24,36,0.06); background:#fff; padding:28px; border-radius:8px; border:1px solid var(--frame-color); box-sizing:border-box}
+    .slide{page-break-after:always; page-break-inside:avoid; margin:12px auto; width:var(--slide-width); height:var(--slide-height); box-shadow: 0 6px 20px rgba(20,24,36,0.06); background:#fff; padding:28px; border-radius:8px; border:1px solid var(--frame-color); box-sizing:border-box; overflow:hidden}
     .slide-inner{display:flex; gap:20px; align-items:flex-start}
     .slide .text{flex: 1 1 45%; padding: 8px 12px}
     .slide .media{flex: 1 1 55%; display:flex; align-items:center; justify-content:center}
-    img{max-width:100%; height:auto; border-radius:6px}
+    img{max-width:100%; height:auto; border-radius:6px; display:block; /* avoid inline gaps */}
+    /* help avoid layout shift when image size unknown */
+    .slide .media img{width:100%; aspect-ratio:16/9; object-fit:contain}
+    figure{margin:0}
+    figcaption{color:#444; margin-top:8px}
     h1,h2{margin:4px 0 8px; font-weight:700}
     h1{font-size:28px}
     h2{font-size:22px}
@@ -22,9 +30,9 @@
     ul{margin:6px 0 12px 20px}
 
     /* title / cover slide */
-    .title-slide{background:linear-gradient(180deg,#0b3d91,#0a2b66); color:#fff; text-align:center}
+    .title-slide{background:linear-gradient(180deg,#0b3d91,#0a2b66); color:#fff; text-align:center; background-clip:padding-box}
     .title-slide .slide-inner{display:block; padding-top:80px}
-    .title-slide h2{font-size:44px; margin:18px 0; line-height:1.05}
+    .title-slide h1{font-size:44px; margin:18px 0; line-height:1.05}
     .title-slide .muted{color:rgba(255,255,255,0.9); margin-top:12px}
 
     /* intro slide (image + text) */
@@ -36,182 +44,293 @@
     /* smaller devices fallback */
     @media (max-width: 1200px){:root{--slide-width: 900px}}
     @media (max-width: 800px){.slide{width:calc(100% - 2*var(--page-margin)); padding:12px;}}
+    /* print-specific fixes: make each slide fill the exported page and remove decorative framing */
+    @media print {
+      body { padding: 0; margin: 0; background: #fff }
+      .slide { margin: 0; width: 1280px; height: 720px; box-shadow: none; border: none; border-radius: 0 }
+      .title-slide { background-clip: border-box }
+    }
   </style>
 </head>
 <body>
-  <h1>Визуализация и исследование данных — на примере «Война и мир»</h1>
-  <p class="muted">Министерство образования Иркутской области · Сиб. отделение РАН · Региональная конференция «Наука. Технологии. Интеллект»</p>
-  <p class="muted">Выполнила: Косова Лада Петровна, ученица 11 «Д», МАОУ «Ангарский лицей №1». Руководитель: Косов Пётр Борисович.</p>
+  <!-- page-level heading removed from visual flow; title is present on the first slide -->
+  <h1 class="visually-hidden">Визуализация и исследование данных — на примере «Война и мир»</h1>
+  <style>
+    /* utility to hide but keep accessible */
+    .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;border:0;padding:0;margin:-1px}
+  </style>
 
   <!-- Cover slide: text only -->
   <section class="slide title-slide cover-slide">
-    <h2>Визуализация и исследование данных — на примере «Война и мир»</h2>
-    <p class="muted">Министерство образования Иркутской области · Сиб. отделение РАН · Региональная конференция «Наука. Технологии. Интеллект»</p>
-    <p class="muted">Выполнила: Косова Лада Петровна. Руководитель: Косов Пётр Борисович.</p>
+    <div class="slide-inner">
+      <div class="text">
+        <h1>Визуализация и исследование данных — на примере «Война и мир»</h1>
+        <p class="muted">Министерство образования Иркутской области · Сиб. отделение РАН · Региональная конференция «Наука. Технологии. Интеллект»</p>
+        <p class="muted">Выполнила: Косова Лада Петровна. Руководитель: Косов Пётр Борисович.</p>
+      </div>
+    </div>
   </section>
 
-  <!-- Intro slide: image + short text -->
-  <section class="slide intro-slide">
+  <!-- Slide 0: Заглавный слайд -->
+  <section class="slide intro-slide title-slide cover-slide">
+    <div class="slide-inner">
+      <div class="text">
+        <h1>Визуализация и исследование данных<br>при анализе классической литературы<br>на примере романа  “Война и мир”</h1>
+        <p class="muted">Министерство образования Иркутской области<br>Министерство по молодежной политике Иркутской области<br>Сибирское отделение Российской академии наук<br>Региональная конференция проектно-исследовательских работ<br>«Наука. Технологии. Интеллект»<br>Для учащихся 8-11 классов<br>общеобразовательных учреждений Иркутской области</p>
+        <p class="muted">Выполнила: Косова Лада Петровна<br>ученица 11 «Д» класса , МАОУ «Ангарский лицей №1»<br>МАОУ «Ангарский лицей № 1»<br>Руководитель проекта: Косов Пётр Борисович</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 1: Введение -->
+  <section class="slide">
     <h2>Введение</h2>
-    <img src="presentation/slide-02-intro.png" alt="Вступление"/>
-    <p class="caption">Краткое введение и цель работы.</p>
-  </section>
-
-  <!-- Slide: Введение -->
-  <section class="slide">
-    <h2>Введение — цель и задачи</h2>
-    <p>Цель: создать открытый и воспроизводимый конвейер для анализа текста и генерации визуальных пособий для крупных произведений.</p>
-    <p>Задачи:</p>
+    <p><strong>Цель:</strong> создать открытый и воспроизводимый способ анализа текста и построения визуализаций для крупного литературного произведения.</p>
+    <p><strong>Задачи:</strong></p>
     <ul>
-      <li>Разработать формат и конвенции для визуализаций.</li>
-      <li>Автоматизировать сбор и нормализацию данных из текста.</li>
-      <li>Построить визуализации, удобные для исследования текста.</li>
-      <li>Опубликовать результаты в открытом доступе (статический сайт).</li>
+      <li>разработать понятный формат визуализаций;</li>
+      <li>автоматизировать сбор и подготовку данных из текста;</li>
+      <li>построить наглядные визуализации;</li>
+      <li>опубликовать результат в открытом доступе.</li>
     </ul>
   </section>
 
-  <!-- Slide: Система разработки на телефоне -->
+  <!-- Slide 2: Система разработки на телефоне -->
   <section class="slide">
-    <h2>Система разработки (включая телефон)</h2>
-    <p>Проект можно разрабатывать и запускать в лёгком окружении (Termux на Android) или на ПК. Ключевые инструменты, использованные в процессе:</p>
+    <h2>Система разработки на телефоне</h2>
+    <p><strong>Инструменты:</strong></p>
     <ul>
-      <li>Markor — заметки/черновики</li>
-      <li>Termux — среда на телефоне</li>
-      <li>GitHub — репозиторий и публикация</li>
-      <li>Agent PI — помощник при генерации кода (использовался для ускорения разработки)</li>
-      <li>Python — анализ и генерация CSV/JSON</li>
-      <li>JavaScript (Vite + ECharts) — статическая витрина</li>
-    </ul>
-    <p class="muted">(Подсказка: проект фиксирует параметры прогона в run_metadata.json — это делает результаты воспроизводимыми между машинами.)</p>
-  </section>
-
-  <!-- Slide: Сбор данных -->
-  <section class="slide">
-    <h2>Сбор данных — пайплайн</h2>
-    <p>Пайплайн формирует готовые для визуализации таблицы/JSON:</p>
-    <ul>
-      <li>Нормализация (UTF‑8, кавычки, тире, многоточия)</li>
-      <li>Токенизация и лемматизация</li>
-      <li>Разбиение на предложения, абзацы, главы и диалоги</li>
-      <li>Выделение кандидатов на именованные сущности (правилами)</li>
-      <li>Подсчёт метрик: частоты, hapax, Yule/Honore, тональность, пунктуация</li>
-      <li>Экспорт в CSV/JSON (tokens.csv, characters.csv, cooccurrence_edges.csv и др.)</li>
+      <li><strong>Markor</strong> — черновики и заметки.</li>
+      <li><strong>Termux</strong> — рабочая среда на Android.</li>
+      <li><strong>GitHub</strong> — хранение и публикация проекта.</li>
+      <li><strong>PI</strong> — помощник при написании кода.</li>
+      <li><strong>Python</strong> — обработка текста и данных.</li>
+      <li><strong>JS</strong> — веб-витрина визуализаций.</li>
     </ul>
   </section>
 
-  <!-- Slide: Визуализация -->
+  <!-- Slide 3: Сбор данных -->
   <section class="slide">
-    <h2>Витрина и визуализация</h2>
-    <p>Frontend — статический Vite‑сайт, который загружает готовые CSV/JSON из <code>site/public/data/</code>. Это даёт простую и надёжную публикацию без отдельного API.</p>
-    <p>Преимущества: лёгкий развёртывание, reproducible artifacts, простота отката и тестирования.</p>
+    <h2>Сбор данных</h2>
+    <p><strong>Пайплайн:</strong></p>
+    <ul>
+      <li>нормализация текста (UTF-8, единые кавычки и тире);</li>
+      <li>разбиение на токены;</li>
+      <li>разбиение на предложения, абзацы, главы и диалоги;</li>
+      <li>лемматизация слов;</li>
+      <li>выделение имен собственных и их связей в тексте;</li>
+      <li>подсчет метрик сложности и тональности;</li>
+      <li>вывод данных в таблицы JSON и CSV.</li>
+    </ul>
   </section>
 
-  <!-- Slide: Реализация агента -->
+  <!-- Slide 4: Визуализация -->
   <section class="slide">
-    <h2>Реализация кода с помощью агента</h2>
-    <p>В разработке использовался агент PI в роли помощника по коду. Ключевые наблюдения:</p>
+    <h2>Визуализация</h2>
     <ul>
-      <li>Агент эффективен при наличии подробной спецификации — пишет много кода быстро.</li>
-      <li>Нужен тщательный код‑ревью: автогенерированный код может нарастить когнитивную долговую нагрузку.</li>
-      <li>Агент иногда усложняет структуру репозитория — после генерации требуется рефакторинг.</li>
+      <li>Визуализации сделаны на JavaScript без API и внешних серверов.</li>
+      <li>Проект выложен в GitHub и запускается локально как статический сайт.</li>
     </ul>
+  </section>
+
+  <!-- Slide 5: Реализация агента -->
+  <section class="slide">
+    <h2>Реализация кода при помощи агента.</h2>
+    <p>В разработке я использовала агента PI.</p>
+    <ul>
+      <li>Ему нужна максимально подробная спецификация.</li>
+      <li>Он быстро пишет большой объем кода.</li>
+      <li>Его нужно внимательно читать, чтобы не накапливать когнитивный долг.</li>
+      <li>Он склонен усложнять структуру репозитория.</li>
+      <li>После генерации нужен рефакторинг.</li>
+    </ul>
+  </section>
+
+  <!-- Slide 6: Спасибо -->
+  <section class="slide">
+    <h2>Спасибо за внимание.</h2>
+    <p class="muted">Дополнительные материалы, визуализации и код доступны в репозитории.</p>
   </section>
 
   <!-- Insert generated visual slides with descriptive captions -->
   <section class="slide">
-    <h2>Частотное ядро (frequency core)</h2>
-    <img src="presentation/--01.png" alt="Частотное ядро"/>
-    <p class="caption">График показывает распределение частот токенов после очистки и фильтрации стоп‑слов. Помогает быстро увидеть доминирующие слова и общую лексику произведения.</p>
+    <div class="slide-inner">
+      <div class="text"><h2>Частотное ядро (frequency core)</h2></div>
+      <div class="media">
+        <figure>
+          <img src="presentation/--01.png" alt="Граф распределения частот токенов после очистки" loading="lazy">
+          <figcaption>График показывает, как распределяются частоты токенов после очистки и удаления стоп-слов. Он помогает быстро увидеть ядро лексики произведения.</figcaption>
+        </figure>
+      </div>
+    </div>
   </section>
 
   <section class="slide">
-    <h2>Top tokens — топ слов</h2>
-    <img src="presentation/top-tokens-02.png" alt="Top tokens"/>
-    <p class="caption">Барчарт с топ‑словами по частоте. Используется для быстрой инспекции ключевых лексем и проверки корректности нормализации/лемматизации.</p>
+    <div class="slide-inner">
+      <div class="text"><h2>Top tokens — топ слов</h2></div>
+      <div class="media">
+        <figure>
+          <img src="presentation/top-tokens-02.png" alt="Барчарт топ слов по частоте" loading="lazy">
+          <figcaption>Барчарт с самыми частотными словами. Он нужен для быстрой проверки нормализации и лемматизации.</figcaption>
+        </figure>
+      </div>
+    </div>
   </section>
 
   <section class="slide">
-    <h2>Ритм по главам</h2>
-    <img src="presentation/--03.png" alt="Ритм по главам"/>
-    <p class="caption">Таймлайн/диаграмма, показывающая плотность событий/текстовую активность по главам — помогает находить пики динамики и структурные особенности.</p>
+    <div class="slide-inner">
+      <div class="text"><h2>Ритм по главам</h2></div>
+      <div class="media">
+        <figure>
+          <img src="presentation/--03.png" alt="Таймлайн плотности текстовой активности по главам" loading="lazy">
+          <figcaption>Диаграмма показывает плотность текстовой активности по главам и помогает находить пики динамики.</figcaption>
+        </figure>
+      </div>
+    </div>
   </section>
 
   <section class="slide">
-    <h2>Тональность по главам</h2>
-    <img src="presentation/--04.png" alt="Тональность по главам"/>
-    <p class="caption">Линейный график тональности (лексикон‑based). Оценка приближённая, но полезна для выявления эмоциональных смен в тексте.</p>
+    <div class="slide-inner">
+      <div class="text"><h2>Тональность по главам</h2></div>
+      <div class="media">
+        <figure>
+          <img src="presentation/--04.png" alt="Линейный график тональности по главам" loading="lazy">
+          <figcaption>Линейный график показывает изменение тональности по главам. Это приближенная оценка, но она помогает увидеть эмоциональные сдвиги.</figcaption>
+        </figure>
+      </div>
+    </div>
   </section>
 
   <section class="slide">
-    <h2>Сеть персонажей</h2>
-    <img src="presentation/--05.png" alt="Персонажи и связи"/>
-    <p class="caption">Граф ко‑встречаемости персонажей: ребра — совместные появления в окне контекста, вес — частота. Позволяет визуально выделить центральных и второстепенных персонажей.</p>
+    <div class="slide-inner">
+      <div class="text"><h2>Сеть персонажей</h2></div>
+      <div class="media">
+        <figure>
+          <img src="presentation/--05.png" alt="Граф ко-встречаемости персонажей (узлы — персонажи, ребра — совместные появления)" loading="lazy">
+          <figcaption>Граф ко-встречаемости показывает, какие персонажи чаще появляются вместе. По нему видно центральных и второстепенных героев.</figcaption>
+        </figure>
+      </div>
+    </div>
   </section>
 
   <section class="slide">
-    <h2>Список персонажей</h2>
-    <img src="presentation/article-06.png" alt="Персонажи"/>
-    <p class="caption">Таблица обнаруженных персонажей и их частоты. Нерегулярности в именах — следствие эвристического NER; требует дополнительной ручной валидации.</p>
+    <div class="slide-inner">
+      <div class="text"><h2>Список персонажей</h2></div>
+      <div class="media">
+        <figure>
+          <img src="presentation/article-06.png" alt="Таблица обнаруженных персонажей и их частоты" loading="lazy">
+          <figcaption>Таблица показывает найденных персонажей и частоту их упоминаний. Часть расхождений связана с эвристическим выделением имен.</figcaption>
+        </figure>
+      </div>
+    </div>
   </section>
 
   <section class="slide">
-    <h2>Hapax legomena</h2>
-    <img src="presentation/hapax-07.png" alt="Hapax"/>
-    <p class="caption">Список слов, встречающихся единожды. Полезно для изучения уникальной лексики и артефактов разметки.</p>
+    <div class="slide-inner">
+      <div class="text"><h2>Hapax legomena</h2></div>
+      <div class="media">
+        <figure>
+          <img src="presentation/hapax-07.png" alt="Список слов, встречающихся единожды" loading="lazy">
+          <figcaption>Это слова, которые встретились только один раз. Они полезны для изучения редкой лексики и возможных артефактов разметки.</figcaption>
+        </figure>
+      </div>
+    </div>
   </section>
 
   <section class="slide">
-    <h2>Метаданные прогона</h2>
-    <img src="presentation/--08.png" alt="Метаданные прогона"/>
-    <p class="caption">run_metadata.json фиксирует параметры и время прогона — это ключ к воспроизводимости (версии, флаги, время).</p>
+    <div class="slide-inner">
+      <div class="text"><h2>Метаданные прогона</h2></div>
+      <div class="media">
+        <figure>
+          <img src="presentation/--08.png" alt="run_metadata.json: параметры и время прогона" loading="lazy">
+          <figcaption>Файл run_metadata.json фиксирует параметры и время прогона. Это важно для воспроизводимости результатов.</figcaption>
+        </figure>
+      </div>
+    </div>
   </section>
 
   <section class="slide">
-    <h2>Пунктуация и структура</h2>
-    <img src="presentation/article-09.png" alt="Пунктуация"/>
-    <p class="caption">Анализ частот пунктуации по главам помогает обнаружить диалоги, паузы и изменение стиля повествования.</p>
+    <div class="slide-inner">
+      <div class="text"><h2>Пунктуация и структура</h2></div>
+      <div class="media">
+        <figure>
+          <img src="presentation/article-09.png" alt="Анализ частот пунктуации по главам" loading="lazy">
+          <figcaption>Частоты пунктуации по главам помогают увидеть диалоги, паузы и смену ритма повествования.</figcaption>
+        </figure>
+      </div>
+    </div>
   </section>
 
   <section class="slide">
-    <h2>Стиль: radar</h2>
-    <img src="presentation/-radar-10.png" alt="Стиль: radar"/>
-    <p class="caption">Радар‑диаграмма показывает сжатые метрики по главам/секциям (лексическая плотность, длинна предложений и пр.).</p>
+    <div class="slide-inner">
+      <div class="text"><h2>Стиль: radar</h2></div>
+      <div class="media">
+        <figure>
+          <img src="presentation/-radar-10.png" alt="Радар-диаграмма: стиль по главам" loading="lazy">
+          <figcaption>Радар-диаграмма сводит несколько метрик главы в один образ: лексическую плотность, длину предложений и другие признаки стиля.</figcaption>
+        </figure>
+      </div>
+    </div>
   </section>
 
   <section class="slide">
-    <h2>Главы: words × sentences</h2>
-    <img src="presentation/-words-sentences-11.png" alt="Главы: words × sentences"/>
-    <p class="caption">Scatter plot: соотношение слов и предложений в главах — помогает находить аномально длинные/короткие главы.</p>
+    <div class="slide-inner">
+      <div class="text"><h2>Главы: words × sentences</h2></div>
+      <div class="media">
+        <figure>
+          <img src="presentation/-words-sentences-11.png" alt="Scatter plot: слова × предложения в главах" loading="lazy">
+          <figcaption>Диаграмма показывает соотношение слов и предложений в главах и позволяет быстро заметить аномалии.</figcaption>
+        </figure>
+      </div>
+    </div>
   </section>
 
   <section class="slide">
-    <h2>Персонажи × главы</h2>
-    <img src="presentation/--12.png" alt="Персонажи × главы"/>
-    <p class="caption">Тепловая карта появления персонажей по главам — удобно для отслеживания арок и смен фокуса на персонажей.</p>
+    <div class="slide-inner">
+      <div class="text"><h2>Персонажи × главы</h2></div>
+      <div class="media">
+        <figure>
+          <img src="presentation/--12.png" alt="Тепловая карта появления персонажей по главам" loading="lazy">
+          <figcaption>Тепловая карта показывает, где и в каких главах появляются персонажи. Это удобно для отслеживания сюжетных арок.</figcaption>
+        </figure>
+      </div>
+    </div>
   </section>
 
   <section class="slide">
-    <h2>Токены × главы</h2>
-    <img src="presentation/--13.png" alt="Токены × главы"/>
-    <p class="caption">Тепловая карта распределения частот ключевых токенов по главам — полезно для тематического картирования.</p>
+    <div class="slide-inner">
+      <div class="text"><h2>Токены × главы</h2></div>
+      <div class="media">
+        <figure>
+          <img src="presentation/--13.png" alt="Тепловая карта распределения частот токенов по главам" loading="lazy">
+          <figcaption>Тепловая карта показывает распределение частот ключевых токенов по главам и помогает увидеть тематические акценты.</figcaption>
+        </figure>
+      </div>
+    </div>
   </section>
 
   <section class="slide">
-    <h2>Zipf: rank × frequency</h2>
-    <img src="presentation/zipf-rank-frequency-14.png" alt="Zipf: rank × frequency"/>
-    <p class="caption">Граф ранга и частоты токенов (закон Ципфа). Проверка ожидаемого распределения и качества токенизации.</p>
+    <div class="slide-inner">
+      <div class="text"><h2>Zipf: rank × frequency</h2></div>
+      <div class="media">
+        <figure>
+          <img src="presentation/zipf-rank-frequency-14.png" alt="Граф ранга и частоты токенов (закон Ципфа)" loading="lazy">
+          <figcaption>Граф ранга и частоты токенов показывает закон Ципфа и помогает проверить качество токенизации.</figcaption>
+        </figure>
+      </div>
+    </div>
   </section>
 
   <!-- Slides from original draft: final / thanks -->
   <section class="slide">
     <h2>Реализация и выводы</h2>
-    <p>Мы показали рабочий конвейер: от текста до визуализаций и статической витрины. Артефакты хранятся в <code>outputs/&lt;book_id&gt;/</code> и экспортируются в <code>site/public/data/</code>.</p>
-    <p>Дальше: улучшение NER, валидация персонажей, сравнение разных изданий и масштабирование на корпус.</p>
+    <p>Проект показывает полный конвейер: от текста до визуализаций и статической витрины. Все артефакты хранятся в <code>outputs/&lt;book_id&gt;/</code> и экспортируются в <code>site/public/data/</code>.</p>
+    <p>Следующие шаги — улучшение выделения именованных сущностей, проверка персонажей, сравнение изданий и масштабирование на корпус.</p>
   </section>
 
   <section class="slide">
     <h2>Спасибо за внимание</h2>
-    <p class="muted">Вопросы и предложения — обсуждаем. Доп. материалы и код — в репозитории.</p>
+    <p class="muted">Вопросы, замечания и дополнительные материалы доступны в репозитории.</p>
   </section>
 
 </body>

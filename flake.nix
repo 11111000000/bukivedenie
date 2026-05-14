@@ -31,6 +31,10 @@
       cd ${builtins.toString ./.}
       exec ${pkgs.bashInteractive}/bin/bash -lc 'make preza-regenerate'
     '';
+    prezaVerify = pkgs.writeShellScriptBin "bukivedenie-preza-verify" ''
+      cd ${builtins.toString ./.}
+      exec ${pkgs.bashInteractive}/bin/bash -lc 'node site/scripts/verify-preza-exports.js'
+    '';
     shell = pkgs.mkShell {
       packages = with pkgs; [
         bashInteractive
@@ -76,6 +80,10 @@
       preza-regenerate = {
         type = "app";
         program = "${prezaAll}/bin/bukivedenie-preza-regenerate";
+      };
+      preza-verify = {
+        type = "app";
+        program = "${prezaVerify}/bin/bukivedenie-preza-verify";
       };
       default = {
         type = "app";

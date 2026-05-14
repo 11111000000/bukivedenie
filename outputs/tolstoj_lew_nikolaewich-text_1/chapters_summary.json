@@ -7,10 +7,10 @@
       "end_offset": 10896,
       "total_chars": 10720,
       "total_paragraphs": 42,
-      "total_sentences": 123,
+      "total_sentences": 146,
       "total_words": 1663,
       "dialog_sentences": 1,
-      "dialog_ratio": 0.0081
+      "dialog_ratio": 0.0068
     },
     {
       "chapter_idx": 1,
@@ -19,7 +19,7 @@
       "end_offset": 18045,
       "total_chars": 7149,
       "total_paragraphs": 20,
-      "total_sentences": 55,
+      "total_sentences": 61,
       "total_words": 1047,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -31,7 +31,7 @@
       "end_offset": 28860,
       "total_chars": 10815,
       "total_paragraphs": 48,
-      "total_sentences": 93,
+      "total_sentences": 104,
       "total_words": 1607,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -43,7 +43,7 @@
       "end_offset": 43885,
       "total_chars": 15025,
       "total_paragraphs": 82,
-      "total_sentences": 169,
+      "total_sentences": 196,
       "total_words": 2282,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -55,7 +55,7 @@
       "end_offset": 51023,
       "total_chars": 7138,
       "total_paragraphs": 48,
-      "total_sentences": 90,
+      "total_sentences": 98,
       "total_words": 1110,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -67,10 +67,10 @@
       "end_offset": 73637,
       "total_chars": 22614,
       "total_paragraphs": 124,
-      "total_sentences": 306,
+      "total_sentences": 345,
       "total_words": 3475,
-      "dialog_sentences": 3,
-      "dialog_ratio": 0.0098
+      "dialog_sentences": 6,
+      "dialog_ratio": 0.0174
     },
     {
       "chapter_idx": 6,
@@ -79,10 +79,10 @@
       "end_offset": 82029,
       "total_chars": 8392,
       "total_paragraphs": 33,
-      "total_sentences": 90,
+      "total_sentences": 104,
       "total_words": 1225,
-      "dialog_sentences": 0,
-      "dialog_ratio": 0.0
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0096
     },
     {
       "chapter_idx": 7,
@@ -91,7 +91,7 @@
       "end_offset": 86606,
       "total_chars": 4577,
       "total_paragraphs": 20,
-      "total_sentences": 47,
+      "total_sentences": 51,
       "total_words": 660,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -103,10 +103,10 @@
       "end_offset": 97252,
       "total_chars": 10646,
       "total_paragraphs": 68,
-      "total_sentences": 143,
+      "total_sentences": 170,
       "total_words": 1604,
-      "dialog_sentences": 2,
-      "dialog_ratio": 0.014
+      "dialog_sentences": 3,
+      "dialog_ratio": 0.0176
     },
     {
       "chapter_idx": 9,
@@ -115,7 +115,7 @@
       "end_offset": 105540,
       "total_chars": 8288,
       "total_paragraphs": 45,
-      "total_sentences": 114,
+      "total_sentences": 126,
       "total_words": 1250,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -127,7 +127,7 @@
       "end_offset": 113461,
       "total_chars": 7921,
       "total_paragraphs": 50,
-      "total_sentences": 92,
+      "total_sentences": 110,
       "total_words": 1173,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -139,10 +139,10 @@
       "end_offset": 122932,
       "total_chars": 9471,
       "total_paragraphs": 53,
-      "total_sentences": 133,
+      "total_sentences": 153,
       "total_words": 1481,
       "dialog_sentences": 1,
-      "dialog_ratio": 0.0075
+      "dialog_ratio": 0.0065
     },
     {
       "chapter_idx": 12,
@@ -151,7 +151,7 @@
       "end_offset": 126536,
       "total_chars": 3604,
       "total_paragraphs": 31,
-      "total_sentences": 58,
+      "total_sentences": 65,
       "total_words": 529,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -163,7 +163,7 @@
       "end_offset": 138450,
       "total_chars": 11914,
       "total_paragraphs": 44,
-      "total_sentences": 117,
+      "total_sentences": 128,
       "total_words": 1776,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -175,10 +175,10 @@
       "end_offset": 144235,
       "total_chars": 5785,
       "total_paragraphs": 41,
-      "total_sentences": 67,
+      "total_sentences": 84,
       "total_words": 849,
       "dialog_sentences": 1,
-      "dialog_ratio": 0.0149
+      "dialog_ratio": 0.0119
     },
     {
       "chapter_idx": 15,
@@ -187,7 +187,7 @@
       "end_offset": 154415,
       "total_chars": 10180,
       "total_paragraphs": 60,
-      "total_sentences": 130,
+      "total_sentences": 154,
       "total_words": 1541,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -199,7 +199,7 @@
       "end_offset": 168357,
       "total_chars": 13942,
       "total_paragraphs": 83,
-      "total_sentences": 150,
+      "total_sentences": 172,
       "total_words": 2106,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -211,7 +211,7 @@
       "end_offset": 177696,
       "total_chars": 9339,
       "total_paragraphs": 30,
-      "total_sentences": 83,
+      "total_sentences": 95,
       "total_words": 1477,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -223,10 +223,10 @@
       "end_offset": 187167,
       "total_chars": 9471,
       "total_paragraphs": 17,
-      "total_sentences": 72,
+      "total_sentences": 76,
       "total_words": 1425,
       "dialog_sentences": 1,
-      "dialog_ratio": 0.0139
+      "dialog_ratio": 0.0132
     },
     {
       "chapter_idx": 19,
@@ -235,10 +235,10 @@
       "end_offset": 195891,
       "total_chars": 8724,
       "total_paragraphs": 45,
-      "total_sentences": 106,
+      "total_sentences": 124,
       "total_words": 1371,
       "dialog_sentences": 1,
-      "dialog_ratio": 0.0094
+      "dialog_ratio": 0.0081
     },
     {
       "chapter_idx": 20,
@@ -247,10 +247,10 @@
       "end_offset": 216406,
       "total_chars": 20515,
       "total_paragraphs": 52,
-      "total_sentences": 161,
+      "total_sentences": 180,
       "total_words": 3309,
       "dialog_sentences": 10,
-      "dialog_ratio": 0.0621
+      "dialog_ratio": 0.0556
     },
     {
       "chapter_idx": 21,
@@ -259,7 +259,7 @@
       "end_offset": 226481,
       "total_chars": 10075,
       "total_paragraphs": 51,
-      "total_sentences": 128,
+      "total_sentences": 149,
       "total_words": 1531,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -271,7 +271,7 @@
       "end_offset": 234802,
       "total_chars": 8321,
       "total_paragraphs": 36,
-      "total_sentences": 94,
+      "total_sentences": 106,
       "total_words": 1280,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -283,7 +283,7 @@
       "end_offset": 251822,
       "total_chars": 17020,
       "total_paragraphs": 104,
-      "total_sentences": 249,
+      "total_sentences": 279,
       "total_words": 2654,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -295,7 +295,7 @@
       "end_offset": 260796,
       "total_chars": 8974,
       "total_paragraphs": 41,
-      "total_sentences": 100,
+      "total_sentences": 117,
       "total_words": 1268,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -307,10 +307,10 @@
       "end_offset": 274455,
       "total_chars": 13659,
       "total_paragraphs": 91,
-      "total_sentences": 185,
+      "total_sentences": 214,
       "total_words": 1985,
-      "dialog_sentences": 2,
-      "dialog_ratio": 0.0108
+      "dialog_sentences": 6,
+      "dialog_ratio": 0.028
     },
     {
       "chapter_idx": 26,
@@ -319,10 +319,10 @@
       "end_offset": 287698,
       "total_chars": 13243,
       "total_paragraphs": 59,
-      "total_sentences": 106,
+      "total_sentences": 119,
       "total_words": 1917,
       "dialog_sentences": 1,
-      "dialog_ratio": 0.0094
+      "dialog_ratio": 0.0084
     },
     {
       "chapter_idx": 27,
@@ -331,10 +331,10 @@
       "end_offset": 302934,
       "total_chars": 15236,
       "total_paragraphs": 132,
-      "total_sentences": 236,
+      "total_sentences": 272,
       "total_words": 2302,
-      "dialog_sentences": 2,
-      "dialog_ratio": 0.0085
+      "dialog_sentences": 5,
+      "dialog_ratio": 0.0184
     },
     {
       "chapter_idx": 28,
@@ -343,10 +343,10 @@
       "end_offset": 308663,
       "total_chars": 5729,
       "total_paragraphs": 44,
-      "total_sentences": 92,
+      "total_sentences": 108,
       "total_words": 879,
-      "dialog_sentences": 0,
-      "dialog_ratio": 0.0
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0093
     },
     {
       "chapter_idx": 29,
@@ -355,7 +355,7 @@
       "end_offset": 313539,
       "total_chars": 4876,
       "total_paragraphs": 30,
-      "total_sentences": 54,
+      "total_sentences": 60,
       "total_words": 693,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -367,7 +367,7 @@
       "end_offset": 322425,
       "total_chars": 8886,
       "total_paragraphs": 57,
-      "total_sentences": 103,
+      "total_sentences": 131,
       "total_words": 1295,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -379,10 +379,10 @@
       "end_offset": 339392,
       "total_chars": 16967,
       "total_paragraphs": 76,
-      "total_sentences": 190,
+      "total_sentences": 216,
       "total_words": 2514,
-      "dialog_sentences": 7,
-      "dialog_ratio": 0.0368
+      "dialog_sentences": 11,
+      "dialog_ratio": 0.0509
     },
     {
       "chapter_idx": 32,
@@ -391,10 +391,10 @@
       "end_offset": 349050,
       "total_chars": 9658,
       "total_paragraphs": 25,
-      "total_sentences": 88,
+      "total_sentences": 92,
       "total_words": 1376,
-      "dialog_sentences": 2,
-      "dialog_ratio": 0.0227
+      "dialog_sentences": 3,
+      "dialog_ratio": 0.0326
     },
     {
       "chapter_idx": 33,
@@ -403,10 +403,10 @@
       "end_offset": 360105,
       "total_chars": 11055,
       "total_paragraphs": 42,
-      "total_sentences": 101,
+      "total_sentences": 121,
       "total_words": 1691,
-      "dialog_sentences": 1,
-      "dialog_ratio": 0.0099
+      "dialog_sentences": 4,
+      "dialog_ratio": 0.0331
     },
     {
       "chapter_idx": 34,
@@ -415,7 +415,7 @@
       "end_offset": 365102,
       "total_chars": 4997,
       "total_paragraphs": 30,
-      "total_sentences": 55,
+      "total_sentences": 67,
       "total_words": 729,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -427,10 +427,10 @@
       "end_offset": 375564,
       "total_chars": 10462,
       "total_paragraphs": 63,
-      "total_sentences": 138,
+      "total_sentences": 159,
       "total_words": 1582,
-      "dialog_sentences": 1,
-      "dialog_ratio": 0.0072
+      "dialog_sentences": 4,
+      "dialog_ratio": 0.0252
     },
     {
       "chapter_idx": 36,
@@ -439,10 +439,10 @@
       "end_offset": 386930,
       "total_chars": 11366,
       "total_paragraphs": 65,
-      "total_sentences": 138,
+      "total_sentences": 153,
       "total_words": 1648,
-      "dialog_sentences": 5,
-      "dialog_ratio": 0.0362
+      "dialog_sentences": 6,
+      "dialog_ratio": 0.0392
     },
     {
       "chapter_idx": 37,
@@ -451,10 +451,10 @@
       "end_offset": 393544,
       "total_chars": 6614,
       "total_paragraphs": 18,
-      "total_sentences": 50,
+      "total_sentences": 52,
       "total_words": 951,
       "dialog_sentences": 3,
-      "dialog_ratio": 0.06
+      "dialog_ratio": 0.0577
     },
     {
       "chapter_idx": 38,
@@ -463,10 +463,10 @@
       "end_offset": 404273,
       "total_chars": 10729,
       "total_paragraphs": 54,
-      "total_sentences": 113,
+      "total_sentences": 126,
       "total_words": 1561,
       "dialog_sentences": 1,
-      "dialog_ratio": 0.0088
+      "dialog_ratio": 0.0079
     },
     {
       "chapter_idx": 39,
@@ -475,10 +475,10 @@
       "end_offset": 409080,
       "total_chars": 4807,
       "total_paragraphs": 17,
-      "total_sentences": 45,
+      "total_sentences": 46,
       "total_words": 706,
       "dialog_sentences": 1,
-      "dialog_ratio": 0.0222
+      "dialog_ratio": 0.0217
     },
     {
       "chapter_idx": 40,
@@ -487,10 +487,10 @@
       "end_offset": 418702,
       "total_chars": 9622,
       "total_paragraphs": 27,
-      "total_sentences": 91,
+      "total_sentences": 104,
       "total_words": 1390,
-      "dialog_sentences": 5,
-      "dialog_ratio": 0.0549
+      "dialog_sentences": 12,
+      "dialog_ratio": 0.1154
     },
     {
       "chapter_idx": 41,
@@ -499,10 +499,10 @@
       "end_offset": 427499,
       "total_chars": 8797,
       "total_paragraphs": 16,
-      "total_sentences": 74,
+      "total_sentences": 95,
       "total_words": 1316,
-      "dialog_sentences": 8,
-      "dialog_ratio": 0.1081
+      "dialog_sentences": 18,
+      "dialog_ratio": 0.1895
     },
     {
       "chapter_idx": 42,
@@ -511,10 +511,10 @@
       "end_offset": 438050,
       "total_chars": 10551,
       "total_paragraphs": 27,
-      "total_sentences": 129,
+      "total_sentences": 136,
       "total_words": 1618,
-      "dialog_sentences": 13,
-      "dialog_ratio": 0.1008
+      "dialog_sentences": 21,
+      "dialog_ratio": 0.1544
     },
     {
       "chapter_idx": 43,
@@ -523,10 +523,10 @@
       "end_offset": 449769,
       "total_chars": 11719,
       "total_paragraphs": 45,
-      "total_sentences": 120,
+      "total_sentences": 131,
       "total_words": 1705,
-      "dialog_sentences": 4,
-      "dialog_ratio": 0.0333
+      "dialog_sentences": 7,
+      "dialog_ratio": 0.0534
     },
     {
       "chapter_idx": 44,
@@ -535,10 +535,10 @@
       "end_offset": 464778,
       "total_chars": 15009,
       "total_paragraphs": 81,
-      "total_sentences": 183,
+      "total_sentences": 201,
       "total_words": 2243,
-      "dialog_sentences": 3,
-      "dialog_ratio": 0.0164
+      "dialog_sentences": 5,
+      "dialog_ratio": 0.0249
     },
     {
       "chapter_idx": 45,
@@ -547,10 +547,10 @@
       "end_offset": 482963,
       "total_chars": 18185,
       "total_paragraphs": 43,
-      "total_sentences": 149,
+      "total_sentences": 166,
       "total_words": 2960,
-      "dialog_sentences": 4,
-      "dialog_ratio": 0.0268
+      "dialog_sentences": 6,
+      "dialog_ratio": 0.0361
     },
     {
       "chapter_idx": 46,
@@ -559,10 +559,10 @@
       "end_offset": 500378,
       "total_chars": 17415,
       "total_paragraphs": 52,
-      "total_sentences": 178,
+      "total_sentences": 215,
       "total_words": 2792,
-      "dialog_sentences": 14,
-      "dialog_ratio": 0.0787
+      "dialog_sentences": 23,
+      "dialog_ratio": 0.107
     },
     {
       "chapter_idx": 47,
@@ -571,10 +571,10 @@
       "end_offset": 516917,
       "total_chars": 16539,
       "total_paragraphs": 76,
-      "total_sentences": 178,
+      "total_sentences": 213,
       "total_words": 2560,
-      "dialog_sentences": 5,
-      "dialog_ratio": 0.0281
+      "dialog_sentences": 8,
+      "dialog_ratio": 0.0376
     },
     {
       "chapter_idx": 48,
@@ -583,10 +583,10 @@
       "end_offset": 532590,
       "total_chars": 15673,
       "total_paragraphs": 60,
-      "total_sentences": 174,
+      "total_sentences": 203,
       "total_words": 2416,
-      "dialog_sentences": 11,
-      "dialog_ratio": 0.0632
+      "dialog_sentences": 15,
+      "dialog_ratio": 0.0739
     },
     {
       "chapter_idx": 49,
@@ -595,10 +595,10 @@
       "end_offset": 543903,
       "total_chars": 11313,
       "total_paragraphs": 55,
-      "total_sentences": 156,
+      "total_sentences": 183,
       "total_words": 1866,
-      "dialog_sentences": 5,
-      "dialog_ratio": 0.0321
+      "dialog_sentences": 8,
+      "dialog_ratio": 0.0437
     },
     {
       "chapter_idx": 50,
@@ -607,10 +607,10 @@
       "end_offset": 555219,
       "total_chars": 11316,
       "total_paragraphs": 61,
-      "total_sentences": 118,
+      "total_sentences": 146,
       "total_words": 1754,
-      "dialog_sentences": 1,
-      "dialog_ratio": 0.0085
+      "dialog_sentences": 2,
+      "dialog_ratio": 0.0137
     },
     {
       "chapter_idx": 51,
@@ -619,10 +619,10 @@
       "end_offset": 572388,
       "total_chars": 17169,
       "total_paragraphs": 71,
-      "total_sentences": 171,
+      "total_sentences": 197,
       "total_words": 2646,
-      "dialog_sentences": 1,
-      "dialog_ratio": 0.0058
+      "dialog_sentences": 3,
+      "dialog_ratio": 0.0152
     },
     {
       "chapter_idx": 52,
@@ -631,10 +631,10 @@
       "end_offset": 581790,
       "total_chars": 9402,
       "total_paragraphs": 38,
-      "total_sentences": 77,
+      "total_sentences": 91,
       "total_words": 1362,
-      "dialog_sentences": 5,
-      "dialog_ratio": 0.0649
+      "dialog_sentences": 14,
+      "dialog_ratio": 0.1538
     },
     {
       "chapter_idx": 53,
@@ -643,10 +643,10 @@
       "end_offset": 594842,
       "total_chars": 13052,
       "total_paragraphs": 42,
-      "total_sentences": 104,
+      "total_sentences": 114,
       "total_words": 1949,
       "dialog_sentences": 1,
-      "dialog_ratio": 0.0096
+      "dialog_ratio": 0.0088
     },
     {
       "chapter_idx": 54,
@@ -655,10 +655,10 @@
       "end_offset": 604931,
       "total_chars": 10089,
       "total_paragraphs": 38,
-      "total_sentences": 88,
+      "total_sentences": 99,
       "total_words": 1496,
-      "dialog_sentences": 0,
-      "dialog_ratio": 0.0
+      "dialog_sentences": 1,
+      "dialog_ratio": 0.0101
     },
     {
       "chapter_idx": 55,
@@ -667,7 +667,7 @@
       "end_offset": 613106,
       "total_chars": 8175,
       "total_paragraphs": 35,
-      "total_sentences": 69,
+      "total_sentences": 78,
       "total_words": 1189,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -679,10 +679,10 @@
       "end_offset": 626383,
       "total_chars": 13277,
       "total_paragraphs": 40,
-      "total_sentences": 106,
+      "total_sentences": 122,
       "total_words": 1938,
-      "dialog_sentences": 5,
-      "dialog_ratio": 0.0472
+      "dialog_sentences": 9,
+      "dialog_ratio": 0.0738
     },
     {
       "chapter_idx": 57,
@@ -691,10 +691,10 @@
       "end_offset": 637798,
       "total_chars": 11415,
       "total_paragraphs": 53,
-      "total_sentences": 151,
+      "total_sentences": 174,
       "total_words": 1688,
-      "dialog_sentences": 11,
-      "dialog_ratio": 0.0728
+      "dialog_sentences": 17,
+      "dialog_ratio": 0.0977
     },
     {
       "chapter_idx": 58,
@@ -703,7 +703,7 @@
       "end_offset": 648243,
       "total_chars": 10445,
       "total_paragraphs": 29,
-      "total_sentences": 85,
+      "total_sentences": 89,
       "total_words": 1559,
       "dialog_sentences": 0,
       "dialog_ratio": 0.0
@@ -715,10 +715,10 @@
       "end_offset": 660108,
       "total_chars": 11865,
       "total_paragraphs": 47,
-      "total_sentences": 106,
+      "total_sentences": 114,
       "total_words": 1690,
       "dialog_sentences": 2,
-      "dialog_ratio": 0.0189
+      "dialog_ratio": 0.0175
     },
     {
       "chapter_idx": 60,
@@ -727,10 +727,10 @@
       "end_offset": 667759,
       "total_chars": 7651,
       "total_paragraphs": 29,
-      "total_sentences": 84,
+      "total_sentences": 102,
       "total_words": 1154,
-      "dialog_sentences": 5,
-      "dialog_ratio": 0.0595
+      "dialog_sentences": 10,
+      "dialog_ratio": 0.098
     },
     {
       "chapter_idx": 61,
@@ -739,10 +739,10 @@
       "end_offset": 677945,
       "total_chars": 10186,
       "total_paragraphs": 48,
-      "total_sentences": 95,
+      "total_sentences": 122,
       "total_words": 1551,
-      "dialog_sentences": 7,
-      "dialog_ratio": 0.0737
+      "dialog_sentences": 14,
+      "dialog_ratio": 0.1148
     },
     {
       "chapter_idx": 62,
@@ -751,10 +751,10 @@
       "end_offset": 691461,
       "total_chars": 13516,
       "total_paragraphs": 51,
-      "total_sentences": 139,
+      "total_sentences": 160,
       "total_words": 2061,
-      "dialog_sentences": 8,
-      "dialog_ratio": 0.0576
+      "dialog_sentences": 13,
+      "dialog_ratio": 0.0813
     },
     {
       "chapter_idx": 63,
@@ -763,10 +763,10 @@
       "end_offset": 732281,
       "total_chars": 40820,
       "total_paragraphs": 457,
-      "total_sentences": 697,
+      "total_sentences": 737,
       "total_words": 6018,
-      "dialog_sentences": 4,
-      "dialog_ratio": 0.0057
+      "dialog_sentences": 8,
+      "dialog_ratio": 0.0109
     }
   ]
 }
