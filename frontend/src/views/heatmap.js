@@ -3,6 +3,10 @@ import { renderSpec } from '../viz/vegaHelper.js'
 
 export async function viewHeatmap(book){
   const el = document.getElementById('view')
+  if(!el){
+    console.error('view mount not found in viewHeatmap')
+    return
+  }
   el.innerHTML = `<h2>${book}: Heatmap (top tokens × главы)</h2><p>Загружаю…</p>`
   const { files } = await api.files(book)
   const name = files.includes('tokens.csv') ? 'tokens.csv' : (files.find(f=>f.endsWith('_tokens.csv')) || 'tokens.csv')
@@ -14,7 +18,6 @@ export async function viewHeatmap(book){
   const topN = 15
   const tokens = rows.slice(0, topN).map(r=>r[0])
   el.innerHTML = `<h2>${book}: Heatmap</h2><p>Собираю распределения по главам для ${tokens.length} токенов…</p><div id="hm"></div>`
-  // Последовательно (чтобы не забивать бекенд)
   const matrix = []
   for(const t of tokens){
     try{
