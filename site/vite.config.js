@@ -10,6 +10,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         index: resolve(__dirname, 'index.html'),
+        preza: resolve(__dirname, 'preza.html'),
         linguistics: resolve(__dirname, 'lingvistics.html'),
         warAndPeaceCloud: resolve(__dirname, 'war-and-peace-cloud.html'),
         warAndPeaceMap: resolve(__dirname, 'war-and-peace-map.html'),
