@@ -1,8 +1,25 @@
 {
-  "hash": "7a74d0f0",
+  "hash": "5b3f751c",
   "configHash": "62d43fdf",
-  "lockfileHash": "e3b0c442",
-  "browserHash": "848e9de3",
-  "optimized": {},
-  "chunks": {}
+  "lockfileHash": "27470aa3",
+  "browserHash": "62530492",
+  "optimized": {
+    "echarts": {
+      "src": "../../node_modules/echarts/index.js",
+      "file": "echarts.js",
+      "fileHash": "6681125a",
+      "needsInterop": false
+    },
+    "echarts-wordcloud": {
+      "src": "../../node_modules/echarts-wordcloud/index.js",
+      "file": "echarts-wordcloud.js",
+      "fileHash": "76e6d41f",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-EPDG2BWQ": {
+      "file": "chunk-EPDG2BWQ.js"
+    }
+  }
 }

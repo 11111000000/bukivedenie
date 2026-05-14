@@ -37,8 +37,19 @@ const browser = await puppeteer.launch({
 
 try {
   const page = await browser.newPage()
+  await page.setViewport({ width: 1280, height: 720, deviceScaleFactor: 1 })
   const url = 'file://' + prezaPath
   await page.goto(url, { waitUntil: 'networkidle0' })
+  await page.evaluate(() => {
+    for (const img of document.images) img.loading = 'eager'
+  })
+  for (const y of [0, 800, 1600, 2400, 3200, 4000, 4800, 5600, 6400, 7200, 8000, 8800, 9600, 10400, 11200, 12000, 12800, 13600, 14400, 15200, 16000]) {
+    await page.evaluate((scrollY) => window.scrollTo(0, scrollY), y)
+    await new Promise((r) => setTimeout(r, 100))
+  }
+  await page.evaluate(() => window.scrollTo(0, 0))
+  await page.evaluate(() => document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve())
+  await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))))
   // give some time for any charts to render
   await new Promise((r) => setTimeout(r, 1000))
   // render as 16:9 at 1280x720

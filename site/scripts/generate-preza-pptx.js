@@ -9,6 +9,13 @@ const outPptx = path.resolve(new URL('.', import.meta.url).pathname, '..', 'prez
 function extractSlides(html) {
   const slides = []
   const re = /<section\b([^>]*)>([\s\S]*?)<\/section>/gi
+  const clean = (value) => value
+    .replace(/<br\s*\/?\s*>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\s+\n/g, '\n')
+    .replace(/\n\s+/g, '\n')
+    .replace(/[ \t]{2,}/g, ' ')
+    .trim()
   let m
   while ((m = re.exec(html))) {
     const attrs = m[1] || ''
@@ -19,7 +26,7 @@ function extractSlides(html) {
     const h1m = raw.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)
     const h2m = raw.match(/<h2[^>]*>([\s\S]*?)<\/h2>/i)
     const h3m = raw.match(/<h3[^>]*>([\s\S]*?)<\/h3>/i)
-    const title = (h1m || h2m || h3m) ? ( (h1m||h2m||h3m)[1].replace(/<[^>]+>/g, '').trim() ) : ''
+    const title = (h1m || h2m || h3m) ? clean((h1m || h2m || h3m)[1]) : ''
     // Image (if any)
     const imgm = raw.match(/<img[^>]*src=["']([^"']+)["'][^>]*>/i)
     const img = imgm ? imgm[1].trim() : null
@@ -27,7 +34,7 @@ function extractSlides(html) {
     const figm = body.match(/<figcaption[^>]*>([\s\S]*?)<\/figcaption>/i)
     const pcm = body.match(/<p[^>]*class=["']caption["'][^>]*>([\s\S]*?)<\/p>/i)
     const pmuted = body.match(/<p[^>]*class=["']muted["'][^>]*>([\s\S]*?)<\/p>/i)
-    const caption = (figm && figm[1]) ? figm[1].replace(/<[^>]+>/g, '').trim() : (pcm ? pcm[1].replace(/<[^>]+>/g, '').trim() : (pmuted ? pmuted[1].replace(/<[^>]+>/g, '').trim() : ''))
+    const caption = (figm && figm[1]) ? clean(figm[1]) : (pcm ? clean(pcm[1]) : (pmuted ? clean(pmuted[1]) : ''))
     // Extract visible paragraph and list text (excluding caption/muted).
     const blocks = []
     const pRe = /<p([^>]*)>([\s\S]*?)<\/p>/gi
@@ -36,14 +43,14 @@ function extractSlides(html) {
       const attrsText = pmAll[1] || ''
       const inner = pmAll[2] || ''
       if (/class\s*=\s*["'][^"']*\b(caption|muted)\b[^"']*["']/i.test(attrsText)) continue
-      const clean = inner.replace(/<[^>]+>/g, '').trim()
-      if (clean) blocks.push(clean)
+      const text = clean(inner)
+      if (text) blocks.push(text)
     }
     const liRe = /<li[^>]*>([\s\S]*?)<\/li>/gi
     let liAll
     while ((liAll = liRe.exec(body))) {
-      const clean = liAll[1].replace(/<[^>]+>/g, '').trim()
-      if (clean) blocks.push(`• ${clean}`)
+      const text = clean(liAll[1])
+      if (text) blocks.push(`• ${text}`)
     }
     const bodyText = blocks.join('\n\n')
     const classes = (attrs.match(/class\s*=\s*["']([^"']+)["']/i)?.[1] || '').split(/\s+/).filter(Boolean)
@@ -52,8 +59,8 @@ function extractSlides(html) {
   return slides
 }
 
-function layoutForSlide(s) {
-  const isCover = s.classes.includes('cover-slide') || s.classes.includes('title-slide')
+function layoutForSlide(s, index) {
+  const isCover = index === 0
   const isIntro = s.classes.includes('intro-slide')
   const isVisual = s.classes.includes('visual-slide') || (s.img && !isCover && !isIntro)
   const isFinal = s.classes.includes('final-slide') || /спасибо/i.test(s.title || '')
@@ -114,9 +121,9 @@ async function main(){
 
   for (const s of slides) {
     const slide = pres.addSlide()
-    const t = layoutForSlide(s)
-    // Force first slide to be cover if it contains a long title and cover classes
-    if (slides.indexOf(s) === 0 || t.isCover) {
+    const index = slides.indexOf(s)
+    const t = layoutForSlide(s, index)
+    if (t.isCover) {
       addCover(slide, s)
     } else if (t.isIntro) {
       addIntro(slide, s)

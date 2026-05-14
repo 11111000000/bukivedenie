@@ -1,39 +1,28 @@
 #!/usr/bin/env node
 import fs from 'fs'
 import path from 'path'
+import { pathToFileURL } from 'node:url'
 import process from 'process'
 
 const API_BASE = process.env.AITUNNEL_API || 'https://api.aitunnel.ru/v1'
 const API_KEY = process.env.AITUNNEL_KEY || ''
+const TASK_FILTER = new Set((process.env.AITUNNEL_TASKS || '').split(',').map((s) => s.trim()).filter(Boolean))
 
 if (!API_KEY) {
   console.error('Set AITUNNEL_KEY environment variable to your API key')
   process.exit(2)
 }
 
-const outDir = path.resolve(process.cwd(), 'site', 'presentation')
+const rootDir = process.cwd()
+const outDir = path.resolve(rootDir, 'presentation')
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true })
 
-// produce two variations per slide (v1, v2) for A/B selection
 let baseTasks = null
-// try to load external prompts file (supports ESM default export or CommonJS .cjs)
-const promptsJs = path.join(process.cwd(), 'site', 'scripts', 'aitunnel-prompts.js')
-const promptsCjs = path.join(process.cwd(), 'site', 'scripts', 'aitunnel-prompts.cjs')
-if (fs.existsSync(promptsCjs)) {
+// try to load external prompts file (ESM default export)
+const promptsJs = path.join(rootDir, 'scripts', 'aitunnel-prompts.js')
+if (fs.existsSync(promptsJs)) {
   try {
-    // in ESM context use createRequire to load CommonJS
-    const { createRequire } = await import('module')
-    const require = createRequire(import.meta.url)
-    baseTasks = require(promptsCjs)
-    if (baseTasks && baseTasks.default) baseTasks = baseTasks.default
-    console.log('Loaded prompts from', promptsCjs)
-  } catch (e) {
-    console.warn('Could not load external prompts file (cjs) via require:', e && (e.message || e.toString()))
-  }
-} else if (fs.existsSync(promptsJs)) {
-  try {
-    const fileUrl = new URL(`file://${promptsJs}`)
-    const mod = await import(fileUrl.href)
+    const mod = await import(pathToFileURL(promptsJs).href)
     baseTasks = mod.default || mod
     console.log('Loaded prompts from', promptsJs)
   } catch (e) {
@@ -57,18 +46,12 @@ if (!baseTasks) {
   ]
 }
 
-// expand to two variants per base task
-const tasks = []
-for (const t of baseTasks) {
-  for (let v = 1; v <= 2; v++) {
-    const variant = Object.assign({}, t)
-    variant.name = `${t.name}-v${v}`
-    // append small variant hint to prompt to nudge different composition
-    variant.prompt = `${t.prompt} VARIANT ${v}: slightly different composition and arrangement, keep palette and overall style.`
-    variant.file = path.join(outDir, t.file.replace('.png', `-v${v}.png`))
-    tasks.push(variant)
-  }
-}
+const tasks = baseTasks.map((t) => ({
+  ...t,
+  file: path.join(outDir, t.file),
+})).filter((t) => TASK_FILTER.size === 0 || TASK_FILTER.has(t.name))
+
+console.log('Task count:', tasks.length)
 
 // fallback: generate simple SVG placeholders and render to PNG via puppeteer
 async function createPlaceholderPng(task) {
@@ -118,13 +101,9 @@ async function gen(task) {
   console.log('\n=== Generate', task.name, '===')
   const url = `${API_BASE}/images/generations`
   const body = {
-    model: 'gemini-3-pro-image-preview',
+    model: 'gpt-image-2',
     prompt: task.prompt,
     n: 1,
-    image_config: {
-      aspect_ratio: '16:9',
-      image_size: '2K',
-    },
   }
 
   console.log('POST', url)
@@ -157,13 +136,13 @@ async function gen(task) {
   }
 
   const dataUrl = j?.data?.[0]?.url
-  if (!dataUrl) {
+  const b64Json = j?.data?.[0]?.b64_json
+  if (!dataUrl && !b64Json) {
     console.error('Full JSON response:', JSON.stringify(j, null, 2).slice(0,5000))
-    throw new Error('No data[0].url in response JSON')
+    throw new Error('No data[0].url or data[0].b64_json in response JSON')
   }
-  const m = dataUrl.match(/^data:(image\/[^;]+);base64,(.+)$/)
-  if (!m) throw new Error('Unexpected data URL format')
-  const b64 = m[2]
+  const b64 = b64Json || dataUrl.match(/^data:(image\/[^;]+);base64,(.+)$/)?.[2]
+  if (!b64) throw new Error('Unexpected image payload format')
   const buf = Buffer.from(b64, 'base64')
   fs.writeFileSync(task.file, buf)
   console.log('Wrote', task.file)

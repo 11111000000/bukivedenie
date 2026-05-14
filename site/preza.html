@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Презентация — Bukivedenie</title>
-  <meta name="description" content="Визуализация и исследование данных на примере "Война и мир" — конвейер от текста до визуализаций и статической витрины." />
+  <meta name="description" content="Визуализация и исследование данных на примере &quot;Война и мир&quot; — конвейер от текста до визуализаций и статической витрины." />
   <meta name="author" content="Косова Лада Петровна" />
   <!-- Load Inter font; falls back to system fonts if blocked -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -20,6 +20,10 @@
     img{max-width:100%; height:auto; border-radius:6px; display:block; /* avoid inline gaps */}
     /* help avoid layout shift when image size unknown */
     .slide .media img{width:100%; aspect-ratio:16/9; object-fit:contain}
+    .small-illustration .slide-inner{align-items:center}
+    .small-illustration .text{flex: 1 1 62%}
+    .small-illustration .media{flex: 1 1 38%}
+    .small-illustration .media img{max-width:320px; max-height:240px; aspect-ratio:auto; object-fit:contain}
     figure{margin:0}
     figcaption{color:#444; margin-top:8px}
     h1,h2{margin:4px 0 8px; font-weight:700}
@@ -72,84 +76,143 @@
   </section>
 
   <!-- Slide 0: Заглавный слайд -->
-  <section class="slide intro-slide title-slide cover-slide">
+  <section class="slide intro-slide small-illustration">
     <div class="slide-inner">
       <div class="text">
         <h1>Визуализация и исследование данных<br>при анализе классической литературы<br>на примере романа  “Война и мир”</h1>
         <p class="muted">Министерство образования Иркутской области<br>Министерство по молодежной политике Иркутской области<br>Сибирское отделение Российской академии наук<br>Региональная конференция проектно-исследовательских работ<br>«Наука. Технологии. Интеллект»<br>Для учащихся 8-11 классов<br>общеобразовательных учреждений Иркутской области</p>
         <p class="muted">Выполнила: Косова Лада Петровна<br>ученица 11 «Д» класса , МАОУ «Ангарский лицей №1»<br>МАОУ «Ангарский лицей № 1»<br>Руководитель проекта: Косов Пётр Борисович</p>
       </div>
+      <div class="media">
+        <figure>
+          <img src="presentation/slide-02-intro.png" alt="Иллюстрация к вступлению: книги, графики и робот-помощник" loading="lazy">
+        </figure>
+      </div>
     </div>
   </section>
 
   <!-- Slide 1: Введение -->
-  <section class="slide">
-    <h2>Введение</h2>
-    <p><strong>Цель:</strong> создать открытый и воспроизводимый способ анализа текста и построения визуализаций для крупного литературного произведения.</p>
-    <p><strong>Задачи:</strong></p>
-    <ul>
-      <li>разработать понятный формат визуализаций;</li>
-      <li>автоматизировать сбор и подготовку данных из текста;</li>
-      <li>построить наглядные визуализации;</li>
-      <li>опубликовать результат в открытом доступе.</li>
-    </ul>
+  <section class="slide intro-slide small-illustration">
+    <div class="slide-inner">
+      <div class="text">
+        <h2>Введение</h2>
+        <p><strong>Цель:</strong> создать открытый и воспроизводимый способ анализа текста и построения визуализаций для крупного литературного произведения.</p>
+        <p><strong>Задачи:</strong></p>
+        <ul>
+          <li>разработать понятный формат визуализаций;</li>
+          <li>автоматизировать сбор и подготовку данных из текста;</li>
+          <li>построить наглядные визуализации;</li>
+          <li>опубликовать результат в открытом доступе.</li>
+        </ul>
+      </div>
+      <div class="media">
+        <figure>
+          <img src="presentation/slide-03-purpose.png" alt="Штудия с роботом и рукописью" loading="lazy">
+        </figure>
+      </div>
+    </div>
   </section>
 
   <!-- Slide 2: Система разработки на телефоне -->
-  <section class="slide">
-    <h2>Система разработки на телефоне</h2>
-    <p><strong>Инструменты:</strong></p>
-    <ul>
-      <li><strong>Markor</strong> — черновики и заметки.</li>
-      <li><strong>Termux</strong> — рабочая среда на Android.</li>
-      <li><strong>GitHub</strong> — хранение и публикация проекта.</li>
-      <li><strong>PI</strong> — помощник при написании кода.</li>
-      <li><strong>Python</strong> — обработка текста и данных.</li>
-      <li><strong>JS</strong> — веб-витрина визуализаций.</li>
-    </ul>
+  <section class="slide intro-slide small-illustration">
+    <div class="slide-inner">
+      <div class="text">
+        <h2>Система разработки на телефоне</h2>
+        <p><strong>Инструменты:</strong></p>
+        <ul>
+          <li><strong>Markor</strong> — черновики и заметки.</li>
+          <li><strong>Termux</strong> — рабочая среда на Android.</li>
+          <li><strong>GitHub</strong> — хранение и публикация проекта.</li>
+          <li><strong>PI</strong> — помощник при написании кода.</li>
+          <li><strong>Python</strong> — обработка текста и данных.</li>
+          <li><strong>JS</strong> — веб-витрина визуализаций.</li>
+        </ul>
+      </div>
+      <div class="media">
+        <figure>
+          <img src="presentation/slide-04-tools.png" alt="Стол с ноутбуком, терминалом и роботом-помощником" loading="lazy">
+        </figure>
+      </div>
+    </div>
   </section>
 
   <!-- Slide 3: Сбор данных -->
-  <section class="slide">
-    <h2>Сбор данных</h2>
-    <p><strong>Пайплайн:</strong></p>
-    <ul>
-      <li>нормализация текста (UTF-8, единые кавычки и тире);</li>
-      <li>разбиение на токены;</li>
-      <li>разбиение на предложения, абзацы, главы и диалоги;</li>
-      <li>лемматизация слов;</li>
-      <li>выделение имен собственных и их связей в тексте;</li>
-      <li>подсчет метрик сложности и тональности;</li>
-      <li>вывод данных в таблицы JSON и CSV.</li>
-    </ul>
+  <section class="slide intro-slide small-illustration">
+    <div class="slide-inner">
+      <div class="text">
+        <h2>Сбор данных</h2>
+        <p><strong>Пайплайн:</strong></p>
+        <ul>
+          <li>нормализация текста (UTF-8, единые кавычки и тире);</li>
+          <li>разбиение на токены;</li>
+          <li>разбиение на предложения, абзацы, главы и диалоги;</li>
+          <li>лемматизация слов;</li>
+          <li>выделение имен собственных и их связей в тексте;</li>
+          <li>подсчет метрик сложности и тональности;</li>
+          <li>вывод данных в таблицы JSON и CSV.</li>
+        </ul>
+      </div>
+      <div class="media">
+        <figure>
+          <img src="presentation/slide-05-pipeline.png" alt="Пайплайн обработки текста с роботом и карточками токенов" loading="lazy">
+        </figure>
+      </div>
+    </div>
   </section>
 
   <!-- Slide 4: Визуализация -->
-  <section class="slide">
-    <h2>Визуализация</h2>
-    <ul>
-      <li>Визуализации сделаны на JavaScript без API и внешних серверов.</li>
-      <li>Проект выложен в GitHub и запускается локально как статический сайт.</li>
-    </ul>
+  <section class="slide intro-slide small-illustration">
+    <div class="slide-inner">
+      <div class="text">
+        <h2>Визуализация</h2>
+        <ul>
+          <li>Визуализации сделаны на JavaScript без API и внешних серверов.</li>
+          <li>Проект выложен в GitHub и запускается локально как статический сайт.</li>
+        </ul>
+      </div>
+      <div class="media">
+        <figure>
+          <img src="presentation/slide-06-web.png" alt="Литературный рабочий стол с ноутбуком и графиками" loading="lazy">
+        </figure>
+      </div>
+    </div>
   </section>
 
   <!-- Slide 5: Реализация агента -->
-  <section class="slide">
-    <h2>Реализация кода при помощи агента.</h2>
-    <p>В разработке я использовала агента PI.</p>
-    <ul>
-      <li>Ему нужна максимально подробная спецификация.</li>
-      <li>Он быстро пишет большой объем кода.</li>
-      <li>Его нужно внимательно читать, чтобы не накапливать когнитивный долг.</li>
-      <li>Он склонен усложнять структуру репозитория.</li>
-      <li>После генерации нужен рефакторинг.</li>
-    </ul>
+  <section class="slide intro-slide small-illustration">
+    <div class="slide-inner">
+      <div class="text">
+        <h2>Реализация кода при помощи агента.</h2>
+        <p>В разработке я использовала агента PI.</p>
+        <ul>
+          <li>Ему нужна максимально подробная спецификация.</li>
+          <li>Он быстро пишет большой объем кода.</li>
+          <li>Его нужно внимательно читать, чтобы не накапливать когнитивный долг.</li>
+          <li>Он склонен усложнять структуру репозитория.</li>
+          <li>После генерации нужен рефакторинг.</li>
+        </ul>
+      </div>
+      <div class="media">
+        <figure>
+          <img src="presentation/slide-07-agent.png" alt="Автор и робот за совместной работой над кодом" loading="lazy">
+        </figure>
+      </div>
+    </div>
   </section>
 
   <!-- Slide 6: Спасибо -->
-  <section class="slide">
-    <h2>Спасибо за внимание.</h2>
-    <p class="muted">Дополнительные материалы, визуализации и код доступны в репозитории.</p>
+  <section class="slide intro-slide small-illustration">
+    <div class="slide-inner">
+      <div class="text">
+        <h2>Спасибо за внимание.</h2>
+        <p class="muted">Дополнительные материалы, визуализации и код доступны в репозитории.</p>
+      </div>
+      <div class="media">
+        <figure>
+          <img src="presentation/slide-08-thanks.png" alt="Архив, книги и робот с итоговым отчетом" loading="lazy">
+        </figure>
+      </div>
+    </div>
   </section>
 
   <!-- Insert generated visual slides with descriptive captions -->
@@ -322,15 +385,33 @@
   </section>
 
   <!-- Slides from original draft: final / thanks -->
-  <section class="slide">
-    <h2>Реализация и выводы</h2>
-    <p>Проект показывает полный конвейер: от текста до визуализаций и статической витрины. Все артефакты хранятся в <code>outputs/&lt;book_id&gt;/</code> и экспортируются в <code>site/public/data/</code>.</p>
-    <p>Следующие шаги — улучшение выделения именованных сущностей, проверка персонажей, сравнение изданий и масштабирование на корпус.</p>
+  <section class="slide intro-slide small-illustration">
+    <div class="slide-inner">
+      <div class="text">
+        <h2>Реализация и выводы</h2>
+        <p>Проект показывает полный конвейер: от текста до визуализаций и статической витрины. Все артефакты хранятся в <code>outputs/&lt;book_id&gt;/</code> и экспортируются в <code>site/public/data/</code>.</p>
+        <p>Следующие шаги — улучшение выделения именованных сущностей, проверка персонажей, сравнение изданий и масштабирование на корпус.</p>
+      </div>
+      <div class="media">
+        <figure>
+          <img src="presentation/slide-09-conclusions.png" alt="Итоговый архив и отчет по исследованию" loading="lazy">
+        </figure>
+      </div>
+    </div>
   </section>
 
-  <section class="slide">
-    <h2>Спасибо за внимание</h2>
-    <p class="muted">Вопросы, замечания и дополнительные материалы доступны в репозитории.</p>
+  <section class="slide intro-slide small-illustration">
+    <div class="slide-inner">
+      <div class="text">
+        <h2>Спасибо за внимание</h2>
+        <p class="muted">Вопросы, замечания и дополнительные материалы доступны в репозитории.</p>
+      </div>
+      <div class="media">
+        <figure>
+          <img src="presentation/slide-10-final-thanks.png" alt="Финальная благодарность с книгами и роботом" loading="lazy">
+        </figure>
+      </div>
+    </div>
   </section>
 
 </body>
