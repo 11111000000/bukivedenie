@@ -6,7 +6,7 @@
   };
 
   outputs = { self, nixpkgs }: let
-    pkgs = import nixpkgs { };
+    pkgs = import nixpkgs { system = "x86_64-linux"; };
     devScript = pkgs.writeShellScriptBin "bukivedenie-dev" ''
       cd ${builtins.toString ./.}
       exec ${pkgs.bashInteractive}/bin/bash -lc 'python scripts/build_site_data.py --source outputs --target site/public/data && cd site && npm run dev'
@@ -36,18 +36,19 @@
       exec ${pkgs.bashInteractive}/bin/bash -lc 'node site/scripts/verify-preza-exports.js'
     '';
     shell = pkgs.mkShell {
-      packages = with pkgs; [
-        bashInteractive
-        curl
-        git
-        gnumake
+       packages = with pkgs; [
+         bashInteractive
+         curl
+         git
+         gnumake
         nodejs_22
-        python3
-        python3Packages.pytest
-        python3Packages.pymorphy2
-        # pymorphy2-dicts may not be available in this nixpkgs pin; include fallback: wordfreq or other dicts
-        libreoffice
-      ];
+        nodePackages.node2nix
+         python3
+         python3Packages.pytest
+         python3Packages.pymorphy2
+         # pymorphy2-dicts may not be available in this nixpkgs pin; include fallback: wordfreq or other dicts
+         libreoffice
+       ];
 
       shellHook = ''
         echo "Entered bukivedenie dev shell. Use: make site-install, make site-dev, make ui-smoke, pytest"

@@ -15,6 +15,7 @@ export default defineConfig({
         linguistics: resolve(__dirname, 'lingvistics.html'),
         warAndPeaceCloud: resolve(__dirname, 'war-and-peace-cloud.html'),
         warAndPeaceMap: resolve(__dirname, 'war-and-peace-map.html'),
+        warAndPeaceMovements: resolve(__dirname, 'war-and-peace-movements.html'),
         warAndPeaceCharacters: resolve(__dirname, 'war-and-peace-characters.html'),
         warAndPeaceTimeline: resolve(__dirname, 'war-and-peace-timeline.html'),
         warCharacters: resolve(__dirname, 'war-characters.html'),

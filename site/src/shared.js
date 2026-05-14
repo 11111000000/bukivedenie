@@ -3,11 +3,12 @@ import 'echarts-wordcloud'
 
 export const APP_BRAND = 'Bukivedenie'
 
-export const NAV_ITEMS = [
-  { href: './index.html', label: 'Лингвистика' },
-  { href: './preza.html?v=20260514', label: 'Презентация' },
-  { href: './war-and-peace.html', label: 'Война и мир' },
-]
+  export const NAV_ITEMS = [
+    { href: './index.html', label: 'Лингвистика' },
+    { href: './preza.html?v=20260514', label: 'Презентация' },
+    { href: './war-and-peace.html', label: 'Война и мир' },
+    { href: './war-and-peace-movements.html', label: 'Перемещения' },
+  ]
 
 export function createStateMessage(message, kind = 'empty') {
   const cls = kind === 'error' ? 'state is-error' : 'state is-empty'
