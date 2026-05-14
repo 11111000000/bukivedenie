@@ -28,12 +28,27 @@ export default defineConfig({
     closeBundle() {
       const outDir = resolve(__dirname, 'dist')
       if (!existsSync(outDir)) return
+      // copy preza pdf/pptx if present
       for (const name of ['preza.pdf', 'preza.pptx']) {
         const src = resolve(__dirname, name)
         const dest = resolve(outDir, name)
         if (existsSync(src)) {
           mkdirSync(outDir, { recursive: true })
           copyFileSync(src, dest)
+        }
+      }
+
+      // copy presentation assets directory so CSVs and images are available on gh-pages
+      const presSrc = resolve(__dirname, 'presentation')
+      const presDest = resolve(outDir, 'presentation')
+      if (existsSync(presSrc)) {
+        mkdirSync(presDest, { recursive: true })
+        // copy files (flat copy) - preserve filenames
+        const fs = require('node:fs')
+        for (const entry of fs.readdirSync(presSrc)) {
+          const s = resolve(presSrc, entry)
+          const d = resolve(presDest, entry)
+          try { fs.copyFileSync(s, d) } catch (e) { /* ignore directories */ }
         }
       }
     },
